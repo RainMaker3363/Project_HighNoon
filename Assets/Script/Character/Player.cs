@@ -1,12 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum PlayerState
-{
-    NORMAL = 0,
-    DEADEYE,
-    DEAD
-}
+
 
 public class Player : MonoBehaviour {
 
@@ -15,7 +10,7 @@ public class Player : MonoBehaviour {
     
     public JoyStickCtrl JoyStickControl;
 
-
+    [HideInInspector]
     public PlayerState playerState;
     
     // 플레이어의 상태 값
@@ -63,10 +58,6 @@ public class Player : MonoBehaviour {
         State = GameManager.NowGameState;
 
         MoveVector = PoolInput();
-    }
-
-    void FixedUpdate()
-    {
 
         switch (State)
         {
@@ -78,7 +69,7 @@ public class Player : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    switch(playerState)
+                    switch (playerState)
                     {
                         case PlayerState.NORMAL:
                             {
@@ -98,7 +89,7 @@ public class Player : MonoBehaviour {
                             }
                             break;
                     }
-                    
+
                 }
                 break;
 
@@ -127,6 +118,69 @@ public class Player : MonoBehaviour {
                 break;
         }
     }
+
+    //void FixedUpdate()
+    //{
+
+    //    switch (State)
+    //    {
+    //        case GameState.START:
+    //            {
+
+    //            }
+    //            break;
+
+    //        case GameState.PLAY:
+    //            {
+    //                switch(playerState)
+    //                {
+    //                    case PlayerState.NORMAL:
+    //                        {
+    //                            this.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+    //                        }
+    //                        break;
+
+    //                    case PlayerState.DEADEYE:
+    //                        {
+
+    //                        }
+    //                        break;
+
+    //                    case PlayerState.DEAD:
+    //                        {
+    //                            GameManager.NowGameState = GameState.GAMEOVER;
+    //                        }
+    //                        break;
+    //                }
+                    
+    //            }
+    //            break;
+
+    //        case GameState.PAUSE:
+    //            {
+
+    //            }
+    //            break;
+
+    //        case GameState.EVENT:
+    //            {
+
+    //            }
+    //            break;
+
+    //        case GameState.GAMEOVER:
+    //            {
+
+    //            }
+    //            break;
+
+    //        case GameState.VICTORY:
+    //            {
+
+    //            }
+    //            break;
+    //    }
+    //}
 
     public Vector3 PoolInput()
     {
@@ -188,5 +242,10 @@ public class Player : MonoBehaviour {
 
         ReloadSuccessOn = true;
         BulletStack = 6;
+    }
+
+    public PlayerState GetPlayerState()
+    {
+        return playerState;
     }
 }

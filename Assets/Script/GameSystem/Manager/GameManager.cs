@@ -17,6 +17,13 @@ public enum GameState
     PLAY
 }
 
+public enum PlayerState
+{
+    NORMAL = 0,
+    DEADEYE,
+    DEAD
+}
+
 public class GameManager : MonoBehaviour {
 
     public static GameState NowGameState;
