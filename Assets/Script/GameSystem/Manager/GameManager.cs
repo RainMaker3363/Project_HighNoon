@@ -24,6 +24,12 @@ public enum PlayerState
     DEAD
 }
 
+public enum PlayerBehaviorState
+{
+    IDLE = 0,
+    MOVE
+}
+
 public class GameManager : MonoBehaviour {
 
     public static GameState NowGameState;

@@ -52,7 +52,8 @@ public class FlyingCamera : MonoBehaviour {
                     {
                         case PlayerState.NORMAL:
                             {
-                                this.transform.position = new Vector3(PlayerObject.transform.position.x, BackPos.y, PlayerObject.transform.position.z);
+                                //this.transform.position = new Vector3(this.transform.position.x, BackPos.y, this.transform.position.z);
+                                this.transform.LookAt(PlayerObject.transform.position);
                             }
                             break;
 
