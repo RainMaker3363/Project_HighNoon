@@ -12,15 +12,21 @@ public class PlayerBullet : MonoBehaviour {
 	void Start () {
         State = GameManager.NowGameState;
 
+        MoveDir = Vector3.zero;
+
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
             MoveDir = m_Player.GetPlayerDirection();
+
         }
         else
         {
             MoveDir = m_Player.GetPlayerDirection();
+
         }
+
+        //this.transform.Rotate(new Vector3(-90.0f, 0.0f, 0.0f));
 
         StopCoroutine(DeadProtocol(true));
         StartCoroutine(DeadProtocol(true));
@@ -31,6 +37,8 @@ public class PlayerBullet : MonoBehaviour {
     void OnEnable()
     {
         State = GameManager.NowGameState;
+
+        MoveDir = Vector3.zero;
 
         if (m_Player == null)
         {
@@ -68,7 +76,7 @@ public class PlayerBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.Translate(MoveDir * 10.0f * Time.deltaTime);
+                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 30.0f * Time.deltaTime));
                 }
                 break;
 

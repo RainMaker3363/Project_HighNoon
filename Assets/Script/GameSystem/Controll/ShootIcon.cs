@@ -82,6 +82,12 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
                             }
                             break;
 
+                        case PlayerState.REALBATTLE:
+                            {
+
+                            }
+                            break;
+
                         case PlayerState.DEAD:
                             {
 

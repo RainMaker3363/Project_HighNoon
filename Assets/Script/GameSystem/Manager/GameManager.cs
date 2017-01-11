@@ -21,6 +21,7 @@ public enum PlayerState
 {
     NORMAL = 0,
     DEADEYE,
+    REALBATTLE,
     DEAD
 }
 

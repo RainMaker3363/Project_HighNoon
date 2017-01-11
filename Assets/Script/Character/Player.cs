@@ -37,6 +37,11 @@ public class Player : MonoBehaviour {
     // 카메라
     public GameObject CameraObject;
 
+    // 플레이어의 사선
+    private Vector3[] Line_Tranjectory_Transform;
+    public GameObject Player_Tranjectory_Object;
+    private LineRenderer Player_Tranjectory;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -52,6 +57,26 @@ public class Player : MonoBehaviour {
         {
             CameraObject = GameObject.Find("Camera");
         }
+
+        if (Player_Tranjectory == null)
+        {
+            Player_Tranjectory = GetComponent<LineRenderer>();
+            Player_Tranjectory.enabled = false;
+
+            Line_Tranjectory_Transform = new Vector3[2];
+            Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
+            Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+        }
+        else
+        {
+            Player_Tranjectory.enabled = false;
+
+            Line_Tranjectory_Transform = new Vector3[2];
+            Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
+            Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+        }
+
+
 
         // 플레이어의 상태 값
         HP = 100.0f;
@@ -99,6 +124,8 @@ public class Player : MonoBehaviour {
             NowMovePlayer = true;
         }
 
+
+
         switch (State)
         {
             case GameState.START:
@@ -113,12 +140,39 @@ public class Player : MonoBehaviour {
                     {
                         case PlayerState.NORMAL:
                             {
+
+                                Player_Tranjectory.enabled = true;
+
                                 if (NowMovePlayer)
                                 {
                                     this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+
+                                    CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                 }
+
+
                                 
-                                CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+
+                                Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
+                                Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+                                Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
+                            }
+                            break;
+
+                        case PlayerState.REALBATTLE:
+                            {
+                                Player_Tranjectory.enabled = true;
+
+                                if (NowMovePlayer)
+                                {
+                                    this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+
+                                    CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+                                }
+
+                                Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
+                                Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+                                Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
                             }
                             break;
 
@@ -280,7 +334,7 @@ public class Player : MonoBehaviour {
             if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
             {
                 Bullets[NowBulletIndex].transform.position = this.transform.position;
-                Bullets[NowBulletIndex].transform.LookAt(PlayerDir);
+                //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
                 Bullets[NowBulletIndex].transform.parent = null;
 
                 Bullets[NowBulletIndex].gameObject.SetActive(true);
@@ -295,7 +349,7 @@ public class Player : MonoBehaviour {
             if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
             {
                 Bullets[NowBulletIndex].transform.position = this.transform.position;
-                Bullets[NowBulletIndex].transform.LookAt(PlayerDir);
+                //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
                 Bullets[NowBulletIndex].transform.parent = null;
 
                 Bullets[NowBulletIndex].gameObject.SetActive(true);
@@ -320,7 +374,7 @@ public class Player : MonoBehaviour {
 
         ReloadSuccessOn = false;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         Debug.Log("Reload End!");
 
@@ -348,6 +402,6 @@ public class Player : MonoBehaviour {
 
     public Vector3 GetPlayerDirection()
     {
-        return PlayerDir;
+        return (Player_Tranjectory_Object.transform.position - this.transform.position).normalized;
     }
 }
