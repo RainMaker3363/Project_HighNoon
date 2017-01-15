@@ -404,4 +404,39 @@ public class Player : MonoBehaviour {
     {
         return (Player_Tranjectory_Object.transform.position - this.transform.position).normalized;
     }
+
+
+    // NORMAL = 0;
+    // DEADEYE = 1;
+    // REALBATTLE = 2;
+    // DEAD = 3;
+    public void SetPlayerState(int Set)
+    {
+        switch(Set)
+        {
+            case 0:
+                {
+                    playerState = PlayerState.NORMAL;
+                }
+                break;
+
+            case 1:
+                {
+                    playerState = PlayerState.DEADEYE;
+                }
+                break;
+
+            case 2:
+                {
+                    playerState = PlayerState.REALBATTLE;
+                }
+                break;
+
+            case 3:
+                {
+                    playerState = PlayerState.DEAD;
+                }
+                break;
+        }
+    }
 }

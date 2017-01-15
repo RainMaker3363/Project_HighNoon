@@ -25,6 +25,20 @@ public enum PlayerState
     DEAD
 }
 
+public enum EnemyState
+{ 
+    NORMAL = 0,
+    REALBATTLE,
+    DEAD
+}
+
+public enum EnemyAIState
+{
+    CHASE = 0,
+    PATROL,
+    ATTACK
+}
+
 public enum PlayerBehaviorState
 {
     IDLE = 0,
@@ -41,6 +55,9 @@ public class GameManager : MonoBehaviour {
     {
         NowGameState = GameState.PLAY;
         NowGameControlState = GameControlState.PC;
+
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
 
         // 지정해 주면 고정비로 빌드가 되어 단말에서 지정 해상도로 출력이 된다.	
         Screen.SetResolution(1280, 720, true); // 1280 x 720 으로 조정
