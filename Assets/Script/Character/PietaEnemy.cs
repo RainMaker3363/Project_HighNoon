@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PietaEnemy : MonoBehaviour {
 
@@ -15,6 +16,11 @@ public class PietaEnemy : MonoBehaviour {
 
     private Player m_Player;
 
+    // 길찾기 타일
+    private float walkSpeed;
+    private TileMap tileMap;
+    private List<PathTile> path = new List<PathTile>();
+
     // 적이 쏘는 총알
     public GameObject[] EnemyBullets;
     private int EnemyBulletIndex;
@@ -22,11 +28,15 @@ public class PietaEnemy : MonoBehaviour {
     private float EnemyShootCoolTime;
 
     // 적이 순찰을 할때의 위치및 순서를 제어한다.
-    public GameObject[] PatrolObjects;
-    public int PatrolIndex;
+    public GameObject[] PatrolPath;
+    private bool PathEnable;
+    private bool PathChangeOn;
+    private bool PathControlChange;
 
     // 적이 플레이어와 시선이 마주쳤는지 여부
-
+    RaycastHit hit;
+    private int layerMask;
+    private Vector3[] SightVectorInterpol;
 
 	// Use this for initialization
 	void Start () {
@@ -46,9 +56,20 @@ public class PietaEnemy : MonoBehaviour {
             playerState = m_Player.GetPlayerState();
         }
 
-        State = GameManager.NowGameState;
-        enemyState = EnemyState.NORMAL;
-        enemyAiState = EnemyAIState.PATROL;
+        // 타일맵 길 찾기 관련 로직 초기화
+        tileMap = FindObjectOfType(typeof(TileMap)) as TileMap;
+
+        walkSpeed = 2.5f;
+        PathEnable = true;
+        PathChangeOn = true;
+        PathControlChange = true;
+
+        // 적의 시야 초기화
+        SightVectorInterpol = new Vector3[2];
+
+        SightVectorInterpol[0] = new Vector3(0.10f, 0.0f, 0.0f);
+        SightVectorInterpol[1] = new Vector3(0.16f, 0.0f, 0.0f);
+        layerMask = 1 << LayerMask.NameToLayer("Player");
 
         // Quad 텍스쳐를 처리해주는 부분
         CharacterAniObject.transform.LookAt(MainCamera.transform.position);
@@ -65,6 +86,10 @@ public class PietaEnemy : MonoBehaviour {
         EnemyBulletIndex = 0;
         EnemyShootCoolTime = 0.5f;
 
+        //Debug.Log("Path Count : " + path.Count);
+        State = GameManager.NowGameState;
+        enemyState = EnemyState.NORMAL;
+        enemyAiState = EnemyAIState.PATROL;
 	}
 	
 	// Update is called once per frame
@@ -88,8 +113,8 @@ public class PietaEnemy : MonoBehaviour {
                     {
                         case PlayerState.NORMAL:
                             {
-                                print((this.transform.position - m_Player.gameObject.transform.position).magnitude);
-
+                                //print((this.transform.position - m_Player.gameObject.transform.position).magnitude);
+                                
                                 switch(enemyState)
                                 {
                                     case EnemyState.NORMAL:
@@ -98,19 +123,103 @@ public class PietaEnemy : MonoBehaviour {
                                             {
                                                 case EnemyAIState.PATROL:
                                                     {
+                                                        //if (PathEnable == true)
+                                                        //{
+                                                        //    if (PathControlChange == true)
+                                                        //    {
+                                                        //        PathControlChange = false;
+
+                                                        //        if (PathChangeOn == true)
+                                                        //        {
+                                                        //            if (tileMap.FindPath(PatrolPath[0].transform.position, PatrolPath[1].transform.position, path))
+                                                        //            {
+                                                        //                StopCoroutine(WalkPath());
+                                                        //                StartCoroutine(WalkPath());
+                                                        //            }
+
+                                                        //        }
+                                                        //        else
+                                                        //        {
+                                                        //            if (tileMap.FindPath(PatrolPath[1].transform.position, PatrolPath[0].transform.position, path))
+                                                        //            {
+                                                        //                StopCoroutine(WalkPath());
+                                                        //                StartCoroutine(WalkPath());
+                                                        //            }
+                                                        //        }
+                                                        //    }
+                                                           
+
+                                                        //}
+
+                                                        
                                                         // 만약 시야안에 들어오는 조건이 됬을시에 적의 상태를 바꿈
+                                                        Debug.DrawRay(this.transform.position, this.transform.forward * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward + SightVectorInterpol[0]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward + SightVectorInterpol[1]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward - SightVectorInterpol[0]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward - SightVectorInterpol[1]).normalized * 10.0f), Color.green);
+
+                                                        if (Physics.Raycast(this.transform.position, (this.transform.forward * 10.0f).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if(hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+
+                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[0])).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if (hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+
+                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[1])).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if (hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+
+                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward - SightVectorInterpol[0])).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if (hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+
+                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward - SightVectorInterpol[1])).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if (hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+
+                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+
                                                     }
                                                     break;
 
                                                 
                                                 case EnemyAIState.CHASE:
-                                                    {
-
-                                                    }
-                                                    break;
-
-
-                                                case EnemyAIState.ATTACK:
                                                     {
 
                                                     }
@@ -140,21 +249,6 @@ public class PietaEnemy : MonoBehaviour {
                                                     {
                                                         // 플레이어의 위치로 다시 이동한다.
 
-                                                    }
-                                                    break;
-
-                                                    
-                                                case EnemyAIState.ATTACK:
-                                                    {
-                                                        // 범위 안에 있다면 사격
-                                                        if ((this.transform.position - m_Player.gameObject.transform.position).magnitude <= 6.0f)
-                                                        {
-                                                            Shoot();
-                                                        }
-                                                        else
-                                                        {
-                                                            enemyAiState = EnemyAIState.CHASE;
-                                                        }
                                                     }
                                                     break;
                                             }
@@ -191,13 +285,6 @@ public class PietaEnemy : MonoBehaviour {
 
                                                     }
                                                     break;
-
-
-                                                case EnemyAIState.ATTACK:
-                                                    {
-
-                                                    }
-                                                    break;
                                             }
                                         }
                                         break;
@@ -222,22 +309,35 @@ public class PietaEnemy : MonoBehaviour {
                                                 case EnemyAIState.CHASE:
                                                     {
                                                         // 플레이어의 위치로 다시 이동한다.
+                                                        //awdasdasfwfaddsadwd
 
-                                                    }
-                                                    break;
+                                                        //if (PathEnable == true)
+                                                        //{
+                                                        //    if (PathControlChange == true)
+                                                        //    {
+                                                        //        PathControlChange = false;
+
+                                                        //        if (PathChangeOn == true)
+                                                        //        {
+                                                        //            if (tileMap.FindPath(PatrolPath[0].transform.position, PatrolPath[1].transform.position, path))
+                                                        //            {
+                                                        //                StopCoroutine(WalkPath());
+                                                        //                StartCoroutine(WalkPath());
+                                                        //            }
+
+                                                        //        }
+                                                        //        else
+                                                        //        {
+                                                        //            if (tileMap.FindPath(PatrolPath[1].transform.position, PatrolPath[0].transform.position, path))
+                                                        //            {
+                                                        //                StopCoroutine(WalkPath());
+                                                        //                StartCoroutine(WalkPath());
+                                                        //            }
+                                                        //        }
+                                                        //    }
 
 
-                                                case EnemyAIState.ATTACK:
-                                                    {
-                                                        // 범위 안에 있다면 사격
-                                                        if ((this.transform.position - m_Player.gameObject.transform.position).magnitude <= 6.0f)
-                                                        {
-                                                            Shoot();
-                                                        }
-                                                        else
-                                                        {
-                                                            enemyAiState = EnemyAIState.CHASE;
-                                                        }
+                                                        //}
                                                     }
                                                     break;
                                             }
@@ -356,5 +456,41 @@ public class PietaEnemy : MonoBehaviour {
 
         enemyState = EnemyState.DEAD;
         enemyAiState = EnemyAIState.PATROL;
+    }
+
+    IEnumerator WalkPathChangeProtocol()
+    {
+
+        PathChangeOn = false;
+
+        yield return new WaitForSeconds(2.0f);
+        
+        PathControlChange = true;
+        
+    }
+
+    IEnumerator WalkPath()
+    {
+        var index = 0;
+
+        while(index < path.Count)
+        {
+            yield return StartCoroutine(WalkTo(path[index].transform.position));
+            index++;
+        }
+    }
+
+    IEnumerator WalkTo(Vector3 position)
+    {
+        while(Vector3.Distance(transform.position, position) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime);
+            //transform.Translate(Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime));
+            yield return 0;
+        }
+
+        transform.position = position;
+        PathChangeOn ^= true;
+        //PathChangeEnable ^= true;
     }
 }

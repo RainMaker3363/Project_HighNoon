@@ -35,8 +35,7 @@ public enum EnemyState
 public enum EnemyAIState
 {
     CHASE = 0,
-    PATROL,
-    ATTACK
+    PATROL
 }
 
 public enum PlayerBehaviorState
