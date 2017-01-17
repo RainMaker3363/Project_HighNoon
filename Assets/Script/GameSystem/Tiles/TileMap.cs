@@ -41,7 +41,7 @@ public class TileMap : MonoBehaviour {
     }
 
     // 해당 타일의 번호에 대한 Vector3값을 반환
-    public Vector3 GetPostion(int index)
+    public Vector3 GetPoistion(int index)
     {
         index = hashes[index];
 

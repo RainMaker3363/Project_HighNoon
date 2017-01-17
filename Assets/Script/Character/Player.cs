@@ -36,6 +36,9 @@ public class Player : MonoBehaviour {
 
     // 카메라
     public GameObject CameraObject;
+    private bool CameraMoveOn;
+    private RaycastHit Wallhit;
+    private int WalllayerMask;
 
     // 플레이어의 사선
     private Vector3[] Line_Tranjectory_Transform;
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour {
         BulletStack = 6;
 
         NowMovePlayer = false;
+        CameraMoveOn = true;
 
         // 총알 오브젝트의 출력 순서를 제어하는 변수
         NowBulletIndex = 0;
@@ -112,6 +116,7 @@ public class Player : MonoBehaviour {
 
         PlayerPos = Vector3.zero;
         layerMask = 1 << LayerMask.NameToLayer("Ground");
+        WalllayerMask = 1 << LayerMask.NameToLayer("Wall");
 	}
 
     // Update is called once per frame
@@ -150,14 +155,19 @@ public class Player : MonoBehaviour {
                         case PlayerState.NORMAL:
                             {
 
-                                Player_Tranjectory.enabled = true;
+                                //Player_Tranjectory.enabled = true;
 
                                 if (NowMovePlayer)
                                 {
                                     this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
 
-                                    CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+
+                                    if (CameraMoveOn)
+                                    {
+                                        CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+                                    }
                                 }
+
                                 
 
                                 Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
@@ -165,6 +175,7 @@ public class Player : MonoBehaviour {
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, Color.yellow);
 
                                 if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
@@ -172,6 +183,18 @@ public class Player : MonoBehaviour {
                                     //print("hit Point : " + hit.point);
 
                                     PlayerPos = hit.point;
+                                }
+
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 1.0f, WalllayerMask))
+                                {
+                                    if (Wallhit.collider.transform.tag.Equals("Wall") == true)
+                                    {
+                                        CameraMoveOn = false;
+                                    }
+                                }
+                                else
+                                {
+                                    CameraMoveOn = true;
                                 }
                             }
                             break;
@@ -184,7 +207,11 @@ public class Player : MonoBehaviour {
                                 {
                                     this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
 
-                                    CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+
+                                    if (CameraMoveOn)
+                                    {
+                                        CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
+                                    }
                                 }
 
                                 Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
@@ -196,7 +223,21 @@ public class Player : MonoBehaviour {
                                     //print("hit Name : " + hit.collider.name);
                                     //print("hit Point : " + hit.point);
 
+
+
                                     PlayerPos = hit.point;
+                                }
+
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 1.0f, WalllayerMask))
+                                {
+                                    if (Wallhit.collider.transform.tag.Equals("Wall") == true)
+                                    {
+                                        CameraMoveOn = false;
+                                    }
+                                }
+                                else
+                                {
+                                    CameraMoveOn = true;
                                 }
                             }
                             break;
@@ -432,7 +473,15 @@ public class Player : MonoBehaviour {
 
     public Vector3 GetPlayerPosition()
     {
-        return PlayerPos;
+        if(PlayerPos == Vector3.zero)
+        {
+            return this.transform.position;
+        }
+        else
+        {
+            return hit.point;
+        }
+        
     }
 
     // NORMAL = 0;
@@ -466,6 +515,24 @@ public class Player : MonoBehaviour {
                     playerState = PlayerState.DEAD;
                 }
                 break;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag.Equals("EnemyBullet") == true)
+        {
+            // HP를 깍는다
+            
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag.Equals("EnemyBullet") == true)
+        {
+            // HP를 깍는다
+
         }
     }
 }

@@ -455,7 +455,7 @@ public class TileMapEditor : Editor
             var instance = (Transform)PrefabUtility.InstantiatePrefab(tileMap.prefabs[index]);
 
             instance.parent = tileMap.transform;
-            instance.localPosition = tileMap.GetPostion(index);
+            instance.localPosition = tileMap.GetPoistion(index);
             instance.localRotation = Quaternion.Euler(0, tileMap.directions[index] * 90, 0);
             
             tileMap.instances[index] = instance;
@@ -480,7 +480,7 @@ public class TileMapEditor : Editor
         {
             if(tileMap.instances[i] != null)
             {
-                tileMap.instances[i].localPosition = tileMap.GetPostion(i);
+                tileMap.instances[i].localPosition = tileMap.GetPoistion(i);
             }
         }
     }
