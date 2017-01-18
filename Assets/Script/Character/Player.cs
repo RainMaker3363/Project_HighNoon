@@ -16,11 +16,15 @@ public class Player : MonoBehaviour {
     
     // 플레이어의 상태 값
     private float HP;
+    private GameObject DeadEyeBox;
+    private bool DeadEyeActive;
+    private bool DeadEyeReady;
 
     // 플레이어의 움직임
     private float MoveSpeed;
     private Vector3 MoveVector;
     private Vector3 PlayerDir;
+    private Vector3 PlayerPosBack;
 
     // 현재 컨트롤러가 플레이어를 조종할 수 있는지의 여부
     private bool NowMovePlayer;
@@ -86,16 +90,23 @@ public class Player : MonoBehaviour {
             Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
         }
 
+        if (DeadEyeBox == null)
+        {
+            DeadEyeBox = GameObject.FindWithTag("DeadEyeBox");
+        }
 
 
         // 플레이어의 상태 값
         HP = 100.0f;
         playerState = PlayerState.NORMAL;
+        DeadEyeActive = false;
+        DeadEyeReady = false;
 
         // 플레이어 이동 방향 초기화
         MoveVector = Vector3.zero;
         MoveSpeed = 2.0f;
         PlayerDir = Vector3.zero;
+        PlayerPosBack = Vector3.zero;
 
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
@@ -160,11 +171,9 @@ public class Player : MonoBehaviour {
 
                                 if (NowMovePlayer)
                                 {
-                                    this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
-
-
                                     if (CameraMoveOn)
                                     {
+                                        this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                     }
                                 }
@@ -176,7 +185,7 @@ public class Player : MonoBehaviour {
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
-                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, Color.yellow);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
 
                                 if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
@@ -186,16 +195,33 @@ public class Player : MonoBehaviour {
                                     PlayerPos = hit.point;
                                 }
 
-                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 1.0f, WalllayerMask))
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.7f, WalllayerMask))
                                 {
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
                                         CameraMoveOn = false;
                                     }
+
+                                    if (Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
+                                    {
+                                        CameraMoveOn = false;
+
+                                        Debug.Log("DeadEye Ready");
+
+                                        DeadEyeReady = true;
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("DeadEye Not Ready");
+
+                                        DeadEyeReady = false;
+                                    }
                                 }
                                 else
                                 {
                                     CameraMoveOn = true;
+
+                                    DeadEyeReady = false;
                                 }
                             }
                             break;
@@ -206,11 +232,9 @@ public class Player : MonoBehaviour {
 
                                 if (NowMovePlayer)
                                 {
-                                    this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
-
-
                                     if (CameraMoveOn)
                                     {
+                                        this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                     }
                                 }
@@ -222,7 +246,7 @@ public class Player : MonoBehaviour {
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
-                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, Color.yellow);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
 
                                 if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
@@ -232,25 +256,44 @@ public class Player : MonoBehaviour {
                                     PlayerPos = hit.point;
                                 }
 
-                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 1.0f, WalllayerMask))
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.7f, WalllayerMask))
                                 {
 
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
-                                        print("Wall In");
-                                        CameraMoveOn = false;
+
+                                        CameraMoveOn = false;    
                                     }
+
+                                    if(Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
+                                    {
+                                        CameraMoveOn = false;
+
+                                        Debug.Log("DeadEye Ready");
+
+                                        DeadEyeReady = true;
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("DeadEye Not Ready");
+
+                                        DeadEyeReady = false;
+                                    }
+
+                                    
                                 }
                                 else
                                 {
                                     CameraMoveOn = true;
+
+                                    DeadEyeReady = false;
                                 }
                             }
                             break;
 
                         case PlayerState.DEADEYE:
                             {
-                                
+                                Player_Tranjectory.enabled = false;
                             }
                             break;
 
@@ -422,14 +465,18 @@ public class Player : MonoBehaviour {
 
             case PlayerState.DEADEYE:
                 {
-                    StopCoroutine(DeadEyeShootProtocol(true));
-                    StartCoroutine(DeadEyeShootProtocol(true));
+                    if (DeadEyeActive == false)
+                    {
+                        StopCoroutine(DeadEyeShootProtocol(true));
+                        StartCoroutine(DeadEyeShootProtocol(true));
+                    }
+
                 }
                 break;
 
             case PlayerState.DEAD:
                 {
-                    
+                    this.gameObject.SetActive(false);
                 }
                 break;
         }
@@ -504,11 +551,36 @@ public class Player : MonoBehaviour {
     {
 
         // 데드 아이 시전
+
+        print("DeadEye Start....");
+        DeadEyeActive = true;
+
+        playerState = PlayerState.DEADEYE;
+        PlayerPosBack = this.transform.position;
+        this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y, DeadEyeBox.transform.position.z);
+
+        yield return new WaitForSeconds(3.5f);
+
+        print("DeadEye End....");
+
+        DeadEyeActive = false;
+
+        playerState  = PlayerState.REALBATTLE;
+        this.transform.position = PlayerPosBack;
+
+        DeadEyeBox.SetActive(false);
+    }
+
+    // 사망 시 애니메이션 및 순서
+    IEnumerator DeadProtocol(bool On = true)
+    {
+
         
+
 
         yield return new WaitForSeconds(1.5f);
 
-        playerState  = PlayerState.REALBATTLE;
+        playerState = PlayerState.DEAD;
     }
 
     // 발사 로직 쿨 타임
@@ -582,11 +654,45 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public bool GetDeadEyeReady()
+    {
+        return DeadEyeReady;
+    }
+
+    public GameObject GetDeadEyeObject()
+    {
+        return DeadEyeBox;
+    }
+
+    public GameObject GetCameraObject()
+    {
+        return CameraObject;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag.Equals("EnemyBullet") == true)
         {
             // HP를 깍는다
+            if (HP <= 0)
+            {
+                HP = 0;
+
+                Debug.Log("The Game End...ㅠ");
+
+                GameManager.NowGameState = GameState.GAMEOVER;
+                playerState = PlayerState.DEAD;
+
+                StopCoroutine(DeadProtocol(true));
+                StartCoroutine(DeadProtocol(true));
+
+
+
+            }
+            else
+            {
+                HP -= 10;
+            }
             
         }
     }
@@ -596,14 +702,43 @@ public class Player : MonoBehaviour {
         if (other.transform.tag.Equals("EnemyBullet") == true)
         {
             // HP를 깍는다
+            if(HP <= 0)
+            {
+                HP = 0;
 
+                Debug.Log("The Game End...ㅠ");
+
+                GameManager.NowGameState = GameState.GAMEOVER;
+                playerState = PlayerState.DEAD;
+
+                StopCoroutine(DeadProtocol(true));
+                StartCoroutine(DeadProtocol(true));
+                
+                
+
+            }
+            else
+            {
+                HP -= 10;
+            }
+            
         }
 
-        if (other.transform.tag.Equals("DeadEyeBox") == true)
-        {
-            // 데드아이를 준비한다.
-            playerState = PlayerState.DEADEYE;
-            this.transform.position = other.transform.position;
-        }
+        //if (other.transform.tag.Equals("DeadEyeBox") == true)
+        //{
+        //    // 데드아이를 준비한다.
+
+        //    print("DeadEye Ready");
+
+        //    DeadEyeReady = true;
+
+
+        //}
+        //else
+        //{
+        //    print("DeadEye Not Ready");
+
+        //    DeadEyeReady = false;
+        //}
     }
 }

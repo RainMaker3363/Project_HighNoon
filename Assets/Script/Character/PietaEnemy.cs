@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class PietaEnemy : MonoBehaviour {
 
     public GameObject MainCamera;
-    public GameObject CharacterAniObject;
     public GameObject Enemy_Tranjectory_Object;
 
     private GameState State;
@@ -30,7 +29,6 @@ public class PietaEnemy : MonoBehaviour {
 
     private IEnumerator WalkPathcoroutine;
     private IEnumerator WalkTocoroutine;
-
     
 
     // 적이 순찰을 할때의 위치및 순서를 제어한다.
@@ -46,6 +44,7 @@ public class PietaEnemy : MonoBehaviour {
     // 적이 플레이어와 시선이 마주쳤는지 여부
     RaycastHit hit;
     private int layerMask;
+    private int DeadEyeLayerMask;
     private Vector3[] SightVectorInterpol;
 
 	// Use this for initialization
@@ -80,24 +79,26 @@ public class PietaEnemy : MonoBehaviour {
         PathControlChange = true;
         PathFindEnd = true;
 
+        // 코루틴 연산 부분 초기화
         WalkPathcoroutine = null;
         WalkTocoroutine = null;
+        
 
         WalkPathcoroutine = WalkPath();
         WalkTocoroutine = WalkTo(Vector3.zero);
+        
 
         // 적의 시야 초기화
         SightVectorInterpol = new Vector3[2];
 
         SightVectorInterpol[0] = new Vector3(0.10f, 0.0f, 0.0f);
         SightVectorInterpol[1] = new Vector3(0.16f, 0.0f, 0.0f);
-        layerMask = (1 << LayerMask.NameToLayer("Player"));
+        layerMask = (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall") | (1 << LayerMask.NameToLayer("DeadEyeBox"))));
+        DeadEyeLayerMask = (1 << LayerMask.NameToLayer("DeadEyeBox") | (1 << LayerMask.NameToLayer("Wall")));
         //layerMask = (1 << 8);
         //layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")));
 
-        // Quad 텍스쳐를 처리해주는 부분
-        CharacterAniObject.transform.LookAt(MainCamera.transform.position);
-        CharacterAniObject.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
+
 
 
         // 적의 총알 관련 로직 초기화
@@ -177,7 +178,7 @@ public class PietaEnemy : MonoBehaviour {
 
                                                         //}
 
-
+                                                        
                                                         
                                                         
                                                        
@@ -193,18 +194,18 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if(hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                //m_Player.SetPlayerState(2);
-                                                                //enemyAiState = EnemyAIState.CHASE;
-                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
                                                             }
                                                         }
                                                         else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[0])).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                //m_Player.SetPlayerState(2);
-                                                                //enemyAiState = EnemyAIState.CHASE;
-                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                 //Debug.Log("PlayerHit!");
@@ -214,9 +215,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                //m_Player.SetPlayerState(2);
-                                                                //enemyAiState = EnemyAIState.CHASE;
-                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");
@@ -226,9 +227,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                //m_Player.SetPlayerState(2);
-                                                                //enemyAiState = EnemyAIState.CHASE;
-                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");
@@ -238,9 +239,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                //m_Player.SetPlayerState(2);
-                                                                //enemyAiState = EnemyAIState.CHASE;
-                                                                //enemyState = EnemyState.REALBATTLE;
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");
@@ -294,7 +295,23 @@ public class PietaEnemy : MonoBehaviour {
                         case PlayerState.DEADEYE:
                             {
                                 // 데드 아이 상태가 되면 모든 행동을 멈춘다.
-                                StopAllCoroutines();
+                                StopCoroutine(WalkPathcoroutine);
+                                StopCoroutine(WalkTocoroutine);
+                                StopCoroutine(ShootProtocol(true));
+
+                                Debug.DrawRay(this.transform.position, ((m_Player.GetDeadEyeObject().transform.position - this.transform.position).normalized) * 10.0f, Color.red);
+
+                                if (Physics.Raycast(this.transform.position, ((m_Player.GetDeadEyeObject().transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, DeadEyeLayerMask))
+                                {
+
+                                    if (hit.collider.gameObject.transform.tag.Equals("DeadEyeBox"))
+                                    {
+                                        Debug.Log("Enemy Deadeye Down! ");
+
+                                        StopCoroutine(DeadProtocol(true));
+                                        StartCoroutine(DeadProtocol(true));
+                                    }
+                                }
                             }
                             break;
 
@@ -373,10 +390,6 @@ public class PietaEnemy : MonoBehaviour {
                                                         //}
 
                                                         Debug.DrawRay(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized) * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) + SightVectorInterpol[0]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) + SightVectorInterpol[1]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) - SightVectorInterpol[0]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) - SightVectorInterpol[1]).normalized * 10.0f), Color.green);
 
                                                         //Debug.Log("Player Tile Index : " + tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
                                                         //Debug.Log("Player Tile Position : " + tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z)));
@@ -387,52 +400,54 @@ public class PietaEnemy : MonoBehaviour {
 
                                                         if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, layerMask))
                                                         {
-                                                            //print("Sight in");
+                                                            print("Enemy Sight In");
 
                                                             if (hit.collider.gameObject.transform.tag.Equals("Player"))
                                                             {
                                                                 if ((m_Player.transform.position - this.transform.position).magnitude <= 4.0f)
                                                                 {
-                                                                    //print("Player Hit !");
+                                                                    print("Enemy Shoot Range In");
 
 
-                                                                    //StopCoroutine(WalkPathcoroutine);
-                                                                    //StopCoroutine(WalkTocoroutine);
+                                                                    StopCoroutine(WalkPathcoroutine);
+                                                                    StopCoroutine(WalkTocoroutine);
 
-                                                                    //Shoot();
+                                                                    Shoot();
                                                                 }
                                                                
                                                             }
                                                             else
                                                             {
-                                                                //print("Don't Player Hit !");
+                                                                print("Enemy Shoot Range Out");
 
-                                                                PathFindEnd = true;
+
+                                                                StopCoroutine(ShootProtocol(true));
                                                             }
                                                         }
                                                         else
                                                         {
+                                                            print("Enemy Sight Out");
 
-                                                        }
-
-
-                                                        if (Input.GetKeyDown(KeyCode.Space))
-                                                        {
-                                                            PathFindEnd = false;
-
-                                                            Vector3 target = m_Player.GetPlayerPosition();//tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-
-                                                            if (tileMap.FindPath(this.transform.position, target, path))
+                                                            if (PathFindEnd == true)
                                                             {
+                                                                PathFindEnd = false;
 
-                                                                StopCoroutine(WalkPathcoroutine);
-                                                                StopCoroutine(WalkTocoroutine);
+                                                                Vector3 target = m_Player.GetPlayerPosition();//tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
 
-                                                                StartCoroutine(WalkPathcoroutine);
+                                                                if (tileMap.FindPath(this.transform.position, target, path))
+                                                                {
 
+                                                                    //StopCoroutine(WalkPathcoroutine);
+                                                                    //StopCoroutine(WalkTocoroutine);
 
+                                                                    StartCoroutine(WalkPathcoroutine);
+
+                                                                }
                                                             }
+
                                                         }
+
+
                                                         
                                                     }
                                                     break;
@@ -506,7 +521,7 @@ public class PietaEnemy : MonoBehaviour {
         {
             if (EnemyBullets[EnemyBulletIndex].gameObject.activeSelf == false)
             {
-                EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                 //EnemyBullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
                 EnemyBullets[EnemyBulletIndex].transform.parent = null;
 
@@ -521,7 +536,7 @@ public class PietaEnemy : MonoBehaviour {
 
             if (EnemyBullets[EnemyBulletIndex].gameObject.activeSelf == false)
             {
-                EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                 //EnemyBullets[EnemyBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
                 EnemyBullets[EnemyBulletIndex].transform.parent = null;
 
@@ -548,10 +563,13 @@ public class PietaEnemy : MonoBehaviour {
     // 사망 로직
     IEnumerator DeadProtocol(bool On = true)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.0f);
 
         enemyState = EnemyState.DEAD;
         enemyAiState = EnemyAIState.PATROL;
+
+        this.gameObject.SetActive(false);
+        
     }
 
 
@@ -595,6 +613,21 @@ public class PietaEnemy : MonoBehaviour {
             return (Enemy_Tranjectory_Object.transform.position - this.transform.position).normalized;
         }
         
+    }
+
+    public Player GetPlayer()
+    {
+        return m_Player;
+    }
+
+    public EnemyState GetenemyState()
+    {
+        return enemyState;
+    }
+
+    public EnemyAIState GetenemyAiState()
+    {
+        return enemyAiState;
     }
 
     void OnCollisionEnter(Collision collision)

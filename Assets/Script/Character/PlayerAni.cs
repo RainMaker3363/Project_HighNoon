@@ -1,41 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DeadEyeBox : MonoBehaviour {
+public class PlayerAni : MonoBehaviour {
 
     private GameState State;
     private GameControlState ControlState;
 
+    [HideInInspector]
+    public PlayerState playerState;
+
     private Player m_Player;
-    
-    private PlayerState playerState;
+    private GameObject MainCamera;
 
 	// Use this for initialization
 	void Start () {
-        State = GameManager.NowGameState;
-        ControlState = GameManager.NowGameControlState;
-
-        if (m_Player == null)
+	
+        if(m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+            State = GameManager.NowGameState;
+            ControlState = GameManager.NowGameControlState;
+
             playerState = m_Player.GetPlayerState();
         }
         else
         {
+            State = GameManager.NowGameState;
+            ControlState = GameManager.NowGameControlState;
+
             playerState = m_Player.GetPlayerState();
         }
 
-        
+        if (MainCamera == null)
+        {
+            MainCamera = GameObject.FindWithTag("MainCamera");
+        }
+
+        this.transform.position = m_Player.gameObject.transform.position;
+        this.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
+
+        this.transform.LookAt(MainCamera.transform.position);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        State = GameManager.NowGameState;
+        ControlState = GameManager.NowGameControlState;
 
         playerState = m_Player.GetPlayerState();
 
-        State = GameManager.NowGameState;
-
-        
+        this.transform.position = m_Player.gameObject.transform.position;
 
         switch (State)
         {
@@ -51,25 +66,25 @@ public class DeadEyeBox : MonoBehaviour {
                     {
                         case PlayerState.NORMAL:
                             {
-                                this.gameObject.SetActive(true);
+
                             }
                             break;
 
                         case PlayerState.REALBATTLE:
                             {
-                                this.gameObject.SetActive(true);
+
                             }
                             break;
 
                         case PlayerState.DEADEYE:
                             {
-                                this.gameObject.SetActive(true);
+                                
                             }
                             break;
 
                         case PlayerState.DEAD:
                             {
-                                this.gameObject.SetActive(true);
+                               
                             }
                             break;
                     }

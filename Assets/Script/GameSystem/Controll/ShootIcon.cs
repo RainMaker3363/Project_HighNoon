@@ -13,6 +13,7 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     private Image img;
     // 주인공 오브젝트
     public Player m_Player;
+    private bool DeadEyeReady;
 
     // 상황에 따른 총기 아이콘의 변화를 위함
     public Sprite[] ShootIcons;
@@ -20,17 +21,29 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 	// Use this for initialization
 	void Start () {
 
-        img = GetComponent<Image>();
+        if (img == null)
+        {
+            img = GameObject.Find("ShootIcon").GetComponent<Image>();
+            img.sprite = ShootIcons[0];
+        }
+        else
+        {
+            img.sprite = ShootIcons[0];
+        }
 
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
             playerState = m_Player.playerState;
+            DeadEyeReady = m_Player.GetDeadEyeReady();
         }
         else
         {
             playerState = m_Player.playerState;
+            DeadEyeReady = m_Player.GetDeadEyeReady();
         }
+
+        
 
         State = GameManager.NowGameState;
         
@@ -42,6 +55,21 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         State = GameManager.NowGameState;
         playerState = m_Player.playerState;
 
+        DeadEyeReady = m_Player.GetDeadEyeReady();
+
+        if (DeadEyeReady == true)
+        {
+         
+
+            img.sprite = ShootIcons[1];
+
+            
+        }
+        else
+        {
+
+            img.sprite = ShootIcons[0];
+        }
 	}
 
         // 터치가 드래그(Drag) 했을때 호출 되는 함수
@@ -54,82 +82,99 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        
-
-        switch (State)
+        if (DeadEyeReady)
         {
-            case GameState.START:
-                {
+            Debug.Log("DeadEyeShoot Button");
+            
 
-                }
-                break;
 
-            case GameState.PLAY:
-                {
-                    switch (playerState)
-                    {
-                        case PlayerState.NORMAL:
-                            {
-                                Debug.Log("Shoot Button");
-
-                                img.sprite = ShootIcons[0];
-
-                                m_Player.Shoot();
-                            }
-                            break;
-
-                        case PlayerState.DEADEYE:
-                            {
-                                img.sprite = ShootIcons[1];
-
-                                m_Player.Shoot();
-                            }
-                            break;
-
-                        case PlayerState.REALBATTLE:
-                            {
-                                Debug.Log("Shoot Button");
-
-                                img.sprite = ShootIcons[0];
-
-                                m_Player.Shoot();
-                            }
-                            break;
-
-                        case PlayerState.DEAD:
-                            {
-
-                            }
-                            break;
-                    }
-
-                }
-                break;
-
-            case GameState.PAUSE:
-                {
-
-                }
-                break;
-
-            case GameState.EVENT:
-                {
-
-                }
-                break;
-
-            case GameState.GAMEOVER:
-                {
-
-                }
-                break;
-
-            case GameState.VICTORY:
-                {
-
-                }
-                break;
+            m_Player.SetPlayerState(1);
+            m_Player.Shoot();
+            
         }
+        else
+        {
+            Debug.Log("Shoot Button");
+
+
+            m_Player.Shoot();
+
+        }
+
+        //switch (State)
+        //{
+        //    case GameState.START:
+        //        {
+
+        //        }
+        //        break;
+
+        //    case GameState.PLAY:
+        //        {
+        //            switch (playerState)
+        //            {
+        //                case PlayerState.NORMAL:
+        //                    {
+        //                        Debug.Log("Shoot Button");
+
+        //                        img.sprite = ShootIcons[0];
+
+        //                        m_Player.Shoot();
+        //                    }
+        //                    break;
+
+        //                case PlayerState.DEADEYE:
+        //                    {
+        //                        img.sprite = ShootIcons[1];
+
+        //                        m_Player.Shoot();
+        //                    }
+        //                    break;
+
+        //                case PlayerState.REALBATTLE:
+        //                    {
+        //                        Debug.Log("Shoot Button");
+
+        //                        img.sprite = ShootIcons[0];
+
+        //                        m_Player.Shoot();
+        //                    }
+        //                    break;
+
+        //                case PlayerState.DEAD:
+        //                    {
+
+        //                    }
+        //                    break;
+        //            }
+
+        //        }
+        //        break;
+
+        //    case GameState.PAUSE:
+        //        {
+
+        //        }
+        //        break;
+
+        //    case GameState.EVENT:
+        //        {
+
+        //        }
+        //        break;
+
+        //    case GameState.GAMEOVER:
+        //        {
+
+        //        }
+        //        break;
+
+        //    case GameState.VICTORY:
+        //        {
+
+        //        }
+        //        break;
+        //}
     }
 
     // 터치에서 손을 땠을때 발생하는 함수
