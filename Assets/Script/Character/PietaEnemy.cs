@@ -91,7 +91,9 @@ public class PietaEnemy : MonoBehaviour {
 
         SightVectorInterpol[0] = new Vector3(0.10f, 0.0f, 0.0f);
         SightVectorInterpol[1] = new Vector3(0.16f, 0.0f, 0.0f);
-        layerMask = 1 << LayerMask.NameToLayer("Player");
+        layerMask = (1 << LayerMask.NameToLayer("Player"));
+        //layerMask = (1 << 8);
+        //layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")));
 
         // Quad 텍스쳐를 처리해주는 부분
         CharacterAniObject.transform.LookAt(MainCamera.transform.position);
@@ -122,7 +124,6 @@ public class PietaEnemy : MonoBehaviour {
 
         playerState = m_Player.GetPlayerState();
         State = GameManager.NowGameState;
-
 
         switch (State)
         {
@@ -370,52 +371,68 @@ public class PietaEnemy : MonoBehaviour {
 
 
                                                         //}
-                                                        Debug.Log("Player Tile Index : " + tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-                                                        Debug.Log("Player Tile Position : " + tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z)));
 
-                                                        print("PathFindEnd : " + PathFindEnd);
-                                                        if (Mathf.Abs((m_Player.transform.position - this.transform.position).magnitude) <= 3.0f)
+                                                        Debug.DrawRay(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized) * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) + SightVectorInterpol[0]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) + SightVectorInterpol[1]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) - SightVectorInterpol[0]).normalized * 10.0f), Color.green);
+                                                        Debug.DrawRay(this.transform.position, (((m_Player.transform.position - this.transform.position) - SightVectorInterpol[1]).normalized * 10.0f), Color.green);
+
+                                                        //Debug.Log("Player Tile Index : " + tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
+                                                        //Debug.Log("Player Tile Position : " + tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z)));
+
+                                                        //print("PathFindEnd : " + PathFindEnd);
+
+                                                        //this.transform.LookAt(m_Player.transform.position);
+
+                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, layerMask))
                                                         {
-                                                            print("Player Hit !");
+                                                            //print("Sight in");
 
-
-                                                            StopCoroutine(WalkPathcoroutine);
-                                                            StopCoroutine(WalkTocoroutine);
-
-                                                            //StopAllCoroutines();
-                                                            
-                                                            //StopCoroutine(WalkPath());
-                                                            //StopCoroutine(WalkTo(Vector3.zero));
-
-                                                            PathFindEnd = false;
-
-                                                            Shoot();
-                                                        }
-                                                        else
-                                                        {
-                                                            print("Don't Player Hit !");
-
-                                                            if (PathFindEnd == true)
+                                                            if (hit.collider.gameObject.transform.tag.Equals("Player"))
                                                             {
-                                                                PathFindEnd = false;
-
-                                                                if (tileMap.FindPath(this.transform.position, tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z)), path))
+                                                                if ((m_Player.transform.position - this.transform.position).magnitude <= 4.0f)
                                                                 {
+                                                                    //print("Player Hit !");
+
 
                                                                     //StopCoroutine(WalkPathcoroutine);
                                                                     //StopCoroutine(WalkTocoroutine);
 
-                                                                    StartCoroutine(WalkPathcoroutine);
-
-
-
+                                                                    //Shoot();
                                                                 }
+                                                               
                                                             }
+                                                            else
+                                                            {
+                                                                //print("Don't Player Hit !");
+
+                                                                PathFindEnd = true;
+                                                            }
+                                                        }
+                                                        else
+                                                        {
 
                                                         }
 
-                                                    
-                                                        
+
+                                                        if (Input.GetKeyDown(KeyCode.Space))
+                                                        {
+                                                            PathFindEnd = false;
+
+                                                            Vector3 target = m_Player.GetPlayerPosition();//tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
+
+                                                            if (tileMap.FindPath(this.transform.position, target, path))
+                                                            {
+
+                                                                StopCoroutine(WalkPathcoroutine);
+                                                                StopCoroutine(WalkTocoroutine);
+
+                                                                StartCoroutine(WalkPathcoroutine);
+
+
+                                                            }
+                                                        }
                                                         
                                                     }
                                                     break;
@@ -461,8 +478,6 @@ public class PietaEnemy : MonoBehaviour {
                 }
                 break;
         }
-
- 
 	}
 
     // 총을 발사 했을때..
@@ -557,6 +572,7 @@ public class PietaEnemy : MonoBehaviour {
         {
             transform.position = Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime);
             //transform.Translate(Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime));
+            this.transform.LookAt(position);
             yield return 0;
         }
 

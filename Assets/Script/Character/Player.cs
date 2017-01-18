@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public PlayerState playerState;
+    private PlayerState PrevPlayerState;
     
     // 플레이어의 상태 값
     private float HP;
@@ -115,8 +116,8 @@ public class Player : MonoBehaviour {
         }
 
         PlayerPos = Vector3.zero;
-        layerMask = 1 << LayerMask.NameToLayer("Ground");
-        WalllayerMask = 1 << LayerMask.NameToLayer("Wall");
+        layerMask = (1 << LayerMask.NameToLayer("Ground"));
+        WalllayerMask = ((1 << LayerMask.NameToLayer("Wall")) | (1 << LayerMask.NameToLayer("DeadEyeBox")));
 	}
 
     // Update is called once per frame
@@ -233,6 +234,7 @@ public class Player : MonoBehaviour {
 
                                 if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 1.0f, WalllayerMask))
                                 {
+
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
                                         print("Wall In");
@@ -248,7 +250,7 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.DEADEYE:
                             {
-
+                                
                             }
                             break;
 
@@ -368,25 +370,70 @@ public class Player : MonoBehaviour {
 
     public void Shoot()
     {
-        // 총알의 개수 파악하기
-        if (BulletStack > 0)
+        switch (playerState)
         {
-
-            // 재장전이 다 되어있다면 발사한다.
-            if (ReloadSuccessOn == true)
-            {
-                if (ShootOn == true)
+            case PlayerState.NORMAL:
                 {
-                    StopCoroutine(ShootProtocol(true));
-                    StartCoroutine(ShootProtocol(true));
+                    // 총알의 개수 파악하기
+                    if (BulletStack > 0)
+                    {
+
+                        // 재장전이 다 되어있다면 발사한다.
+                        if (ReloadSuccessOn == true)
+                        {
+                            if (ShootOn == true)
+                            {
+                                StopCoroutine(ShootProtocol(true));
+                                StartCoroutine(ShootProtocol(true));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StopCoroutine(ReloadProtocol(true));
+                        StartCoroutine(ReloadProtocol(true));
+                    }
                 }
-            }
+                break;
+
+            case PlayerState.REALBATTLE:
+                {
+                    // 총알의 개수 파악하기
+                    if (BulletStack > 0)
+                    {
+
+                        // 재장전이 다 되어있다면 발사한다.
+                        if (ReloadSuccessOn == true)
+                        {
+                            if (ShootOn == true)
+                            {
+                                StopCoroutine(ShootProtocol(true));
+                                StartCoroutine(ShootProtocol(true));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StopCoroutine(ReloadProtocol(true));
+                        StartCoroutine(ReloadProtocol(true));
+                    }
+                }
+                break;
+
+            case PlayerState.DEADEYE:
+                {
+                    StopCoroutine(DeadEyeShootProtocol(true));
+                    StartCoroutine(DeadEyeShootProtocol(true));
+                }
+                break;
+
+            case PlayerState.DEAD:
+                {
+                    
+                }
+                break;
         }
-        else
-        {
-            StopCoroutine(ReloadProtocol(true));
-            StartCoroutine(ReloadProtocol(true));
-        }
+
 
 
         
@@ -452,6 +499,18 @@ public class Player : MonoBehaviour {
         BulletStack = 6;
     }
 
+    // 데드 아이 시전 로직
+    IEnumerator DeadEyeShootProtocol(bool On = true)
+    {
+
+        // 데드 아이 시전
+        
+
+        yield return new WaitForSeconds(1.5f);
+
+        playerState  = PlayerState.REALBATTLE;
+    }
+
     // 발사 로직 쿨 타임
     //IEnumerator ShootCoolProtocol(bool On = true)
     //{
@@ -504,6 +563,7 @@ public class Player : MonoBehaviour {
 
             case 1:
                 {
+                    PrevPlayerState = playerState;
                     playerState = PlayerState.DEADEYE;
                 }
                 break;
@@ -537,6 +597,13 @@ public class Player : MonoBehaviour {
         {
             // HP를 깍는다
 
+        }
+
+        if (other.transform.tag.Equals("DeadEyeBox") == true)
+        {
+            // 데드아이를 준비한다.
+            playerState = PlayerState.DEADEYE;
+            this.transform.position = other.transform.position;
         }
     }
 }

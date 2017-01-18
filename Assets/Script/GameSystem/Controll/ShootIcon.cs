@@ -72,19 +72,27 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
                             {
                                 Debug.Log("Shoot Button");
 
+                                img.sprite = ShootIcons[0];
+
                                 m_Player.Shoot();
                             }
                             break;
 
                         case PlayerState.DEADEYE:
                             {
+                                img.sprite = ShootIcons[1];
 
+                                m_Player.Shoot();
                             }
                             break;
 
                         case PlayerState.REALBATTLE:
                             {
+                                Debug.Log("Shoot Button");
 
+                                img.sprite = ShootIcons[0];
+
+                                m_Player.Shoot();
                             }
                             break;
 
