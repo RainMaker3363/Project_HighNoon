@@ -192,18 +192,18 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if(hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                m_Player.SetPlayerState(2);
-                                                                enemyAiState = EnemyAIState.CHASE;
-                                                                enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
                                                             }
                                                         }
                                                         else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[0])).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                m_Player.SetPlayerState(2);
-                                                                enemyAiState = EnemyAIState.CHASE;
-                                                                enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                 //Debug.Log("PlayerHit!");
@@ -213,9 +213,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                m_Player.SetPlayerState(2);
-                                                                enemyAiState = EnemyAIState.CHASE;
-                                                                enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");
@@ -225,9 +225,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                m_Player.SetPlayerState(2);
-                                                                enemyAiState = EnemyAIState.CHASE;
-                                                                enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");
@@ -237,9 +237,9 @@ public class PietaEnemy : MonoBehaviour {
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
-                                                                m_Player.SetPlayerState(2);
-                                                                enemyAiState = EnemyAIState.CHASE;
-                                                                enemyState = EnemyState.REALBATTLE;
+                                                                //m_Player.SetPlayerState(2);
+                                                                //enemyAiState = EnemyAIState.CHASE;
+                                                                //enemyState = EnemyState.REALBATTLE;
                                                                 
 
                                                                // Debug.Log("PlayerHit!");

@@ -155,7 +155,7 @@ public class Player : MonoBehaviour {
                         case PlayerState.NORMAL:
                             {
 
-                                //Player_Tranjectory.enabled = true;
+                                Player_Tranjectory.enabled = true;
 
                                 if (NowMovePlayer)
                                 {
@@ -214,16 +214,19 @@ public class Player : MonoBehaviour {
                                     }
                                 }
 
+
+
                                 Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
                                 Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
-                                if (Physics.Raycast(this.transform.position, (this.transform.position + Vector3.down).normalized * 50.0f, out hit, Mathf.Infinity, layerMask))
+                                Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, Color.yellow);
+
+                                if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
                                     //print("hit Name : " + hit.collider.name);
                                     //print("hit Point : " + hit.point);
-
-
 
                                     PlayerPos = hit.point;
                                 }
@@ -232,6 +235,7 @@ public class Player : MonoBehaviour {
                                 {
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
+                                        print("Wall In");
                                         CameraMoveOn = false;
                                     }
                                 }

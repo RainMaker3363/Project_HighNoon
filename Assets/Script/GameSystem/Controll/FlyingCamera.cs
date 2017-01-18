@@ -65,7 +65,7 @@ public class FlyingCamera : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
-                                this.transform.LookAt(PlayerObject.transform.position);
+                                //this.transform.LookAt(PlayerObject.transform.position);
                             }
                             break;
 
