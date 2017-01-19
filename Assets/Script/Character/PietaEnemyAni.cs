@@ -46,7 +46,7 @@ public class PietaEnemyAni : MonoBehaviour {
 
         State = GameManager.NowGameState;
 
-        this.transform.position = this.transform.position;
+        
 
         switch (State)
         {
@@ -58,6 +58,9 @@ public class PietaEnemyAni : MonoBehaviour {
 
             case GameState.PLAY:
                 {
+                    this.gameObject.SetActive(m_PietaEnemy.gameObject.activeSelf);
+                    this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.4f, m_PietaEnemy.gameObject.transform.position.z);
+
                     switch (playerState)
                     {
                         case PlayerState.NORMAL:

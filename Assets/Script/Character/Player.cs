@@ -490,7 +490,7 @@ public class Player : MonoBehaviour {
     {
         ShootOn = false;
 
-        Debug.Log("Bang!");
+        //Debug.Log("Bang!");
 
         // 총알 오브젝트 On
         if (NowBulletIndex < Bullets.Length)
@@ -691,7 +691,7 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                HP -= 10;
+                //HP -= 10;
             }
             
         }
@@ -719,7 +719,7 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                HP -= 10;
+                //HP -= 10;
             }
             
         }

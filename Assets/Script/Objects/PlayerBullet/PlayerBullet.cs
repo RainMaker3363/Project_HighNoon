@@ -76,7 +76,7 @@ public class PlayerBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 30.0f * Time.deltaTime));
+                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 20.0f * Time.deltaTime));
                 }
                 break;
 
