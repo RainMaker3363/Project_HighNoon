@@ -1,0 +1,3643 @@
+fileFormatVersion: 2
+guid: 633b2f2ee91b0a14ea6a0afcd8cddbab
+timeCreated: 1484944461
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PlayerAnimationTexture_0
+    21300002: PlayerAnimationTexture_1
+    21300004: PlayerAnimationTexture_2
+    21300006: PlayerAnimationTexture_3
+    21300008: PlayerAnimationTexture_4
+    21300010: PlayerAnimationTexture_5
+    21300012: PlayerAnimationTexture_6
+    21300014: PlayerAnimationTexture_7
+    21300016: PlayerAnimationTexture_8
+    21300018: PlayerAnimationTexture_9
+    21300020: PlayerAnimationTexture_10
+    21300022: PlayerAnimationTexture_11
+    21300024: PlayerAnimationTexture_12
+    21300026: PlayerAnimationTexture_13
+    21300028: PlayerAnimationTexture_14
+    21300030: PlayerAnimationTexture_15
+    21300032: PlayerAnimationTexture_16
+    21300034: PlayerAnimationTexture_17
+    21300036: PlayerAnimationTexture_18
+    21300038: PlayerAnimationTexture_19
+    21300040: PlayerAnimationTexture_20
+    21300042: PlayerAnimationTexture_21
+    21300044: PlayerAnimationTexture_22
+    21300046: PlayerAnimationTexture_23
+    21300048: PlayerAnimationTexture_24
+    21300050: PlayerAnimationTexture_25
+    21300052: PlayerAnimationTexture_26
+    21300054: PlayerAnimationTexture_27
+    21300056: PlayerAnimationTexture_28
+    21300058: PlayerAnimationTexture_29
+    21300060: PlayerAnimationTexture_30
+    21300062: PlayerAnimationTexture_31
+    21300064: PlayerAnimationTexture_32
+    21300066: PlayerAnimationTexture_33
+    21300068: PlayerAnimationTexture_34
+    21300070: PlayerAnimationTexture_35
+    21300072: PlayerAnimationTexture_36
+    21300074: PlayerAnimationTexture_37
+    21300076: PlayerAnimationTexture_38
+    21300078: PlayerAnimationTexture_39
+    21300080: PlayerAnimationTexture_40
+    21300082: PlayerAnimationTexture_41
+    21300084: PlayerAnimationTexture_42
+    21300086: PlayerAnimationTexture_43
+    21300088: PlayerAnimationTexture_44
+    21300090: PlayerAnimationTexture_45
+    21300092: PlayerAnimationTexture_46
+    21300094: PlayerAnimationTexture_47
+    21300096: PlayerAnimationTexture_48
+    21300098: PlayerAnimationTexture_49
+    21300100: PlayerAnimationTexture_50
+    21300102: PlayerAnimationTexture_51
+    21300104: PlayerAnimationTexture_52
+    21300106: PlayerAnimationTexture_53
+    21300108: PlayerAnimationTexture_54
+    21300110: PlayerAnimationTexture_55
+    21300112: PlayerAnimationTexture_56
+    21300114: PlayerAnimationTexture_57
+    21300116: PlayerAnimationTexture_58
+    21300118: PlayerAnimationTexture_59
+    21300120: PlayerAnimationTexture_60
+    21300122: PlayerAnimationTexture_61
+    21300124: PlayerAnimationTexture_62
+    21300126: PlayerAnimationTexture_63
+    21300128: PlayerAnimationTexture_64
+    21300130: PlayerAnimationTexture_65
+    21300132: PlayerAnimationTexture_66
+    21300134: PlayerAnimationTexture_67
+    21300136: PlayerAnimationTexture_68
+    21300138: PlayerAnimationTexture_69
+    21300140: PlayerAnimationTexture_70
+    21300142: PlayerAnimationTexture_71
+    21300144: PlayerAnimationTexture_72
+    21300146: PlayerAnimationTexture_73
+    21300148: PlayerAnimationTexture_74
+    21300150: PlayerAnimationTexture_75
+    21300152: PlayerAnimationTexture_76
+    21300154: PlayerAnimationTexture_77
+    21300156: PlayerAnimationTexture_78
+    21300158: PlayerAnimationTexture_79
+    21300160: PlayerAnimationTexture_80
+    21300162: PlayerAnimationTexture_81
+    21300164: PlayerAnimationTexture_82
+    21300166: PlayerAnimationTexture_83
+    21300168: PlayerAnimationTexture_84
+    21300170: PlayerAnimationTexture_85
+    21300172: PlayerAnimationTexture_86
+    21300174: PlayerAnimationTexture_87
+    21300176: PlayerAnimationTexture_88
+    21300178: PlayerAnimationTexture_89
+    21300180: PlayerAnimationTexture_90
+    21300182: PlayerAnimationTexture_91
+    21300184: PlayerAnimationTexture_92
+    21300186: PlayerAnimationTexture_93
+    21300188: PlayerAnimationTexture_94
+    21300190: PlayerAnimationTexture_95
+    21300192: PlayerAnimationTexture_96
+    21300194: PlayerAnimationTexture_97
+    21300196: PlayerAnimationTexture_98
+    21300198: PlayerAnimationTexture_99
+    21300200: PlayerAnimationTexture_100
+    21300202: PlayerAnimationTexture_101
+    21300204: PlayerAnimationTexture_102
+    21300206: PlayerAnimationTexture_103
+    21300208: PlayerAnimationTexture_104
+    21300210: PlayerAnimationTexture_105
+    21300212: PlayerAnimationTexture_106
+    21300214: PlayerAnimationTexture_107
+    21300216: PlayerAnimationTexture_108
+    21300218: PlayerAnimationTexture_109
+    21300220: PlayerAnimationTexture_110
+    21300222: PlayerAnimationTexture_111
+    21300224: PlayerAnimationTexture_112
+    21300226: PlayerAnimationTexture_113
+    21300228: PlayerAnimationTexture_114
+    21300230: PlayerAnimationTexture_115
+    21300232: PlayerAnimationTexture_116
+    21300234: PlayerAnimationTexture_117
+    21300236: PlayerAnimationTexture_118
+    21300238: PlayerAnimationTexture_119
+    21300240: PlayerAnimationTexture_120
+    21300242: PlayerAnimationTexture_121
+    21300244: PlayerAnimationTexture_122
+    21300246: PlayerAnimationTexture_123
+    21300248: PlayerAnimationTexture_124
+    21300250: PlayerAnimationTexture_125
+    21300252: PlayerAnimationTexture_126
+    21300254: PlayerAnimationTexture_127
+    21300256: PlayerAnimationTexture_128
+    21300258: PlayerAnimationTexture_129
+    21300260: PlayerAnimationTexture_130
+    21300262: PlayerAnimationTexture_131
+    21300264: PlayerAnimationTexture_132
+    21300266: PlayerAnimationTexture_133
+    21300268: PlayerAnimationTexture_134
+    21300270: PlayerAnimationTexture_135
+    21300272: PlayerAnimationTexture_136
+    21300274: PlayerAnimationTexture_137
+    21300276: PlayerAnimationTexture_138
+    21300278: PlayerAnimationTexture_139
+    21300280: PlayerAnimationTexture_140
+    21300282: PlayerAnimationTexture_141
+    21300284: PlayerAnimationTexture_142
+    21300286: PlayerAnimationTexture_143
+    21300288: PlayerAnimationTexture_144
+    21300290: PlayerAnimationTexture_145
+    21300292: PlayerAnimationTexture_146
+    21300294: PlayerAnimationTexture_147
+    21300296: PlayerAnimationTexture_148
+    21300298: PlayerAnimationTexture_149
+    21300300: PlayerAnimationTexture_150
+    21300302: PlayerAnimationTexture_151
+    21300304: PlayerAnimationTexture_152
+    21300306: PlayerAnimationTexture_153
+    21300308: PlayerAnimationTexture_154
+    21300310: PlayerAnimationTexture_155
+    21300312: PlayerAnimationTexture_156
+    21300314: PlayerAnimationTexture_157
+    21300316: PlayerAnimationTexture_158
+    21300318: PlayerAnimationTexture_159
+    21300320: PlayerAnimationTexture_160
+    21300322: PlayerAnimationTexture_161
+    21300324: PlayerAnimationTexture_162
+    21300326: PlayerAnimationTexture_163
+    21300328: PlayerAnimationTexture_164
+    21300330: PlayerAnimationTexture_165
+    21300332: PlayerAnimationTexture_166
+    21300334: PlayerAnimationTexture_167
+    21300336: PlayerAnimationTexture_168
+    21300338: PlayerAnimationTexture_169
+    21300340: PlayerAnimationTexture_170
+    21300342: PlayerAnimationTexture_171
+    21300344: PlayerAnimationTexture_172
+    21300346: PlayerAnimationTexture_173
+    21300348: PlayerAnimationTexture_174
+    21300350: PlayerAnimationTexture_175
+    21300352: PlayerAnimationTexture_176
+    21300354: PlayerAnimationTexture_177
+    21300356: PlayerAnimationTexture_178
+    21300358: PlayerAnimationTexture_179
+    21300360: PlayerAnimationTexture_180
+    21300362: PlayerAnimationTexture_181
+    21300364: PlayerAnimationTexture_182
+    21300366: PlayerAnimationTexture_183
+    21300368: PlayerAnimationTexture_184
+    21300370: PlayerAnimationTexture_185
+    21300372: PlayerAnimationTexture_186
+    21300374: PlayerAnimationTexture_187
+    21300376: PlayerAnimationTexture_188
+    21300378: PlayerAnimationTexture_189
+    21300380: PlayerAnimationTexture_190
+    21300382: PlayerAnimationTexture_191
+    21300384: PlayerAnimationTexture_192
+    21300386: PlayerAnimationTexture_193
+    21300388: PlayerAnimationTexture_194
+    21300390: PlayerAnimationTexture_195
+    21300392: PlayerAnimationTexture_196
+    21300394: PlayerAnimationTexture_197
+    21300396: PlayerAnimationTexture_198
+    21300398: PlayerAnimationTexture_199
+    21300400: PlayerAnimationTexture_200
+    21300402: PlayerAnimationTexture_201
+    21300404: PlayerAnimationTexture_202
+    21300406: PlayerAnimationTexture_203
+    21300408: PlayerAnimationTexture_204
+    21300410: PlayerAnimationTexture_205
+    21300412: PlayerAnimationTexture_206
+    21300414: PlayerAnimationTexture_207
+    21300416: PlayerAnimationTexture_208
+    21300418: PlayerAnimationTexture_209
+    21300420: PlayerAnimationTexture_210
+    21300422: PlayerAnimationTexture_211
+    21300424: PlayerAnimationTexture_212
+    21300426: PlayerAnimationTexture_213
+    21300428: PlayerAnimationTexture_214
+    21300430: PlayerAnimationTexture_215
+    21300432: PlayerAnimationTexture_216
+    21300434: PlayerAnimationTexture_217
+    21300436: PlayerAnimationTexture_218
+    21300438: PlayerAnimationTexture_219
+    21300440: PlayerAnimationTexture_220
+    21300442: PlayerAnimationTexture_221
+    21300444: PlayerAnimationTexture_222
+    21300446: PlayerAnimationTexture_223
+    21300448: PlayerAnimationTexture_224
+    21300450: PlayerAnimationTexture_225
+    21300452: PlayerAnimationTexture_226
+    21300454: PlayerAnimationTexture_227
+    21300456: PlayerAnimationTexture_228
+    21300458: PlayerAnimationTexture_229
+    21300460: PlayerAnimationTexture_230
+    21300462: PlayerAnimationTexture_231
+    21300464: PlayerAnimationTexture_232
+    21300466: PlayerAnimationTexture_233
+    21300468: PlayerAnimationTexture_234
+    21300470: PlayerAnimationTexture_235
+    21300472: PlayerAnimationTexture_236
+    21300474: PlayerAnimationTexture_237
+    21300476: PlayerAnimationTexture_238
+    21300478: PlayerAnimationTexture_239
+    21300480: PlayerAnimationTexture_240
+    21300482: PlayerAnimationTexture_241
+    21300484: PlayerAnimationTexture_242
+    21300486: PlayerAnimationTexture_243
+    21300488: PlayerAnimationTexture_244
+    21300490: PlayerAnimationTexture_245
+    21300492: PlayerAnimationTexture_246
+    21300494: PlayerAnimationTexture_247
+    21300496: PlayerAnimationTexture_248
+    21300498: PlayerAnimationTexture_249
+    21300500: PlayerAnimationTexture_250
+    21300502: PlayerAnimationTexture_251
+    21300504: PlayerAnimationTexture_252
+    21300506: PlayerAnimationTexture_253
+    21300508: PlayerAnimationTexture_254
+    21300510: PlayerAnimationTexture_255
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_1
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_2
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_3
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_4
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_5
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_6
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_7
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_8
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_9
+      rect:
+        serializedVersion: 2
+        x: 2387
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_10
+      rect:
+        serializedVersion: 2
+        x: 2643
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_11
+      rect:
+        serializedVersion: 2
+        x: 2899
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_12
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 3859
+        width: 90
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_13
+      rect:
+        serializedVersion: 2
+        x: 3411
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_14
+      rect:
+        serializedVersion: 2
+        x: 3667
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_15
+      rect:
+        serializedVersion: 2
+        x: 3923
+        y: 3859
+        width: 90
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_17
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_18
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 3617
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_19
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_20
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_21
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_22
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_23
+      rect:
+        serializedVersion: 2
+        x: 1877
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_24
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_25
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_26
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_27
+      rect:
+        serializedVersion: 2
+        x: 2901
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_28
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_29
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_30
+      rect:
+        serializedVersion: 2
+        x: 3667
+        y: 3617
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_31
+      rect:
+        serializedVersion: 2
+        x: 3925
+        y: 3617
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_32
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_33
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_34
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_35
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_36
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_37
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_38
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_39
+      rect:
+        serializedVersion: 2
+        x: 1883
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_40
+      rect:
+        serializedVersion: 2
+        x: 2139
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_41
+      rect:
+        serializedVersion: 2
+        x: 2395
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_42
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_43
+      rect:
+        serializedVersion: 2
+        x: 2907
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_44
+      rect:
+        serializedVersion: 2
+        x: 3163
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_45
+      rect:
+        serializedVersion: 2
+        x: 3419
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_46
+      rect:
+        serializedVersion: 2
+        x: 3675
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_47
+      rect:
+        serializedVersion: 2
+        x: 3931
+        y: 3361
+        width: 80
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_48
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_49
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_50
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_51
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_52
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_53
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_54
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_55
+      rect:
+        serializedVersion: 2
+        x: 1887
+        y: 3105
+        width: 81
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_56
+      rect:
+        serializedVersion: 2
+        x: 2143
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_57
+      rect:
+        serializedVersion: 2
+        x: 2399
+        y: 3105
+        width: 81
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_58
+      rect:
+        serializedVersion: 2
+        x: 2655
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_59
+      rect:
+        serializedVersion: 2
+        x: 2911
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_60
+      rect:
+        serializedVersion: 2
+        x: 3167
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_61
+      rect:
+        serializedVersion: 2
+        x: 3423
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_62
+      rect:
+        serializedVersion: 2
+        x: 3679
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_63
+      rect:
+        serializedVersion: 2
+        x: 3935
+        y: 3105
+        width: 78
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_64
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_65
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_66
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_67
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_68
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_69
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_70
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_71
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_72
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_73
+      rect:
+        serializedVersion: 2
+        x: 2387
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_74
+      rect:
+        serializedVersion: 2
+        x: 2643
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_75
+      rect:
+        serializedVersion: 2
+        x: 2899
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_76
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_77
+      rect:
+        serializedVersion: 2
+        x: 3411
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_78
+      rect:
+        serializedVersion: 2
+        x: 3667
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_79
+      rect:
+        serializedVersion: 2
+        x: 3923
+        y: 2847
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_80
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_81
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_82
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_83
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_84
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_85
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_86
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_87
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_88
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_89
+      rect:
+        serializedVersion: 2
+        x: 2401
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_90
+      rect:
+        serializedVersion: 2
+        x: 2657
+        y: 2591
+        width: 80
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_91
+      rect:
+        serializedVersion: 2
+        x: 2911
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_92
+      rect:
+        serializedVersion: 2
+        x: 3167
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_93
+      rect:
+        serializedVersion: 2
+        x: 3423
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_94
+      rect:
+        serializedVersion: 2
+        x: 3679
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_95
+      rect:
+        serializedVersion: 2
+        x: 3935
+        y: 2591
+        width: 82
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_96
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_97
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_98
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_99
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_100
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_101
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_102
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_103
+      rect:
+        serializedVersion: 2
+        x: 1877
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_104
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_105
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_106
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_107
+      rect:
+        serializedVersion: 2
+        x: 2901
+        y: 2335
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_108
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_109
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_110
+      rect:
+        serializedVersion: 2
+        x: 3669
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_111
+      rect:
+        serializedVersion: 2
+        x: 3925
+        y: 2335
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_112
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 2079
+        width: 83
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_113
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 2079
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_114
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_115
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_116
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_117
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_118
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_119
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_120
+      rect:
+        serializedVersion: 2
+        x: 2141
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_121
+      rect:
+        serializedVersion: 2
+        x: 2397
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_122
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_123
+      rect:
+        serializedVersion: 2
+        x: 2909
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_124
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_125
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_126
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 2079
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_127
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 2079
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_128
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1811
+        width: 90
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_129
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 1815
+        width: 90
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_130
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 1817
+        width: 90
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_131
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1821
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_132
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1825
+        width: 90
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_133
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 1823
+        width: 90
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_134
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 1819
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_135
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 1815
+        width: 90
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_136
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 1811
+        width: 90
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_137
+      rect:
+        serializedVersion: 2
+        x: 2387
+        y: 1815
+        width: 90
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_138
+      rect:
+        serializedVersion: 2
+        x: 2643
+        y: 1819
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_139
+      rect:
+        serializedVersion: 2
+        x: 2899
+        y: 1821
+        width: 90
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_140
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 1825
+        width: 90
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_141
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 1823
+        width: 88
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_142
+      rect:
+        serializedVersion: 2
+        x: 3667
+        y: 1819
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_143
+      rect:
+        serializedVersion: 2
+        x: 3923
+        y: 1815
+        width: 90
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_144
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1567
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_145
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1568
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_146
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1571
+        width: 91
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_147
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1573
+        width: 90
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_148
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1575
+        width: 90
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_149
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 1575
+        width: 92
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_150
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1570
+        width: 90
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_151
+      rect:
+        serializedVersion: 2
+        x: 1877
+        y: 1567
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_152
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 1567
+        width: 90
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_153
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 1567
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_154
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 1570
+        width: 90
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_155
+      rect:
+        serializedVersion: 2
+        x: 2901
+        y: 1575
+        width: 92
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_156
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 1575
+        width: 90
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_157
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 1573
+        width: 90
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_158
+      rect:
+        serializedVersion: 2
+        x: 3669
+        y: 1571
+        width: 91
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_159
+      rect:
+        serializedVersion: 2
+        x: 3925
+        y: 1568
+        width: 90
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_160
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1315
+        width: 86
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_161
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 1315
+        width: 84
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_162
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 1317
+        width: 84
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_163
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 1313
+        width: 80
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_164
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 1313
+        width: 80
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_165
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 1313
+        width: 80
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_166
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 1311
+        width: 80
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_167
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 1311
+        width: 80
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_168
+      rect:
+        serializedVersion: 2
+        x: 2137
+        y: 1313
+        width: 84
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_169
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 1315
+        width: 88
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_170
+      rect:
+        serializedVersion: 2
+        x: 2641
+        y: 1321
+        width: 92
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_171
+      rect:
+        serializedVersion: 2
+        x: 2903
+        y: 1319
+        width: 86
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_172
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 1323
+        width: 80
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_173
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 1313
+        width: 80
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_174
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 1313
+        width: 80
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_175
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 1312
+        width: 80
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_176
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1059
+        width: 88
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_177
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 1059
+        width: 86
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_178
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 1061
+        width: 84
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_179
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 1057
+        width: 82
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_180
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 1057
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_181
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 1055
+        width: 82
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_182
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 1057
+        width: 81
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_183
+      rect:
+        serializedVersion: 2
+        x: 1883
+        y: 1055
+        width: 80
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_184
+      rect:
+        serializedVersion: 2
+        x: 2139
+        y: 1057
+        width: 86
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_185
+      rect:
+        serializedVersion: 2
+        x: 2395
+        y: 1059
+        width: 90
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_186
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 1064
+        width: 94
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_187
+      rect:
+        serializedVersion: 2
+        x: 2907
+        y: 1063
+        width: 86
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_188
+      rect:
+        serializedVersion: 2
+        x: 3163
+        y: 1067
+        width: 82
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_189
+      rect:
+        serializedVersion: 2
+        x: 3419
+        y: 1057
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_190
+      rect:
+        serializedVersion: 2
+        x: 3675
+        y: 1057
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_191
+      rect:
+        serializedVersion: 2
+        x: 3931
+        y: 1057
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_192
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 799
+        width: 88
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_193
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 799
+        width: 84
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_194
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 797
+        width: 84
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_195
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 797
+        width: 84
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_196
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 799
+        width: 83
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_197
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 801
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_198
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 807
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_199
+      rect:
+        serializedVersion: 2
+        x: 1879
+        y: 803
+        width: 80
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_200
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 803
+        width: 88
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_201
+      rect:
+        serializedVersion: 2
+        x: 2391
+        y: 805
+        width: 80
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_202
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 805
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_203
+      rect:
+        serializedVersion: 2
+        x: 2901
+        y: 805
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_204
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 807
+        width: 83
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_205
+      rect:
+        serializedVersion: 2
+        x: 3411
+        y: 803
+        width: 84
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_206
+      rect:
+        serializedVersion: 2
+        x: 3667
+        y: 795
+        width: 84
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_207
+      rect:
+        serializedVersion: 2
+        x: 3923
+        y: 795
+        width: 84
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_208
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 543
+        width: 90
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_209
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 543
+        width: 84
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_210
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 541
+        width: 82
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_211
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 541
+        width: 84
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_212
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 541
+        width: 84
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_213
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 545
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_214
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 551
+        width: 80
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_215
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 547
+        width: 81
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_216
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 547
+        width: 86
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_217
+      rect:
+        serializedVersion: 2
+        x: 2395
+        y: 549
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_218
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 549
+        width: 80
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_219
+      rect:
+        serializedVersion: 2
+        x: 2907
+        y: 549
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_220
+      rect:
+        serializedVersion: 2
+        x: 3163
+        y: 551
+        width: 84
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_221
+      rect:
+        serializedVersion: 2
+        x: 3419
+        y: 547
+        width: 84
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_222
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 539
+        width: 82
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_223
+      rect:
+        serializedVersion: 2
+        x: 3931
+        y: 539
+        width: 84
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_224
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 293
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_225
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 295
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_226
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 289
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_227
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 289
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_228
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 287
+        width: 82
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_229
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 287
+        width: 82
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_230
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 287
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_231
+      rect:
+        serializedVersion: 2
+        x: 1877
+        y: 287
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_232
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 287
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_233
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 287
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_234
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 287
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_235
+      rect:
+        serializedVersion: 2
+        x: 2903
+        y: 291
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_236
+      rect:
+        serializedVersion: 2
+        x: 3159
+        y: 295
+        width: 82
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_237
+      rect:
+        serializedVersion: 2
+        x: 3415
+        y: 289
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_238
+      rect:
+        serializedVersion: 2
+        x: 3671
+        y: 291
+        width: 82
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_239
+      rect:
+        serializedVersion: 2
+        x: 3927
+        y: 293
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_240
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 37
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_241
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 39
+        width: 82
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_242
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 33
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_243
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 33
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_244
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 31
+        width: 82
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_245
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 31
+        width: 82
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_246
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 31
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_247
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 31
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_248
+      rect:
+        serializedVersion: 2
+        x: 2137
+        y: 31
+        width: 86
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_249
+      rect:
+        serializedVersion: 2
+        x: 2397
+        y: 31
+        width: 82
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_250
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 31
+        width: 84
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_251
+      rect:
+        serializedVersion: 2
+        x: 2909
+        y: 35
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_252
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 39
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_253
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 35
+        width: 82
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_254
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 35
+        width: 82
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAnimationTexture_255
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 37
+        width: 82
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

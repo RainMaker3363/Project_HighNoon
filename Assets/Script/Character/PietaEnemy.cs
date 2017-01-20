@@ -42,9 +42,13 @@ public class PietaEnemy : MonoBehaviour {
     // 길 찾기를 끝냈는지의 여부
     private bool PathFindEnd;
 
+    private float AITimer;
+    private Vector3 Target;
+
     // 적이 플레이어와 시선이 마주쳤는지 여부
     RaycastHit hit;
     private int layerMask;
+    private int ChaseLayerMark;
     private int DeadEyeLayerMask;
     private Vector3[] SightVectorInterpol;
 
@@ -89,12 +93,16 @@ public class PietaEnemy : MonoBehaviour {
         WalkTocoroutine = WalkTo(Vector3.zero);
         PathFindUpdateRoutine = PathFindUpdateProtocol(true);
 
+        Target = this.transform.position;
+        AITimer = 3.0f;
+
         // 적의 시야 초기화
         SightVectorInterpol = new Vector3[2];
 
         SightVectorInterpol[0] = new Vector3(0.10f, 0.0f, 0.0f);
         SightVectorInterpol[1] = new Vector3(0.16f, 0.0f, 0.0f);
         layerMask = (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall") | (1 << LayerMask.NameToLayer("DeadEyeBox"))));
+        ChaseLayerMark = 1 << LayerMask.NameToLayer("Player");
         DeadEyeLayerMask = (1 << LayerMask.NameToLayer("DeadEyeBox") | (1 << LayerMask.NameToLayer("Wall")));
         //layerMask = (1 << 8);
         //layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")));
@@ -400,111 +408,53 @@ public class PietaEnemy : MonoBehaviour {
 
                                                         //print("PathFindEnd : " + PathFindEnd);
 
-                                                        //this.transform.LookAt(m_Player.transform.position);
-                                                        //print("PathTimer : " + PathTimer);
-                                                        print("PathFindEnd : " + PathFindEnd);
-
-                                                        
-
-                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, layerMask))
+                                                        if (AITimer <= 0.0f)
                                                         {
+                                                            AITimer = 2.5f;
 
-                                                            if (hit.collider.gameObject.transform.tag.Equals("Player"))
+                                                            Target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
+
+                                                            print("Target : " + Target);
+
+
+                                                            if (tileMap.FindPath(this.transform.position, Target, path))
                                                             {
-                                                                //print("Enemy Sight In");
 
-                                                                if ((m_Player.transform.position - this.transform.position).magnitude <= 5.0f)
-                                                                {
-                                                                    //print("Enemy Shoot Range In");
-                                                                    //PathFindEnd = true;
+                                                                print("Path.Count : " + path.Count);
 
-                                                                    StopCoroutine(WalkPathcoroutine);
-                                                                    StopCoroutine(WalkTocoroutine);
+                                                                WalkPathcoroutine = WalkPath();
+                                                                StartCoroutine(WalkPathcoroutine);
+                                                               // StartCoroutine(WalkPathcoroutine);
 
-                                                                    Shoot();
-                                                                }
-                                                                else
-                                                                {
-                                                                    
-
-                                                                    if (PathFindEnd == true)
-                                                                    {
-                                                                        PathFindEnd = false;
-
-                                                                        //StartCoroutine(PathFindUpdateProtocol(PathFindEnd));
-
-                                                                        Vector3 target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-
-                                                                        if (tileMap.FindPath(this.transform.position, target, path))
-                                                                        {
-
-                                                                            //StopCoroutine(WalkPathcoroutine);
-                                                                            //StopCoroutine(WalkTocoroutine);
-
-                                                                            StartCoroutine(WalkPathcoroutine);
-
-                                                                        }
-
-                                                                    }
-                                                                }
-                                                    
                                                             }
-                                                            else
-                                                            {
-                                                                print("Enemy Sight Out");
-
-                                                                //StartCoroutine(PathFindUpdateProtocol(true));
-
-
-                                                                if (PathFindEnd == true)
-                                                                {
-                                                                    PathFindEnd = false;
-
-                                                                    //StartCoroutine(PathFindUpdateProtocol(PathFindEnd));
-
-                                                                    Vector3 target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-
-                                                                    if (tileMap.FindPath(this.transform.position, target, path))
-                                                                    {
-
-                                                                        //StopCoroutine(WalkPathcoroutine);
-                                                                        //StopCoroutine(WalkTocoroutine);
-
-                                                                        StartCoroutine(WalkPathcoroutine);
-                                                                    }
-                                                                }
-
-                                                                
-                                                            }
-
 
                                                         }
                                                         else
                                                         {
-
-                                                            //print("Enemy Sight Out");
-
-                                                            //if (PathFindEnd == true)
-                                                            //{
-                                                            //    StartCoroutine(PathFindUpdateProtocol(true));
-
-                                                            //    Vector3 target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-
-                                                            //    if (tileMap.FindPath(this.transform.position, target, path))
-                                                            //    {
-
-                                                            //        StopCoroutine(WalkPathcoroutine);
-                                                            //        StopCoroutine(WalkTocoroutine);
-
-                                                            //        StartCoroutine(WalkPathcoroutine);
-
-                                                            //    }
-                                                            //}
-
+                                                            AITimer -= Time.deltaTime;
                                                         }
 
 
-                                                        
+                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, layerMask))
+                                                        {
+                                                           
+
+                                                            if (hit.collider.gameObject.transform.tag.Equals("Player"))
+                                                            {
+                                                                print("Enemy Sight In");
+
+                                                                //StopAllCoroutines();
+                                                                //StopCoroutine(WalkPath());
+
+                                                                StopCoroutine(WalkPathcoroutine);
+                                                                //StopCoroutine(WalkTocoroutine);
+
+                                                                Shoot();
+
+                                                    
+                                                            }
+                                                        }
+
                                                     }
                                                     break;
                                             }
@@ -642,6 +592,7 @@ public class PietaEnemy : MonoBehaviour {
 
     IEnumerator WalkPath()
     {
+        
         var index = 0;
 
         while(index < path.Count)
@@ -657,16 +608,29 @@ public class PietaEnemy : MonoBehaviour {
         {
             transform.position = Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime);
             //transform.Translate(Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime));
-            this.transform.LookAt(position);
+            //this.transform.LookAt(position);
             yield return 0;
         }
 
         transform.position = position;
 
-        PathChangeOn ^= true;
-        PathControlChange = true;
+        //PathChangeOn ^= true;
+        //PathControlChange = true;
         //PathFindEnd = true;
         //PathChangeEnable ^= true;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        for (int i = 0; i < path.Count; i++)
+        {
+            Gizmos.DrawSphere(path[i].transform.position, 0.05f);
+
+            if (i > 0)
+                Gizmos.DrawLine(path[i - 1].transform.position, path[i].transform.position);
+        }
     }
 
     public Vector3 GetDirection()
