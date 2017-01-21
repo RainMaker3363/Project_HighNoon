@@ -443,13 +443,19 @@ public class PietaEnemy : MonoBehaviour {
                                                             {
                                                                 print("Enemy Sight In");
 
-                                                                //StopAllCoroutines();
-                                                                //StopCoroutine(WalkPath());
+                                                                if((m_Player.transform.position - this.transform.position).magnitude <= 6.0f)
+                                                                {
+                                                                    
 
-                                                                StopCoroutine(WalkPathcoroutine);
-                                                                //StopCoroutine(WalkTocoroutine);
+                                                                    //StopAllCoroutines();
+                                                                    //StopCoroutine(WalkPath());
 
-                                                                Shoot();
+                                                                    StopCoroutine(WalkPathcoroutine);
+                                                                    StopCoroutine(WalkTocoroutine);
+
+                                                                    Shoot();
+                                                                }
+
 
                                                     
                                                             }
@@ -608,7 +614,7 @@ public class PietaEnemy : MonoBehaviour {
         {
             transform.position = Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime);
             //transform.Translate(Vector3.MoveTowards(transform.position, position, walkSpeed * Time.deltaTime));
-            //this.transform.LookAt(position);
+            this.transform.LookAt(position);
             yield return 0;
         }
 

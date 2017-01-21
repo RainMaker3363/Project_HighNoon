@@ -44,16 +44,41 @@ public enum PlayerBehaviorState
     MOVE
 }
 
+public enum AnimationState
+{
+    LEFTWALK = 0,
+    RIGHTWALK,
+    UPWALK,
+    DOWNWALK,
+    LEFTUPWALK,
+    RIGHTUPWALK,
+    LEFTDOWNWALK,
+    RIGHTDOWNWALK,
+    LEFTSTAND,
+    RIGHTSTAND,
+    UPSTAND,
+    DOWNSTAND,
+    LEFTUPSTAND,
+    RIGHTUPSTAND,
+    LEFTDOWNSTAND,
+    RIGHTDOWNSTAND,
+    SHOOTING,
+    DEADEYING,
+    DEAD
+}
+
 public class GameManager : MonoBehaviour {
 
     public static GameState NowGameState;
     public static GameControlState NowGameControlState;
+    public static EnemyAIState NowEnemyAiState;
 
 	// Use this for initialization
 	void Awake () 
     {
         NowGameState = GameState.PLAY;
         NowGameControlState = GameControlState.PC;
+        NowEnemyAiState = EnemyAIState.PATROL;
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);

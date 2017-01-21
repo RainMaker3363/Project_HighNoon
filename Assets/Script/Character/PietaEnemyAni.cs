@@ -6,6 +6,8 @@ public class PietaEnemyAni : MonoBehaviour {
     private GameObject MainCamera;
     public PietaEnemy m_PietaEnemy;
 
+    public AnimateTiledTexture _animatedTileTexture;
+
     private GameState State;
     private EnemyState enemyState;
     private EnemyAIState enemyAiState;
@@ -26,15 +28,32 @@ public class PietaEnemyAni : MonoBehaviour {
             Debug.Log("Enemy Null Object countion!");
         }
 
+        if (_animatedTileTexture == null)
+        {
+            Debug.LogWarning("No animated tile texture script assigned!");
+        }
+        else
+        {
+            _animatedTileTexture.RegisterCallback(AnimationFinished);
+        }
+
+ 
+
         // Quad 텍스쳐를 처리해주는 부분
         this.transform.LookAt(MainCamera.transform.position);
-        this.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
+        //this.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
 
         State = GameManager.NowGameState;
         enemyState = m_PietaEnemy.GetenemyState();
         enemyAiState = m_PietaEnemy.GetenemyAiState();
 
 	}
+
+    // This function will get called by the AnimatedTiledTexture script when the animation is completed if the EnableEvents option is set to true
+    void AnimationFinished()
+    {
+        // The animation is finished
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,7 +65,6 @@ public class PietaEnemyAni : MonoBehaviour {
 
         State = GameManager.NowGameState;
 
-        
 
         switch (State)
         {

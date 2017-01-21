@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public PlayerState playerState;
     private PlayerState PrevPlayerState;
+    private AnimationState PlayerAniState;
     
     // 플레이어의 상태 값
     private float HP;
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour {
 	
         State = GameManager.NowGameState;
         ControlState = GameManager.NowGameControlState;
-
+        PlayerAniState = AnimationState.DOWNSTAND;
         
         if(JoyStickControl == null)
         {
@@ -294,11 +295,13 @@ public class Player : MonoBehaviour {
                         case PlayerState.DEADEYE:
                             {
                                 Player_Tranjectory.enabled = false;
+                                PlayerAniState = AnimationState.DEADEYING;
                             }
                             break;
 
                         case PlayerState.DEAD:
                             {
+                                PlayerAniState = AnimationState.DEAD;
                                 GameManager.NowGameState = GameState.GAMEOVER;
                             }
                             break;
@@ -667,6 +670,11 @@ public class Player : MonoBehaviour {
     public GameObject GetCameraObject()
     {
         return CameraObject;
+    }
+
+    public AnimationState GetPlayerAniState()
+    {
+        return PlayerAniState;
     }
 
     void OnCollisionEnter(Collision collision)
