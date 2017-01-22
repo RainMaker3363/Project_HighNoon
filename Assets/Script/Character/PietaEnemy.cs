@@ -51,7 +51,7 @@ public class PietaEnemy : MonoBehaviour {
     private int layerMask;
     private int ChaseLayerMark;
     private int DeadEyeLayerMask;
-    private Vector3[] SightVectorInterpol;
+    public GameObject[] SightPos;
 
 	// Use this for initialization
 	void Start () {
@@ -98,10 +98,7 @@ public class PietaEnemy : MonoBehaviour {
         AITimer = 3.0f;
 
         // 적의 시야 초기화
-        SightVectorInterpol = new Vector3[2];
 
-        SightVectorInterpol[0] = new Vector3(0.10f, 0.0f, 0.0f);
-        SightVectorInterpol[1] = new Vector3(0.16f, 0.0f, 0.0f);
         layerMask = (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall") | (1 << LayerMask.NameToLayer("DeadEyeBox"))));
         ChaseLayerMark = 1 << LayerMask.NameToLayer("Player");
         DeadEyeLayerMask = (1 << LayerMask.NameToLayer("DeadEyeBox") | (1 << LayerMask.NameToLayer("Wall")));
@@ -194,13 +191,14 @@ public class PietaEnemy : MonoBehaviour {
                                                        
 
                                                         // 만약 시야안에 들어오는 조건이 됬을시에 적의 상태를 바꿈
-                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward).normalized) * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward + SightVectorInterpol[0]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward + SightVectorInterpol[1]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward - SightVectorInterpol[0]).normalized * 10.0f), Color.green);
-                                                        Debug.DrawRay(this.transform.position, ((this.transform.forward - SightVectorInterpol[1]).normalized * 10.0f), Color.green);
+                                                        //Debug.DrawRay(this.transform.position, ((this.transform.forward).normalized) * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized * 10.0f, Color.green);
 
-                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, 7.0f, layerMask))
+                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, 10.0f, layerMask))
                                                         {
                                                             if(hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -209,7 +207,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                 enemyState = EnemyState.REALBATTLE;
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[0])).normalized, out hit, 7.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -221,7 +219,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                 Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward + SightVectorInterpol[1])).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -233,7 +231,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward - SightVectorInterpol[0])).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -245,7 +243,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, ((this.transform.forward - SightVectorInterpol[1])).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -255,6 +253,18 @@ public class PietaEnemy : MonoBehaviour {
                                                                 
 
                                                                Debug.Log("PlayerHit!");
+                                                            }
+                                                        }
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        {
+                                                            if (hit.collider.gameObject.tag.Equals("Player"))
+                                                            {
+                                                                m_Player.SetPlayerState(2);
+                                                                enemyAiState = EnemyAIState.CHASE;
+                                                                enemyState = EnemyState.REALBATTLE;
+
+
+                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
 
@@ -446,7 +456,7 @@ public class PietaEnemy : MonoBehaviour {
                                                             {
                                                                 print("Enemy Sight In");
 
-                                                                if((m_Player.transform.position - this.transform.position).magnitude <= 6.0f)
+                                                                if((m_Player.transform.position - this.transform.position).magnitude <= 4.5f)
                                                                 {
                                                                     
 
@@ -594,7 +604,19 @@ public class PietaEnemy : MonoBehaviour {
         enemyState = EnemyState.DEAD;
         enemyAiState = EnemyAIState.PATROL;
 
-        this.gameObject.SetActive(false);
+        if (this.gameObject.activeSelf == true)
+        {
+            if (GameManager.NowStageEnemies <= 0)
+            {
+                GameManager.NowStageEnemies = 0;
+            }
+            else
+            {
+                GameManager.NowStageEnemies -= 1;
+            }
+
+            this.gameObject.SetActive(false);
+        }
         
     }
 
@@ -681,7 +703,22 @@ public class PietaEnemy : MonoBehaviour {
         {
             // HP를 깍이게 한다.
 
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
+
+            //if(this.gameObject.activeSelf == true)
+            //{
+            //    if (GameManager.NowStageEnemies <= 0)
+            //    {
+            //        GameManager.NowStageEnemies = 0;
+            //    }
+            //    else
+            //    {
+            //        GameManager.NowStageEnemies -= 1;
+            //    }
+
+            //    this.gameObject.SetActive(false);
+            //}
+
         }
         
     }

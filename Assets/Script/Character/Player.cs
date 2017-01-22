@@ -79,16 +79,18 @@ public class Player : MonoBehaviour {
             Player_Tranjectory.enabled = false;
 
             Line_Tranjectory_Transform = new Vector3[2];
-            Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
-            Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+            Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
+            Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
+            Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
         }
         else
         {
             Player_Tranjectory.enabled = false;
 
             Line_Tranjectory_Transform = new Vector3[2];
-            Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
-            Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+            Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
+            Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
+            Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
         }
 
         if (DeadEyeBox == null)
@@ -187,8 +189,8 @@ public class Player : MonoBehaviour {
 
                                 
 
-                                Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
-                                Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+                                Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
+                                Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
                                 // 방향 계산
@@ -346,8 +348,8 @@ public class Player : MonoBehaviour {
 
 
 
-                                Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
-                                Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
+                                Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
+                                Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
 
                                 // 방향 계산
