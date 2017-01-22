@@ -73,12 +73,16 @@ public class GameManager : MonoBehaviour {
     public static GameControlState NowGameControlState;
     public static EnemyAIState NowEnemyAiState;
 
+    public static int NowStageEnemies;
+
 	// Use this for initialization
 	void Awake () 
     {
         NowGameState = GameState.PLAY;
         NowGameControlState = GameControlState.PC;
         NowEnemyAiState = EnemyAIState.PATROL;
+
+        NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
@@ -94,6 +98,11 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (NowStageEnemies <= 0)
+        {
+            NowGameState = GameState.VICTORY;
+        }
+
         switch(Application.platform)
         {
             case RuntimePlatform.Android:

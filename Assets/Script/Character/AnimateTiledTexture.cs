@@ -125,7 +125,7 @@ public class AnimateTiledTexture : MonoBehaviour {
     {
         if(_ChRow >= _rows)
         {
-            _ChRow = _rows;
+            ChangeRow = _rows;
         }
         else if(_ChRow <= 0)
         {
@@ -238,15 +238,17 @@ public class AnimateTiledTexture : MonoBehaviour {
 
             if (ChangeRow <= 0)
             {
-                checkRows = (1 - ((1f / _columns)));
+                checkRows = 0.0f;
+                
             }
             else if(ChangeRow >= _rows)
             {
-                checkRows = 0.0f;
+                checkRows = 1.0f;//(1 - ((1f / _columns)));
+                
             }
             else
             {
-                checkRows = ((1 - ((1f / _columns) * (ChangeRow - 1))));
+                checkRows = (1 - (((1f / _columns) * (ChangeRow))));
             }
             
 

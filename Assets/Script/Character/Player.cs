@@ -100,6 +100,7 @@ public class Player : MonoBehaviour {
         // 플레이어의 상태 값
         HP = 100.0f;
         playerState = PlayerState.NORMAL;
+        PlayerAniState = AnimationState.DOWNSTAND;
         DeadEyeActive = false;
         DeadEyeReady = false;
 
@@ -153,6 +154,8 @@ public class Player : MonoBehaviour {
 
 
 
+        print("transform.rotation.y : " + transform.rotation.eulerAngles);
+
         switch (State)
         {
             case GameState.START:
@@ -163,6 +166,9 @@ public class Player : MonoBehaviour {
 
             case GameState.PLAY:
                 {
+                  
+                 
+
                     switch (playerState)
                     {
                         case PlayerState.NORMAL:
@@ -184,6 +190,104 @@ public class Player : MonoBehaviour {
                                 Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
                                 Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
+
+                                // 방향 계산
+                                if (ShootOn == true)
+                                {
+                                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.UPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.UPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.DOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.DOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPWALK;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    PlayerAniState = AnimationState.SHOOTING;
+                                }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
                                 Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
@@ -245,6 +349,104 @@ public class Player : MonoBehaviour {
                                 Line_Tranjectory_Transform[1] = this.gameObject.transform.position;
                                 Line_Tranjectory_Transform[0] = Player_Tranjectory_Object.transform.position;
                                 Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
+
+                                // 방향 계산
+                                if (ShootOn == true)
+                                {
+                                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.UPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.UPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.DOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.DOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPWALK;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    PlayerAniState = AnimationState.SHOOTING;
+                                }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
                                 Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
@@ -405,6 +607,9 @@ public class Player : MonoBehaviour {
 
         Direction.x = JoyStickControl.GetHorizontalValue();
         Direction.z = JoyStickControl.GetVerticalValue();
+
+        //print("Direction.x : " + Direction.x);
+        //print("Direction.z : " + Direction.z);
 
         if(Direction.magnitude > 1)
         {

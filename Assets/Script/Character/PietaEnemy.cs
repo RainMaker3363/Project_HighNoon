@@ -10,6 +10,7 @@ public class PietaEnemy : MonoBehaviour {
     private GameState State;
     private EnemyState enemyState;
     private EnemyAIState enemyAiState;
+    private AnimationState enemyAniState;
 
     [HideInInspector]
     public PlayerState playerState;
@@ -124,7 +125,7 @@ public class PietaEnemy : MonoBehaviour {
         State = GameManager.NowGameState;
         enemyState = EnemyState.NORMAL;
         enemyAiState = EnemyAIState.PATROL;
-
+        enemyAniState = AnimationState.DOWNSTAND;
 
 
 	}
@@ -408,6 +409,8 @@ public class PietaEnemy : MonoBehaviour {
 
                                                         //print("PathFindEnd : " + PathFindEnd);
 
+                                                        enemyAniState = AnimationState.DOWNWALK;
+
                                                         if (AITimer <= 0.0f)
                                                         {
                                                             AITimer = 2.5f;
@@ -665,6 +668,11 @@ public class PietaEnemy : MonoBehaviour {
     public EnemyAIState GetenemyAiState()
     {
         return enemyAiState;
+    }
+
+    public AnimationState GetenemyAniState()
+    {
+        return enemyAniState;
     }
 
     void OnCollisionEnter(Collision collision)
