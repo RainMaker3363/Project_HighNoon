@@ -41,7 +41,7 @@ public class PietaEnemyAni : MonoBehaviour {
 
         State = GameManager.NowGameState;
         EnemyAniState = m_PietaEnemy.GetenemyAniState();
-        this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.5f, m_PietaEnemy.gameObject.transform.position.z);
+        //this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.6f, m_PietaEnemy.gameObject.transform.position.z);
 
         // 애니메이션 기본 값
         _animatedTileTexture.ChangeCheckRow(16);
@@ -73,7 +73,7 @@ public class PietaEnemyAni : MonoBehaviour {
                     this.gameObject.SetActive(m_PietaEnemy.gameObject.activeSelf);
                     //this.transform.LookAt(MainCamera.transform.position);
                     //this.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
-                    this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.5f, m_PietaEnemy.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.6f, m_PietaEnemy.gameObject.transform.position.z);
 
                     switch (EnemyAniState)
                     {

@@ -292,7 +292,7 @@ public class Player : MonoBehaviour {
                                 }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
-                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.6f, Color.yellow);
 
                                 if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
@@ -302,7 +302,7 @@ public class Player : MonoBehaviour {
                                     PlayerPos = hit.point;
                                 }
 
-                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.7f, WalllayerMask))
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.6f, WalllayerMask))
                                 {
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
@@ -451,7 +451,7 @@ public class Player : MonoBehaviour {
                                 }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
-                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.7f, Color.yellow);
+                                Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.6f, Color.yellow);
 
                                 if (Physics.Raycast(this.transform.position, (Vector3.down), out hit, Mathf.Infinity, layerMask))
                                 {
@@ -461,7 +461,7 @@ public class Player : MonoBehaviour {
                                     PlayerPos = hit.point;
                                 }
 
-                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.7f, WalllayerMask))
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.6f, WalllayerMask))
                                 {
 
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)

@@ -17,10 +17,10 @@
 			Pass
 			{
 				CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
+				#pragma vertex vert
+				#pragma fragment frag
 
-#include "UnityCG.cginc"
+				#include "UnityCG.cginc"
 
 				float _RepeatCount;
 				float _Spacing;

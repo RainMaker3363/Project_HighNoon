@@ -46,13 +46,13 @@ public class JoyStickCtrl : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
             Pos.x = (Pos.x / Joystick_Pad.rectTransform.sizeDelta.x);
             Pos.y = (Pos.y / Joystick_Pad.rectTransform.sizeDelta.y);
 
-            inputVector = new Vector3(Pos.x * 2 + 1, Pos.y * 2 - 1, 0);
+            inputVector = new Vector3(Pos.x * 2 + 1,Pos.y * 2 - 1, 0);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
             // 조이스틱이 움직인다면..
             // joystick_Stick의 이미지를 터치한 좌표값으로 움직여준다.
-            joystick_Stick.rectTransform.anchoredPosition = new Vector3(inputVector.x * (joystick_Stick.rectTransform.sizeDelta.x / 3),
-                 inputVector.y * (joystick_Stick.rectTransform.sizeDelta.y / 3));
+            joystick_Stick.rectTransform.anchoredPosition = new Vector3(inputVector.x * (joystick_Stick.rectTransform.sizeDelta.x / 2),
+                 inputVector.y * (joystick_Stick.rectTransform.sizeDelta.y / 2));
         }
     }
 

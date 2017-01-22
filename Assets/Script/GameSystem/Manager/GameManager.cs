@@ -85,10 +85,17 @@ public class GameManager : MonoBehaviour {
         NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
+
+
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
 
         // 지정해 주면 고정비로 빌드가 되어 단말에서 지정 해상도로 출력이 된다.	
         Screen.SetResolution(1280, 720, true); // 1280 x 720 으로 조정
+        //Screen.SetResolution(1920, 1080, true); // 1280 x 720 으로 조정
 
         //Screen.SetResolution(Screen.width, (Screen.width / 2) * 3 ); // 2:3 비율로 개발시
 
@@ -115,6 +122,7 @@ public class GameManager : MonoBehaviour {
                         // Application.Quit();
 
                     }
+
                 }
                 break;
 

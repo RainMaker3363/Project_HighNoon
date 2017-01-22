@@ -17,12 +17,12 @@ public class PlayerBullet : MonoBehaviour {
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            MoveDir = m_Player.GetPlayerDirection();
+            MoveDir = new Vector3(m_Player.GetPlayerDirection().x, this.transform.position.y, m_Player.GetPlayerDirection().z);
 
         }
         else
         {
-            MoveDir = m_Player.GetPlayerDirection();
+            MoveDir = new Vector3(m_Player.GetPlayerDirection().x, this.transform.position.y, m_Player.GetPlayerDirection().z);
 
         }
 
@@ -32,6 +32,8 @@ public class PlayerBullet : MonoBehaviour {
         StartCoroutine(DeadProtocol(true));
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
 	}
 
     void OnEnable()
@@ -43,12 +45,16 @@ public class PlayerBullet : MonoBehaviour {
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            MoveDir = m_Player.GetPlayerDirection();
+            MoveDir = new Vector3(m_Player.GetPlayerDirection().x, this.transform.position.y, m_Player.GetPlayerDirection().z);
         }
         else
         {
-            MoveDir = m_Player.GetPlayerDirection();
+            MoveDir = new Vector3(m_Player.GetPlayerDirection().x, this.transform.position.y, m_Player.GetPlayerDirection().z);
         }
+
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
 
         StopCoroutine(DeadProtocol(true));
         StartCoroutine(DeadProtocol(true));
@@ -76,7 +82,7 @@ public class PlayerBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 20.0f * Time.deltaTime));
+                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 15.0f * Time.deltaTime));
                 }
                 break;
 
@@ -108,6 +114,17 @@ public class PlayerBullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        this.gameObject.SetActive(false);
+        if (collision.transform.tag.Equals("Enemy"))
+        {
+            print("DFAGADFGDSGSDGSDRFSRGSEDG");
+
+            this.gameObject.SetActive(false);
+        }
+
+        if (collision.transform.tag.Equals("Wall"))
+        {
+            this.gameObject.SetActive(false);
+        }
+        
     }
 }

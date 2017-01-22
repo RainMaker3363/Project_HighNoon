@@ -52,6 +52,7 @@ public class PietaEnemy : MonoBehaviour {
     private int ChaseLayerMark;
     private int DeadEyeLayerMask;
     public GameObject[] SightPos;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -95,7 +96,7 @@ public class PietaEnemy : MonoBehaviour {
         PathFindUpdateRoutine = PathFindUpdateProtocol(true);
 
         Target = this.transform.position;
-        AITimer = 3.0f;
+        AITimer = 0.0f;
 
         // 적의 시야 초기화
 
@@ -153,6 +154,7 @@ public class PietaEnemy : MonoBehaviour {
                                 {
                                     case EnemyState.NORMAL:
                                         {
+
                                             switch (enemyAiState)
                                             {
                                                 case EnemyAIState.PATROL:
@@ -192,13 +194,13 @@ public class PietaEnemy : MonoBehaviour {
 
                                                         // 만약 시야안에 들어오는 조건이 됬을시에 적의 상태를 바꿈
                                                         //Debug.DrawRay(this.transform.position, ((this.transform.forward).normalized) * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized * 10.0f, Color.green);
-                                                        Debug.DrawRay(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized * 10.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized * 7.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized * 7.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized * 7.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized * 7.0f, Color.green);
+                                                        Debug.DrawRay(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized * 7.0f, Color.green);
 
-                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, 10.0f, layerMask))
+                                                        if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, 7.0f, layerMask))
                                                         {
                                                             if(hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -207,7 +209,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                 enemyState = EnemyState.REALBATTLE;
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[0].transform.position - this.transform.position).normalized, out hit, 7.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -219,7 +221,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                 Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[1].transform.position - this.transform.position).normalized, out hit, 7.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -231,7 +233,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[2].transform.position - this.transform.position).normalized, out hit, 7.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -243,7 +245,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[3].transform.position - this.transform.position).normalized, out hit, 7.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -255,7 +257,7 @@ public class PietaEnemy : MonoBehaviour {
                                                                Debug.Log("PlayerHit!");
                                                             }
                                                         }
-                                                        else if (Physics.Raycast(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized, out hit, 10.0f, layerMask))
+                                                        else if (Physics.Raycast(this.transform.position, (SightPos[4].transform.position - this.transform.position).normalized, out hit, 7.0f, layerMask))
                                                         {
                                                             if (hit.collider.gameObject.tag.Equals("Player"))
                                                             {
@@ -314,6 +316,7 @@ public class PietaEnemy : MonoBehaviour {
 
                         case PlayerState.DEADEYE:
                             {
+
                                 // 데드 아이 상태가 되면 모든 행동을 멈춘다.
                                 StopCoroutine(WalkPathcoroutine);
                                 StopCoroutine(WalkTocoroutine);
@@ -337,6 +340,7 @@ public class PietaEnemy : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
+
                                 switch (enemyState)
                                 {
                                     case EnemyState.NORMAL:
@@ -361,12 +365,13 @@ public class PietaEnemy : MonoBehaviour {
 
                                     case EnemyState.DEAD:
                                         {
-
+                                            
                                         }
                                         break;
 
                                     case EnemyState.REALBATTLE:
                                         {
+                                            
                                             switch (enemyAiState)
                                             {
                                                 case EnemyAIState.PATROL:
@@ -548,6 +553,7 @@ public class PietaEnemy : MonoBehaviour {
             {
                 EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                 //EnemyBullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+                //EnemyBullets[EnemyBulletIndex].GetComponent<PietaEnemyBullet>().SetMoveDir(m_Player.transform.position);
                 EnemyBullets[EnemyBulletIndex].transform.parent = null;
 
                 EnemyBullets[EnemyBulletIndex].gameObject.SetActive(true);
@@ -563,6 +569,7 @@ public class PietaEnemy : MonoBehaviour {
             {
                 EnemyBullets[EnemyBulletIndex].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                 //EnemyBullets[EnemyBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+               // EnemyBullets[EnemyBulletIndex].GetComponent<PietaEnemyBullet>().SetMoveDir(m_Player.transform.position);
                 EnemyBullets[EnemyBulletIndex].transform.parent = null;
 
                 EnemyBullets[EnemyBulletIndex].gameObject.SetActive(true);

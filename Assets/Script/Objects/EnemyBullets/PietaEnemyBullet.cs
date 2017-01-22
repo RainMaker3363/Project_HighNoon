@@ -29,6 +29,8 @@ public class PietaEnemyBullet : MonoBehaviour {
         //this.transform.Rotate(new Vector3(-90.0f, 0.0f, 0.0f));
         
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
 
         StopCoroutine(DeadProtocol(true));
         StartCoroutine(DeadProtocol(true));
@@ -54,8 +56,10 @@ public class PietaEnemyBullet : MonoBehaviour {
 
         }
 
-        
+
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
 
         StopCoroutine(DeadProtocol(true));
         StartCoroutine(DeadProtocol(true));
@@ -67,6 +71,11 @@ public class PietaEnemyBullet : MonoBehaviour {
 
         this.gameObject.SetActive(false);
 
+    }
+
+    public void SetMoveDir(Vector3 Dir)
+    {
+        MoveDir = (Dir - this.transform.position).normalized;
     }
 	
 	// Update is called once per frame
@@ -83,7 +92,7 @@ public class PietaEnemyBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 20.0f * Time.deltaTime));
+                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 15.0f * Time.deltaTime));
                 }
                 break;
 
@@ -115,6 +124,14 @@ public class PietaEnemyBullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        this.gameObject.SetActive(false);
+        if (collision.transform.tag.Equals("Player"))
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        if (collision.transform.tag.Equals("Wall"))
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

@@ -26,6 +26,8 @@ public class PlayerAni : MonoBehaviour {
             ControlState = GameManager.NowGameControlState;
 
             PlayerAniState = m_Player.GetPlayerAniState();
+
+            this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
         }
         else
         {
@@ -33,6 +35,8 @@ public class PlayerAni : MonoBehaviour {
             ControlState = GameManager.NowGameControlState;
 
             PlayerAniState = m_Player.GetPlayerAniState();
+
+            this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
         }
 
         if (MainCamera == null)
@@ -49,7 +53,7 @@ public class PlayerAni : MonoBehaviour {
             _animatedTileTexture.RegisterCallback(AnimationFinished);
         }
 
-        this.transform.position = m_Player.gameObject.transform.position;
+        
         
 
         this.transform.LookAt(MainCamera.transform.position);
@@ -71,18 +75,20 @@ public class PlayerAni : MonoBehaviour {
         playerState = m_Player.GetPlayerState();
         PlayerAniState = m_Player.GetPlayerAniState();
 
-        this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.4f, m_Player.gameObject.transform.position.z);
+        
 
         switch (State)
         {
             case GameState.START:
                 {
-
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
                 }
                 break;
 
             case GameState.PLAY:
                 {
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+
                     switch(PlayerAniState)
                     {
                         case AnimationState.DOWNSTAND:
@@ -205,25 +211,25 @@ public class PlayerAni : MonoBehaviour {
 
             case GameState.PAUSE:
                 {
-
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
                 }
                 break;
 
             case GameState.EVENT:
                 {
-
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
                 }
                 break;
 
             case GameState.GAMEOVER:
                 {
-
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
                 }
                 break;
 
             case GameState.VICTORY:
                 {
-
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
                 }
                 break;
         }

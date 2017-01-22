@@ -13,7 +13,11 @@ public class TileMap : MonoBehaviour {
 
     public float tileSize = 1;
     public Transform tilePrefab;
+
+    #if UNITY_EDITOR
     public TileSet tileSet;
+    #endif
+    
     public bool connectDiagonals;
     public bool cutCorners;
 
