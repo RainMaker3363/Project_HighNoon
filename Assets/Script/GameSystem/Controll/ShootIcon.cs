@@ -14,6 +14,7 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     // 주인공 오브젝트
     public Player m_Player;
     private bool DeadEyeReady;
+    private bool DeadEyeActive;
 
     // 상황에 따른 총기 아이콘의 변화를 위함
     public Sprite[] ShootIcons;
@@ -56,11 +57,10 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         playerState = m_Player.playerState;
 
         DeadEyeReady = m_Player.GetDeadEyeReady();
+        DeadEyeActive = m_Player.GetDeadEyeActive();
 
         if (DeadEyeReady == true)
         {
-         
-
             img.sprite = ShootIcons[1];
 
             
@@ -99,6 +99,13 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 
             m_Player.Shoot();
 
+        }
+
+        if(DeadEyeActive == true)
+        {
+            m_Player.SetDeadEyeShootOn(true);
+
+            m_Player.DeadEyeCancel();
         }
 
         //switch (State)

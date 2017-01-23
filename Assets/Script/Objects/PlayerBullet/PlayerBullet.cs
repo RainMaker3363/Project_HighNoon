@@ -34,6 +34,7 @@ public class PlayerBullet : MonoBehaviour {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
+        //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Wall"), true);
 	}
 
     void OnEnable()
@@ -116,14 +117,12 @@ public class PlayerBullet : MonoBehaviour {
     {
         if (collision.transform.tag.Equals("Enemy"))
         {
-            print("DFAGADFGDSGSDGSDRFSRGSEDG");
-
             this.gameObject.SetActive(false);
         }
 
         if (collision.transform.tag.Equals("Wall"))
         {
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
         
     }

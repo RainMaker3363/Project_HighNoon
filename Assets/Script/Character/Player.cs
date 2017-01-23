@@ -20,12 +20,15 @@ public class Player : MonoBehaviour {
     private GameObject DeadEyeBox;
     private bool DeadEyeActive;
     private bool DeadEyeReady;
+    private bool DeadEyeShootOn;
 
     // 플레이어의 움직임
     private float MoveSpeed;
     private Vector3 MoveVector;
     private Vector3 PlayerDir;
+    private Vector3 PlayerDeadEyePosBack;
     private Vector3 PlayerPosBack;
+    private Vector3 CameraPosBack;
 
     // 현재 컨트롤러가 플레이어를 조종할 수 있는지의 여부
     private bool NowMovePlayer;
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour {
 
     // 카메라
     public GameObject CameraObject;
+    private GameObject MainCamera;
     private bool CameraMoveOn;
     private RaycastHit Wallhit;
     private int WalllayerMask;
@@ -55,6 +59,9 @@ public class Player : MonoBehaviour {
     private RaycastHit hit;
     private int layerMask;
     private Vector3 PlayerPos;
+
+    // 플레이어의 코루틴 연산들
+    private IEnumerator DeadEyeProtocol;
 
 	// Use this for initialization
 	void Start () {
@@ -72,6 +79,13 @@ public class Player : MonoBehaviour {
         {
             CameraObject = GameObject.Find("Camera");
         }
+
+        if (MainCamera == null)
+        {
+            MainCamera = GameObject.FindWithTag("MainCamera");
+        }
+        
+        CameraPosBack = Vector3.zero;
 
         if (Player_Tranjectory == null)
         {
@@ -105,12 +119,14 @@ public class Player : MonoBehaviour {
         PlayerAniState = AnimationState.DOWNSTAND;
         DeadEyeActive = false;
         DeadEyeReady = false;
+        DeadEyeShootOn = false;
 
         // 플레이어 이동 방향 초기화
         MoveVector = Vector3.zero;
         MoveSpeed = 2.0f;
         PlayerDir = Vector3.zero;
         PlayerPosBack = Vector3.zero;
+        PlayerDeadEyePosBack = Vector3.zero;
 
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
@@ -129,6 +145,11 @@ public class Player : MonoBehaviour {
         {
             Bullets[i].gameObject.SetActive(false);
         }
+
+        // 코루틴 설정
+        DeadEyeProtocol = null;
+
+        DeadEyeProtocol = DeadEyeShootProtocol(true);
 
         PlayerPos = Vector3.zero;
         layerMask = (1 << LayerMask.NameToLayer("Ground"));
@@ -156,7 +177,7 @@ public class Player : MonoBehaviour {
 
 
 
-        print("transform.rotation.y : " + transform.rotation.eulerAngles);
+        //print("transform.rotation.y : " + transform.rotation.eulerAngles);
 
         switch (State)
         {
@@ -182,12 +203,11 @@ public class Player : MonoBehaviour {
                                 {
                                     if (CameraMoveOn)
                                     {
-                                        this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+                                        //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+                                        this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                     }
                                 }
-
-                                
 
                                 Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
                                 Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
@@ -300,6 +320,11 @@ public class Player : MonoBehaviour {
                                     //print("hit Point : " + hit.point);
 
                                     PlayerPos = hit.point;
+                                    PlayerPosBack = PlayerPos;
+                                }
+                                else
+                                {
+                                    this.transform.position = new Vector3(PlayerPosBack.x, this.transform.position.y, PlayerPosBack.z);
                                 }
 
                                 if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.6f, WalllayerMask))
@@ -341,11 +366,11 @@ public class Player : MonoBehaviour {
                                 {
                                     if (CameraMoveOn)
                                     {
-                                        this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+                                        //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
+                                        this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                     }
                                 }
-
 
 
                                 Line_Tranjectory_Transform[0] = this.gameObject.transform.position;
@@ -459,6 +484,11 @@ public class Player : MonoBehaviour {
                                     //print("hit Point : " + hit.point);
 
                                     PlayerPos = hit.point;
+                                    PlayerPosBack = PlayerPos;
+                                }
+                                else
+                                {
+                                    this.transform.position = new Vector3(PlayerPosBack.x, this.transform.position.y, PlayerPosBack.z);
                                 }
 
                                 if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.6f, WalllayerMask))
@@ -677,8 +707,12 @@ public class Player : MonoBehaviour {
                 {
                     if (DeadEyeActive == false)
                     {
-                        StopCoroutine(DeadEyeShootProtocol(true));
-                        StartCoroutine(DeadEyeShootProtocol(true));
+                        StopCoroutine(DeadEyeProtocol);
+                        
+                        DeadEyeProtocol = null;
+                        DeadEyeProtocol = DeadEyeShootProtocol(true);
+
+                        StartCoroutine(DeadEyeProtocol);
                     }
 
                 }
@@ -766,17 +800,23 @@ public class Player : MonoBehaviour {
         DeadEyeActive = true;
 
         playerState = PlayerState.DEADEYE;
-        PlayerPosBack = this.transform.position;
-        this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y, DeadEyeBox.transform.position.z);
+        PlayerDeadEyePosBack = this.transform.position;
+        CameraPosBack = MainCamera.transform.position;
 
-        yield return new WaitForSeconds(3.5f);
+        this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y + 0.3f, DeadEyeBox.transform.position.z);
+        MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, -200.0f) * Time.deltaTime);
+
+        yield return new WaitForSeconds(4.4f);
 
         print("DeadEye End....");
 
         DeadEyeActive = false;
+        DeadEyeShootOn = true;
 
         playerState  = PlayerState.REALBATTLE;
-        this.transform.position = PlayerPosBack;
+        this.transform.position = PlayerDeadEyePosBack;
+
+        MainCamera.transform.position = CameraPosBack;
 
         DeadEyeBox.SetActive(false);
     }
@@ -879,9 +919,45 @@ public class Player : MonoBehaviour {
         return CameraObject;
     }
 
+    public void SetDeadEyeShootOn(bool On = true)
+    {
+        DeadEyeShootOn = On;
+    }
+
+    public bool GetDeadEyeShootOn()
+    {
+        return DeadEyeShootOn;
+    }
+
     public AnimationState GetPlayerAniState()
     {
         return PlayerAniState;
+    }
+
+    public bool GetDeadEyeActive()
+    {
+        return DeadEyeActive;
+    }
+
+    public void DeadEyeCancel()
+    {
+        StopCoroutine(DeadEyeProtocol);
+
+        if (DeadEyeActive == true)
+        {
+            print("DeadEye End....");
+
+            DeadEyeActive = false;
+            DeadEyeShootOn = true;
+
+            playerState = PlayerState.REALBATTLE;
+            this.transform.position = PlayerDeadEyePosBack;
+            MainCamera.transform.position = CameraPosBack;
+            //MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, 200.0f) * Time.deltaTime);
+
+            DeadEyeBox.SetActive(false);
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)

@@ -41,7 +41,7 @@ public class PietaEnemyAni : MonoBehaviour {
 
         State = GameManager.NowGameState;
         EnemyAniState = m_PietaEnemy.GetenemyAniState();
-        //this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y + 0.6f, m_PietaEnemy.gameObject.transform.position.z);
+        this.transform.position = new Vector3(m_PietaEnemy.gameObject.transform.position.x, m_PietaEnemy.gameObject.transform.position.y, m_PietaEnemy.gameObject.transform.position.z);
 
         // 애니메이션 기본 값
         _animatedTileTexture.ChangeCheckRow(16);
@@ -79,7 +79,7 @@ public class PietaEnemyAni : MonoBehaviour {
                     {
                         case AnimationState.DOWNSTAND:
                             {
-                                _animatedTileTexture.ChangeCheckRow(16);
+                                _animatedTileTexture.ChangeCheckRow(3);
                                 //_animatedTileTexture.ChangeCheckRow(1);
                             }
                             break;
@@ -128,13 +128,13 @@ public class PietaEnemyAni : MonoBehaviour {
 
                         case AnimationState.LEFTWALK:
                             {
-                                _animatedTileTexture.ChangeCheckRow(12);
+                                _animatedTileTexture.ChangeCheckRow(11);
                             }
                             break;
 
                         case AnimationState.RIGHTWALK:
                             {
-                                _animatedTileTexture.ChangeCheckRow(11);
+                                _animatedTileTexture.ChangeCheckRow(12);
                             }
                             break;
 
