@@ -174,6 +174,54 @@ public class PietaEnemyAni : MonoBehaviour {
                             }
                             break;
 
+                        case AnimationState.LEFTSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+
+                            }
+                            break;
+
                         case AnimationState.SHOOTING:
                             {
 
@@ -186,7 +234,25 @@ public class PietaEnemyAni : MonoBehaviour {
                             }
                             break;
 
-                        case AnimationState.DEAD:
+                        case AnimationState.LEFTDEAD:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
                             {
 
                             }

@@ -120,7 +120,7 @@ public class PietaEnemy : MonoBehaviour {
 
         layerMask = (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall") | (1 << LayerMask.NameToLayer("DeadEyeBox"))));
         ChaseLayerMark = 1 << LayerMask.NameToLayer("Player");
-        DeadEyeLayerMask = (1 << LayerMask.NameToLayer("DeadEyeBox") | (1 << LayerMask.NameToLayer("Wall")));
+        DeadEyeLayerMask = (1 << LayerMask.NameToLayer("DeadEyeBox") | (1 << LayerMask.NameToLayer("DeadEyeWall")));
         //layerMask = (1 << 8);
         //layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")));
 

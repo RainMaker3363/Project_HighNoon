@@ -306,10 +306,6 @@ public class Player : MonoBehaviour {
                                         }
                                     }
                                 }
-                                else
-                                {
-                                    PlayerAniState = AnimationState.SHOOTING;
-                                }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
                                 Debug.DrawRay(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 0.6f, Color.yellow);
@@ -364,7 +360,7 @@ public class Player : MonoBehaviour {
 
                                 if (NowMovePlayer)
                                 {
-                                    if (CameraMoveOn)
+                                    if (CameraMoveOn && (ShootOn == true))
                                     {
                                         //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
                                         this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
@@ -472,7 +468,97 @@ public class Player : MonoBehaviour {
                                 }
                                 else
                                 {
-                                    PlayerAniState = AnimationState.SHOOTING;
+                                    // 사격 애니메이션 출력
+
+                                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                       || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.UPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.UPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.DOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.DOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPWALK;
+                                        }
+                                    }
                                 }
 
                                 Debug.DrawRay(this.transform.position, (Vector3.down) * 50.0f, Color.red);
@@ -535,7 +621,7 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.DEAD:
                             {
-                                PlayerAniState = AnimationState.DEAD;
+                                //PlayerAniState = AnimationState.DEAD;
                                 GameManager.NowGameState = GameState.GAMEOVER;
                             }
                             break;
@@ -657,25 +743,25 @@ public class Player : MonoBehaviour {
         {
             case PlayerState.NORMAL:
                 {
-                    // 총알의 개수 파악하기
-                    if (BulletStack > 0)
-                    {
+                    //// 총알의 개수 파악하기
+                    //if (BulletStack > 0)
+                    //{
 
-                        // 재장전이 다 되어있다면 발사한다.
-                        if (ReloadSuccessOn == true)
-                        {
-                            if (ShootOn == true)
-                            {
-                                StopCoroutine(ShootProtocol(true));
-                                StartCoroutine(ShootProtocol(true));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        StopCoroutine(ReloadProtocol(true));
-                        StartCoroutine(ReloadProtocol(true));
-                    }
+                    //    // 재장전이 다 되어있다면 발사한다.
+                    //    if (ReloadSuccessOn == true)
+                    //    {
+                    //        if (ShootOn == true)
+                    //        {
+                    //            StopCoroutine(ShootProtocol(true));
+                    //            StartCoroutine(ShootProtocol(true));
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    StopCoroutine(ReloadProtocol(true));
+                    //    StartCoroutine(ReloadProtocol(true));
+                    //}
                 }
                 break;
 
