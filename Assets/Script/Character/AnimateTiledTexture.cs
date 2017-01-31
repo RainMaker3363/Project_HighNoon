@@ -7,7 +7,9 @@ public class AnimateTiledTexture : MonoBehaviour {
     public int _columns = 1;                                // 텍스쳐의 열 개수
     public int _rows = 1;                                   // 텍스쳐의 행 개수
     public int checkAgainst = 0;                            // 텍스쳐 애니메이션을 어느 정도까지 재생할지의 여부 (열)
+    public int checkColumns = 0;                            // 혹시나 애니메이션의 프레임이 다를 경우 제한시킬 열의 수
     public float checkRows = 0.0f;                               // 텍스쳐 애니메이션을 어느 정도까지 재생할지의 여부 (행)
+    public int PlayOnceIndex = 0;
     public Vector2 _scale = new Vector2(1.0f, 1.0f);        // 텍스쳐의 크기, 0은 안되며 -값이라면 뒤집는다.
     public Vector2 _offset = Vector2.zero;                  // 텍스쳐의 오프셋을 정해준다.
     public Vector2 _buffer = Vector2.zero;                  // You can use this to buffer frames to hide unwanted grid lines or artifacts
@@ -46,8 +48,10 @@ public class AnimateTiledTexture : MonoBehaviour {
         _index = _columns;
 
         checkAgainst = _columns;
-        checkRows = 1 - (1f / _columns);
+        checkColumns = _columns;
+        checkRows = 1 - (1f / _rows);
         ChangeRow = 0;
+        PlayOnceIndex = 0;
 
         // Start the update tiling coroutine
         StartCoroutine(updateTiling());
@@ -118,7 +122,7 @@ public class AnimateTiledTexture : MonoBehaviour {
     // 몇번째 프레임부터 재생시킬지의 여부
     public void ChangeCheckColumn(int ChangeCol)
     {
-        checkAgainst = ChangeCol;
+        checkColumns = ChangeCol;
     }
 
     public void ChangeCheckRow(int _ChRow)
@@ -204,59 +208,93 @@ public class AnimateTiledTexture : MonoBehaviour {
 
         while (true)
         {
-            // If we are at the last frame, we need to either loop or break out of the loop
-            if (_index >= checkAgainst)
+
+
+            if (_playOnce == false)
             {
-                _index = 0;  // Reset the index
-
-                // If we only want to play the texture one time
-                if (_playOnce)
+                // If we are at the last frame, we need to either loop or break out of the loop
+                if (_index >= checkAgainst)
                 {
-                    if (checkAgainst == _columns)
-                    {
-                        // We are done with the coroutine. Fire the event, if needed
-                        if (_enableEvents)
-                        {
-                            HandleCallbacks(_voidEventCallbackList);
-                        }
-                            
+                    _index = 0;  // Reset the index
 
-                        if (_disableUponCompletion)
-                            gameObject.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-                        // turn off the isplaying flag
-                        _isPlaying = false;
-
-                        // Break out of the loop, we are finished
-                        yield break;
-                    }
-                    else
-                        checkAgainst = _columns;    // We need to loop through one more row
                 }
 
-            }
+                if (ChangeRow <= 0)
+                {
+                    checkRows = 0.0f;
 
-            if (ChangeRow <= 0)
-            {
-                checkRows = 0.0f;
-                
-            }
-            else if(ChangeRow >= _rows)
-            {
-                checkRows = 1.0f;//(1 - ((1f / _columns)));
-                
+                }
+                else if (ChangeRow >= _rows)
+                {
+                    checkRows = 1.0f;//(1 - ((1f / _columns)));
+
+                }
+                else
+                {
+                    checkRows = (1 - (((1f / _rows) * (ChangeRow))));
+                }
+
+
+                // Apply the offset in order to move to the next frame
+                ApplyOffset();
+
+                //Increment the index
+                _index++;
             }
             else
             {
-                checkRows = (1 - (((1f / _columns) * (ChangeRow))));
+                if (PlayOnceIndex >= checkColumns)
+                {
+                    // We are done with the coroutine. Fire the event, if needed
+                    if (_enableEvents)
+                    {
+                        HandleCallbacks(_voidEventCallbackList);
+                    }
+
+
+                    if (_disableUponCompletion)
+                    {
+                        gameObject.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    }
+
+
+                    // turn off the isplaying flag
+                    _isPlaying = false;
+
+                    // Break out of the loop, we are finished
+                    yield break;
+                }
+                else
+                {
+                    //checkAgainst = _columns;    // We need to loop through one more row
+                    //checkAgainst = checkColumns;
+                    //PlayOnceIndex++;
+                }
+
+                if (ChangeRow <= 0)
+                {
+                    checkRows = 0.0f;
+
+                }
+                else if (ChangeRow >= _rows)
+                {
+                    checkRows = 1.0f;//(1 - ((1f / _columns)));
+
+                }
+                else
+                {
+                    checkRows = (1 - (((1f / _rows) * (ChangeRow))));
+                }
+
+
+                // Apply the offset in order to move to the next frame
+                ApplyOffset();
+
+                //Increment the index
+                PlayOnceIndex++;
             }
-            
 
-            // Apply the offset in order to move to the next frame
-            ApplyOffset();
-
-            //Increment the index
-            _index++;
 
             // Wait a time before we move to the next frame. Note, this gives unexpected results on mobile devices
             yield return new WaitForSeconds(1f / _framesPerSecond);
@@ -265,24 +303,51 @@ public class AnimateTiledTexture : MonoBehaviour {
 
     private void ApplyOffset()
     {
-        //split into x and y indexes. calculate the new offsets
-        Vector2 offset = new Vector2((float)_index / _columns - (_index / _columns), //x index
-                                      checkRows);//1 - ((_index / _columns) / (float)_rows));    //y index
+        if(_playOnce == false)
+        {
+            //split into x and y indexes. calculate the new offsets
+            Vector2 offset = new Vector2((float)_index / _columns - (_index / _columns), //x index
+                                          checkRows);//1 - ((_index / _columns) / (float)_rows));    //y index
 
-        // Reset the y offset, if needed
-        if (offset.y == 1)
-            offset.y = 0.0f;
+            // Reset the y offset, if needed
+            if (offset.y == 1)
+                offset.y = 0.0f;
 
-        // If we have scaled the texture, we need to reposition the texture to the center of the object
-        offset.x += ((1f / _columns) - _textureSize.x) / 2.0f;
-        offset.y += ((1f / _rows) - _textureSize.y) / 2.0f;
+            // If we have scaled the texture, we need to reposition the texture to the center of the object
+            offset.x += ((1f / _columns) - _textureSize.x) / 2.0f;
+            offset.y += ((1f / _rows) - _textureSize.y) / 2.0f;
 
-        // Add an additional offset if the user does not want the texture centered
-        offset.x += _offset.x;
-        offset.y += _offset.y;
+            // Add an additional offset if the user does not want the texture centered
+            offset.x += _offset.x;
+            offset.y += _offset.y;
 
-        // Update the material
-        gameObject.GetComponent<MeshRenderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
+            // Update the material
+            gameObject.GetComponent<MeshRenderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
+        }
+        else
+        {
+            //split into x and y indexes. calculate the new offsets
+            Vector2 offset = new Vector2((float)PlayOnceIndex / _columns - (PlayOnceIndex / _columns), //x index
+                                          checkRows);//1 - ((_index / _columns) / (float)_rows));    //y index
+
+            // Reset the y offset, if needed
+            if (offset.y == 1)
+                offset.y = 0.0f;
+
+            // If we have scaled the texture, we need to reposition the texture to the center of the object
+            offset.x += ((1f / _columns) - _textureSize.x) / 2.0f;
+            offset.y += ((1f / _rows) - _textureSize.y) / 2.0f;
+
+            // Add an additional offset if the user does not want the texture centered
+            offset.x += _offset.x;
+            offset.y += _offset.y;
+
+            // Update the material
+            gameObject.GetComponent<MeshRenderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
+        }
+
+
+
     }
 
 }

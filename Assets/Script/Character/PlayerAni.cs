@@ -51,6 +51,7 @@ public class PlayerAni : MonoBehaviour {
         else
         {
             _animatedTileTexture.RegisterCallback(AnimationFinished);
+            //_animatedTileTexture.RegisterCallback(ShootAnimationFinished);
         }
 
         
@@ -63,7 +64,15 @@ public class PlayerAni : MonoBehaviour {
     // This function will get called by the AnimatedTiledTexture script when the animation is completed if the EnableEvents option is set to true
     void AnimationFinished()
     {
+        playerState = m_Player.GetPlayerState();
+
         // The animation is finished
+        if(playerState == PlayerState.DEAD)
+        {
+            //_animatedTileTexture._framesPerSecond = 12;
+        }
+
+        PlayerAniState = m_Player.GetPlayerAniState();
     }
 	
 	// Update is called once per frame
@@ -93,6 +102,7 @@ public class PlayerAni : MonoBehaviour {
                     {
                         case AnimationState.DOWNSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(1);
                                 //_animatedTileTexture.ChangeCheckRow(1);
                             }
@@ -100,139 +110,162 @@ public class PlayerAni : MonoBehaviour {
 
                         case AnimationState.UPSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(2);
                             }
                             break;
 
                         case AnimationState.LEFTSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(4);
                             }
                             break;
 
                         case AnimationState.RIGHTSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(3);
                             }
                             break;
 
                         case AnimationState.LEFTDOWNSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(6);
                             }
                             break;
 
                         case AnimationState.LEFTUPSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(8);
                             }
                             break;
 
                         case AnimationState.RIGHTUPSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(7);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNSTAND:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(5);
                             }
                             break;
 
                         case AnimationState.LEFTWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(12);
                             }
                             break;
 
                         case AnimationState.RIGHTWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(11);
                             }
                             break;
 
                         case AnimationState.UPWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(10);
                             }
                             break;
 
                         case AnimationState.DOWNWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(9);
                             }
                             break;
 
                         case AnimationState.LEFTUPWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(16);
                             }
                             break;
 
                         case AnimationState.LEFTDOWNWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(14);
                             }
                             break;
 
                         case AnimationState.RIGHTUPWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(15);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNWALK:
                             {
+                                _animatedTileTexture._enableEvents = true;
                                 _animatedTileTexture.ChangeCheckRow(13);
                             }
                             break;
 
                         case AnimationState.LEFTSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(20);
                             }
                             break;
 
                         case AnimationState.RIGHTSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(19);
                             }
                             break;
 
                         case AnimationState.DOWNSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(17);
                             }
                             break;
 
                         case AnimationState.UPSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(18);
                             }
                             break;
 
                         case AnimationState.LEFTUPSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(24);
                             }
                             break;
 
                         case AnimationState.LEFTDOWNSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(22);
                             }
                             break;
 
                         case AnimationState.RIGHTUPSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(23);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNSHOOT:
                             {
-
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckRow(21);
                             }
                             break;
 
@@ -250,25 +283,44 @@ public class PlayerAni : MonoBehaviour {
 
                         case AnimationState.LEFTDEAD:
                             {
-
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+                                
+                                
                             }
                             break;
 
                         case AnimationState.UPDEAD:
                             {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
 
                             }
                             break;
 
                         case AnimationState.DOWNDEAD:
                             {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
 
                             }
                             break;
 
                         case AnimationState.RIGHTDEAD:
                             {
-
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+                                
                             }
                             break;
                     }

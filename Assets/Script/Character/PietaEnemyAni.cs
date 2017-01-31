@@ -79,8 +79,8 @@ public class PietaEnemyAni : MonoBehaviour {
                     {
                         case AnimationState.DOWNSTAND:
                             {
-                                _animatedTileTexture.ChangeCheckRow(3);
-                                //_animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(3);
+                                _animatedTileTexture.ChangeCheckRow(1);
                             }
                             break;
 

@@ -547,7 +547,10 @@ public class PietaEnemy : MonoBehaviour {
                                 }
                                 else
                                 {
+                                    // 일단 죽는 모션이 없으므로...
+                                    enemyAniState = AnimationState.DOWNSTAND;
 
+                                    
                                 }
                             }
                             break;
