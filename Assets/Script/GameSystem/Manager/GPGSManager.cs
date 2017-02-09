@@ -23,6 +23,7 @@ public class GPGSManager : Singleton<GPGSManager>
         bLogin = false;
 
         PlayGamesPlatform.Activate();
+
     }
 
     // GPGS를 로그인 합니다.
