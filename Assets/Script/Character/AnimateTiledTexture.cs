@@ -350,4 +350,24 @@ public class AnimateTiledTexture : MonoBehaviour {
 
     }
 
+    public int GetIndex()
+    {
+        return _index;
+    }
+
+    public void SetIndex(int indexNum)
+    {
+        if (indexNum >= _columns)
+        {
+            _index = _columns;
+        }
+        else if(indexNum <= 0)
+        {
+            _index = 0;
+        }
+        else
+        {
+            _index = indexNum;
+        }
+    }
 }

@@ -117,10 +117,10 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (NowStageEnemies <= 0)
-        {
-            NowGameState = GameState.VICTORY;
-        }
+        //if (NowStageEnemies <= 0)
+        //{
+        //    NowGameState = GameState.VICTORY;
+        //}
 
         switch(Application.platform)
         {

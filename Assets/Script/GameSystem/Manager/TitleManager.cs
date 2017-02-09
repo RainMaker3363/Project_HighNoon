@@ -1,13 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames;
 
 public class TitleManager : MonoBehaviour {
 
+    // 터치 후 타이틀 화면을 넘어갈때의 조건문
+    private bool NextTitleOn;
 
     // Use this for initialization
     void Start()
     {
+        NextTitleOn = false;
 
+        GPGSManager.GetInstance.InitializeGPGS(); // 초기화
+
+        GPGSManager.GetInstance.LoginGPGS();
+
+        StopCoroutine(TitleSceneProtocol(true));
+        StartCoroutine(TitleSceneProtocol(true));
+        //PlayGamesPlatform.Activate();
+    }
+
+    // 타이틀 화면 대기 프로토콜
+    IEnumerator TitleSceneProtocol(bool On = true)
+    {
+        Debug.Log("Wait for Moment...!");
+
+        yield return new WaitForSeconds(2.0f);
+
+        Debug.Log("Hello Player !");
+
+        NextTitleOn = true;
     }
 
     // Update is called once per frame
@@ -37,7 +61,11 @@ public class TitleManager : MonoBehaviour {
                                 {
                                     Debug.Log("TouchPhase Began!");
 
-                                    AutoFade.LoadLevel("TestScene", 1.0f, 0.5f, Color.black);
+                                    if(NextTitleOn == true)
+                                    {
+                                        AutoFade.LoadLevel("TestScene", 0.5f, 0.5f, Color.black);
+                                    }
+                                    
                                 }
                                 break;
 

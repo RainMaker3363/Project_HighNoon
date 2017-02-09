@@ -47,6 +47,8 @@ public class PietaEnemy : MonoBehaviour {
     private bool PathControlChange;
     // 길 찾기를 끝냈는지의 여부
     private bool PathFindEnd;
+    private int PlayerPathIndex;
+    private int PlayerPrevPathIndex;
 
     private float AITimer;
     private Vector3 Target;
@@ -99,6 +101,8 @@ public class PietaEnemy : MonoBehaviour {
         PathChangeOn = true;
         PathControlChange = true;
         PathFindEnd = true;
+        PlayerPathIndex = PlayerPathIndex = tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z);
+        PlayerPrevPathIndex = -1;
 
         // 적의 상태 초기화
         HP = 100;
@@ -470,31 +474,33 @@ public class PietaEnemy : MonoBehaviour {
 
                                                             enemyAniState = AnimationState.LEFTWALK;
 
-                                                            if (AITimer <= 0.0f)
-                                                            {
-                                                                AITimer = 2.5f;
-
-                                                                Target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
-
-                                                                print("Target : " + Target);
 
 
-                                                                if (tileMap.FindPath(this.transform.position, Target, path))
-                                                                {
+                                                            //if (AITimer <= 0.0f)
+                                                            //{
+                                                            //    AITimer = 2.5f;
 
-                                                                    print("Path.Count : " + path.Count);
+                                                            //    Target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
 
-                                                                    WalkPathcoroutine = WalkPath();
-                                                                    StartCoroutine(WalkPathcoroutine);
-                                                                    // StartCoroutine(WalkPathcoroutine);
+                                                            //    print("Target : " + Target);
 
-                                                                }
 
-                                                            }
-                                                            else
-                                                            {
-                                                                AITimer -= Time.deltaTime;
-                                                            }
+                                                            //    if (tileMap.FindPath(this.transform.position, Target, path))
+                                                            //    {
+
+                                                            //        print("Path.Count : " + path.Count);
+
+                                                            //        WalkPathcoroutine = WalkPath();
+                                                            //        StartCoroutine(WalkPathcoroutine);
+                                                            //        // StartCoroutine(WalkPathcoroutine);
+
+                                                            //    }
+
+                                                            //}
+                                                            //else
+                                                            //{
+                                                            //    AITimer -= Time.deltaTime;
+                                                            //}
 
 
                                                             if (Physics.Raycast(this.transform.position, ((m_Player.transform.position - this.transform.position).normalized), out hit, Mathf.Infinity, layerMask))
@@ -521,6 +527,29 @@ public class PietaEnemy : MonoBehaviour {
 
 
                                                                 }
+                                                            }
+
+                                                            // 플레이어의 위치를 갱신한다.
+                                                            if (PlayerPrevPathIndex != PlayerPathIndex)
+                                                            {
+                                                                PlayerPrevPathIndex = PlayerPathIndex;
+
+                                                                Target = tileMap.GetPoistion(tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z));
+
+                                                                if (tileMap.FindPath(this.transform.position, Target, path))
+                                                                {
+
+                                                                    print("Path.Count : " + path.Count);
+
+                                                                    WalkPathcoroutine = WalkPath();
+                                                                    StartCoroutine(WalkPathcoroutine);
+                                                                    // StartCoroutine(WalkPathcoroutine);
+
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                PlayerPrevPathIndex = tileMap.GetIndex((int)m_Player.GetPlayerPosition().x, (int)m_Player.GetPlayerPosition().z);
                                                             }
 
                                                         }
@@ -604,7 +633,7 @@ public class PietaEnemy : MonoBehaviour {
     {
         
 
-        Debug.Log("Bang!");
+        //Debug.Log("Bang!");
 
         // 총알 오브젝트 On
         if (EnemyBulletIndex < EnemyBullets.Length)

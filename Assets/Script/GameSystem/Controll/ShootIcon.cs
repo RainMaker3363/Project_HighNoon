@@ -72,7 +72,7 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         }
 	}
 
-        // 터치가 드래그(Drag) 했을때 호출 되는 함수
+    // 터치가 드래그(Drag) 했을때 호출 되는 함수
     public virtual void OnDrag(PointerEventData ped)
     {
 

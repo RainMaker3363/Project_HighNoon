@@ -15,6 +15,9 @@ public class PlayerAni : MonoBehaviour {
     private Player m_Player;
     private GameObject MainCamera;
 
+    private bool ShootAniOn;
+    private bool AniCheckOn;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -54,8 +57,9 @@ public class PlayerAni : MonoBehaviour {
             //_animatedTileTexture.RegisterCallback(ShootAnimationFinished);
         }
 
-        
-        
+
+        ShootAniOn = false;
+        AniCheckOn = false;
 
         this.transform.LookAt(MainCamera.transform.position);
         this.transform.Rotate(new Vector3(0.0f, -180.0f, 0.0f));
@@ -72,6 +76,10 @@ public class PlayerAni : MonoBehaviour {
             //_animatedTileTexture._framesPerSecond = 12;
         }
 
+        ShootAniOn = false;
+        AniCheckOn = false;
+        _animatedTileTexture.SetIndex(0);
+
         PlayerAniState = m_Player.GetPlayerAniState();
     }
 	
@@ -84,19 +92,28 @@ public class PlayerAni : MonoBehaviour {
         playerState = m_Player.GetPlayerState();
         PlayerAniState = m_Player.GetPlayerAniState();
 
-        
+        if (_animatedTileTexture.GetIndex() >= 5)
+        {
+            ShootAniOn = true;
+        }
+        else
+        {
+            ShootAniOn = false;
+        }
+
+        //print("_animatedTileTexture.GetIndex() : " + _animatedTileTexture.GetIndex());
 
         switch (State)
         {
             case GameState.START:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
                 }
                 break;
 
             case GameState.PLAY:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
 
                     switch(PlayerAniState)
                     {
@@ -215,57 +232,106 @@ public class PlayerAni : MonoBehaviour {
 
                         case AnimationState.LEFTSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
                                 _animatedTileTexture.ChangeCheckRow(20);
+
                             }
                             break;
 
                         case AnimationState.RIGHTSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(19);
+
                             }
                             break;
 
                         case AnimationState.DOWNSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(17);
+
                             }
                             break;
 
                         case AnimationState.UPSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(18);
+
                             }
                             break;
 
                         case AnimationState.LEFTUPSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(24);
+
                             }
                             break;
 
                         case AnimationState.LEFTDOWNSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(22);
+
+
                             }
                             break;
 
                         case AnimationState.RIGHTUPSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(23);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNSHOOT:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    _animatedTileTexture._enableEvents = true;
+                                }
                                 _animatedTileTexture.ChangeCheckRow(21);
+
                             }
                             break;
 
@@ -352,4 +418,9 @@ public class PlayerAni : MonoBehaviour {
                 break;
         }
 	}
+
+    public bool GetShootAniOn()
+    {
+        return ShootAniOn;
+    }
 }
