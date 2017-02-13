@@ -5,11 +5,12 @@ using System.Collections;
 
 public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    private bool buttonDown;
 
     // Use this for initialization
     void Start()
     {
-
+        buttonDown = false;
     }
 
     // Update is called once per frame
@@ -99,7 +100,27 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        
 
+        if(buttonDown == false)
+        {
+            buttonDown = true;
+
+            MainMenuManager.gameMode = GameModeState.Multi;
+
+            //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+
+            //GPGSManager.GetInstance.SignInAndStartMPGame();
+        }
+
+        if(GPGSManager.GetInstance.IsConnected() == true)
+        {
+            AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+        }
+        else
+        {
+            GPGSManager.GetInstance.SignInAndStartMPGame();
+        }
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

@@ -5,6 +5,7 @@ using System.Collections;
 
 public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public GameObject MainMenuObject;
     public GameObject GameModeSelectObject;
 
 	// Use this for initialization
@@ -99,6 +100,7 @@ public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        MainMenuObject.SetActive(false);
         GameModeSelectObject.SetActive(true);
     }
 

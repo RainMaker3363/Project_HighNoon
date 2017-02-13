@@ -5,16 +5,18 @@ using System.Collections;
 
 public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    private bool buttonDown;
 
     // Use this for initialization
     void Start()
     {
-
+        buttonDown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //switch (Application.platform)
         //{
         //    case RuntimePlatform.Android:
@@ -100,6 +102,15 @@ public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     public virtual void OnPointerDown(PointerEventData ped)
     {
 
+
+        if(buttonDown == false)
+        {
+            buttonDown = true;
+
+            MainMenuManager.gameMode = GameModeState.Single;
+
+            AutoFade.LoadLevel("TestScene", 0.2f, 0.2f, Color.black);
+        }
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

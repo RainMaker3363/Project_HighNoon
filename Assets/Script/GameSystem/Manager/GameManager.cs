@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public enum GameControlState
 {
     Mobile = 0,
@@ -15,6 +16,14 @@ public enum GameState
     VICTORY,
     EVENT,
     PLAY
+}
+
+
+public enum GameModeState
+{
+    Single = 0,
+    Multi,
+    NotSelect
 }
 
 public enum PlayerState
@@ -83,6 +92,7 @@ public class GameManager : MonoBehaviour {
     public static GameState NowGameState;
     public static GameControlState NowGameControlState;
     public static EnemyAIState NowEnemyAiState;
+    public static GameModeState NowGameModeState;
 
     public static int NowStageEnemies;
 
@@ -92,6 +102,8 @@ public class GameManager : MonoBehaviour {
         NowGameState = GameState.PLAY;
         NowGameControlState = GameControlState.PC;
         NowEnemyAiState = EnemyAIState.PATROL;
+
+        NowGameModeState = GameModeState.NotSelect;
 
         NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
 

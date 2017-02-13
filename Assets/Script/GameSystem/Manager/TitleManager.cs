@@ -27,7 +27,7 @@ public class TitleManager : MonoBehaviour {
     {
         Debug.Log("Wait for Moment...!");
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.5f);
 
         Debug.Log("Hello Player !");
 
@@ -63,7 +63,7 @@ public class TitleManager : MonoBehaviour {
 
                                     if(NextTitleOn == true)
                                     {
-                                        AutoFade.LoadLevel("TestScene", 0.5f, 0.5f, Color.black);
+                                        AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
                                     }
                                     
                                 }
