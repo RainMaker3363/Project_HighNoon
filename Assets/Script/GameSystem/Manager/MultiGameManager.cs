@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using GooglePlayGames.BasicApi.Multiplayer;
 
-
+public enum MultiPlayerState
+{
+    LIVE = 0,
+    DEAD,
+    DEADEYEING
+}
 
 public class MultiGameManager : MonoBehaviour {
 
     public static GameState NowGameState;
     public static GameControlState NowGameControlState;
-    public static EnemyAIState NowEnemyAiState;
 
     public GameObject MyCharacter;
     public GameObject EnemyCharacter;
@@ -23,7 +27,6 @@ public class MultiGameManager : MonoBehaviour {
     {
         NowGameState = GameState.PLAY;
         NowGameControlState = GameControlState.PC;
-        NowEnemyAiState = EnemyAIState.PATROL;
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
@@ -43,7 +46,7 @@ public class MultiGameManager : MonoBehaviour {
 
         //Screen.SetResolution(Screen.width, Screen.width * 16 / 9,  true); // 16:9 로 개발시
 
-        GPGSManager.GetInstance.SignInAndStartMPGame();
+        //GPGSManager.GetInstance.SignInAndStartMPGame();
 	}
 
     public void UpdateReceived(string senderId, float posX, float posY, float velX, float velY, float rotZ)
@@ -63,6 +66,7 @@ public class MultiGameManager : MonoBehaviour {
 
         // 1
         _myParticipantId = GPGSManager.GetInstance.GetMyParticipantId();
+
         // 2
         //List<Participant> allPlayers = MultiplayerController.Instance.GetAllPlayers();
         //_opponentScripts = new Dictionary<string, OpponentCarController>(allPlayers.Count - 1);
@@ -93,6 +97,7 @@ public class MultiGameManager : MonoBehaviour {
         //_timePlayed = 0;
         //guiObject.SetLaps(_lapsRemaining);
         //guiObject.SetTime(_timePlayed);
+
         _multiplayerReady = true;
 
     }

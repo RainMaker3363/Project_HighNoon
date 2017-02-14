@@ -100,27 +100,32 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        
 
-        if(buttonDown == false)
+        if (MainMenuManager.MainModeBtnDownOn == true)
         {
-            buttonDown = true;
+            if (buttonDown == false)
+            {
+                buttonDown = true;
 
-            MainMenuManager.gameMode = GameModeState.Multi;
+                MainMenuManager.gameMode = GameModeState.Multi;
 
-            //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
 
-            //GPGSManager.GetInstance.SignInAndStartMPGame();
-        }
+                //GPGSManager.GetInstance.SignInAndStartMPGame();
+            }
 
-        if(GPGSManager.GetInstance.IsConnected() == true)
-        {
+            //if (GPGSManager.GetInstance.IsConnected() == true)
+            //{
+            //    AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+            //}
+            //else
+            //{
+            //    GPGSManager.GetInstance.SignInAndStartMPGame();
+            //}
+
             AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
         }
-        else
-        {
-            GPGSManager.GetInstance.SignInAndStartMPGame();
-        }
+
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

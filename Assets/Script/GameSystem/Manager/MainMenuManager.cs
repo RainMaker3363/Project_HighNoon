@@ -6,6 +6,8 @@ using System.Collections;
 public class MainMenuManager : MonoBehaviour {
 
     public static bool _showLobbyDialog;
+    public static bool MainMenuBtnDownOn;
+    public static bool MainModeBtnDownOn;
     private string _lobbyMessage;
 
     public GameObject MainMenuObject;
@@ -32,6 +34,10 @@ public class MainMenuManager : MonoBehaviour {
 
         MainMenuObject.SetActive(true);
         ModeSelectObject.SetActive(false);
+
+        MainMenuBtnDownOn = false;
+        MainModeBtnDownOn = false;
+
 
         gameMode = GameModeState.NotSelect;
 	}

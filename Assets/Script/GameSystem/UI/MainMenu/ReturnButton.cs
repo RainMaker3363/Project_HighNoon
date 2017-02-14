@@ -3,20 +3,20 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class ReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    private bool buttonDown;
+    public GameObject MainMenuObject;
+    public GameObject GameModeSelectObject;
 
     // Use this for initialization
     void Start()
     {
-        buttonDown = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //switch (Application.platform)
         //{
         //    case RuntimePlatform.Android:
@@ -101,17 +101,10 @@ public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-
         if (MainMenuManager.MainModeBtnDownOn == true)
         {
-            if (buttonDown == false)
-            {
-                buttonDown = true;
-
-                MainMenuManager.gameMode = GameModeState.Single;
-
-                AutoFade.LoadLevel("TestScene", 0.2f, 0.2f, Color.black);
-            }
+            MainMenuObject.SetActive(true);
+            GameModeSelectObject.SetActive(false);
         }
 
     }

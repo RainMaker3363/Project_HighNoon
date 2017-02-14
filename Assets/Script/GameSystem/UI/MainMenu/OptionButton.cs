@@ -99,7 +99,10 @@ public class OptionButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        if (MainMenuManager.MainMenuBtnDownOn == true)
+        {
 
+        }
     }
 
     // 터치에서 손을 땠을때 발생하는 함수
