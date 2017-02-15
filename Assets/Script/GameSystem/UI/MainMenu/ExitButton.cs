@@ -101,7 +101,9 @@ public class ExitButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
     {
         if (MainMenuManager.MainMenuBtnDownOn == true)
         {
+            GPGSManager.GetInstance.LogoutGPGS();
 
+            Application.Quit();
         }
     }
 

@@ -21,6 +21,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     private List<byte> _updateMessage;
     private bool IsConnectedOn = false;
 
+    public MPUpdateListener updateListener;
+
     public MainMenuManager mainMenuManager;
 
 	// 현재 로그인 중인지 체크
@@ -190,7 +192,9 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         _updateMessage.AddRange(System.BitConverter.GetBytes(velocity.y));
         _updateMessage.AddRange(System.BitConverter.GetBytes(rotZ));
         byte[] messageToSend = _updateMessage.ToArray();
+
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
+
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
     }
 
@@ -213,6 +217,12 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
             float rotZ = System.BitConverter.ToSingle(data, 18);
             Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
             // We'd better tell our GameController about this.
+
+            if (updateListener != null)
+            {
+                updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+            }
+
         }
     }
 

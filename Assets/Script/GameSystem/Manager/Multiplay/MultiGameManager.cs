@@ -10,13 +10,18 @@ public enum MultiPlayerState
     DEADEYEING
 }
 
-public class MultiGameManager : MonoBehaviour {
+public class MultiGameManager : MonoBehaviour, MPUpdateListener
+{
 
     public static GameState NowGameState;
     public static GameControlState NowGameControlState;
 
+    // 플레이어의 정보
     public GameObject MyCharacter;
+
+    // 적의 정보
     public GameObject EnemyCharacter;
+    private Dictionary<string, MulEnemy> _opponentScripts;
 
     private bool _multiplayerReady;
 	private string _myParticipantId;
@@ -46,30 +51,70 @@ public class MultiGameManager : MonoBehaviour {
 
         //Screen.SetResolution(Screen.width, Screen.width * 16 / 9,  true); // 16:9 로 개발시
 
-        //GPGSManager.GetInstance.SignInAndStartMPGame();
+        GPGSManager.GetInstance.SignInAndStartMPGame();
+
 	}
 
     public void UpdateReceived(string senderId, float posX, float posY, float velX, float velY, float rotZ)
     {
-        //if (_multiplayerReady)
-        //{
-        //    OpponentCarController opponent = _opponentScripts[senderId];
-        //    if (opponent != null)
-        //    {
-        //        opponent.SetCarInformation(posX, posY, velX, velY, rotZ);
-        //    }
-        //}
+        if (_multiplayerReady)
+        {
+            MulEnemy opponent = _opponentScripts[senderId];
+
+            if (opponent != null)
+            {
+                opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
+            }
+        }
     }
 
     void SetupMultiplayerGame()
     {
 
+        GPGSManager.GetInstance.updateListener = this;
+
         // 1
         _myParticipantId = GPGSManager.GetInstance.GetMyParticipantId();
 
         // 2
-        //List<Participant> allPlayers = MultiplayerController.Instance.GetAllPlayers();
-        //_opponentScripts = new Dictionary<string, OpponentCarController>(allPlayers.Count - 1);
+        List<Participant> allPlayers = GPGSManager.GetInstance.GetAllPlayers();
+        _opponentScripts = new Dictionary<string, MulEnemy>(allPlayers.Count - 1);
+
+        for (int i = 0; i < allPlayers.Count; i++)
+        {
+            string nextParticipantId = allPlayers[i].ParticipantId;
+            Debug.Log("Setting up for " + nextParticipantId);
+
+
+            // 나의 식별 ID일때...
+            if (nextParticipantId == _myParticipantId)
+            {
+                // 4
+                if(MyCharacter == null)
+                {
+                    MyCharacter = GameObject.Find("Lincoin_Body");
+                }
+            }
+            else
+            {
+                if(EnemyCharacter == null)
+                {
+                    EnemyCharacter = GameObject.Find("EnemyLincoin_Body");
+
+                    MulEnemy opponentScript = EnemyCharacter.GetComponent<MulEnemy>();
+                    _opponentScripts[nextParticipantId] = opponentScript;
+                }
+                else
+                {
+                    MulEnemy opponentScript = EnemyCharacter.GetComponent<MulEnemy>();
+                    _opponentScripts[nextParticipantId] = opponentScript;
+                }
+                // 5
+                //GameObject opponentCar = (Instantiate(opponentPrefab, carStartPoint, Quaternion.identity) as GameObject);
+
+            }
+        }
+
         //for (int i = 0; i < allPlayers.Count; i++)
         //{
         //    string nextParticipantId = allPlayers[i].ParticipantId;
