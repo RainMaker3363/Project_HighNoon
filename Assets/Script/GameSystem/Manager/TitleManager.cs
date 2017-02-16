@@ -5,6 +5,8 @@ using GooglePlayGames;
 
 public class TitleManager : MonoBehaviour {
 
+    public GameObject TitleScreenText;
+
     // 터치 후 타이틀 화면을 넘어갈때의 조건문
     private bool NextTitleOn;
 
@@ -12,6 +14,7 @@ public class TitleManager : MonoBehaviour {
     void Start()
     {
         NextTitleOn = false;
+        TitleScreenText.SetActive(false);
 
         GPGSManager.GetInstance.InitializeGPGS(); // 초기화
 
@@ -27,7 +30,7 @@ public class TitleManager : MonoBehaviour {
     {
         Debug.Log("Wait for Moment...!");
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.0f);
 
         Debug.Log("Hello Player !");
 
@@ -63,6 +66,8 @@ public class TitleManager : MonoBehaviour {
 
                                     if(NextTitleOn == true)
                                     {
+                                        TitleScreenText.SetActive(true);
+
                                         AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
                                     }
                                     

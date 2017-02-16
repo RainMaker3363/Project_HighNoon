@@ -105,7 +105,6 @@ public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             MainMenuObject.SetActive(false);
             GameModeSelectObject.SetActive(true);
         }
-
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

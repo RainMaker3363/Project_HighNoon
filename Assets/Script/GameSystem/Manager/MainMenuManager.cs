@@ -48,6 +48,7 @@ public class MainMenuManager : MonoBehaviour {
 
     void Update()
     {
+
         switch(gameMode)
         {
             case GameModeState.Single:

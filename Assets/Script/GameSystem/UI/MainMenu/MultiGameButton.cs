@@ -8,7 +8,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     private bool buttonDown;
     private bool StartMultiOn;
     private bool StartMultiSetOn;
-
+    
     public Text NetText;
     public Text NetWarningText;
     public Text NetReadyText;
@@ -41,6 +41,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             if(GPGSManager.GetInstance.IsSetup() == true)
             {
                 NetReadyText.text = "이제 시작합니다.";
+
             }
             else
             {
