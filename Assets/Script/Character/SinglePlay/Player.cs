@@ -355,7 +355,7 @@ public class Player : MonoBehaviour {
                         case PlayerState.NORMAL:
                             {
 
-                                Player_Tranjectory.enabled = false;
+                                Player_Tranjectory.enabled = true;
 
                                 //if (NowMovePlayer)
                                 //{
@@ -537,7 +537,7 @@ public class Player : MonoBehaviour {
                                     this.transform.position = new Vector3(PlayerPosBack.x, this.transform.position.y, PlayerPosBack.z);
                                 }
 
-                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.6f, WalllayerMask))
+                                if (Physics.Raycast(this.transform.position, (Player_Tranjectory_Object.transform.position - this.transform.position).normalized * 1.0f, out Wallhit, 0.3f, WalllayerMask))
                                 {
                                     if (Wallhit.collider.transform.tag.Equals("Wall") == true)
                                     {
@@ -570,7 +570,7 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
-                                Player_Tranjectory.enabled = false;
+                                Player_Tranjectory.enabled = true;
 
                                 if (NowMovePlayer)
                                 {
