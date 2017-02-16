@@ -6,16 +6,55 @@ using System.Collections;
 public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     private bool buttonDown;
+    private bool StartMultiOn;
+    private bool StartMultiSetOn;
+
+    public Text NetText;
+    public Text NetWarningText;
+    public Text NetReadyText;
 
     // Use this for initialization
     void Start()
     {
         buttonDown = false;
+        StartMultiOn = false;
+        StartMultiSetOn = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        NetText.text = GPGSManager.GetInstance.GetNetMessage();
+
+        if(GPGSManager.GetInstance.IsAuthenticated())
+        {
+            NetWarningText.text = "구글 계정이 연결 되었습니다.";
+        }
+        else
+        {
+            NetWarningText.text = "구글 계정이 아직 연결되지 않았습니다.";
+        }
+
+        if (GPGSManager.GetInstance.IsConnected() == true)
+        {
+            if(GPGSManager.GetInstance.IsSetup() == true)
+            {
+                NetReadyText.text = "이제 시작합니다.";
+            }
+            else
+            {
+                
+
+                NetReadyText.text = "플레이어를 찾아 세팅 중입니다.";
+            }
+            
+        }
+        else
+        {
+            NetReadyText.text = "아직 게임을 준비 중입니다...";
+        }
+
         //switch (Application.platform)
         //{
         //    case RuntimePlatform.Android:
@@ -39,7 +78,6 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         //                    case TouchPhase.Began:
         //                        {
         //                            Debug.Log("TouchPhase Began!");
-
         //                        }
         //                        break;
 
@@ -100,31 +138,43 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-
-        if (MainMenuManager.MainModeBtnDownOn == true)
+        if(GPGSManager.GetInstance.IsAuthenticated() == true)
         {
-            if (buttonDown == false)
+            if (MainMenuManager.MainModeBtnDownOn == true)
             {
-                buttonDown = true;
+                MainMenuManager.StartMultiGameOn = true;
 
-                MainMenuManager.gameMode = GameModeState.Multi;
+                if (buttonDown == false)
+                {
+                    buttonDown = true;
+
+                    MainMenuManager.gameMode = GameModeState.Multi;
+
+
+
+                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+
+                    //GPGSManager.GetInstance.SignInAndStartMPGame();
+                }
+
+                if (GPGSManager.GetInstance.IsConnected() == false)
+                {
+
+                    GPGSManager.GetInstance.SignInAndStartMPGame();
+
+                    GPGSManager.GetInstance.ShowRoomUI();
+                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                }
+                else
+                {
+                    AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                }
 
                 //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-
-                //GPGSManager.GetInstance.SignInAndStartMPGame();
             }
-
-            //if (GPGSManager.GetInstance.IsConnected() == true)
-            //{
-            //    AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-            //}
-            //else
-            //{
-            //    GPGSManager.GetInstance.SignInAndStartMPGame();
-            //}
-
-            AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
         }
+  
 
     }
 

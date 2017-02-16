@@ -20,6 +20,9 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     private int _updateMessageLength = 22;
     private List<byte> _updateMessage;
     private bool IsConnectedOn = false;
+    private bool IsSetupOn = false;
+    private string StateMessage = " ";
+    private string NetMessage = " ";
 
     public MPUpdateListener updateListener;
 
@@ -49,6 +52,11 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         // 최대 수용 인원
         PlayGamesPlatform.Instance.RealTime.CreateQuickGame(minimumOpponents, maximumOpponents, gameVariation, this);
 
+        //PlayGamesPlatform.Instance.RealTime.ShowWaitingRoomUI();
+    }
+
+    public void ShowRoomUI()
+    {
         PlayGamesPlatform.Instance.RealTime.ShowWaitingRoomUI();
     }
 
@@ -57,10 +65,27 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         return IsConnectedOn;
     }
 
+    public string GetNetMessage()
+    {
+        return NetMessage;
+    }
+
+    public bool IsSetup()
+    {
+        return IsSetupOn;
+    }
+
+    public string GetStateMessage()
+    {
+        return StateMessage;
+    }
+
     // 현재 상태를 디버깅 로그로 보여주는 함수
     private void ShowMPStatus(string message)
     {
         //Debug.Log(message);
+
+        NetMessage = message;
 
         if (mainMenuManager != null)
         {
@@ -102,6 +127,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         {
             ShowMPStatus("Player " + participantID + " has joined.");
         }
+
+        IsSetupOn = true;
     }
 
     // 해당 플레이어의 아이디가 연결을 끊었을 경우 호출되는 리스너 함수
@@ -111,6 +138,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         {
             ShowMPStatus("Player " + participantID + " has left.");
         }
+
+        IsSetupOn = false;
     }
 
     /// Raises the participant left event.
@@ -216,7 +245,10 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
             float velY = System.BitConverter.ToSingle(data, 14);
             float rotZ = System.BitConverter.ToSingle(data, 18);
             Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
+
+            StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
             // We'd better tell our GameController about this.
+            updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
 
             if (updateListener != null)
             {

@@ -101,17 +101,24 @@ public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-
-        if (MainMenuManager.MainModeBtnDownOn == true)
+        if(GPGSManager.GetInstance.IsConnected() == false)
         {
-            if (buttonDown == false)
+            if (MainMenuManager.MainModeBtnDownOn == true)
             {
-                buttonDown = true;
+                if (MainMenuManager.StartMultiGameOn == false)
+                {
+                    if (buttonDown == false)
+                    {
+                        buttonDown = true;
 
-                MainMenuManager.gameMode = GameModeState.Single;
+                        MainMenuManager.gameMode = GameModeState.Single;
 
-                AutoFade.LoadLevel("TestScene", 0.2f, 0.2f, Color.black);
+                        AutoFade.LoadLevel("TestScene", 0.2f, 0.2f, Color.black);
+                    }
+                }
+
             }
+
         }
 
     }

@@ -5,7 +5,10 @@ public class MulEnemy : MonoBehaviour {
 
     public MulEnemy_Ani m_EnemyAni;
 
+    private GameState NowGameState;
     private AnimationState EnemyAniState;
+
+    private string InfoText;
 
 	// Use this for initialization
 	void Start () {
@@ -14,11 +17,53 @@ public class MulEnemy : MonoBehaviour {
         {
             m_EnemyAni = GameObject.Find("EnemyLincoin_Ani").GetComponent<MulEnemy_Ani>();
         }
+
+        NowGameState = MultiGameManager.NowGameState;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        NowGameState = MultiGameManager.NowGameState;
+
+        switch(NowGameState)
+        {
+            case GameState.PLAY:
+                {
+
+                }
+                break;
+
+            case GameState.PAUSE:
+                {
+
+                }
+                break;
+
+            case GameState.START:
+                {
+
+                }
+                break;
+
+            case GameState.EVENT:
+                {
+
+                }
+                break;
+
+            case GameState.VICTORY:
+                {
+
+                }
+                break;
+
+            case GameState.GAMEOVER:
+                {
+
+                }
+                break;
+
+        }
 	}
 
     public AnimationState GetEnemyAniState()
@@ -28,8 +73,9 @@ public class MulEnemy : MonoBehaviour {
 
     public void SetTransformInformation(float posX, float posY, float velX, float velY, float rotZ)
     {
-        transform.position = new Vector3(posX, posY, 0);
-        //transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        transform.position = new Vector3(posX, 0, posY);
+
+        transform.rotation = Quaternion.Euler(0, rotZ, 0);
         // We're going to do nothing with velocity.... for now
     }
 

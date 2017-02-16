@@ -8,7 +8,10 @@ public class MainMenuManager : MonoBehaviour {
     public static bool _showLobbyDialog;
     public static bool MainMenuBtnDownOn;
     public static bool MainModeBtnDownOn;
+    public static bool StartMultiGameOn;
     private string _lobbyMessage;
+
+    
 
     public GameObject MainMenuObject;
     public GameObject ModeSelectObject;
@@ -37,6 +40,7 @@ public class MainMenuManager : MonoBehaviour {
 
         MainMenuBtnDownOn = false;
         MainModeBtnDownOn = false;
+        StartMultiGameOn = false;
 
 
         gameMode = GameModeState.NotSelect;
