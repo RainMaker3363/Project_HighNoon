@@ -100,6 +100,7 @@ public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+
         if(MainMenuManager.MainMenuBtnDownOn == true)
         {
             MainMenuObject.SetActive(false);

@@ -34,6 +34,7 @@ public class TitleManager : MonoBehaviour {
 
         Debug.Log("Hello Player !");
 
+        TitleScreenText.SetActive(true);
         NextTitleOn = true;
     }
 
@@ -66,7 +67,6 @@ public class TitleManager : MonoBehaviour {
 
                                     if(NextTitleOn == true)
                                     {
-                                        TitleScreenText.SetActive(true);
 
                                         AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
                                     }
