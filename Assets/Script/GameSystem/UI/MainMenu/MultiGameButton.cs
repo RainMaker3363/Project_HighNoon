@@ -8,6 +8,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     private bool buttonDown;
     private bool StartMultiOn;
     private bool StartMultiSetOn;
+    private bool MultiButtonDownCheck;
     
     public Text NetText;
     public Text NetWarningText;
@@ -19,7 +20,15 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         buttonDown = false;
         StartMultiOn = false;
         StartMultiSetOn = false;
+        MultiButtonDownCheck = false;
         
+    }
+
+    IEnumerator StartMultiGame()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
     }
 
     // Update is called once per frame
@@ -38,18 +47,21 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
         if (GPGSManager.GetInstance.IsConnected() == true)
         {
-            if(GPGSManager.GetInstance.IsSetup() == true)
-            {
-                NetReadyText.text = "이제 시작합니다.";
+            //if(GPGSManager.GetInstance.IsSetup() == true)
+            //{
+            //    NetReadyText.text = "이제 시작합니다.";
 
-            }
-            else
-            {
+
+            //}
+            //else
+            //{
                 
 
-                NetReadyText.text = "플레이어를 찾아 세팅 중입니다.";
-            }
-            
+            //    NetReadyText.text = "플레이어를 찾아 세팅 중입니다.";
+            //}
+            NetReadyText.text = "이제 시작합니다.";
+
+            StartCoroutine(StartMultiGame());
         }
         else
         {
@@ -158,19 +170,25 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
                     //GPGSManager.GetInstance.SignInAndStartMPGame();
                 }
 
-                if (GPGSManager.GetInstance.IsConnected() == false)
+                if (MultiButtonDownCheck == false)
                 {
+                    MultiButtonDownCheck = true;
 
-                    GPGSManager.GetInstance.SignInAndStartMPGame();
+                    if (GPGSManager.GetInstance.IsConnected() == false)
+                    {
 
-                    //GPGSManager.GetInstance.ShowRoomUI();
-                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                        GPGSManager.GetInstance.SignInAndStartMPGame();
+
+                        //GPGSManager.GetInstance.ShowRoomUI();
+                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                    }
+                    else
+                    {
+                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                    }
                 }
-                else
-                {
-                    AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                }
+
 
                 //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
             }

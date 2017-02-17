@@ -21,6 +21,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     private List<byte> _updateMessage;
     private bool IsConnectedOn = false;
     private bool IsSetupOn = false;
+    private bool showingWaitingRoom = false;
     private string StateMessage = " ";
     private string NetMessage = " ";
 
@@ -75,6 +76,11 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         return IsSetupOn;
     }
 
+    public bool IsShowingWaitingRoom()
+    {
+        return showingWaitingRoom;
+    }
+
     public string GetStateMessage()
     {
         return StateMessage;
@@ -97,6 +103,12 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     public void OnRoomSetupProgress(float percent)
     {
         ShowMPStatus("We are " + percent + "% done with setup");
+
+        if (!showingWaitingRoom)
+        {
+            showingWaitingRoom = true;
+            PlayGamesPlatform.Instance.RealTime.ShowWaitingRoomUI();
+        }
     }
 
     // 멀티플레이 방이 연결되었는지의 여부
@@ -118,6 +130,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     public void OnLeftRoom()
     {
         ShowMPStatus("We have left the room. We should probably perform some clean-up tasks.");
+
+        showingWaitingRoom = false;
     }
 
     // 해당 플레이어의 아이디가 연결을 했을 경우 호출되는 리스너 함수
@@ -152,6 +166,11 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
 
     }
 
+    // 방을 떠나기 및 파기
+    public void LeaveRoom()
+    {
+        PlayGamesPlatform.Instance.RealTime.LeaveRoom();
+    }
 
     // 상대 ID로부터 메시지를 받았을때 호출되는 리스너 함수
     //public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
@@ -224,6 +243,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
 
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
 
+        //PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
     }
 
