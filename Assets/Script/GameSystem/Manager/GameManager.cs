@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
         NowGameControlState = GameControlState.PC;
         NowEnemyAiState = EnemyAIState.PATROL;
 
-        NowGameModeState = GameModeState.NotSelect;
+        NowGameModeState = GameModeState.Single;
 
         NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
 

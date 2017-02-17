@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
     private bool ShootOn;
     private bool ReloadSuccessOn;
     private float ShootCoolTime;
+    private int BulletQuantity;
     private int BulletStack;
     private int NowBulletIndex;
 
@@ -276,6 +277,9 @@ public class Player : MonoBehaviour {
         ReloadSuccessOn = true;
         ShootCoolTime = 1.0f;
         BulletStack = 6;
+
+        // 총알의 수
+        BulletQuantity = 1000;
 
         NowMovePlayer = false;
         CameraMoveOn = true;
@@ -962,48 +966,56 @@ public class Player : MonoBehaviour {
             case PlayerState.NORMAL:
                 {
                     // 총알의 개수 파악하기
-                    if (BulletStack > 0)
+                    if (BulletQuantity > 0)
                     {
-
-                        // 재장전이 다 되어있다면 발사한다.
-                        if (ReloadSuccessOn == true)
+                        if (BulletStack > 0)
                         {
-                            if ((ShootOn == true))
+
+                            // 재장전이 다 되어있다면 발사한다.
+                            if (ReloadSuccessOn == true)
                             {
-                                StopCoroutine(ShootProtocol(true));
-                                StartCoroutine(ShootProtocol(true));
+                                if ((ShootOn == true))
+                                {
+                                    StopCoroutine(ShootProtocol(true));
+                                    StartCoroutine(ShootProtocol(true));
+                                }
                             }
                         }
+                        else
+                        {
+                            StopCoroutine(ReloadProtocol(true));
+                            StartCoroutine(ReloadProtocol(true));
+                        }
                     }
-                    else
-                    {
-                        StopCoroutine(ReloadProtocol(true));
-                        StartCoroutine(ReloadProtocol(true));
-                    }
+          
                 }
                 break;
 
             case PlayerState.REALBATTLE:
                 {
                     // 총알의 개수 파악하기
-                    if (BulletStack > 0)
+                    if (BulletQuantity > 0)
                     {
-
-                        // 재장전이 다 되어있다면 발사한다.
-                        if (ReloadSuccessOn == true)
+                        if (BulletStack > 0)
                         {
-                            if ((ShootOn == true))
+
+                            // 재장전이 다 되어있다면 발사한다.
+                            if (ReloadSuccessOn == true)
                             {
-                                StopCoroutine(ShootProtocol(true));
-                                StartCoroutine(ShootProtocol(true));
+                                if ((ShootOn == true))
+                                {
+                                    StopCoroutine(ShootProtocol(true));
+                                    StartCoroutine(ShootProtocol(true));
+                                }
                             }
                         }
+                        else
+                        {
+                            StopCoroutine(ReloadProtocol(true));
+                            StartCoroutine(ReloadProtocol(true));
+                        }
                     }
-                    else
-                    {
-                        StopCoroutine(ReloadProtocol(true));
-                        StartCoroutine(ReloadProtocol(true));
-                    }
+                    
                 }
                 break;
 
@@ -1342,6 +1354,14 @@ public class Player : MonoBehaviour {
             
         }
 
+        if (other.transform.tag.Equals("Item") == true)
+        {
+            Debug.Log("Bullet Get !");
+            
+            BulletQuantity++;
+
+            Debug.Log("BulletQuantity : " + BulletQuantity);
+        }
         //if (other.transform.tag.Equals("DeadEyeBox") == true)
         //{
         //    // 데드아이를 준비한다.

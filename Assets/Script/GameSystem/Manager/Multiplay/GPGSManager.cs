@@ -237,24 +237,41 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         // Let's figure out what type of message this is.
         char messageType = (char)data[1];
 
-        if (messageType == 'U' && data.Length == _updateMessageLength)
+        //if (messageType == 'U' && data.Length == _updateMessageLength)
+        //if (messageType == 'U')
+        //{
+        //    float posX = System.BitConverter.ToSingle(data, 2);
+        //    float posY = System.BitConverter.ToSingle(data, 6);
+        //    float velX = System.BitConverter.ToSingle(data, 10);
+        //    float velY = System.BitConverter.ToSingle(data, 14);
+        //    float rotZ = System.BitConverter.ToSingle(data, 18);
+        //    Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
+
+        //    StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
+        //    // We'd better tell our GameController about this.
+        //    updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+
+        //    if (updateListener != null)
+        //    {
+        //        updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+        //    }
+
+        //}
+
+        float posX = System.BitConverter.ToSingle(data, 2);
+        float posY = System.BitConverter.ToSingle(data, 6);
+        float velX = System.BitConverter.ToSingle(data, 10);
+        float velY = System.BitConverter.ToSingle(data, 14);
+        float rotZ = System.BitConverter.ToSingle(data, 18);
+        Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
+
+        StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
+        // We'd better tell our GameController about this.
+        updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+
+        if (updateListener != null)
         {
-            float posX = System.BitConverter.ToSingle(data, 2);
-            float posY = System.BitConverter.ToSingle(data, 6);
-            float velX = System.BitConverter.ToSingle(data, 10);
-            float velY = System.BitConverter.ToSingle(data, 14);
-            float rotZ = System.BitConverter.ToSingle(data, 18);
-            Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
-
-            StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
-            // We'd better tell our GameController about this.
             updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
-
-            if (updateListener != null)
-            {
-                updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
-            }
-
         }
     }
 
@@ -315,6 +332,19 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         if (Social.localUser.authenticated)
         {
             return Social.localUser.userName;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public string GetOtherNameGPGS(int index)
+    {
+
+        if (PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants()[index] != null)
+        {
+            return PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants()[index].DisplayName;
         }
         else
         {

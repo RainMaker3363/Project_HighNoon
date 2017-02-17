@@ -69,6 +69,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
 
         //GPGSManager.GetInstance.SignInAndStartMPGame();
 
+        GPGSManager.GetInstance.TrySilentSignIn();
 
         SetupMultiplayerGame();
 
@@ -78,18 +79,25 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
 
     public void UpdateReceived(string senderId, float posX, float posY, float velX, float velY, float rotZ)
     {
-        if (_multiplayerReady)
+        MulEnemy opponent = _opponentScripts[senderId];
+
+        if (opponent != null)
         {
-            MulEnemy opponent = _opponentScripts[senderId];
-
-            if (opponent != null)
-            {
-                opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
-            }
-
-
-            EnemyCharacter.GetComponent<MulEnemy>().SetTransformInformation(posX, posY, velX, velY, rotZ);
+            opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
         }
+
+        //if (_multiplayerReady)
+        //{
+        //    MulEnemy opponent = _opponentScripts[senderId];
+
+        //    if (opponent != null)
+        //    {
+        //        opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
+        //    }
+
+
+        //    //EnemyCharacter.GetComponent<MulEnemy>().SetTransformInformation(posX, posY, velX, velY, rotZ);
+        //}
 
     }
 
@@ -201,16 +209,16 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         GPGSManager.GetInstance.SendMyUpdate(MyCharacter.transform.position.x,
                                                     MyCharacter.transform.position.z,
                                                   Vector2.zero,
-                                                    MyCharacter.transform.rotation.eulerAngles.z);
+                                                    MyCharacter.transform.rotation.eulerAngles.y);
     }
 	// Update is called once per frame
 	void Update () 
     {
 
         //NetText.text = "Net : " + GPGSManager.GetInstance.GetStateMessage().ToString();
-        MyInfoText.text = "Player ID : " + GPGSManager.GetInstance.GetMyParticipantId() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
-        EnemyInfoText.text = "Ohter[0] ID : " + GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
-        NetText.text = "Other[1] ID : " + GPGSManager.GetInstance.GetAllPlayers()[1].ParticipantId;
+        MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Ready : " + _multiplayerReady.ToString();
+        EnemyInfoText.text = "Ohter[0] Name : " + GPGSManager.GetInstance.GetOtherNameGPGS(0);//GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
+        NetText.text = "Other[1] Name : " + GPGSManager.GetInstance.GetOtherNameGPGS(1);
 
         DoMultiplayerUpdate();
 

@@ -30,7 +30,7 @@ public class TitleManager : MonoBehaviour {
     {
         Debug.Log("Wait for Moment...!");
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.7f);
 
         Debug.Log("Hello Player !");
 

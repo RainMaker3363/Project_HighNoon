@@ -35,6 +35,7 @@ public class MulPlayer : MonoBehaviour {
     private bool ShootOn;
     private bool ReloadSuccessOn;
     private float ShootCoolTime;
+    private int BulletQuantity;
     private int BulletStack;
     private int NowBulletIndex;
 
@@ -227,6 +228,9 @@ public class MulPlayer : MonoBehaviour {
         ReloadSuccessOn = true;
         ShootCoolTime = 1.0f;
         BulletStack = 6;
+        
+        // 총알의 수 (임시)
+        BulletQuantity = 1000;
 
         NowMovePlayer = false;
         CameraMoveOn = true;
@@ -567,69 +571,6 @@ public class MulPlayer : MonoBehaviour {
         }
     }
 
-    //void FixedUpdate()
-    //{
-
-    //    switch (State)
-    //    {
-    //        case GameState.START:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.PLAY:
-    //            {
-    //                switch(playerState)
-    //                {
-    //                    case PlayerState.NORMAL:
-    //                        {
-    //                            this.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
-    //                        }
-    //                        break;
-
-    //                    case PlayerState.DEADEYE:
-    //                        {
-
-    //                        }
-    //                        break;
-
-    //                    case PlayerState.DEAD:
-    //                        {
-    //                            GameManager.NowGameState = GameState.GAMEOVER;
-    //                        }
-    //                        break;
-    //                }
-
-    //            }
-    //            break;
-
-    //        case GameState.PAUSE:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.EVENT:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.GAMEOVER:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.VICTORY:
-    //            {
-
-    //            }
-    //            break;
-    //    }
-    //}
-
     public Vector3 PoolInput()
     {
         Vector3 Direction = Vector3.zero;
@@ -657,24 +598,28 @@ public class MulPlayer : MonoBehaviour {
             case MultiPlayerState.LIVE:
                 {
                     // 총알의 개수 파악하기
-                    if (BulletStack > 0)
+                    if (BulletQuantity > 0)
                     {
-
-                        // 재장전이 다 되어있다면 발사한다.
-                        if (ReloadSuccessOn == true)
+                        if (BulletStack > 0)
                         {
-                            if ((ShootOn == true))
+
+                            // 재장전이 다 되어있다면 발사한다.
+                            if (ReloadSuccessOn == true)
                             {
-                                StopCoroutine(ShootProtocol(true));
-                                StartCoroutine(ShootProtocol(true));
+                                if ((ShootOn == true))
+                                {
+                                    StopCoroutine(ShootProtocol(true));
+                                    StartCoroutine(ShootProtocol(true));
+                                }
                             }
                         }
+                        else
+                        {
+                            StopCoroutine(ReloadProtocol(true));
+                            StartCoroutine(ReloadProtocol(true));
+                        }
                     }
-                    else
-                    {
-                        StopCoroutine(ReloadProtocol(true));
-                        StartCoroutine(ReloadProtocol(true));
-                    }
+
                 }
                 break;
 
@@ -689,7 +634,6 @@ public class MulPlayer : MonoBehaviour {
 
                         StartCoroutine(DeadEyeProtocol);
                     }
-
                 }
                 break;
 
@@ -1013,6 +957,10 @@ public class MulPlayer : MonoBehaviour {
 
         }
 
+        if(other.transform.tag.Equals("Item") == true)
+        {
+            BulletQuantity++;
+        }
         //if (other.transform.tag.Equals("DeadEyeBox") == true)
         //{
         //    // 데드아이를 준비한다.

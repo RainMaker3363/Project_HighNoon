@@ -103,8 +103,12 @@ public class ReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     {
         if (MainMenuManager.MainModeBtnDownOn == true)
         {
-            MainMenuObject.SetActive(true);
-            GameModeSelectObject.SetActive(false);
+            if (MainMenuManager.StartMultiGameOn == false)
+            {
+                MainMenuObject.SetActive(true);
+                GameModeSelectObject.SetActive(false);
+            }
+
         }
 
     }

@@ -163,7 +163,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
                     GPGSManager.GetInstance.SignInAndStartMPGame();
 
-                    GPGSManager.GetInstance.ShowRoomUI();
+                    //GPGSManager.GetInstance.ShowRoomUI();
                     //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
                 }
                 else
