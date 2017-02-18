@@ -10,6 +10,9 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
     private SphereCollider SpColl;
     public GameObject ScareCrow_Object;
+    private GameObject m_Player;
+    public GameObject DeadEyeMarkObject;
+
     private int HP;
     
 	// Use this for initialization
@@ -23,9 +26,49 @@ public class Dummy_Scarecrow : MonoBehaviour {
             SpColl.enabled = true;
         }
 
+        if(DeadEyeMarkObject == null)
+        {
+            DeadEyeMarkObject = GameObject.Find("EnemyDeadMark");
+            DeadEyeMarkObject.SetActive(false);
+        }
+        else
+        {
+            DeadEyeMarkObject.SetActive(false);
+        }
+
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
 
+        switch (NowGameModeState)
+        {
+            case GameModeState.Multi:
+                {
+                    if(m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+
+                }
+                break;
+
+            case GameModeState.Single:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+                }
+                break;
+        }
         //ActiveCoroutine = ResurectionProtocol(true);
         //StartCoroutine(ActiveCoroutine);
         //StopCoroutine(ActiveCoroutine);
@@ -42,9 +85,49 @@ public class Dummy_Scarecrow : MonoBehaviour {
             SpColl.enabled = true;
         }
 
+        if (DeadEyeMarkObject == null)
+        {
+            DeadEyeMarkObject = GameObject.Find("EnemyDeadMark");
+            DeadEyeMarkObject.SetActive(false);
+        }
+        else
+        {
+            DeadEyeMarkObject.SetActive(false);
+        }
+
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
 
+        switch (NowGameModeState)
+        {
+            case GameModeState.Multi:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+
+                }
+                break;
+
+            case GameModeState.Single:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+                }
+                break;
+        }
         //ActiveCoroutine = ResurectionProtocol(true);
         //StartCoroutine(ActiveCoroutine);
         //StopCoroutine(ActiveCoroutine);
@@ -74,11 +157,32 @@ public class Dummy_Scarecrow : MonoBehaviour {
         {
             case GameModeState.Multi:
                 {
+                    MultiPlayerState MulPlayerState = m_Player.GetComponent<MulPlayer>().GetPlayerState();
+
                     switch (NowGameState)
                     {
                         case GameState.PLAY:
                             {
+                                switch(MulPlayerState)
+                                {
+                                    case MultiPlayerState.LIVE:
+                                        {
+                                            DeadEyeMarkObject.SetActive(false);
+                                        }
+                                        break;
 
+                                    case MultiPlayerState.DEADEYEING:
+                                        {
+                                            DeadEyeMarkObject.SetActive(true);
+                                        }
+                                        break;
+
+                                    case MultiPlayerState.DEAD:
+                                        {
+                                            DeadEyeMarkObject.SetActive(false);
+                                        }
+                                        break;
+                                }
                             }
                             break;
 
@@ -117,10 +221,39 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
             case GameModeState.Single:
                 {
+                    PlayerState playerState = m_Player.GetComponent<Player>().GetPlayerState();
+
                     switch (NowGameState)
                     {
                         case GameState.PLAY:
                             {
+                                switch(playerState)
+                                {
+                                    case PlayerState.NORMAL:
+                                        {
+                                            DeadEyeMarkObject.SetActive(false);
+                                        }
+                                        break;
+
+                                    case PlayerState.DEADEYE:
+                                        {
+                                            DeadEyeMarkObject.SetActive(true);
+
+                                        }
+                                        break;
+
+                                    case PlayerState.REALBATTLE:
+                                        {
+                                            DeadEyeMarkObject.SetActive(false);
+                                        }
+                                        break;
+
+                                    case PlayerState.DEAD:
+                                        {
+                                            DeadEyeMarkObject.SetActive(false);
+                                        }
+                                        break;
+                                }
 
                             }
                             break;

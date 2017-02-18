@@ -15,7 +15,7 @@ public class MulPlayer : MonoBehaviour {
 
     // 플레이어의 상태 값
     private float HP;
-    private GameObject DeadEyeBox;
+    //private GameObject DeadEyeBox;
     private bool DeadEyeActive;
     private bool DeadEyeReady;
     private bool DeadEyeShootOn;
@@ -24,9 +24,9 @@ public class MulPlayer : MonoBehaviour {
     private float MoveSpeed;
     private Vector3 MoveVector;
     private Vector3 PlayerDir;
-    private Vector3 PlayerDeadEyePosBack;
+    //private Vector3 PlayerDeadEyePosBack;
     private Vector3 PlayerPosBack;
-    private Vector3 CameraPosBack;
+    //private Vector3 CameraPosBack;
 
     // 현재 컨트롤러가 플레이어를 조종할 수 있는지의 여부
     private bool NowMovePlayer;
@@ -87,7 +87,7 @@ public class MulPlayer : MonoBehaviour {
             MainCamera = GameObject.FindWithTag("MainCamera");
         }
 
-        CameraPosBack = Vector3.zero;
+        //CameraPosBack = Vector3.zero;
 
         if (Player_Tranjectory == null)
         {
@@ -109,10 +109,10 @@ public class MulPlayer : MonoBehaviour {
             Player_Tranjectory.SetPositions(Line_Tranjectory_Transform);
         }
 
-        if (DeadEyeBox == null)
-        {
-            DeadEyeBox = GameObject.FindWithTag("DeadEyeBox");
-        }
+        //if (DeadEyeBox == null)
+        //{
+        //    DeadEyeBox = GameObject.FindWithTag("DeadEyeBox");
+        //}
 
 
         // 플레이어의 상태 값
@@ -221,7 +221,7 @@ public class MulPlayer : MonoBehaviour {
         MoveSpeed = 2.0f;
         PlayerDir = Vector3.zero;
         PlayerPosBack = Vector3.zero;
-        PlayerDeadEyePosBack = Vector3.zero;
+        //PlayerDeadEyePosBack = Vector3.zero;
 
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
@@ -497,26 +497,26 @@ public class MulPlayer : MonoBehaviour {
                                         CameraMoveOn = false;
                                     }
 
-                                    if (Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
-                                    {
-                                        CameraMoveOn = false;
+                                    //if (Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
+                                    //{
+                                    //    CameraMoveOn = false;
 
-                                        Debug.Log("DeadEye Ready");
+                                    //    Debug.Log("DeadEye Ready");
 
-                                        DeadEyeReady = true;
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("DeadEye Not Ready");
+                                    //    DeadEyeReady = true;
+                                    //}
+                                    //else
+                                    //{
+                                    //    Debug.Log("DeadEye Not Ready");
 
-                                        DeadEyeReady = false;
-                                    }
+                                    //    DeadEyeReady = false;
+                                    //}
                                 }
                                 else
                                 {
                                     CameraMoveOn = true;
 
-                                    DeadEyeReady = false;
+                                    //DeadEyeReady = false;
                                 }
                             }
                             break;
@@ -527,6 +527,11 @@ public class MulPlayer : MonoBehaviour {
                             {
                                 Player_Tranjectory.enabled = false;
                                 PlayerAniState = AnimationState.DEADEYING;
+
+                                DeadEyeProtocol = null;
+                                DeadEyeProtocol = DeadEyeShootProtocol();
+                                StopCoroutine(DeadEyeProtocol);
+                                StartCoroutine(DeadEyeProtocol);
                             }
                             break;
 
@@ -729,11 +734,11 @@ public class MulPlayer : MonoBehaviour {
         DeadEyeActive = true;
 
         playerState = MultiPlayerState.DEADEYEING;
-        PlayerDeadEyePosBack = this.transform.position;
-        CameraPosBack = MainCamera.transform.position;
+        //PlayerDeadEyePosBack = this.transform.position;
+        //CameraPosBack = MainCamera.transform.position;
 
-        this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y + 0.3f, DeadEyeBox.transform.position.z);
-        MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, -200.0f) * Time.deltaTime);
+        //this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y + 0.3f, DeadEyeBox.transform.position.z);
+        //MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, -200.0f) * Time.deltaTime);
 
         yield return new WaitForSeconds(4.4f);
 
@@ -743,11 +748,11 @@ public class MulPlayer : MonoBehaviour {
         DeadEyeShootOn = true;
 
         playerState = MultiPlayerState.LIVE;
-        this.transform.position = PlayerDeadEyePosBack;
+        //this.transform.position = PlayerDeadEyePosBack;
 
-        MainCamera.transform.position = CameraPosBack;
+        //MainCamera.transform.position = CameraPosBack;
 
-        DeadEyeBox.SetActive(false);
+        //DeadEyeBox.SetActive(false);
     }
 
     // 사망 시 애니메이션 및 순서
@@ -855,11 +860,6 @@ public class MulPlayer : MonoBehaviour {
         return DeadEyeReady;
     }
 
-    public GameObject GetDeadEyeObject()
-    {
-        return DeadEyeBox;
-    }
-
     public GameObject GetCameraObject()
     {
         return CameraObject;
@@ -897,11 +897,11 @@ public class MulPlayer : MonoBehaviour {
             DeadEyeShootOn = true;
 
             playerState = MultiPlayerState.LIVE;
-            this.transform.position = PlayerDeadEyePosBack;
-            MainCamera.transform.position = CameraPosBack;
+            //this.transform.position = PlayerDeadEyePosBack;
+            //MainCamera.transform.position = CameraPosBack;
             //MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, 200.0f) * Time.deltaTime);
 
-            DeadEyeBox.SetActive(false);
+            //DeadEyeBox.SetActive(false);
         }
 
     }
@@ -961,6 +961,12 @@ public class MulPlayer : MonoBehaviour {
         {
             BulletQuantity++;
         }
+
+        if(other.transform.tag.Equals("DeadEyeBox") == true)
+        {
+            DeadEyeReady = true;
+        }
+
         //if (other.transform.tag.Equals("DeadEyeBox") == true)
         //{
         //    // 데드아이를 준비한다.

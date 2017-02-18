@@ -21,17 +21,23 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
     public Text EnemyInfoText;
     public Text NetText;
 
+    public TextMesh PlayerName;
+    public TextMesh EnemyName;
+
     public bool _showingGameOver;
 
     // 플레이어의 정보
     public GameObject MyCharacter;
+    public GameObject MyCharacterPos;
 
     // 적의 정보
     public GameObject EnemyCharacter;
+    public GameObject EnemyCharacterPos;
     private Dictionary<string, MulEnemy> _opponentScripts;
 
     private bool _multiplayerReady = false;
-	private string _myParticipantId;
+	private string _MyParticipantId;
+    private string _EnemyParticipantId;
     private Vector2 _startingPoint;
 	
     // Use this for initialization
@@ -56,6 +62,36 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
 
         _showingGameOver = false;
 
+        if(PlayerName != null)
+        {
+            PlayerName = GameObject.Find("PlayerName").GetComponent<TextMesh>();
+            PlayerName.text = " "; //GPGSManager.GetInstance.GetNameGPGS();
+        }
+        else
+        {
+            PlayerName.text = " "; //GPGSManager.GetInstance.GetNameGPGS();
+        }
+
+        if(EnemyName != null)
+        {
+            EnemyName = GameObject.Find("EnemyName").GetComponent<TextMesh>();
+            EnemyName.text = " ";
+        }
+        else
+        {
+            EnemyName.text = " ";
+        }
+        
+        if(MyCharacter == null)
+        {
+            MyCharacter = GameObject.Find("Lincoin_Body");
+        }
+
+        if(EnemyCharacter == null)
+        {
+            EnemyCharacter = GameObject.Find("EnemyLincoin_Body");
+        }
+
         // 지정해 주면 고정비로 빌드가 되어 단말에서 지정 해상도로 출력이 된다.	
         Screen.SetResolution(1280, 720, true); // 1280 x 720 으로 조정
         //Screen.SetResolution(1920, 1080, true); // 1280 x 720 으로 조정
@@ -79,12 +115,18 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
 
     public void UpdateReceived(string senderId, float posX, float posY, float velX, float velY, float rotZ)
     {
-        MulEnemy opponent = _opponentScripts[senderId];
-
-        if (opponent != null)
+        if (_multiplayerReady)
         {
-            opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
+            MulEnemy opponent = _opponentScripts[senderId];
+
+            if (opponent != null)
+            {
+                opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
+            }
+
+            EnemyCharacter.GetComponent<MulEnemy>().SetTransformInformation(posX, posY, velX, velY, rotZ);
         }
+
 
         //if (_multiplayerReady)
         //{
@@ -107,7 +149,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         GPGSManager.GetInstance.updateListener = this;
 
         // 1
-        _myParticipantId = GPGSManager.GetInstance.GetMyParticipantId();
+        _MyParticipantId = GPGSManager.GetInstance.GetMyParticipantId();
 
         // 2
         List<Participant> allPlayers = GPGSManager.GetInstance.GetAllPlayers();
@@ -120,12 +162,17 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
 
 
             // 나의 식별 ID일때...
-            if (nextParticipantId == _myParticipantId)
+            if (nextParticipantId == _MyParticipantId)
             {
                 // 4
                 if(MyCharacter == null)
                 {
                     MyCharacter = GameObject.Find("Lincoin_Body");
+                    MyCharacter.transform.position = MyCharacterPos.transform.position;
+                }
+                else
+                {
+                    MyCharacter.transform.position = MyCharacterPos.transform.position;
                 }
             }
             else
@@ -133,14 +180,19 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
                 if(EnemyCharacter == null)
                 {
                     EnemyCharacter = GameObject.Find("EnemyLincoin_Body");
+                    EnemyCharacter.transform.position = EnemyCharacterPos.transform.position;
 
                     MulEnemy opponentScript = EnemyCharacter.GetComponent<MulEnemy>();
+                    _EnemyParticipantId = nextParticipantId;
                     _opponentScripts[nextParticipantId] = opponentScript;
                     
                 }
                 else
                 {
+                    EnemyCharacter.transform.position = EnemyCharacterPos.transform.position;
+
                     MulEnemy opponentScript = EnemyCharacter.GetComponent<MulEnemy>();
+                    _EnemyParticipantId = nextParticipantId;
                     _opponentScripts[nextParticipantId] = opponentScript;
                 }
                 // 5
@@ -207,18 +259,53 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         
         // We will be doing more here
         GPGSManager.GetInstance.SendMyUpdate(MyCharacter.transform.position.x,
-                                                    MyCharacter.transform.position.z,
-                                                  Vector2.zero,
-                                                    MyCharacter.transform.rotation.eulerAngles.y);
+                                                MyCharacter.transform.position.z,
+                                                Vector2.zero,
+                                                MyCharacter.transform.rotation.eulerAngles.y);
     }
 	// Update is called once per frame
 	void Update () 
     {
 
         //NetText.text = "Net : " + GPGSManager.GetInstance.GetStateMessage().ToString();
-        MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Ready : " + _multiplayerReady.ToString();
-        EnemyInfoText.text = "Ohter[0] Name : " + GPGSManager.GetInstance.GetOtherNameGPGS(0);//GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
-        NetText.text = "Other[1] Name : " + GPGSManager.GetInstance.GetOtherNameGPGS(1);
+        if (_multiplayerReady)
+        {
+            if(GPGSManager.GetInstance.GetOtherNameGPGS(1) == _MyParticipantId)
+            {
+                PlayerName.text = GPGSManager.GetInstance.GetOtherNameGPGS(1);;//_opponentScripts[_MyParticipantId].name;//GPGSManager.GetInstance.GetOtherNameGPGS(0);
+                EnemyName.text = GPGSManager.GetInstance.GetOtherNameGPGS(0);
+            }
+            else
+            {
+                PlayerName.text = GPGSManager.GetInstance.GetOtherNameGPGS(0);//GPGSManager.GetInstance.GetOtherNameGPGS(0);
+                EnemyName.text = GPGSManager.GetInstance.GetOtherNameGPGS(1);
+            }
+
+
+            //PlayerName.gameObject.transform.position = new Vector3(_opponentScripts[_MyParticipantId].transform.position.x, _opponentScripts[_MyParticipantId].transform.position.y + 0.4f, _opponentScripts[_MyParticipantId].transform.position.z);
+            //EnemyName.gameObject.transform.position = new Vector3(_opponentScripts[_EnemyParticipantId].transform.position.x, _opponentScripts[_EnemyParticipantId].transform.position.y + 0.4f, _opponentScripts[_EnemyParticipantId].transform.position.z);
+            PlayerName.gameObject.transform.position = new Vector3(MyCharacter.transform.position.x, MyCharacter.transform.position.y + 0.4f, MyCharacter.transform.position.z);
+            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z); 
+
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
+            EnemyInfoText.text = "Player Info : " + GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
+            NetText.text = "Enemy Info : " + GPGSManager.GetInstance.GetAllPlayers()[1].ParticipantId;
+            
+
+        }
+        else
+        {
+            PlayerName.text = "Player"; //GPGSManager.GetInstance.GetNameGPGS();
+            EnemyName.text = "Enemy";
+
+            PlayerName.gameObject.transform.position = new Vector3(MyCharacter.transform.position.x, MyCharacter.transform.position.y + 0.4f, MyCharacter.transform.position.z);
+            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z); 
+
+            EnemyInfoText.text = "Player Info : " + MyCharacter.transform.position.ToString();//("Player Info : " + _opponentScripts[_MyParticipantId].transform.position).ToString();//GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
+            NetText.text = "Enemy Info : " + EnemyCharacter.transform.position.ToString();//("Enemy Info : " + _opponentScripts[_EnemyParticipantId].transform.position).ToString();
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
+
+        }
 
         DoMultiplayerUpdate();
 

@@ -3,20 +3,22 @@ using System.Collections;
 
 public class MainMenuButtonTrigger : MonoBehaviour {
 
-    //private Animator ani;
+    private Animator ani;
 
     // Use this for initialization
     void Start()
     {
-        //if (ani == null)
-        //{
-        //    ani = GetComponent<Animator>();
-        //    ani.enabled = false;
-        //}
-        //else
-        //{
-        //    ani.enabled = false;
-        //}
+        if (ani == null)
+        {
+            ani = GetComponent<Animator>();
+            ani.enabled = false;
+        }
+        else
+        {
+            ani.enabled = false;
+        }
+
+        MainMenuManager.MainMenuBtnDownOn = true;
     }
 
     //// Update is called once per frame
@@ -28,15 +30,15 @@ public class MainMenuButtonTrigger : MonoBehaviour {
 
     void OnEnable()
     {
-        //if (ani == null)
-        //{
-        //    ani = GetComponent<Animator>();
-        //    ani.enabled = true;
-        //}
-        //else
-        //{
-        //    ani.enabled = true;
-        //}
+        if (ani == null)
+        {
+            ani = GetComponent<Animator>();
+            ani.enabled = true;
+        }
+        else
+        {
+            ani.enabled = true;
+        }
 
         MainMenuManager.MainMenuBtnDownOn = false;
 

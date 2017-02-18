@@ -10,7 +10,7 @@ public class MulEnemy_Ani : MonoBehaviour {
     [HideInInspector]
     private AnimationState EnemyAniState;
 
-    private MulEnemy m_EnemyPlayer;
+    public MulEnemy m_EnemyPlayer;
     private GameObject MainCamera;
 
     private bool ShootAniOn;

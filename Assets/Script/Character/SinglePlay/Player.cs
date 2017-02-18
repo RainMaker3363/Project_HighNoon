@@ -548,20 +548,20 @@ public class Player : MonoBehaviour {
                                         CameraMoveOn = false;
                                     }
 
-                                    if (Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
-                                    {
-                                        CameraMoveOn = false;
+                                    //if (Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
+                                    //{
+                                    //    CameraMoveOn = false;
 
-                                        Debug.Log("DeadEye Ready");
+                                    //    Debug.Log("DeadEye Ready");
 
-                                        DeadEyeReady = true;
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("DeadEye Not Ready");
+                                    //    DeadEyeReady = true;
+                                    //}
+                                    //else
+                                    //{
+                                    //    Debug.Log("DeadEye Not Ready");
 
-                                        DeadEyeReady = false;
-                                    }
+                                    //    DeadEyeReady = false;
+                                    //}
                                 }
                                 else
                                 {
@@ -756,20 +756,20 @@ public class Player : MonoBehaviour {
                                         CameraMoveOn = false;    
                                     }
 
-                                    if(Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
-                                    {
-                                        CameraMoveOn = false;
+                                    //if(Wallhit.collider.transform.tag.Equals("DeadEyeBox") == true)
+                                    //{
+                                    //    CameraMoveOn = false;
 
-                                        Debug.Log("DeadEye Ready");
+                                    //    Debug.Log("DeadEye Ready");
 
-                                        DeadEyeReady = true;
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("DeadEye Not Ready");
+                                    //    DeadEyeReady = true;
+                                    //}
+                                    //else
+                                    //{
+                                    //    Debug.Log("DeadEye Not Ready");
 
-                                        DeadEyeReady = false;
-                                    }
+                                    //    DeadEyeReady = false;
+                                    //}
 
                                     
                                 }
@@ -1021,15 +1021,15 @@ public class Player : MonoBehaviour {
 
             case PlayerState.DEADEYE:
                 {
-                    if (DeadEyeActive == false)
-                    {
-                        StopCoroutine(DeadEyeProtocol);
+                    //if (DeadEyeActive == false)
+                    //{
+                    //    StopCoroutine(DeadEyeProtocol);
                         
-                        DeadEyeProtocol = null;
-                        DeadEyeProtocol = DeadEyeShootProtocol(true);
+                    //    DeadEyeProtocol = null;
+                    //    DeadEyeProtocol = DeadEyeShootProtocol(true);
 
-                        StartCoroutine(DeadEyeProtocol);
-                    }
+                    //    StartCoroutine(DeadEyeProtocol);
+                    //}
 
                 }
                 break;
@@ -1282,6 +1282,11 @@ public class Player : MonoBehaviour {
         return DeadEyeActive;
     }
 
+    public void SetDeadEyeActive(bool Active)
+    {
+        DeadEyeActive = Active;
+    }
+
     public void DeadEyeCancel()
     {
         StopCoroutine(DeadEyeProtocol);
@@ -1362,21 +1367,17 @@ public class Player : MonoBehaviour {
 
             Debug.Log("BulletQuantity : " + BulletQuantity);
         }
-        //if (other.transform.tag.Equals("DeadEyeBox") == true)
-        //{
-        //    // 데드아이를 준비한다.
+        
+        if (other.transform.tag.Equals("DeadEyeBox") == true)
+        {
+            // 데드아이를 준비한다.
 
-        //    print("DeadEye Ready");
+            print("DeadEye Ready");
 
-        //    DeadEyeReady = true;
+            DeadEyeReady = true;
+            DeadEyeActive = true;
 
-
-        //}
-        //else
-        //{
-        //    print("DeadEye Not Ready");
-
-        //    DeadEyeReady = false;
-        //}
+            playerState = PlayerState.DEADEYE;
+        }
     }
 }

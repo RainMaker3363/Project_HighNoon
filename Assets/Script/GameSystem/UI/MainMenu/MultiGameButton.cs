@@ -47,25 +47,19 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
         if (GPGSManager.GetInstance.IsConnected() == true)
         {
-            //if(GPGSManager.GetInstance.IsSetup() == true)
-            //{
-            //    NetReadyText.text = "이제 시작합니다.";
+            MultiButtonDownCheck = true;
+            MainMenuManager.StartMultiGameOn = true;
 
-
-            //}
-            //else
-            //{
-                
-
-            //    NetReadyText.text = "플레이어를 찾아 세팅 중입니다.";
-            //}
-            NetReadyText.text = "이제 시작합니다.";
+            NetReadyText.text = "잠시후 멀티 게임을 시작합니다.";
 
             StartCoroutine(StartMultiGame());
         }
         else
         {
-            NetReadyText.text = "아직 게임을 준비 중입니다...";
+            MainMenuManager.StartMultiGameOn = false;
+            MultiButtonDownCheck = false;
+
+            NetReadyText.text = "아직 멀티 게임을 준비 중입니다...";
         }
 
         //switch (Application.platform)

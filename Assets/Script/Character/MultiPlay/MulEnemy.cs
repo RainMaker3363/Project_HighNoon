@@ -8,6 +8,7 @@ public class MulEnemy : MonoBehaviour {
     private GameState NowGameState;
     private AnimationState EnemyAniState;
 
+    private Vector3 _startPos;
     private string InfoText;
 
 	// Use this for initialization
@@ -17,6 +18,8 @@ public class MulEnemy : MonoBehaviour {
         {
             m_EnemyAni = GameObject.Find("EnemyLincoin_Ani").GetComponent<MulEnemy_Ani>();
         }
+
+        _startPos = this.transform.position;
 
         NowGameState = MultiGameManager.NowGameState;
 	}
@@ -73,6 +76,8 @@ public class MulEnemy : MonoBehaviour {
 
     public void SetTransformInformation(float posX, float posY, float velX, float velY, float rotZ)
     {
+        _startPos = this.transform.position;
+
         transform.position = new Vector3(posX, 0, posY);
 
         transform.rotation = Quaternion.Euler(0, rotZ, 0);

@@ -163,7 +163,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     public void OnParticipantLeft(Participant participant)
     {
         ShowMPStatus("All Player Out! So, The Room will be Close");
-
+        LeaveRoom();
     }
 
     // 방을 떠나기 및 파기
@@ -247,6 +247,23 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
     }
 
+    public void SendMyUpdate(string senderId, float posX, float posY, Vector2 velocity, float rotZ)
+    {
+        _updateMessage.Clear();
+        _updateMessage.Add(_protocolVersion);
+        _updateMessage.Add((byte)'U');
+        _updateMessage.AddRange(System.BitConverter.GetBytes(posX));
+        _updateMessage.AddRange(System.BitConverter.GetBytes(posY));
+        _updateMessage.AddRange(System.BitConverter.GetBytes(velocity.x));
+        _updateMessage.AddRange(System.BitConverter.GetBytes(velocity.y));
+        _updateMessage.AddRange(System.BitConverter.GetBytes(rotZ));
+        byte[] messageToSend = _updateMessage.ToArray();
+
+        Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
+
+        PlayGamesPlatform.Instance.RealTime.SendMessage(false, senderId, messageToSend);
+    }
+
     // 상대 ID로부터 메시지를 받았을때 호출되는 리스너 함수
     public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
     {
@@ -258,40 +275,24 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         char messageType = (char)data[1];
 
         //if (messageType == 'U' && data.Length == _updateMessageLength)
-        //if (messageType == 'U')
-        //{
-        //    float posX = System.BitConverter.ToSingle(data, 2);
-        //    float posY = System.BitConverter.ToSingle(data, 6);
-        //    float velX = System.BitConverter.ToSingle(data, 10);
-        //    float velY = System.BitConverter.ToSingle(data, 14);
-        //    float rotZ = System.BitConverter.ToSingle(data, 18);
-        //    Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
-
-        //    StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
-        //    // We'd better tell our GameController about this.
-        //    updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
-
-        //    if (updateListener != null)
-        //    {
-        //        updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
-        //    }
-
-        //}
-
-        float posX = System.BitConverter.ToSingle(data, 2);
-        float posY = System.BitConverter.ToSingle(data, 6);
-        float velX = System.BitConverter.ToSingle(data, 10);
-        float velY = System.BitConverter.ToSingle(data, 14);
-        float rotZ = System.BitConverter.ToSingle(data, 18);
-        Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
-
-        StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
-        // We'd better tell our GameController about this.
-        updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
-
-        if (updateListener != null)
+        if (messageType == 'U')
         {
-            updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+            float posX = System.BitConverter.ToSingle(data, 2);
+            float posY = System.BitConverter.ToSingle(data, 6);
+            float velX = System.BitConverter.ToSingle(data, 10);
+            float velY = System.BitConverter.ToSingle(data, 14);
+            float rotZ = System.BitConverter.ToSingle(data, 18);
+            Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
+
+            StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
+            // We'd better tell our GameController about this.
+            //updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+
+            if (updateListener != null)
+            {
+                updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
+            }
+
         }
     }
 
