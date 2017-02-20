@@ -94,7 +94,14 @@ public class GameManager : MonoBehaviour {
     public static EnemyAIState NowEnemyAiState;
     public static GameModeState NowGameModeState;
 
+    // 현재 스테이지에 있는 적들의 숫자
     public static int NowStageEnemies;
+    // 데드 아이 액션 시작의 여부
+    public static bool DeadEyeActiveOn;
+    // 데드 아이 대결 모션의 끝난 여부
+    public static bool DeadEyeVersusAction;
+    // 데드 아이 리볼버 모션의 끝난 여부
+    public static bool DeadEyeRevolverAction;
 
 	// Use this for initialization
 	void Awake () 
@@ -104,6 +111,10 @@ public class GameManager : MonoBehaviour {
         NowEnemyAiState = EnemyAIState.PATROL;
 
         NowGameModeState = GameModeState.Single;
+
+        DeadEyeActiveOn = false;
+        DeadEyeVersusAction = false;
+        DeadEyeRevolverAction = false;
 
         NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
 

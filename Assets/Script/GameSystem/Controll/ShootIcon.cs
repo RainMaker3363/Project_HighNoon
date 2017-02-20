@@ -13,8 +13,8 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     private Image img;
     // 주인공 오브젝트
     public Player m_Player;
-    private bool DeadEyeReady;
-    private bool DeadEyeActive;
+    //private bool DeadEyeReady;
+    //private bool DeadEyeActive;
 
     // 상황에 따른 총기 아이콘의 변화를 위함
     public Sprite[] ShootIcons;
@@ -36,12 +36,12 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
             playerState = m_Player.playerState;
-            DeadEyeReady = m_Player.GetDeadEyeReady();
+            //DeadEyeReady = m_Player.GetDeadEyeReady();
         }
         else
         {
             playerState = m_Player.playerState;
-            DeadEyeReady = m_Player.GetDeadEyeReady();
+            //DeadEyeReady = m_Player.GetDeadEyeReady();
         }
 
         
@@ -56,20 +56,20 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         State = GameManager.NowGameState;
         playerState = m_Player.playerState;
 
-        DeadEyeReady = m_Player.GetDeadEyeReady();
-        DeadEyeActive = m_Player.GetDeadEyeActive();
+        //DeadEyeReady = m_Player.GetDeadEyeReady();
+        //DeadEyeActive = m_Player.GetDeadEyeActive();
 
-        if (DeadEyeReady == true)
-        {
-            img.sprite = ShootIcons[1];
+        //if (DeadEyeReady == true)
+        //{
+        //    img.sprite = ShootIcons[1];
 
             
-        }
-        else
-        {
+        //}
+        //else
+        //{
 
-            img.sprite = ShootIcons[0];
-        }
+        //    img.sprite = ShootIcons[0];
+        //}
 	}
 
     // 터치가 드래그(Drag) 했을때 호출 되는 함수
@@ -82,31 +82,36 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        if (DeadEyeReady)
-        {
-            Debug.Log("DeadEyeShoot Button");
+        //if (DeadEyeReady)
+        //{
+        //    //Debug.Log("DeadEyeShoot Button");
             
 
 
-            m_Player.SetPlayerState(1);
-            m_Player.Shoot();
+        //    //m_Player.SetPlayerState(1);
+        //    //m_Player.Shoot();
             
-        }
-        else
-        {
-            Debug.Log("Shoot Button");
+        //}
+        //else
+        //{
+        //    Debug.Log("Shoot Button");
 
 
-            m_Player.Shoot();
+        //    m_Player.Shoot();
 
-        }
+        //}
 
-        if(DeadEyeActive == true)
-        {
-            m_Player.SetDeadEyeShootOn(true);
+        Debug.Log("Shoot Button");
 
-            m_Player.DeadEyeCancel();
-        }
+
+        m_Player.Shoot();
+
+        //if(DeadEyeActive == true)
+        //{
+        //    m_Player.SetDeadEyeShootOn(true);
+
+        //    m_Player.DeadEyeCancel();
+        //}
 
         //switch (State)
         //{

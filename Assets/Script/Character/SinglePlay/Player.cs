@@ -18,17 +18,18 @@ public class Player : MonoBehaviour {
     // 플레이어의 상태 값
     private float HP;
     private GameObject DeadEyeBox;
+    public GameObject Single_VersusActionObject;
     private bool DeadEyeActive;
     private bool DeadEyeReady;
-    private bool DeadEyeShootOn;
+    //private bool DeadEyeShootOn;
 
     // 플레이어의 움직임
     private float MoveSpeed;
     private Vector3 MoveVector;
     private Vector3 PlayerDir;
-    private Vector3 PlayerDeadEyePosBack;
+    //private Vector3 PlayerDeadEyePosBack;
     private Vector3 PlayerPosBack;
-    private Vector3 CameraPosBack;
+    //private Vector3 CameraPosBack;
 
     // 현재 컨트롤러가 플레이어를 조종할 수 있는지의 여부
     private bool NowMovePlayer;
@@ -88,7 +89,7 @@ public class Player : MonoBehaviour {
             MainCamera = GameObject.FindWithTag("MainCamera");
         }
         
-        CameraPosBack = Vector3.zero;
+        //CameraPosBack = Vector3.zero;
 
         if (Player_Tranjectory == null)
         {
@@ -115,6 +116,16 @@ public class Player : MonoBehaviour {
             DeadEyeBox = GameObject.FindWithTag("DeadEyeBox");
         }
 
+        if(Single_VersusActionObject == null)
+        {
+            Single_VersusActionObject = GameObject.Find("Single_VersusAction");
+            Single_VersusActionObject.SetActive(false);
+        }
+        else
+        {
+            Single_VersusActionObject.SetActive(false);
+        }
+        
 
         // 플레이어의 상태 값
         HP = 100.0f;
@@ -263,14 +274,14 @@ public class Player : MonoBehaviour {
 
         DeadEyeActive = false;
         DeadEyeReady = false;
-        DeadEyeShootOn = false;
+        //DeadEyeShootOn = false;
 
         // 플레이어 이동 방향 초기화
         MoveVector = Vector3.zero;
         MoveSpeed = 2.0f;
         PlayerDir = Vector3.zero;
         PlayerPosBack = Vector3.zero;
-        PlayerDeadEyePosBack = Vector3.zero;
+        //PlayerDeadEyePosBack = Vector3.zero;
 
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
@@ -279,7 +290,7 @@ public class Player : MonoBehaviour {
         BulletStack = 6;
 
         // 총알의 수
-        BulletQuantity = 1000;
+        BulletQuantity = 0;
 
         NowMovePlayer = false;
         CameraMoveOn = true;
@@ -313,51 +324,74 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        State = GameManager.NowGameState;
-        ShootAniOn = m_PlayerAni.GetShootAniOn();
-        MoveVector = PoolInput();
-
-        if (MoveVector == Vector3.zero)
-        {
-            if(ShootOn == true)
-            {
-                transform.rotation = Quaternion.LookRotation(PlayerDir);
-                NowMovePlayer = false;
-            }
-
-        }
-        else
-        {
-            if (ShootOn == true)
-            {
-                PlayerDir = MoveVector;
-                transform.rotation = Quaternion.LookRotation(PlayerDir);
-                NowMovePlayer = true;
-            }
-
-        }
 
 
 
+        print("PlayerState : " + playerState);
         //print("transform.rotation.y : " + transform.rotation.eulerAngles);
 
         switch (State)
         {
             case GameState.START:
                 {
+                    State = GameManager.NowGameState;
+                    ShootAniOn = m_PlayerAni.GetShootAniOn();
+                    MoveVector = PoolInput();
 
+                    if (MoveVector == Vector3.zero)
+                    {
+                        if (ShootOn == true)
+                        {
+                            transform.rotation = Quaternion.LookRotation(PlayerDir);
+                            NowMovePlayer = false;
+                        }
+
+                    }
+                    else
+                    {
+                        if (ShootOn == true)
+                        {
+                            PlayerDir = MoveVector;
+                            transform.rotation = Quaternion.LookRotation(PlayerDir);
+                            NowMovePlayer = true;
+                        }
+
+                    }
                 }
                 break;
 
             case GameState.PLAY:
                 {
-                  
-                 
+                    State = GameManager.NowGameState;
+                    ShootAniOn = m_PlayerAni.GetShootAniOn();
+                    MoveVector = PoolInput();
+
+
 
                     switch (playerState)
                     {
                         case PlayerState.NORMAL:
                             {
+
+                                if (MoveVector == Vector3.zero)
+                                {
+                                    if (ShootOn == true)
+                                    {
+                                        transform.rotation = Quaternion.LookRotation(PlayerDir);
+                                        NowMovePlayer = false;
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (ShootOn == true)
+                                    {
+                                        PlayerDir = MoveVector;
+                                        transform.rotation = Quaternion.LookRotation(PlayerDir);
+                                        NowMovePlayer = true;
+                                    }
+
+                                }
 
                                 Player_Tranjectory.enabled = true;
 
@@ -574,6 +608,27 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
+
+                                if (MoveVector == Vector3.zero)
+                                {
+                                    if (ShootOn == true)
+                                    {
+                                        transform.rotation = Quaternion.LookRotation(PlayerDir);
+                                        NowMovePlayer = false;
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (ShootOn == true)
+                                    {
+                                        PlayerDir = MoveVector;
+                                        transform.rotation = Quaternion.LookRotation(PlayerDir);
+                                        NowMovePlayer = true;
+                                    }
+
+                                }
+
                                 Player_Tranjectory.enabled = true;
 
                                 if (NowMovePlayer)
@@ -595,7 +650,7 @@ public class Player : MonoBehaviour {
                                 if (ShootOn == true)
                                 {
                                     if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+      || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
                                     {
                                         if (NowMovePlayer == false)
                                         {
@@ -784,8 +839,116 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.DEADEYE:
                             {
-                                Player_Tranjectory.enabled = false;
-                                PlayerAniState = AnimationState.DEADEYING;
+                                if(GameManager.DeadEyeActiveOn == true)
+                                {
+                                    Player_Tranjectory.enabled = false;
+                                    //PlayerAniState = AnimationState.DEADEYING;
+
+                                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.UPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.UPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTUPWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.RIGHTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.DOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.DOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTDOWNWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTWALK;
+                                        }
+                                    }
+                                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                                    {
+                                        if (NowMovePlayer == false)
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPSTAND;
+                                        }
+                                        else
+                                        {
+                                            PlayerAniState = AnimationState.LEFTUPWALK;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if(DeadEyeActive == true)
+                                    {
+                                        DeadEyeActive = false;
+
+                                        DeadEyeProtocol = null;
+                                        DeadEyeProtocol = DeadEyeShootProtocol(true);
+
+                                        StopCoroutine(DeadEyeProtocol);
+                                        StartCoroutine(DeadEyeProtocol);
+                                    }
+
+                                }
+
                             }
                             break;
 
@@ -806,6 +969,7 @@ public class Player : MonoBehaviour {
 
             case GameState.PAUSE:
                 {
+
                     switch (playerState)
                     {
                         case PlayerState.NORMAL:
@@ -875,69 +1039,6 @@ public class Player : MonoBehaviour {
                 break;
         }
     }
-
-    //void FixedUpdate()
-    //{
-
-    //    switch (State)
-    //    {
-    //        case GameState.START:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.PLAY:
-    //            {
-    //                switch(playerState)
-    //                {
-    //                    case PlayerState.NORMAL:
-    //                        {
-    //                            this.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
-    //                        }
-    //                        break;
-
-    //                    case PlayerState.DEADEYE:
-    //                        {
-
-    //                        }
-    //                        break;
-
-    //                    case PlayerState.DEAD:
-    //                        {
-    //                            GameManager.NowGameState = GameState.GAMEOVER;
-    //                        }
-    //                        break;
-    //                }
-                    
-    //            }
-    //            break;
-
-    //        case GameState.PAUSE:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.EVENT:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.GAMEOVER:
-    //            {
-
-    //            }
-    //            break;
-
-    //        case GameState.VICTORY:
-    //            {
-
-    //            }
-    //            break;
-    //    }
-    //}
 
     public Vector3 PoolInput()
     {
@@ -1046,6 +1147,103 @@ public class Player : MonoBehaviour {
         
     }
 
+    IEnumerator DeadEyeShootProtocol(bool On = true)
+    {
+        DeadEyeActive = false;
+
+        // 사격 애니메이션 출력
+
+        if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+           || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+        {
+            PlayerAniState = AnimationState.UPSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+        {
+
+            PlayerAniState = AnimationState.RIGHTUPSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+        {
+
+            PlayerAniState = AnimationState.RIGHTSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+        {
+
+            PlayerAniState = AnimationState.RIGHTDOWNSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+        {
+
+            PlayerAniState = AnimationState.DOWNSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+        {
+
+            PlayerAniState = AnimationState.LEFTDOWNSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+        {
+
+
+            PlayerAniState = AnimationState.LEFTSHOOT;
+        }
+        else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+        {
+
+            PlayerAniState = AnimationState.LEFTUPSHOOT;
+        }
+
+        // 총알 오브젝트 On
+        if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
+        {
+            Bullets[NowBulletIndex].transform.position = this.transform.position;
+            //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+            Bullets[NowBulletIndex].transform.parent = null;
+
+            Bullets[NowBulletIndex].gameObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+        {
+            PlayerAniState = AnimationState.UPSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+        {
+            PlayerAniState = AnimationState.RIGHTUPSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+        {
+            PlayerAniState = AnimationState.RIGHTSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+        {
+            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+        {
+            PlayerAniState = AnimationState.DOWNSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+        {
+            PlayerAniState = AnimationState.LEFTDOWNSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+        {
+            PlayerAniState = AnimationState.LEFTSTAND;
+        }
+        else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+        {
+            PlayerAniState = AnimationState.LEFTUPSTAND;
+        }
+
+        playerState = PlayerState.REALBATTLE;
+    }
+
     IEnumerator ShootProtocol(bool On = true)
     {
         ShootOn = false;
@@ -1067,6 +1265,7 @@ public class Player : MonoBehaviour {
                     Bullets[NowBulletIndex].gameObject.SetActive(true);
 
                     NowBulletIndex++;
+                    BulletQuantity--;
                 }
             }
 
@@ -1088,6 +1287,7 @@ public class Player : MonoBehaviour {
                     Bullets[NowBulletIndex].gameObject.SetActive(true);
 
                     NowBulletIndex++;
+                    BulletQuantity--;
                 }
             }
 
@@ -1116,36 +1316,36 @@ public class Player : MonoBehaviour {
         BulletStack = 6;
     }
 
-    // 데드 아이 시전 로직
-    IEnumerator DeadEyeShootProtocol(bool On = true)
-    {
+    //// 데드 아이 시전 로직
+    //IEnumerator DeadEyeShootProtocol(bool On = true)
+    //{
 
-        // 데드 아이 시전
+    //    // 데드 아이 시전
 
-        print("DeadEye Start....");
-        DeadEyeActive = true;
+    //    print("DeadEye Start....");
+    //    DeadEyeActive = true;
 
-        playerState = PlayerState.DEADEYE;
-        PlayerDeadEyePosBack = this.transform.position;
-        CameraPosBack = MainCamera.transform.position;
+    //    playerState = PlayerState.DEADEYE;
+    //    PlayerDeadEyePosBack = this.transform.position;
+    //    CameraPosBack = MainCamera.transform.position;
 
-        this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y + 0.3f, DeadEyeBox.transform.position.z);
-        MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, -200.0f) * Time.deltaTime);
+    //    this.transform.position = new Vector3(DeadEyeBox.transform.position.x, this.transform.position.y + DeadEyeBox.transform.position.y + 0.3f, DeadEyeBox.transform.position.z);
+    //    MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, -200.0f) * Time.deltaTime);
 
-        yield return new WaitForSeconds(4.4f);
+    //    yield return new WaitForSeconds(4.4f);
 
-        print("DeadEye End....");
+    //    print("DeadEye End....");
 
-        DeadEyeActive = false;
-        DeadEyeShootOn = true;
+    //    DeadEyeActive = false;
+    //    DeadEyeShootOn = true;
 
-        playerState  = PlayerState.REALBATTLE;
-        this.transform.position = PlayerDeadEyePosBack;
+    //    playerState  = PlayerState.REALBATTLE;
+    //    this.transform.position = PlayerDeadEyePosBack;
 
-        MainCamera.transform.position = CameraPosBack;
+    //    MainCamera.transform.position = CameraPosBack;
 
-        DeadEyeBox.SetActive(false);
-    }
+    //    DeadEyeBox.SetActive(false);
+    //}
 
     // 사망 시 애니메이션 및 순서
     IEnumerator DeadProtocol(bool On = true)
@@ -1262,15 +1462,15 @@ public class Player : MonoBehaviour {
         return CameraObject;
     }
 
-    public void SetDeadEyeShootOn(bool On = true)
-    {
-        DeadEyeShootOn = On;
-    }
+    //public void SetDeadEyeShootOn(bool On = true)
+    //{
+    //    DeadEyeShootOn = On;
+    //}
 
-    public bool GetDeadEyeShootOn()
-    {
-        return DeadEyeShootOn;
-    }
+    //public bool GetDeadEyeShootOn()
+    //{
+    //    return DeadEyeShootOn;
+    //}
 
     public AnimationState GetPlayerAniState()
     {
@@ -1296,11 +1496,11 @@ public class Player : MonoBehaviour {
             print("DeadEye End....");
 
             DeadEyeActive = false;
-            DeadEyeShootOn = true;
+            //DeadEyeShootOn = true;
 
             playerState = PlayerState.REALBATTLE;
-            this.transform.position = PlayerDeadEyePosBack;
-            MainCamera.transform.position = CameraPosBack;
+            //this.transform.position = PlayerDeadEyePosBack;
+            //MainCamera.transform.position = CameraPosBack;
             //MainCamera.transform.Translate(new Vector3(0.0f, 0.0f, 200.0f) * Time.deltaTime);
 
             DeadEyeBox.SetActive(false);
@@ -1378,6 +1578,17 @@ public class Player : MonoBehaviour {
             DeadEyeActive = true;
 
             playerState = PlayerState.DEADEYE;
+            
+            if(Single_VersusActionObject.activeSelf == false)
+            {
+                Single_VersusActionObject.SetActive(true);
+
+                GameObject Enemy = GameObject.FindWithTag("Enemy");
+                this.gameObject.transform.LookAt(Enemy.transform.position);
+            }
+            
+            GameManager.DeadEyeActiveOn = true;
+            GameManager.DeadEyeVersusAction = true;
         }
     }
 }

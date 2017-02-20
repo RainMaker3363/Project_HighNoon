@@ -173,7 +173,8 @@ public class PietaEnemy : MonoBehaviour {
                         case PlayerState.NORMAL:
                             {
 
-                                if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                //if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                if (ImDead == true)
                                 {
                                     // 일단 죽는 모션이 없으므로...
                                     enemyAniState = AnimationState.DEADEYING;
@@ -379,7 +380,8 @@ public class PietaEnemy : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
-                                if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                //if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                if (ImDead == true)
                                 {
                                     // 일단 죽는 모션이 없으므로...
                                     enemyAniState = AnimationState.DEADEYING;
@@ -566,7 +568,8 @@ public class PietaEnemy : MonoBehaviour {
 
                         case PlayerState.DEAD:
                             {
-                                if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                //if (m_Player.GetDeadEyeShootOn() == true && ImDead == true)
+                                if (ImDead == true)
                                 {
                                     // 일단 죽는 모션이 없으므로...
                                     enemyAniState = AnimationState.DOWNSTAND;

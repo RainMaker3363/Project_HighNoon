@@ -81,6 +81,8 @@ public class PlayerAni : MonoBehaviour {
         //_animatedTileTexture.SetIndex(0);
         _animatedTileTexture._playOnce = false;
         _animatedTileTexture._enableEvents = true;
+        //_animatedTileTexture.SetIndex(0);
+        
 
         PlayerAniState = m_Player.GetPlayerAniState();
     }
@@ -238,6 +240,9 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
 
@@ -252,10 +257,13 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(19);
 
+                                _animatedTileTexture.ChangeCheckRow(19);
                             }
                             break;
 
@@ -265,6 +273,9 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
                                 _animatedTileTexture.ChangeCheckRow(17);
@@ -278,10 +289,13 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(18);
 
+                                _animatedTileTexture.ChangeCheckRow(18);
                             }
                             break;
 
@@ -292,10 +306,13 @@ public class PlayerAni : MonoBehaviour {
                                     AniCheckOn = true;
                                     //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(24);
 
+                                _animatedTileTexture.ChangeCheckRow(24);
                             }
                             break;
 
@@ -306,10 +323,13 @@ public class PlayerAni : MonoBehaviour {
                                     AniCheckOn = true;
                                     //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(22);
 
+                                _animatedTileTexture.ChangeCheckRow(22);
 
                             }
                             break;
@@ -321,6 +341,9 @@ public class PlayerAni : MonoBehaviour {
                                     AniCheckOn = true;
                                     //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
                                 _animatedTileTexture.ChangeCheckRow(23);
@@ -334,10 +357,13 @@ public class PlayerAni : MonoBehaviour {
                                     AniCheckOn = true;
                                    // _animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    
+                                    
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(21);
 
+                                _animatedTileTexture.ChangeCheckRow(21);
                             }
                             break;
 
