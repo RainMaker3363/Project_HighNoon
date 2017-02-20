@@ -22,7 +22,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     private bool IsConnectedOn = false;
     private bool IsSetupOn = false;
     private bool showingWaitingRoom = false;
-    private string StateMessage = " ";
+    private string ReceiveMessage = " ";
+    private string SendMessage = " ";
     private string NetMessage = " ";
 
     public MPUpdateListener updateListener;
@@ -81,9 +82,14 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         return showingWaitingRoom;
     }
 
-    public string GetStateMessage()
+    public string GetReceiveMessage()
     {
-        return StateMessage;
+        return ReceiveMessage;
+    }
+
+    public string GetSendMessage()
+    {
+        return SendMessage;
     }
 
     // 현재 상태를 디버깅 로그로 보여주는 함수
@@ -95,7 +101,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
 
         if (mainMenuManager != null)
         {
-            mainMenuManager.SetLobbyStatusMessage(message);
+            //mainMenuManager.SetLobbyStatusMessage(message);
         }
     }
 
@@ -244,7 +250,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
 
         //PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
-        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
     }
 
     public void SendMyUpdate(string senderId, float posX, float posY, Vector2 velocity, float rotZ)
@@ -258,6 +264,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         _updateMessage.AddRange(System.BitConverter.GetBytes(velocity.y));
         _updateMessage.AddRange(System.BitConverter.GetBytes(rotZ));
         byte[] messageToSend = _updateMessage.ToArray();
+
+        SendMessage = messageToSend.ToString();
 
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
 
@@ -284,7 +292,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
             float rotZ = System.BitConverter.ToSingle(data, 18);
             Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
 
-            StateMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
+            ReceiveMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
             // We'd better tell our GameController about this.
             //updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
 

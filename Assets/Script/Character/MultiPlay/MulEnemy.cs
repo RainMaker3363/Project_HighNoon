@@ -13,8 +13,8 @@ public class MulEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-        if(m_EnemyAni == null)
+
+        if (m_EnemyAni == null)
         {
             m_EnemyAni = GameObject.Find("EnemyLincoin_Ani").GetComponent<MulEnemy_Ani>();
         }

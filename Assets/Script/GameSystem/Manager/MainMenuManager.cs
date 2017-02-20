@@ -5,11 +5,11 @@ using System.Collections;
 
 public class MainMenuManager : MonoBehaviour {
 
-    public static bool _showLobbyDialog;
+    //public static bool _showLobbyDialog;
     public static bool MainMenuBtnDownOn;
     public static bool MainModeBtnDownOn;
     public static bool StartMultiGameOn;
-    private string _lobbyMessage;
+    //private string _lobbyMessage;
 
     
 
@@ -33,7 +33,7 @@ public class MainMenuManager : MonoBehaviour {
 
         GPGSManager.GetInstance.mainMenuManager = this;
         
-        _showLobbyDialog = false;
+        //_showLobbyDialog = false;
 
         MainMenuObject.SetActive(true);
         ModeSelectObject.SetActive(false);
@@ -53,8 +53,8 @@ public class MainMenuManager : MonoBehaviour {
         {
             case GameModeState.Single:
                 {
-                    _lobbyMessage = "Starting a single-player game...";
-                    _showLobbyDialog = true;
+                    //_lobbyMessage = "Starting a single-player game...";
+                    //_showLobbyDialog = true;
 
                     GameManager.NowGameModeState = GameModeState.Single;
                 }
@@ -62,8 +62,8 @@ public class MainMenuManager : MonoBehaviour {
 
             case GameModeState.Multi:
                 {
-                    _lobbyMessage = "Starting a multi-player game...";
-                    _showLobbyDialog = true;
+                    //_lobbyMessage = "Starting a multi-player game...";
+                    //_showLobbyDialog = true;
 
                     //SingleModeButton.gameObject.SetActive(false);
                     //MultiModeButton.gameObject.SetActive(true);
@@ -74,7 +74,7 @@ public class MainMenuManager : MonoBehaviour {
 
             case GameModeState.NotSelect:
                 {
-                    _showLobbyDialog = false;
+                    //_showLobbyDialog = false;
 
                     SingleModeButton.gameObject.SetActive(true);
                     MultiModeButton.gameObject.SetActive(true);
@@ -85,15 +85,15 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
-    public void SetLobbyStatusMessage(string message)
-    {
-        _lobbyMessage = message;
-    }
+    //public void SetLobbyStatusMessage(string message)
+    //{
+    //    _lobbyMessage = message;
+    //}
 
-    public void HideLobby()
-    {
-        _lobbyMessage = "";
-        _showLobbyDialog = false;
-    }
+    //public void HideLobby()
+    //{
+    //    _lobbyMessage = "";
+    //    _showLobbyDialog = false;
+    //}
 
 }
