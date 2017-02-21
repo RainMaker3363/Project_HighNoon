@@ -4,10 +4,32 @@ using System.Collections;
 public class Single_RevolverAction : MonoBehaviour {
 
     public GameObject Single_RevolverTouch;
-    public GameObject Single_RevolverAction_Object;
+    public GameObject Single_RevolverLetterBox;
+    //public GameObject Single_RevolverAction_Object;
+    private Animator ani;
 
 	// Use this for initialization
 	void Start () {
+
+        if(ani == null)
+        {
+            ani = GetComponent<Animator>();
+            ani.enabled = true;
+        }
+        else
+        {
+            ani.enabled = true;
+        }
+
+        if (Single_RevolverLetterBox == null)
+        {
+            Single_RevolverLetterBox = GameObject.Find("Letterbox");
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
+        }
+        else
+        {
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
+        }
 
         GameManager.DeadEyeRevolverAction = false;
         Single_RevolverTouch.SetActive(false);
@@ -15,6 +37,26 @@ public class Single_RevolverAction : MonoBehaviour {
 
     void OnEnable()
     {
+        if (ani == null)
+        {
+            ani = GetComponent<Animator>();
+            ani.enabled = true;
+        }
+        else
+        {
+            ani.enabled = true;
+        }
+
+        if (Single_RevolverLetterBox == null)
+        {
+            Single_RevolverLetterBox = GameObject.Find("Letterbox");
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
+        }
+        else
+        {
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
+        }
+
         GameManager.DeadEyeRevolverAction = false;
         Single_RevolverTouch.SetActive(false);
     }
@@ -30,13 +72,21 @@ public class Single_RevolverAction : MonoBehaviour {
         {
             GameManager.DeadEyeRevolverAction = true;
             Single_RevolverTouch.SetActive(true);
-            Single_RevolverAction_Object.gameObject.SetActive(false);
+            ani.enabled = false;
+            ani.Stop();
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox.GetComponent<Animator>().Stop();
+            //Single_RevolverAction_Object.gameObject.SetActive(false);
         }
         else
         {
-            GameManager.DeadEyeRevolverAction = false;
-            Single_RevolverTouch.SetActive(false);
-            Single_RevolverAction_Object.gameObject.SetActive(false);
+            GameManager.DeadEyeRevolverAction = true;
+            Single_RevolverTouch.SetActive(true);
+            ani.enabled = false;
+            ani.Stop();
+            Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox.GetComponent<Animator>().Stop();
+            //Single_RevolverAction_Object.gameObject.SetActive(false);
         }
     }
 }

@@ -8,7 +8,6 @@ public class DeadEyeBullet : MonoBehaviour {
 
     private IEnumerator ActiveCoroutine;
     private SphereCollider spcol;
-    private bool RespawnChecker;
     public GameObject DeadEyeBullet_Object;
 
     // Use this for initialization
@@ -17,8 +16,6 @@ public class DeadEyeBullet : MonoBehaviour {
 
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
-
-        RespawnChecker = true;
 
         if (ActiveCoroutine == null)
         {
@@ -42,7 +39,6 @@ public class DeadEyeBullet : MonoBehaviour {
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
 
-        RespawnChecker = true;
 
         if (ActiveCoroutine == null)
         {
@@ -63,18 +59,18 @@ public class DeadEyeBullet : MonoBehaviour {
     {
         Debug.Log("Protocol Start!");
 
-        RespawnChecker = false;
+        //RespawnChecker = false;
 
         spcol.enabled = false;
         DeadEyeBullet_Object.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(5.0f);
 
         Debug.Log("Protocol End!");
 
-        RespawnChecker = true;
+        //RespawnChecker = true;
 
-        //spcol.enabled = true;
+        spcol.enabled = true;
         DeadEyeBullet_Object.gameObject.SetActive(true);
 
     }
@@ -139,19 +135,19 @@ public class DeadEyeBullet : MonoBehaviour {
                             {
                                 //NormalBullet_Object.transform.Rotate(new Vector3(0.0f, 65.0f, 0.0f) * Time.deltaTime);
 
-                                //if (GameManager.DeadEyeActiveOn == true)
-                                //{
-                                //    if(RespawnChecker == true)
-                                //    {
+                                if (GameManager.DeadEyeActiveOn == false)
+                                {
+                                    if (DeadEyeBullet_Object.activeSelf == false)
+                                    {
 
 
-                                //        ActiveCoroutine = null;
-                                //        ActiveCoroutine = ResurectionProtocol();
+                                        ActiveCoroutine = null;
+                                        ActiveCoroutine = ResurectionProtocol();
 
-                                //        StopCoroutine(ActiveCoroutine);
-                                //        StartCoroutine(ActiveCoroutine);
-                                //    }
-                                //}
+                                        StopCoroutine(ActiveCoroutine);
+                                        StartCoroutine(ActiveCoroutine);
+                                    }
+                                }
                             }
                             break;
 
@@ -195,19 +191,6 @@ public class DeadEyeBullet : MonoBehaviour {
                 break;
         }
 
-    }
-
-    public void Switiching(bool switiching = true)
-    {
-        if (switiching == true)
-        {
-            spcol.enabled = true;
-        }
-        else
-        {
-            spcol.enabled = false;
-        }
-        
     }
 
     //void OnCollisionEnter(Collision collision)
@@ -257,10 +240,13 @@ public class DeadEyeBullet : MonoBehaviour {
 
             print("DeadEye Start!");
 
-            ActiveCoroutine = ResurectionProtocol();
+            spcol.enabled = false;
+            DeadEyeBullet_Object.gameObject.SetActive(false);
 
-            StopCoroutine(ActiveCoroutine);
-            StartCoroutine(ActiveCoroutine);
+            //ActiveCoroutine = ResurectionProtocol();
+
+            //StopCoroutine(ActiveCoroutine);
+            //StartCoroutine(ActiveCoroutine);
         }
 
     }

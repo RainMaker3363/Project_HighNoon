@@ -517,7 +517,7 @@ public class Player : MonoBehaviour {
                                     // 사격 애니메이션 출력
 
                                     if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-                                       || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                                                           || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
                                     {
                                         PlayerAniState = AnimationState.UPSHOOT;
                                     }
@@ -847,91 +847,35 @@ public class Player : MonoBehaviour {
                                     if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
                                         || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.UPSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.UPWALK;
-                                        }
+                                        PlayerAniState = AnimationState.UPSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTUPSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTUPWALK;
-                                        }
+                                        PlayerAniState = AnimationState.RIGHTUPSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTWALK;
-                                        }
+                                        PlayerAniState = AnimationState.RIGHTSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTDOWNSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.RIGHTDOWNWALK;
-                                        }
+                                        PlayerAniState = AnimationState.RIGHTDOWNSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.DOWNSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.DOWNWALK;
-                                        }
+                                        PlayerAniState = AnimationState.DOWNSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.LEFTDOWNSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.LEFTDOWNWALK;
-                                        }
+                                        PlayerAniState = AnimationState.LEFTDOWNSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.LEFTSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.LEFTWALK;
-                                        }
+                                        PlayerAniState = AnimationState.LEFTSTAND;
                                     }
                                     else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
                                     {
-                                        if (NowMovePlayer == false)
-                                        {
-                                            PlayerAniState = AnimationState.LEFTUPSTAND;
-                                        }
-                                        else
-                                        {
-                                            PlayerAniState = AnimationState.LEFTUPWALK;
-                                        }
+                                        PlayerAniState = AnimationState.LEFTUPSTAND;
                                     }
                                 }
                                 else
@@ -1149,6 +1093,8 @@ public class Player : MonoBehaviour {
 
     IEnumerator DeadEyeShootProtocol(bool On = true)
     {
+        yield return new WaitForSeconds(0.8f);
+
         DeadEyeActive = false;
 
         // 사격 애니메이션 출력

@@ -265,7 +265,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         _updateMessage.AddRange(System.BitConverter.GetBytes(rotZ));
         byte[] messageToSend = _updateMessage.ToArray();
 
-        SendMessage = messageToSend.ToString();
+        SendMessage = ByteToString(messageToSend);
 
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
 
@@ -292,7 +292,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
             float rotZ = System.BitConverter.ToSingle(data, 18);
             Debug.Log("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ);
 
-            ReceiveMessage = ("Player " + senderId + " is at (" + posX + ", " + posY + ") traveling (" + velX + ", " + velY + ") rotation " + rotZ).ToString();
+            ReceiveMessage = ByteToString(data);
             // We'd better tell our GameController about this.
             //updateListener.UpdateReceived(senderId, posX, posY, velX, velY, rotZ);
 
@@ -324,6 +324,22 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     {
         return PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants();
     }
+
+    // 바이트 배열을 String으로 변환 
+    private string ByteToString(byte[] strByte)
+    {
+        string str = System.Text.Encoding.UTF8.GetString(strByte);//Encoding.Default.GetString(StrByte);
+        return str;
+    }
+
+    // String을 바이트 배열로 변환 
+    private byte[] StringToByte(string str)
+    {
+
+        byte[] StrByte = System.Text.Encoding.UTF8.GetBytes(str);//Encoding.UTF8.GetBytes(str);
+        return StrByte;
+    }
+
 
     // GPGS 로그인 콜백
     public void LoginCallBackGPGS(bool result)
