@@ -7,19 +7,30 @@ public class Single_VersusAction : MonoBehaviour {
     public GameObject Single_RevolverAction;
     public GameObject InGame_UI_Object;
 
+    private Animator ani;
+
 	// Use this for initialization
 	void Start () {
 
-        if (Single_VersusAction_Object == null)
+        //if (Single_VersusAction_Object == null)
+        //{
+        //    Single_VersusAction_Object = GameObject.Find("Single_VersusAction");
+        //    Single_VersusAction_Object.SetActive(true);
+        //}
+        //else
+        //{
+        //    Single_VersusAction_Object.SetActive(true);
+        //}
+
+        if (ani == null)
         {
-            Single_VersusAction_Object = GameObject.Find("Single_VersusAction");
-            Single_VersusAction_Object.SetActive(true);
+            ani = GetComponent<Animator>();
+            ani.enabled = true;
         }
         else
         {
-            Single_VersusAction_Object.SetActive(true);
+            ani.enabled = true;
         }
-
         
 
         if (Single_RevolverAction == null)
@@ -49,17 +60,25 @@ public class Single_VersusAction : MonoBehaviour {
 
     void OnEnable()
     {
-        if (Single_VersusAction_Object == null)
+        //if (Single_VersusAction_Object == null)
+        //{
+        //    Single_VersusAction_Object = GameObject.Find("Single_VersusAction");
+        //    Single_VersusAction_Object.SetActive(true);
+        //}
+        //else
+        //{
+        //    Single_VersusAction_Object.SetActive(true);
+        //}
+
+        if (ani == null)
         {
-            Single_VersusAction_Object = GameObject.Find("Single_VersusAction");
-            Single_VersusAction_Object.SetActive(true);
+            ani = GetComponent<Animator>();
+            ani.enabled = true;
         }
         else
         {
-            Single_VersusAction_Object.SetActive(true);
+            ani.enabled = true;
         }
-
-
 
         if (Single_RevolverAction == null)
         {
@@ -97,6 +116,8 @@ public class Single_VersusAction : MonoBehaviour {
             Single_RevolverAction.SetActive(true);
             Single_VersusAction_Object.SetActive(false);
             InGame_UI_Object.SetActive(false);
+
+            ani.enabled = false;
         }
         else
         {
@@ -104,6 +125,8 @@ public class Single_VersusAction : MonoBehaviour {
             Single_RevolverAction.SetActive(true);
             Single_VersusAction_Object.SetActive(false);
             InGame_UI_Object.SetActive(false);
+
+            ani.enabled = false;
         }
     }
 }

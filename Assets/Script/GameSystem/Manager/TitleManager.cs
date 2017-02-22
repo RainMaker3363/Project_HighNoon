@@ -30,7 +30,7 @@ public class TitleManager : MonoBehaviour {
     {
         Debug.Log("Wait for Moment...!");
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.0f);
 
         Debug.Log("Hello Player !");
 
@@ -119,10 +119,15 @@ public class TitleManager : MonoBehaviour {
 
                     if(Input.anyKeyDown)
                     {
-                        AutoFade.LoadLevel("TestScene", 1.0f, 0.5f, Color.black);
+                        if (NextTitleOn == true)
+                        {
+
+                            AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
+                        }
                     }
                 }
                 break;
         }
     }
 }
+

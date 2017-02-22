@@ -64,7 +64,7 @@ public class DeadEyeBullet : MonoBehaviour {
         spcol.enabled = false;
         DeadEyeBullet_Object.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(7.0f);
 
         Debug.Log("Protocol End!");
 

@@ -5,6 +5,7 @@ public class Single_RevolverAction : MonoBehaviour {
 
     public GameObject Single_RevolverTouch;
     public GameObject Single_RevolverLetterBox;
+    public GameObject Single_RevolverAction_BG;
     //public GameObject Single_RevolverAction_Object;
     private Animator ani;
 
@@ -29,6 +30,16 @@ public class Single_RevolverAction : MonoBehaviour {
         else
         {
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
+        }
+
+        if (Single_RevolverAction_BG == null)
+        {
+            Single_RevolverAction_BG = GameObject.Find("RevolverAction_BG");
+            Single_RevolverAction_BG.SetActive(true);
+        }
+        else
+        {
+            Single_RevolverAction_BG.SetActive(true);
         }
 
         GameManager.DeadEyeRevolverAction = false;
@@ -57,6 +68,16 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = true;
         }
 
+        if (Single_RevolverAction_BG == null)
+        {
+            Single_RevolverAction_BG = GameObject.Find("RevolverAction_BG");
+            Single_RevolverAction_BG.SetActive(true);
+        }
+        else
+        {
+            Single_RevolverAction_BG.SetActive(true);
+        }
+
         GameManager.DeadEyeRevolverAction = false;
         Single_RevolverTouch.SetActive(false);
     }
@@ -72,6 +93,7 @@ public class Single_RevolverAction : MonoBehaviour {
         {
             GameManager.DeadEyeRevolverAction = true;
             Single_RevolverTouch.SetActive(true);
+            Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;
             ani.Stop();
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
@@ -82,6 +104,7 @@ public class Single_RevolverAction : MonoBehaviour {
         {
             GameManager.DeadEyeRevolverAction = true;
             Single_RevolverTouch.SetActive(true);
+            Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;
             ani.Stop();
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;

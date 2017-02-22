@@ -8,6 +8,7 @@ public class Single_RevolverTouch : MonoBehaviour {
     public GameObject Single_RevolverAction_Object;
     public GameObject Single_RevolverTouch_BG_object;
     public GameObject Single_RevolverLetterBox_Object;
+    public GameObject Single_RevolverLetterBox_BG_Object;
     public GameObject Single_RevolverBullets_Object;
     public GameObject InGame_UI_Object;
 
@@ -36,24 +37,39 @@ public class Single_RevolverTouch : MonoBehaviour {
 
         if (Single_RevolverAction_Object == null)
         {
-            Single_RevolverAction_Object = GameObject.Find("Single_RevolverAction_Object");
-            Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
-            Single_RevolverAction_Object.GetComponent<Animator>().Stop();
+            Single_RevolverAction_Object = GameObject.Find("Single_RevolverAction");
+            //Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
+            //Single_RevolverAction_Object.GetComponent<Animator>().Stop();
         }
         else
         {
-            Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
-            Single_RevolverAction_Object.GetComponent<Animator>().Stop();
+            //Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
+            //Single_RevolverAction_Object.GetComponent<Animator>().Stop();
         }
 
         if(Single_RevolverLetterBox_Object == null)
         {
             Single_RevolverLetterBox_Object = GameObject.Find("LetterBox");
             Single_RevolverLetterBox_Object.SetActive(true);
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().Stop();
+            
         }
         else
         {
             Single_RevolverLetterBox_Object.SetActive(true);
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().Stop();
+        }
+
+        if (Single_RevolverLetterBox_BG_Object == null)
+        {
+            Single_RevolverLetterBox_BG_Object = GameObject.Find("LetterBox_BG");
+            Single_RevolverLetterBox_BG_Object.SetActive(true);
+        }
+        else
+        {
+            Single_RevolverLetterBox_BG_Object.SetActive(true);
         }
 
         if(Single_RevolverTouch_BG_object == null)
@@ -108,24 +124,38 @@ public class Single_RevolverTouch : MonoBehaviour {
 
         if (Single_RevolverAction_Object == null)
         {
-            Single_RevolverAction_Object = GameObject.Find("Single_RevolverAction_Object");
-            Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
-            Single_RevolverAction_Object.GetComponent<Animator>().Stop();
+            Single_RevolverAction_Object = GameObject.Find("Single_RevolverAction");
+            //Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
+            //Single_RevolverAction_Object.GetComponent<Animator>().Stop();
         }
         else
         {
-            Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
-            Single_RevolverAction_Object.GetComponent<Animator>().Stop();
+            //Single_RevolverAction_Object.GetComponent<Animator>().enabled = false;
+            //Single_RevolverAction_Object.GetComponent<Animator>().Stop();
         }
 
         if (Single_RevolverLetterBox_Object == null)
         {
             Single_RevolverLetterBox_Object = GameObject.Find("LetterBox");
             Single_RevolverLetterBox_Object.SetActive(true);
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().Stop();
         }
         else
         {
             Single_RevolverLetterBox_Object.SetActive(true);
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = false;
+            Single_RevolverLetterBox_Object.GetComponent<Animator>().Stop();
+        }
+
+        if (Single_RevolverLetterBox_BG_Object == null)
+        {
+            Single_RevolverLetterBox_BG_Object = GameObject.Find("LetterBox_BG");
+            Single_RevolverLetterBox_BG_Object.SetActive(true);
+        }
+        else
+        {
+            Single_RevolverLetterBox_BG_Object.SetActive(true);
         }
 
         if (Single_RevolverTouch_BG_object == null)
@@ -166,6 +196,7 @@ public class Single_RevolverTouch : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if(BulletChecker > Bullets.Length)
         {
             
@@ -175,6 +206,7 @@ public class Single_RevolverTouch : MonoBehaviour {
             Single_RevolverTouch_BG_object.SetActive(false);
             Single_RevolverAction_Object.SetActive(false);
             Single_RevolverBullets_Object.SetActive(false);
+            Single_RevolverLetterBox_BG_Object.SetActive(false);
 
             AnnounceText.text = " ";
 
@@ -191,10 +223,10 @@ public class Single_RevolverTouch : MonoBehaviour {
     IEnumerator LetterBoxProtocol(bool IsOn = true)
     {
         GameManager.DeadEyeActiveOn = false;
+        Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = true;
 
         yield return new WaitForSeconds(1.0f);
 
-        
         Single_RevolverLetterBox_Object.SetActive(false);
         InGame_UI_Object.SetActive(true);
         this.gameObject.SetActive(false);

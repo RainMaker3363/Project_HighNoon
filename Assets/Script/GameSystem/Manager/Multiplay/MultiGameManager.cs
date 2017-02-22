@@ -24,6 +24,8 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
     public TextMesh PlayerName;
     public TextMesh EnemyName;
 
+    private int TestNum;
+
     public bool _showingGameOver;
 
     // 플레이어의 정보
@@ -59,6 +61,8 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         MyInfoText.text = "";
         EnemyInfoText.text = "";
         NetText.text = "";
+
+        TestNum = 0;
 
         _showingGameOver = false;
 
@@ -124,6 +128,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
                 opponent.SetTransformInformation(posX, posY, velX, velY, rotZ);
             }
 
+            TestNum++;
             //EnemyCharacter.GetComponent<MulEnemy>().SetTransformInformation(posX, posY, velX, velY, rotZ);
         }
 
@@ -272,7 +277,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         {
             if(GPGSManager.GetInstance.GetOtherNameGPGS(1) == _MyParticipantId)
             {
-                PlayerName.text = GPGSManager.GetInstance.GetOtherNameGPGS(1);;//_opponentScripts[_MyParticipantId].name;//GPGSManager.GetInstance.GetOtherNameGPGS(0);
+                PlayerName.text = GPGSManager.GetInstance.GetOtherNameGPGS(1);//_opponentScripts[_MyParticipantId].name;//GPGSManager.GetInstance.GetOtherNameGPGS(0);
                 EnemyName.text = GPGSManager.GetInstance.GetOtherNameGPGS(0);
             }
             else
@@ -285,9 +290,9 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
             //PlayerName.gameObject.transform.position = new Vector3(_opponentScripts[_MyParticipantId].transform.position.x, _opponentScripts[_MyParticipantId].transform.position.y + 0.4f, _opponentScripts[_MyParticipantId].transform.position.z);
             //EnemyName.gameObject.transform.position = new Vector3(_opponentScripts[_EnemyParticipantId].transform.position.x, _opponentScripts[_EnemyParticipantId].transform.position.y + 0.4f, _opponentScripts[_EnemyParticipantId].transform.position.z);
             PlayerName.gameObject.transform.position = new Vector3(MyCharacter.transform.position.x, MyCharacter.transform.position.y + 0.4f, MyCharacter.transform.position.z);
-            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z); 
+            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z);
 
-            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Num : " + TestNum.ToString();
             EnemyInfoText.text = "Player Info : " + GPGSManager.GetInstance.GetSendMessage().ToString();
             NetText.text = "Enemy Info : " + GPGSManager.GetInstance.GetReceiveMessage().ToString();
             
@@ -305,7 +310,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
             //NetText.text = "Enemy Info : " + EnemyCharacter.transform.position.ToString();//("Enemy Info : " + _opponentScripts[_EnemyParticipantId].transform.position).ToString();
             EnemyInfoText.text = "Player Info : " + GPGSManager.GetInstance.GetSendMessage().ToString();
             NetText.text = "Enemy Info : " + GPGSManager.GetInstance.GetReceiveMessage().ToString();
-            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Num : " + TestNum.ToString();
 
         }
 

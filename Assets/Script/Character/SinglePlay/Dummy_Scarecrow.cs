@@ -13,6 +13,8 @@ public class Dummy_Scarecrow : MonoBehaviour {
     private GameObject m_Player;
     public GameObject DeadEyeMarkObject;
 
+
+    private bool RespawnCheck;
     private int HP;
     
 	// Use this for initialization
@@ -35,6 +37,8 @@ public class Dummy_Scarecrow : MonoBehaviour {
         {
             DeadEyeMarkObject.SetActive(false);
         }
+
+        
 
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
@@ -94,6 +98,8 @@ public class Dummy_Scarecrow : MonoBehaviour {
         {
             DeadEyeMarkObject.SetActive(false);
         }
+        
+        RespawnCheck = false;
 
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
@@ -135,11 +141,16 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
     IEnumerator ResurectionProtocol(bool On = true)
     {
+        
+
+        yield return new WaitForSeconds(1.5f);
+
         SpColl.enabled = false;
         ScareCrow_Object.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(5.5f);
 
+        RespawnCheck = false;
 
         HP = 100;
         SpColl.enabled = true;
@@ -173,7 +184,7 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
                                     case MultiPlayerState.DEADEYEING:
                                         {
-                                            DeadEyeMarkObject.SetActive(true);
+                                            DeadEyeMarkObject.SetActive(false);
                                         }
                                         break;
 
@@ -233,29 +244,33 @@ public class Dummy_Scarecrow : MonoBehaviour {
                                         {
                                             DeadEyeMarkObject.SetActive(false);
 
-                                            if (this.gameObject.activeSelf == false)
-                                            {
 
-                                                ActiveCoroutine = ResurectionProtocol(true);
-
-                                                StopCoroutine(ActiveCoroutine);
-                                                StartCoroutine(ActiveCoroutine);
-                                            }
                                         }
                                         break;
 
                                     case PlayerState.DEADEYE:
                                         {
-                                            DeadEyeMarkObject.SetActive(true);
 
                                             if(GameManager.DeadEyeActiveOn == false)
                                             {
+                                                if (RespawnCheck == false)
+                                                {
+                                                    RespawnCheck = true;
 
-                                                ActiveCoroutine = ResurectionProtocol(true);
+                                                    DeadEyeMarkObject.SetActive(false);
 
-                                                StopCoroutine(ActiveCoroutine);
-                                                StartCoroutine(ActiveCoroutine);
 
+                                                    ActiveCoroutine = ResurectionProtocol(true);
+
+                                                    StopCoroutine(ActiveCoroutine);
+                                                    StartCoroutine(ActiveCoroutine);
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                DeadEyeMarkObject.SetActive(false);
                                             }
                                         }
                                         break;
@@ -264,14 +279,7 @@ public class Dummy_Scarecrow : MonoBehaviour {
                                         {
                                             DeadEyeMarkObject.SetActive(false);
 
-                                            if(this.gameObject.activeSelf == false)
-                                            {
-
-                                                ActiveCoroutine = ResurectionProtocol(true);
-
-                                                StopCoroutine(ActiveCoroutine);
-                                                StartCoroutine(ActiveCoroutine);
-                                            }
+      
                                         }
                                         break;
 

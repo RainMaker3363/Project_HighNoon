@@ -362,9 +362,7 @@ public class Player : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    State = GameManager.NowGameState;
-                    ShootAniOn = m_PlayerAni.GetShootAniOn();
-                    MoveVector = PoolInput();
+
 
 
 
@@ -372,6 +370,9 @@ public class Player : MonoBehaviour {
                     {
                         case PlayerState.NORMAL:
                             {
+                                State = GameManager.NowGameState;
+                                ShootAniOn = m_PlayerAni.GetShootAniOn();
+                                MoveVector = PoolInput();
 
                                 if (MoveVector == Vector3.zero)
                                 {
@@ -608,6 +609,9 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
+                                State = GameManager.NowGameState;
+                                ShootAniOn = m_PlayerAni.GetShootAniOn();
+                                MoveVector = PoolInput();
 
                                 if (MoveVector == Vector3.zero)
                                 {
@@ -1187,6 +1191,7 @@ public class Player : MonoBehaviour {
             PlayerAniState = AnimationState.LEFTUPSTAND;
         }
 
+        MoveVector = Vector3.zero;
         playerState = PlayerState.REALBATTLE;
     }
 
