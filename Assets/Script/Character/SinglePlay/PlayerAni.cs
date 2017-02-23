@@ -56,7 +56,7 @@ public class PlayerAni : MonoBehaviour {
             _animatedTileTexture.RegisterCallback(AnimationFinished);
             //_animatedTileTexture.RegisterCallback(ShootAnimationFinished);
         }
-
+        //_animatedTileTexture.RegisterCallback(AnimationFinished);
 
         ShootAniOn = false;
         AniCheckOn = false;
@@ -80,7 +80,7 @@ public class PlayerAni : MonoBehaviour {
         AniCheckOn = false;
         //_animatedTileTexture.SetIndex(0);
         _animatedTileTexture._playOnce = false;
-        _animatedTileTexture._enableEvents = true;
+        _animatedTileTexture._enableEvents = false;
         //_animatedTileTexture.SetIndex(0);
         
 
@@ -105,7 +105,7 @@ public class PlayerAni : MonoBehaviour {
             ShootAniOn = false;
         }
 
-        print("Index : " + _animatedTileTexture.GetIndex());
+        //print("Index : " + _animatedTileTexture.GetIndex());
         //print("PlayerAniState : " + PlayerAniState);
         //print("_animatedTileTexture.GetIndex() : " + _animatedTileTexture.GetIndex());
 
@@ -242,9 +242,7 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
-                                    
-                                    
-
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture._enableEvents = true;
                                 }
 
@@ -259,9 +257,7 @@ public class PlayerAni : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
-                                    
-                                    
-
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture._enableEvents = true;
                                 }
 

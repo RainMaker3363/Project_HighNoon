@@ -7,12 +7,16 @@ public class PlayerBullet : MonoBehaviour {
     private Player m_Player;
 
     private Vector3 MoveDir;
+    private Vector3 MyPos;
+
+    private IEnumerator DeadOrAliveCoroutine;
 
 	// Use this for initialization
 	void Start () {
         State = GameManager.NowGameState;
 
         MoveDir = Vector3.zero;
+        MyPos = this.transform.position;
 
         if (m_Player == null)
         {
@@ -27,9 +31,11 @@ public class PlayerBullet : MonoBehaviour {
         }
 
         //this.transform.Rotate(new Vector3(-90.0f, 0.0f, 0.0f));
+        DeadOrAliveCoroutine = null;
+        DeadOrAliveCoroutine = DeadProtocol(true);
 
-        StopCoroutine(DeadProtocol(true));
-        StartCoroutine(DeadProtocol(true));
+        StopCoroutine(DeadOrAliveCoroutine);
+        StartCoroutine(DeadOrAliveCoroutine);
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
@@ -43,6 +49,7 @@ public class PlayerBullet : MonoBehaviour {
         State = GameManager.NowGameState;
 
         MoveDir = Vector3.zero;
+        MyPos = this.transform.position;
 
         if (m_Player == null)
         {
@@ -54,18 +61,23 @@ public class PlayerBullet : MonoBehaviour {
             MoveDir = new Vector3(m_Player.GetPlayerDirection().x, this.transform.position.y, m_Player.GetPlayerDirection().z);
         }
 
+        DeadOrAliveCoroutine = null;
+        DeadOrAliveCoroutine = DeadProtocol(true);
+
+        StopCoroutine(DeadOrAliveCoroutine);
+        StartCoroutine(DeadOrAliveCoroutine);
+
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Item"), true);
 
-        StopCoroutine(DeadProtocol(true));
-        StartCoroutine(DeadProtocol(true));
+
     }
 
     IEnumerator DeadProtocol(bool On = true)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3.0f);
 
         this.gameObject.SetActive(false);
 
@@ -85,7 +97,22 @@ public class PlayerBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 15.0f * Time.deltaTime));
+                    print("Distance : " + (this.transform.position - MyPos).magnitude);
+
+                    if ((this.transform.position - MyPos).magnitude >= 6.0f)
+                    {
+                        DeadOrAliveCoroutine = null;
+                        DeadOrAliveCoroutine = DeadProtocol(true);
+
+                        StopCoroutine(DeadOrAliveCoroutine);
+
+                        this.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        this.transform.Translate((new Vector3(MoveDir.x, 0.0f, MoveDir.z) * 30.0f * Time.deltaTime));
+                    }
+                    
                 }
                 break;
 
@@ -127,5 +154,14 @@ public class PlayerBullet : MonoBehaviour {
             //this.gameObject.SetActive(false);
         }
         
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag.Equals("Enemy"))
+        {
+
+            this.gameObject.SetActive(false);
+        }
     }
 }

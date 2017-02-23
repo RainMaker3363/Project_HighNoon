@@ -5,6 +5,8 @@ using System.Collections;
 
 public class ExitButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip Button_Touch_Sound;
 
     // Use this for initialization
     void Start()
@@ -101,6 +103,8 @@ public class ExitButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
     {
         if (MainMenuManager.MainMenuBtnDownOn == true)
         {
+            SDManager.PlaySfx(Button_Touch_Sound);
+
             GPGSManager.GetInstance.LogoutGPGS();
 
             Application.Quit();

@@ -42,7 +42,7 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverAction_BG.SetActive(true);
         }
 
-        GameManager.DeadEyeRevolverAction = false;
+        GameManager.DeadEyeRevolverAction = true;
         Single_RevolverTouch.SetActive(false);
 	}
 
@@ -78,7 +78,7 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverAction_BG.SetActive(true);
         }
 
-        GameManager.DeadEyeRevolverAction = false;
+        GameManager.DeadEyeRevolverAction = true;
         Single_RevolverTouch.SetActive(false);
     }
 	
@@ -91,7 +91,7 @@ public class Single_RevolverAction : MonoBehaviour {
     {
         if (switchOn >= 1)
         {
-            GameManager.DeadEyeRevolverAction = true;
+            GameManager.DeadEyeRevolverAction = false;
             Single_RevolverTouch.SetActive(true);
             Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;
@@ -102,7 +102,7 @@ public class Single_RevolverAction : MonoBehaviour {
         }
         else
         {
-            GameManager.DeadEyeRevolverAction = true;
+            GameManager.DeadEyeRevolverAction = false;
             Single_RevolverTouch.SetActive(true);
             Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;

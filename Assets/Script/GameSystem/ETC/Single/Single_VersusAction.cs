@@ -55,7 +55,7 @@ public class Single_VersusAction : MonoBehaviour {
 
 
 
-        GameManager.DeadEyeVersusAction = false;
+        GameManager.DeadEyeVersusAction = true;
 	}
 
     void OnEnable()
@@ -80,6 +80,7 @@ public class Single_VersusAction : MonoBehaviour {
             ani.enabled = true;
         }
 
+
         if (Single_RevolverAction == null)
         {
             Single_RevolverAction = GameObject.Find("Single_RevolverAction");
@@ -100,7 +101,9 @@ public class Single_VersusAction : MonoBehaviour {
             InGame_UI_Object.SetActive(false);
         }
 
-        GameManager.DeadEyeVersusAction = false;
+
+
+        GameManager.DeadEyeVersusAction = true;
     }
 	
 	// Update is called once per frame
@@ -112,21 +115,27 @@ public class Single_VersusAction : MonoBehaviour {
     {
         if(switchOn >= 1)
         {
-            GameManager.DeadEyeVersusAction = true;
+
+            ani.enabled = false;
+            ani.Stop();
+
+            GameManager.DeadEyeVersusAction = false;
             Single_RevolverAction.SetActive(true);
             Single_VersusAction_Object.SetActive(false);
             InGame_UI_Object.SetActive(false);
 
-            ani.enabled = false;
         }
         else
         {
-            GameManager.DeadEyeVersusAction = true;
+
+            ani.enabled = false;
+            ani.Stop();
+
+            GameManager.DeadEyeVersusAction = false;
             Single_RevolverAction.SetActive(true);
             Single_VersusAction_Object.SetActive(false);
             InGame_UI_Object.SetActive(false);
 
-            ani.enabled = false;
         }
     }
 }

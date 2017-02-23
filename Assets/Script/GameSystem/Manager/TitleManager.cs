@@ -7,6 +7,9 @@ public class TitleManager : MonoBehaviour {
 
     public GameObject TitleScreenText;
 
+    public SoundManager SDManager;
+    public AudioClip Title_Touch_Sound;
+
     // 터치 후 타이틀 화면을 넘어갈때의 조건문
     private bool NextTitleOn;
 
@@ -64,9 +67,11 @@ public class TitleManager : MonoBehaviour {
                             case TouchPhase.Began:
                                 {
                                     Debug.Log("TouchPhase Began!");
+                                    
 
                                     if(NextTitleOn == true)
                                     {
+                                        SDManager.PlaySfx(Title_Touch_Sound);
 
                                         AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
                                     }
@@ -121,6 +126,7 @@ public class TitleManager : MonoBehaviour {
                     {
                         if (NextTitleOn == true)
                         {
+                            SDManager.PlaySfx(Title_Touch_Sound);
 
                             AutoFade.LoadLevel("MainMenuScene", 0.5f, 0.5f, Color.black);
                         }

@@ -5,6 +5,9 @@ using System.Collections;
 
 public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip Button_Touch_Sound;
+
     private bool buttonDown;
     private bool StartMultiOn;
     private bool StartMultiSetOn;
@@ -154,6 +157,8 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
                 if (buttonDown == false)
                 {
                     buttonDown = true;
+
+                    SDManager.PlaySfx(Button_Touch_Sound);
 
                     MainMenuManager.gameMode = GameModeState.Multi;
 

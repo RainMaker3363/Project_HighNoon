@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 
@@ -9,6 +10,8 @@ public class Player : MonoBehaviour {
     private GameControlState ControlState;
     
     public JoyStickCtrl JoyStickControl;
+    public Text BulletInfoText;
+    public Text ItemInfoText;
 
     [HideInInspector]
     public PlayerState playerState;
@@ -64,6 +67,13 @@ public class Player : MonoBehaviour {
     private int layerMask;
     private Vector3 PlayerPos;
 
+    // 사운드 관련
+    private AudioSource Audio;
+    public AudioClip Player_FireSound;
+    public AudioClip Player_DeadSound;
+    public AudioClip Player_HitSound;
+    public AudioClip Player_WalkSound;
+
     // 플레이어의 코루틴 연산들
     private IEnumerator DeadEyeProtocol;
 
@@ -88,9 +98,36 @@ public class Player : MonoBehaviour {
         {
             MainCamera = GameObject.FindWithTag("MainCamera");
         }
-        
-        //CameraPosBack = Vector3.zero;
 
+        if (Audio == null)
+        {
+            Audio = GetComponent<AudioSource>();
+        }
+
+        if (BulletInfoText == null)
+        {
+            BulletInfoText = GameObject.Find("Now_Bullet_Text").GetComponent<Text>();
+            BulletInfoText.text = " ";
+        }
+        else
+        {
+            BulletInfoText.text = " ";
+        }
+
+        if(ItemInfoText == null)
+        {
+            ItemInfoText = GameObject.Find("ItemIndexText").GetComponent<Text>();
+            ItemInfoText.text = " ";
+            ItemInfoText.gameObject.SetActive(false);
+        }
+        else
+        {
+            ItemInfoText.text = " ";
+            ItemInfoText.gameObject.SetActive(false);
+        }
+
+        //CameraPosBack = Vector3.zero;
+        
         if (Player_Tranjectory == null)
         {
             Player_Tranjectory = GetComponent<LineRenderer>();
@@ -133,144 +170,41 @@ public class Player : MonoBehaviour {
         //PlayerAniState = AnimationState.DOWNSTAND;
 
         // 방향 계산
-        if (ShootOn == true)
-        {
-            if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-                || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.UPSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.UPWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.RIGHTUPSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.RIGHTUPWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.RIGHTSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.RIGHTWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.RIGHTDOWNSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.RIGHTDOWNWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.DOWNSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.DOWNWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.LEFTDOWNSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.LEFTDOWNWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.LEFTSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.LEFTWALK;
-                }
-            }
-            else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
-            {
-                if (NowMovePlayer == false)
-                {
-                    PlayerAniState = AnimationState.LEFTUPSTAND;
-                }
-                else
-                {
-                    PlayerAniState = AnimationState.LEFTUPWALK;
-                }
-            }
-        }
-        else
-        {
-            // 사격 애니메이션 출력
+        //if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+        //    || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+        //{
+        //    PlayerAniState = AnimationState.UPSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+        //{
+        //    PlayerAniState = AnimationState.RIGHTUPSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+        //{
+        //    PlayerAniState = AnimationState.RIGHTSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+        //{
+        //    PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+        //{
+        //    PlayerAniState = AnimationState.DOWNSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+        //{
+        //    PlayerAniState = AnimationState.LEFTDOWNSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+        //{
+        //    PlayerAniState = AnimationState.LEFTSTAND;
+        //}
+        //else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+        //{
+        //    PlayerAniState = AnimationState.LEFTUPSTAND;
+        //}
 
-            if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-               || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
-            {
-                PlayerAniState = AnimationState.UPSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
-            {
-
-                PlayerAniState = AnimationState.RIGHTUPSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
-            {
-
-                PlayerAniState = AnimationState.RIGHTSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
-            {
-
-                PlayerAniState = AnimationState.RIGHTDOWNSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
-            {
-
-                PlayerAniState = AnimationState.DOWNSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
-            {
-
-                PlayerAniState = AnimationState.LEFTDOWNSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
-            {
-
-
-                PlayerAniState = AnimationState.LEFTSHOOT;
-            }
-            else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
-            {
-
-                PlayerAniState = AnimationState.LEFTUPSHOOT;
-            }
-        }
+        PlayerAniState = AnimationState.UPSTAND;
 
         DeadEyeActive = false;
         DeadEyeReady = false;
@@ -286,7 +220,7 @@ public class Player : MonoBehaviour {
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
         ReloadSuccessOn = true;
-        ShootCoolTime = 1.0f;
+        ShootCoolTime = 0.7f;
         BulletStack = 6;
 
         // 총알의 수
@@ -363,17 +297,17 @@ public class Player : MonoBehaviour {
             case GameState.PLAY:
                 {
 
-
+                    State = GameManager.NowGameState;
+                    ShootAniOn = m_PlayerAni.GetShootAniOn();
+                    MoveVector = PoolInput();
 
 
                     switch (playerState)
                     {
                         case PlayerState.NORMAL:
                             {
-                                State = GameManager.NowGameState;
-                                ShootAniOn = m_PlayerAni.GetShootAniOn();
-                                MoveVector = PoolInput();
 
+                                // 가상 조이스틱의 상태 여부
                                 if (MoveVector == Vector3.zero)
                                 {
                                     if (ShootOn == true)
@@ -394,27 +328,28 @@ public class Player : MonoBehaviour {
 
                                 }
 
+                                // 조준선 표시 여부
                                 Player_Tranjectory.enabled = true;
+                                // 현재 총알에 대한 UI 표시
+                                BulletInfoText.text = (BulletQuantity.ToString() + "/6").ToString();
 
-                                //if (NowMovePlayer)
-                                //{
-                                //    if (CameraMoveOn)
-                                //    {
-                                //        //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
-                                //        this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
-                                //        CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
-                                //    }
-                                //}
-
+                                // 플레이어의 움직임
                                 if (NowMovePlayer)
                                 {
-                                    if ((CameraMoveOn == true) && (ShootOn == true))
+                                    if (CameraMoveOn && (ShootOn == true))
                                     {
+                                        if (Audio.isPlaying == false)
+                                        {
+                                            Audio.clip = Player_WalkSound;
+                                            Audio.Play();
+                                        }
+
                                         //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
                                         this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
                                     }
                                 }
+
 
                                 Line_Tranjectory_Transform[0] = this.gameObject.transform.position - new Vector3(0.0f, 0.2f, 0.0f);
                                 Line_Tranjectory_Transform[1] = Player_Tranjectory_Object.transform.position;
@@ -609,10 +544,7 @@ public class Player : MonoBehaviour {
 
                         case PlayerState.REALBATTLE:
                             {
-                                State = GameManager.NowGameState;
-                                ShootAniOn = m_PlayerAni.GetShootAniOn();
-                                MoveVector = PoolInput();
-
+                                // 가상 조이스틱의 상태 여부
                                 if (MoveVector == Vector3.zero)
                                 {
                                     if (ShootOn == true)
@@ -633,12 +565,22 @@ public class Player : MonoBehaviour {
 
                                 }
 
+                                // 조준선 표시 여부
                                 Player_Tranjectory.enabled = true;
+                                // 현재 총알에 대한 UI 표시
+                                BulletInfoText.text = (BulletQuantity.ToString() + "/6").ToString(); 
 
+                                // 플레이어의 움직임
                                 if (NowMovePlayer)
                                 {
                                     if (CameraMoveOn && (ShootOn == true))
                                     {
+                                        if(Audio.isPlaying == false)
+                                        {
+                                            Audio.clip = Player_WalkSound;
+                                            Audio.Play();
+                                        }
+
                                         //this.transform.Translate((Vector3.forward * MoveSpeed) * Time.deltaTime);
                                         this.transform.Translate((new Vector3(0.0f, 0.0f, MoveVector.magnitude) * MoveSpeed) * Time.deltaTime);
                                         CameraObject.transform.Translate((MoveVector * MoveSpeed) * Time.deltaTime);
@@ -1097,7 +1039,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator DeadEyeShootProtocol(bool On = true)
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.0f);
 
         DeadEyeActive = false;
 
@@ -1155,7 +1097,7 @@ public class Player : MonoBehaviour {
             Bullets[NowBulletIndex].gameObject.SetActive(true);
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.8f);
 
         if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
                                         || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
@@ -1192,6 +1134,8 @@ public class Player : MonoBehaviour {
         }
 
         MoveVector = Vector3.zero;
+        JoyStickControl.InitInputVector();
+
         playerState = PlayerState.REALBATTLE;
     }
 
@@ -1200,47 +1144,71 @@ public class Player : MonoBehaviour {
         ShootOn = false;
 
         //Debug.Log("Bang!");
+        Audio.clip = Player_FireSound;
+        Audio.Play();
 
         // 총알 오브젝트 On
         if (NowBulletIndex < Bullets.Length)
         {
-            if (ShootAniOn == true)
+            //if (ShootAniOn == true)
+            //{
+
+            //    if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
+            //    {
+            //        Bullets[NowBulletIndex].transform.position = this.transform.position;
+            //        //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+            //        Bullets[NowBulletIndex].transform.parent = null;
+
+            //        Bullets[NowBulletIndex].gameObject.SetActive(true);
+
+            //        NowBulletIndex++;
+            //        BulletQuantity--;
+            //    }
+            //}
+            if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
             {
+                Bullets[NowBulletIndex].transform.position = this.transform.position;
+                //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+                Bullets[NowBulletIndex].transform.parent = null;
 
-                if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
-                {
-                    Bullets[NowBulletIndex].transform.position = this.transform.position;
-                    //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
-                    Bullets[NowBulletIndex].transform.parent = null;
+                Bullets[NowBulletIndex].gameObject.SetActive(true);
 
-                    Bullets[NowBulletIndex].gameObject.SetActive(true);
-
-                    NowBulletIndex++;
-                    BulletQuantity--;
-                }
+                NowBulletIndex++;
+                BulletQuantity--;
             }
-
         }
         else
         {
 
+            NowBulletIndex = 0;
 
-            if (ShootAniOn == true)
+            if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
             {
-                NowBulletIndex = 0;
+                Bullets[NowBulletIndex].transform.position = this.transform.position;
+                //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+                Bullets[NowBulletIndex].transform.parent = null;
 
-                if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
-                {
-                    Bullets[NowBulletIndex].transform.position = this.transform.position;
-                    //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
-                    Bullets[NowBulletIndex].transform.parent = null;
+                Bullets[NowBulletIndex].gameObject.SetActive(true);
 
-                    Bullets[NowBulletIndex].gameObject.SetActive(true);
-
-                    NowBulletIndex++;
-                    BulletQuantity--;
-                }
+                NowBulletIndex++;
+                BulletQuantity--;
             }
+            //if (ShootAniOn == true)
+            //{
+            //    NowBulletIndex = 0;
+
+            //    if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
+            //    {
+            //        Bullets[NowBulletIndex].transform.position = this.transform.position;
+            //        //Bullets[NowBulletIndex].transform.LookAt(Player_Tranjectory_Object.transform.position);
+            //        Bullets[NowBulletIndex].transform.parent = null;
+
+            //        Bullets[NowBulletIndex].gameObject.SetActive(true);
+
+            //        NowBulletIndex++;
+            //        BulletQuantity--;
+            //    }
+            //}
 
         }
 
@@ -1301,6 +1269,10 @@ public class Player : MonoBehaviour {
     // 사망 시 애니메이션 및 순서
     IEnumerator DeadProtocol(bool On = true)
     {
+
+        Audio.clip = Player_DeadSound;
+        Audio.Play();
+
         if ((transform.rotation.eulerAngles.y > 315.0f && transform.rotation.eulerAngles.y <= 0.0f)
     || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 45.0f))
         {
@@ -1487,6 +1459,9 @@ public class Player : MonoBehaviour {
     {
         if (other.transform.tag.Equals("EnemyBullet") == true)
         {
+            Audio.clip = Player_HitSound;
+            Audio.Play();
+
             // HP를 깍는다
             if(HP <= 0)
             {
@@ -1513,8 +1488,19 @@ public class Player : MonoBehaviour {
         if (other.transform.tag.Equals("Item") == true)
         {
             Debug.Log("Bullet Get !");
+
+            if (BulletQuantity >= 6)
+            {
+                BulletQuantity = 6;
+            }
+            else
+            {
+                BulletQuantity++;
+            }
             
-            BulletQuantity++;
+
+            ItemInfoText.text = ("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+            ItemInfoText.gameObject.SetActive(true);
 
             Debug.Log("BulletQuantity : " + BulletQuantity);
         }

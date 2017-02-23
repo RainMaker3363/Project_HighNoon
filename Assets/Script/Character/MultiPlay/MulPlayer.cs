@@ -226,7 +226,7 @@ public class MulPlayer : MonoBehaviour {
         // 플레이어가 사격할 수 있는지의 여부
         ShootOn = true;
         ReloadSuccessOn = true;
-        ShootCoolTime = 1.0f;
+        ShootCoolTime = 0.7f;
         BulletStack = 6;
         
         // 총알의 수 (임시)

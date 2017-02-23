@@ -71,7 +71,10 @@ public class MulPlayer_Ani : MonoBehaviour {
 
         ShootAniOn = false;
         AniCheckOn = false;
+
         _animatedTileTexture.SetIndex(0);
+        _animatedTileTexture._playOnce = false;
+        _animatedTileTexture._enableEvents = false;
 
         PlayerAniState = m_Player.GetPlayerAniState();
     }
@@ -112,7 +115,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                     {
                         case AnimationState.DOWNSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(1);
                                 //_animatedTileTexture.ChangeCheckRow(1);
                             }
@@ -120,105 +123,105 @@ public class MulPlayer_Ani : MonoBehaviour {
 
                         case AnimationState.UPSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(2);
                             }
                             break;
 
                         case AnimationState.LEFTSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(4);
                             }
                             break;
 
                         case AnimationState.RIGHTSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(3);
                             }
                             break;
 
                         case AnimationState.LEFTDOWNSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(6);
                             }
                             break;
 
                         case AnimationState.LEFTUPSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(8);
                             }
                             break;
 
                         case AnimationState.RIGHTUPSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(7);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNSTAND:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(5);
                             }
                             break;
 
                         case AnimationState.LEFTWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(12);
                             }
                             break;
 
                         case AnimationState.RIGHTWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(11);
                             }
                             break;
 
                         case AnimationState.UPWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(10);
                             }
                             break;
 
                         case AnimationState.DOWNWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(9);
                             }
                             break;
 
                         case AnimationState.LEFTUPWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(16);
                             }
                             break;
 
                         case AnimationState.LEFTDOWNWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(14);
                             }
                             break;
 
                         case AnimationState.RIGHTUPWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(15);
                             }
                             break;
 
                         case AnimationState.RIGHTDOWNWALK:
                             {
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckRow(13);
                             }
                             break;
@@ -229,6 +232,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture._enableEvents = true;
                                 }
 
@@ -243,10 +247,11 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(19);
 
+                                _animatedTileTexture.ChangeCheckRow(19);
                             }
                             break;
 
@@ -256,6 +261,9 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
                                 _animatedTileTexture.ChangeCheckRow(17);
@@ -269,10 +277,13 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 {
                                     AniCheckOn = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(18);
 
+                                _animatedTileTexture.ChangeCheckRow(18);
                             }
                             break;
 
@@ -281,11 +292,15 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 if (AniCheckOn == false)
                                 {
                                     AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(24);
 
+                                _animatedTileTexture.ChangeCheckRow(24);
                             }
                             break;
 
@@ -294,11 +309,15 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 if (AniCheckOn == false)
                                 {
                                     AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(22);
 
+                                _animatedTileTexture.ChangeCheckRow(22);
 
                             }
                             break;
@@ -308,7 +327,11 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 if (AniCheckOn == false)
                                 {
                                     AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
                                 _animatedTileTexture.ChangeCheckRow(23);
@@ -320,11 +343,15 @@ public class MulPlayer_Ani : MonoBehaviour {
                                 if (AniCheckOn == false)
                                 {
                                     AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
                                     _animatedTileTexture.SetIndex(0);
+
+
+
                                     _animatedTileTexture._enableEvents = true;
                                 }
-                                _animatedTileTexture.ChangeCheckRow(21);
 
+                                _animatedTileTexture.ChangeCheckRow(21);
                             }
                             break;
 
@@ -343,7 +370,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                         case AnimationState.LEFTDEAD:
                             {
                                 _animatedTileTexture._playOnce = true;
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckColumn(12);
                                 _animatedTileTexture.ChangeCheckRow(28);
 
@@ -354,7 +381,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                         case AnimationState.UPDEAD:
                             {
                                 _animatedTileTexture._playOnce = true;
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckColumn(12);
                                 _animatedTileTexture.ChangeCheckRow(26);
                                 //_animatedTileTexture.ChangeCheckColumn(12);
@@ -365,7 +392,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                         case AnimationState.DOWNDEAD:
                             {
                                 _animatedTileTexture._playOnce = true;
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckColumn(12);
                                 _animatedTileTexture.ChangeCheckRow(25);
                                 //_animatedTileTexture.ChangeCheckColumn(12);
@@ -376,7 +403,7 @@ public class MulPlayer_Ani : MonoBehaviour {
                         case AnimationState.RIGHTDEAD:
                             {
                                 _animatedTileTexture._playOnce = true;
-                                _animatedTileTexture._enableEvents = true;
+                                _animatedTileTexture._enableEvents = false;
                                 _animatedTileTexture.ChangeCheckColumn(12);
                                 //_animatedTileTexture.ChangeCheckRow(27);
 

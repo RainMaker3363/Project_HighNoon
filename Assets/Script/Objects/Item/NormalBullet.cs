@@ -10,6 +10,9 @@ public class NormalBullet : MonoBehaviour {
     private SphereCollider spcol;
     public GameObject NormalBullet_Object;
 
+    private AudioSource Audio;
+    public AudioClip Get_Sound;
+
     // Use this for initialization
     void Start()
     {
@@ -17,6 +20,15 @@ public class NormalBullet : MonoBehaviour {
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
 
+        if (Audio == null)
+        {
+            Audio = GetComponent<AudioSource>();
+            Audio.clip = Get_Sound;
+        }
+        else
+        {
+            Audio.clip = Get_Sound;
+        }
 
         if (ActiveCoroutine == null)
         {
@@ -39,6 +51,17 @@ public class NormalBullet : MonoBehaviour {
 
         NowGameState = GameManager.NowGameState;
         NowGameModeState = GameManager.NowGameModeState;
+
+        if (Audio == null)
+        {
+            Audio = GetComponent<AudioSource>();
+            Audio.clip = Get_Sound;
+        }
+        else
+        {
+            Audio.clip = Get_Sound;
+        }
+
 
         if(ActiveCoroutine == null)
         {
@@ -221,6 +244,9 @@ public class NormalBullet : MonoBehaviour {
         {
 
             print("Bullet + 1");
+
+
+            Audio.Play();
 
             ActiveCoroutine = ResurectionProtocol();
 

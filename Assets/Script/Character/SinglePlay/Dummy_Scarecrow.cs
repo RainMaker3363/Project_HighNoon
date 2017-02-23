@@ -6,7 +6,8 @@ public class Dummy_Scarecrow : MonoBehaviour {
     private GameState NowGameState;
     private GameModeState NowGameModeState;
 
-    private IEnumerator ActiveCoroutine;
+    private IEnumerator ResurectCoroutine;
+    private IEnumerator DeadEyeCoroutine;
 
     private SphereCollider SpColl;
     public GameObject ScareCrow_Object;
@@ -139,7 +140,7 @@ public class Dummy_Scarecrow : MonoBehaviour {
         //StopCoroutine(ActiveCoroutine);
     }
 
-    IEnumerator ResurectionProtocol(bool On = true)
+    IEnumerator DeadEyeResructionProtocol(bool On = true)
     {
         
 
@@ -156,6 +157,18 @@ public class Dummy_Scarecrow : MonoBehaviour {
         SpColl.enabled = true;
         ScareCrow_Object.gameObject.SetActive(true);
 
+    }
+
+    IEnumerator ResurectionProtocol(bool On = true)
+    {
+        SpColl.enabled = false;
+        ScareCrow_Object.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(4.0f);
+
+        HP = 100;
+        SpColl.enabled = true;
+        ScareCrow_Object.gameObject.SetActive(true);
     }
 
 	// Update is called once per frame
@@ -244,7 +257,16 @@ public class Dummy_Scarecrow : MonoBehaviour {
                                         {
                                             DeadEyeMarkObject.SetActive(false);
 
+                                            if(HP <= 0)
+                                            {
+                                                HP = 0;
 
+                                                ResurectCoroutine = null;
+                                                ResurectCoroutine = ResurectionProtocol(true);
+
+                                                StopCoroutine(ResurectCoroutine);
+                                                StartCoroutine(ResurectCoroutine);
+                                            }
                                         }
                                         break;
 
@@ -259,11 +281,11 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
                                                     DeadEyeMarkObject.SetActive(false);
 
+                                                    DeadEyeCoroutine = null;
+                                                    DeadEyeCoroutine = DeadEyeResructionProtocol(true);
 
-                                                    ActiveCoroutine = ResurectionProtocol(true);
-
-                                                    StopCoroutine(ActiveCoroutine);
-                                                    StartCoroutine(ActiveCoroutine);
+                                                    StopCoroutine(DeadEyeCoroutine);
+                                                    StartCoroutine(DeadEyeCoroutine);
                                                 }
 
 
@@ -279,6 +301,16 @@ public class Dummy_Scarecrow : MonoBehaviour {
                                         {
                                             DeadEyeMarkObject.SetActive(false);
 
+                                            if (HP <= 0)
+                                            {
+                                                HP = 0;
+
+                                                ResurectCoroutine = null;
+                                                ResurectCoroutine = ResurectionProtocol(true);
+
+                                                StopCoroutine(ResurectCoroutine);
+                                                StartCoroutine(ResurectCoroutine);
+                                            }
       
                                         }
                                         break;
@@ -389,10 +421,11 @@ public class Dummy_Scarecrow : MonoBehaviour {
             {
                 HP = 0;
 
-                ActiveCoroutine = ResurectionProtocol(true);
+                ResurectCoroutine = null;
+                ResurectCoroutine = ResurectionProtocol(true);
 
-                StopCoroutine(ActiveCoroutine);
-                StartCoroutine(ActiveCoroutine);
+                StopCoroutine(ResurectCoroutine);
+                StartCoroutine(ResurectCoroutine);
 
                 //if(this.gameObject.activeSelf == true)
                 //{

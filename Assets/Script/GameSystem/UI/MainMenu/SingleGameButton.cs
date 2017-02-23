@@ -5,6 +5,9 @@ using System.Collections;
 
 public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip Button_Touch_Sound;
+
     private bool buttonDown;
 
     // Use this for initialization
@@ -110,6 +113,8 @@ public class SingleGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, 
                     if (buttonDown == false)
                     {
                         buttonDown = true;
+
+                        SDManager.PlaySfx(Button_Touch_Sound);
 
                         MainMenuManager.gameMode = GameModeState.Single;
 

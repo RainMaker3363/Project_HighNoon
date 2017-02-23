@@ -8,6 +8,9 @@ public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     public GameObject MainMenuObject;
     public GameObject GameModeSelectObject;
 
+    public SoundManager SDManager;
+    public AudioClip Button_Touch_Sound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -103,6 +106,8 @@ public class GameStartButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
         if(MainMenuManager.MainMenuBtnDownOn == true)
         {
+            SDManager.PlaySfx(Button_Touch_Sound);
+
             MainMenuObject.SetActive(false);
             GameModeSelectObject.SetActive(true);
         }

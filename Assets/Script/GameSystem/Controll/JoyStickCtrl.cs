@@ -80,4 +80,10 @@ public class JoyStickCtrl : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     {
         return inputVector.y;
     }
+
+    public void InitInputVector()
+    {
+        inputVector = Vector3.zero;
+        joystick_Stick.rectTransform.anchoredPosition = Vector2.zero;
+    }
 }
