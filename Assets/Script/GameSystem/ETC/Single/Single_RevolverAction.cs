@@ -9,6 +9,10 @@ public class Single_RevolverAction : MonoBehaviour {
     //public GameObject Single_RevolverAction_Object;
     private Animator ani;
 
+    public SoundManager SDManager;
+    public AudioClip CommandStart_Sound;
+    
+
 	// Use this for initialization
 	void Start () {
 
@@ -41,6 +45,8 @@ public class Single_RevolverAction : MonoBehaviour {
         {
             Single_RevolverAction_BG.SetActive(true);
         }
+
+        SDManager.PlaySfx(CommandStart_Sound);
 
         GameManager.DeadEyeRevolverAction = true;
         Single_RevolverTouch.SetActive(false);
@@ -78,6 +84,8 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverAction_BG.SetActive(true);
         }
 
+        SDManager.PlaySfx(CommandStart_Sound);
+
         GameManager.DeadEyeRevolverAction = true;
         Single_RevolverTouch.SetActive(false);
     }
@@ -98,6 +106,7 @@ public class Single_RevolverAction : MonoBehaviour {
             ani.Stop();
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
             Single_RevolverLetterBox.GetComponent<Animator>().Stop();
+
             //Single_RevolverAction_Object.gameObject.SetActive(false);
         }
         else

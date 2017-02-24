@@ -8,6 +8,7 @@ public class DeadEyeBullet : MonoBehaviour {
 
     private IEnumerator ActiveCoroutine;
     private SphereCollider spcol;
+    private bool RespawnChecker;
     public GameObject DeadEyeBullet_Object;
 
     // Use this for initialization
@@ -28,6 +29,7 @@ public class DeadEyeBullet : MonoBehaviour {
             spcol = GetComponent<SphereCollider>();
         }
 
+        RespawnChecker = false;
 
         //StartCoroutine(ResurectionProtocol(true));
         //StopCoroutine(ResurectionProtocol(true));
@@ -44,14 +46,26 @@ public class DeadEyeBullet : MonoBehaviour {
         {
             ActiveCoroutine = null;
             ActiveCoroutine = ResurectionProtocol();
+
+            StopCoroutine(ActiveCoroutine);
+        }
+        else
+        {
+            ActiveCoroutine = null;
+            ActiveCoroutine = ResurectionProtocol();
+
+            StopCoroutine(ActiveCoroutine);
         }
 
         if (spcol == null)
         {
             spcol = GetComponent<SphereCollider>();
         }
+
+        RespawnChecker = false;
+
         //StartCoroutine(ResurectionProtocol(true));
-        //StopCoroutine(ResurectionProtocol(true));
+        
 
     }
 
@@ -59,7 +73,7 @@ public class DeadEyeBullet : MonoBehaviour {
     {
         Debug.Log("Protocol Start!");
 
-        //RespawnChecker = false;
+        RespawnChecker = true;
 
         spcol.enabled = false;
         DeadEyeBullet_Object.gameObject.SetActive(false);
@@ -69,6 +83,7 @@ public class DeadEyeBullet : MonoBehaviour {
         Debug.Log("Protocol End!");
 
         //RespawnChecker = true;
+        RespawnChecker = false;
 
         spcol.enabled = true;
         DeadEyeBullet_Object.gameObject.SetActive(true);
@@ -139,13 +154,16 @@ public class DeadEyeBullet : MonoBehaviour {
                                 {
                                     if (DeadEyeBullet_Object.activeSelf == false)
                                     {
+                                        if (RespawnChecker == false)
+                                        {
+                                            ActiveCoroutine = null;
+                                            ActiveCoroutine = ResurectionProtocol();
+
+                                            StopCoroutine(ActiveCoroutine);
+                                            StartCoroutine(ActiveCoroutine);
+                                        }
 
 
-                                        ActiveCoroutine = null;
-                                        ActiveCoroutine = ResurectionProtocol();
-
-                                        StopCoroutine(ActiveCoroutine);
-                                        StartCoroutine(ActiveCoroutine);
                                     }
                                 }
                             }
@@ -238,14 +256,15 @@ public class DeadEyeBullet : MonoBehaviour {
         if (other.transform.tag.Equals("Player") == true)
         {
 
-            print("DeadEye Start!");
+            print("DeadEye Trigger Start!");
 
             spcol.enabled = false;
             DeadEyeBullet_Object.gameObject.SetActive(false);
 
-            //ActiveCoroutine = ResurectionProtocol();
+            ActiveCoroutine = null;
+            ActiveCoroutine = ResurectionProtocol();
 
-            //StopCoroutine(ActiveCoroutine);
+            StopCoroutine(ActiveCoroutine);
             //StartCoroutine(ActiveCoroutine);
         }
 

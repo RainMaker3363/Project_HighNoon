@@ -97,7 +97,7 @@ public class PlayerBullet : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    print("Distance : " + (this.transform.position - MyPos).magnitude);
+                    //print("Distance : " + (this.transform.position - MyPos).magnitude);
 
                     if ((this.transform.position - MyPos).magnitude >= 6.0f)
                     {

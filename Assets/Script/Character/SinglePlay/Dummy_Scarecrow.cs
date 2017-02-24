@@ -8,6 +8,7 @@ public class Dummy_Scarecrow : MonoBehaviour {
 
     private IEnumerator ResurectCoroutine;
     private IEnumerator DeadEyeCoroutine;
+    private IEnumerator DamgeCoroutine;
 
     private SphereCollider SpColl;
     public GameObject ScareCrow_Object;
@@ -38,7 +39,6 @@ public class Dummy_Scarecrow : MonoBehaviour {
         {
             DeadEyeMarkObject.SetActive(false);
         }
-
         
 
         NowGameState = GameManager.NowGameState;
@@ -169,6 +169,17 @@ public class Dummy_Scarecrow : MonoBehaviour {
         HP = 100;
         SpColl.enabled = true;
         ScareCrow_Object.gameObject.SetActive(true);
+    }
+
+    IEnumerator DamgeProtocol(bool On = true)
+    {
+        //ScareCrow_Object.GetComponent<Material>().color = Color.red;
+        ScareCrow_Object.GetComponent<MeshRenderer>().material.color = Color.red;
+
+        yield return new WaitForSeconds(0.5f);
+
+        ScareCrow_Object.GetComponent<MeshRenderer>().material.color = Color.white;
+        //ScareCrow_Object.GetComponent<Material>().color = Color.white;
     }
 
 	// Update is called once per frame
@@ -443,6 +454,12 @@ public class Dummy_Scarecrow : MonoBehaviour {
             }
             else
             {
+                DamgeCoroutine = null;
+                DamgeCoroutine = DamgeProtocol(true);
+
+                StopCoroutine(DamgeCoroutine);
+                StartCoroutine(DamgeCoroutine);
+
                 HP -= 50;
             }
 

@@ -12,6 +12,11 @@ public class FlyingCamera : MonoBehaviour {
     public GameObject PlayerObject;
     private Player m_Player;
 
+    private AudioSource Audio;
+    public AudioClip InGame_BG_Sound;
+    public AudioClip DeadEyeSound;
+    private bool DeadEyeSoundCheck;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -28,6 +33,20 @@ public class FlyingCamera : MonoBehaviour {
         {
             m_Player = PlayerObject.GetComponent<Player>();
         }
+
+        if (Audio == null)
+        {
+            Audio = GetComponent<AudioSource>();
+            Audio.loop = true;
+            //Audio.clip = InGame_BG_Sound;
+        }
+        else
+        {
+            Audio.loop = true;
+            //Audio.clip = InGame_BG_Sound;
+        }
+
+        DeadEyeSoundCheck = false;
 
         BackPos = this.transform.position;
 	}
@@ -54,18 +73,48 @@ public class FlyingCamera : MonoBehaviour {
                             {
                                 //this.transform.position = new Vector3(this.transform.position.x, BackPos.y, this.transform.position.z);
                                 //this.transform.LookAt(PlayerObject.transform.position);
+                                
+                                DeadEyeSoundCheck = false;
+
+                                //if (Audio.isPlaying == false)
+                                //{
+                                //    Audio.loop = true;
+                                //    Audio.clip = InGame_BG_Sound;
+                                //    Audio.Play();
+                                //}
                             }
                             break;
 
                         case PlayerState.DEADEYE:
                             {
+                                if (DeadEyeSoundCheck == false)
+                                {
+                                    DeadEyeSoundCheck = true;
 
+                                    if (Audio.isPlaying == false)
+                                    {
+                                        Audio.loop = false;
+                                        Audio.clip = DeadEyeSound;
+                                        Audio.Play();
+                                    }
+                                }
+
+                                
                             }
                             break;
 
                         case PlayerState.REALBATTLE:
                             {
+                                DeadEyeSoundCheck = false;
+
                                 //this.transform.LookAt(PlayerObject.transform.position);
+                                //if (Audio.isPlaying == false)
+                                //{
+                                //    Audio.loop = true;
+                                //    Audio.clip = InGame_BG_Sound;
+                                //    Audio.Play();
+                                //}
+                                
                             }
                             break;
 

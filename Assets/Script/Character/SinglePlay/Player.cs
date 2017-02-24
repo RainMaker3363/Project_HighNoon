@@ -76,6 +76,7 @@ public class Player : MonoBehaviour {
 
     // 플레이어의 코루틴 연산들
     private IEnumerator DeadEyeProtocol;
+    private Vector3 PrevPlayerRot;
 
 	// Use this for initialization
 	void Start () {
@@ -261,7 +262,7 @@ public class Player : MonoBehaviour {
 
 
 
-        print("PlayerState : " + playerState);
+        //print("PlayerState : " + playerState);
         //print("transform.rotation.y : " + transform.rotation.eulerAngles);
 
         switch (State)
@@ -1043,6 +1044,10 @@ public class Player : MonoBehaviour {
 
         DeadEyeActive = false;
 
+        Audio.clip = Player_FireSound;
+        Audio.Play();
+
+
         // 사격 애니메이션 출력
 
         if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
@@ -1087,6 +1092,8 @@ public class Player : MonoBehaviour {
             PlayerAniState = AnimationState.LEFTUPSHOOT;
         }
 
+
+
         // 총알 오브젝트 On
         if (Bullets[NowBulletIndex].gameObject.activeSelf == false)
         {
@@ -1098,6 +1105,10 @@ public class Player : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(0.8f);
+
+        // 회전 값 백업 다시 채우기
+        MoveVector = PrevPlayerRot;
+        JoyStickControl.InitInputVector();
 
         if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
                                         || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
@@ -1133,8 +1144,6 @@ public class Player : MonoBehaviour {
             PlayerAniState = AnimationState.LEFTUPSTAND;
         }
 
-        MoveVector = Vector3.zero;
-        JoyStickControl.InitInputVector();
 
         playerState = PlayerState.REALBATTLE;
     }
@@ -1509,8 +1518,6 @@ public class Player : MonoBehaviour {
         {
             // 데드아이를 준비한다.
 
-            print("DeadEye Ready");
-
             DeadEyeReady = true;
             DeadEyeActive = true;
 
@@ -1522,6 +1529,9 @@ public class Player : MonoBehaviour {
 
                 GameObject Enemy = GameObject.FindWithTag("Enemy");
                 this.gameObject.transform.LookAt(Enemy.transform.position);
+
+                // 플레이어의 회전 값 백업
+                PrevPlayerRot = this.gameObject.transform.rotation.eulerAngles;
             }
             
             GameManager.DeadEyeActiveOn = true;

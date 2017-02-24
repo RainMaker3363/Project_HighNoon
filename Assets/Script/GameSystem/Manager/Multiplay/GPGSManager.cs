@@ -45,6 +45,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
+        //_updateMessage = new List<byte>(_updateMessageLength);
     }
 
     // P2P 방식으로 상대방을 검색하기 시작한다.
@@ -53,7 +54,6 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
         // 최소 수용 인원
         // 최대 수용 인원
         PlayGamesPlatform.Instance.RealTime.CreateQuickGame(minimumOpponents, maximumOpponents, gameVariation, this);
-
         //PlayGamesPlatform.Instance.RealTime.ShowWaitingRoomUI();
     }
 
@@ -90,6 +90,16 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     public string GetSendMessage()
     {
         return SendMessage;
+    }
+
+    public void InitMessager()
+    {
+        _updateMessage = new List<byte>(_updateMessageLength);
+    }
+
+    public List<byte> GetUpdateMessage()
+    {
+        return _updateMessage;
     }
 
     // 현재 상태를 디버깅 로그로 보여주는 함수
@@ -237,6 +247,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
 
     public void SendMyUpdate(float posX, float posY, Vector2 velocity, float rotZ)
     {
+
+
         _updateMessage.Clear();
         _updateMessage.Add(_protocolVersion);
         _updateMessage.Add((byte)'U');
@@ -249,8 +261,8 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
 
         Debug.Log("Sending my update message  " + messageToSend + " to all players in the room");
 
-        //PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
-        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
+        //PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
     }
 
     public void SendMyUpdate(string senderId, float posX, float posY, Vector2 velocity, float rotZ)
@@ -276,7 +288,7 @@ public class GPGSManager : Singleton<GPGSManager>, RealTimeMultiplayerListener
     public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
     {
         ShowMPStatus("We have received some gameplay messages from participant ID:" + senderId);
-
+        
         // We'll be doing more with this later...
         byte messageVersion = (byte)data[0];
         // Let's figure out what type of message this is.

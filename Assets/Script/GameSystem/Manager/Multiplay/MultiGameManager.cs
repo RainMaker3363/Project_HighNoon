@@ -20,13 +20,14 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
     public Text MyInfoText;
     public Text EnemyInfoText;
     public Text NetText;
+    public Text UpdateCountText;
 
     public TextMesh PlayerName;
     public TextMesh EnemyName;
 
     private int TestNum;
 
-    public bool _showingGameOver;
+    private bool _showingGameOver;
 
     // 플레이어의 정보
     public GameObject MyCharacter;
@@ -110,6 +111,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         //GPGSManager.GetInstance.SignInAndStartMPGame();
 
         GPGSManager.GetInstance.TrySilentSignIn();
+        GPGSManager.GetInstance.InitMessager();
 
         SetupMultiplayerGame();
 
@@ -275,7 +277,7 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
         //NetText.text = "Net : " + GPGSManager.GetInstance.GetStateMessage().ToString();
         if (_multiplayerReady)
         {
-            if(GPGSManager.GetInstance.GetOtherNameGPGS(1) == _MyParticipantId)
+            if (GPGSManager.GetInstance.GetOtherNameGPGS(1) == _MyParticipantId)
             {
                 PlayerName.text = GPGSManager.GetInstance.GetOtherNameGPGS(1);//_opponentScripts[_MyParticipantId].name;//GPGSManager.GetInstance.GetOtherNameGPGS(0);
                 EnemyName.text = GPGSManager.GetInstance.GetOtherNameGPGS(0);
@@ -292,10 +294,10 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
             PlayerName.gameObject.transform.position = new Vector3(MyCharacter.transform.position.x, MyCharacter.transform.position.y + 0.4f, MyCharacter.transform.position.z);
             EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z);
 
-            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Num : " + TestNum.ToString();
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
             EnemyInfoText.text = "Player Info : " + GPGSManager.GetInstance.GetSendMessage().ToString();
             NetText.text = "Enemy Info : " + GPGSManager.GetInstance.GetReceiveMessage().ToString();
-            
+
 
         }
         else
@@ -304,16 +306,17 @@ public class MultiGameManager : MonoBehaviour, MPUpdateListener
             EnemyName.text = "Enemy";
 
             PlayerName.gameObject.transform.position = new Vector3(MyCharacter.transform.position.x, MyCharacter.transform.position.y + 0.4f, MyCharacter.transform.position.z);
-            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z); 
+            EnemyName.gameObject.transform.position = new Vector3(EnemyCharacter.transform.position.x, EnemyCharacter.transform.position.y + 0.4f, EnemyCharacter.transform.position.z);
 
             //EnemyInfoText.text = "Player Info : " + MyCharacter.transform.position.ToString();//("Player Info : " + _opponentScripts[_MyParticipantId].transform.position).ToString();//GPGSManager.GetInstance.GetAllPlayers()[0].ParticipantId;
             //NetText.text = "Enemy Info : " + EnemyCharacter.transform.position.ToString();//("Enemy Info : " + _opponentScripts[_EnemyParticipantId].transform.position).ToString();
             EnemyInfoText.text = "Player Info : " + GPGSManager.GetInstance.GetSendMessage().ToString();
             NetText.text = "Enemy Info : " + GPGSManager.GetInstance.GetReceiveMessage().ToString();
-            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString() + " Num : " + TestNum.ToString();
+            MyInfoText.text = "Player Name : " + GPGSManager.GetInstance.GetNameGPGS() + "  Count : " + GPGSManager.GetInstance.GetAllPlayers().Count.ToString();
 
         }
 
+        UpdateCountText.text = "MessageCount : " + TestNum + "// MesssageSize : " + GPGSManager.GetInstance.GetUpdateMessage().Count;
         DoMultiplayerUpdate();
 
         switch(NowGameState)

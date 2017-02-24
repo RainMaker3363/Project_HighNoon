@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Single_RevolverBullet : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip Command_Touch_Sound;
 
     public Text MyNumberText;
     public int MyNumber;
@@ -29,6 +31,8 @@ public class Single_RevolverBullet : MonoBehaviour, IDragHandler, IPointerUpHand
     {
         if(MyNumber == Single_RevolverTouch.BulletChecker)
         {
+            SDManager.PlaySfx(Command_Touch_Sound);
+
             this.gameObject.SetActive(false);
             Single_RevolverTouch.BulletChecker++;
         }
