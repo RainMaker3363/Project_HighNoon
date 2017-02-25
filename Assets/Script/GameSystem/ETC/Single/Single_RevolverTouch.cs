@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Single_RevolverTouch : MonoBehaviour {
 
+    private GameModeState ModeState;
+
     public GameObject Single_RevolverAction_Object;
     public GameObject Single_RevolverTouch_BG_object;
     public GameObject Single_RevolverLetterBox_Object;
@@ -15,6 +17,7 @@ public class Single_RevolverTouch : MonoBehaviour {
     public Text AnnounceText;
 
     public static int BulletChecker;
+    public static float DeadEyeGage;
 
     private IEnumerator DeadEyeEndCoroutine;
     private List<int> BulletIndex = new List<int>();
@@ -27,6 +30,10 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletIndex.Clear();
         
         BulletChecker = 1;
+        GameManager.DeadEyeFailOn = false;
+        DeadEyeGage = 100.0f;
+
+        ModeState = GameManager.NowGameModeState;
 
         for (int i = 0; i < Bullets.Length; i++)
         {
@@ -64,7 +71,7 @@ public class Single_RevolverTouch : MonoBehaviour {
 
         if (Single_RevolverLetterBox_BG_Object == null)
         {
-            Single_RevolverLetterBox_BG_Object = GameObject.Find("LetterBox_BG");
+            Single_RevolverLetterBox_BG_Object = GameObject.Find("RevolverAction_BG");
             Single_RevolverLetterBox_BG_Object.SetActive(true);
         }
         else
@@ -114,6 +121,10 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletIndex.Clear();
 
         BulletChecker = 1;
+        GameManager.DeadEyeFailOn = false;
+        DeadEyeGage = 100.0f;
+
+        ModeState = GameManager.NowGameModeState;
 
         for (int i = 0; i < Bullets.Length; i++)
         {
@@ -150,7 +161,7 @@ public class Single_RevolverTouch : MonoBehaviour {
 
         if (Single_RevolverLetterBox_BG_Object == null)
         {
-            Single_RevolverLetterBox_BG_Object = GameObject.Find("LetterBox_BG");
+            Single_RevolverLetterBox_BG_Object = GameObject.Find("RevolverAction_BG");
             Single_RevolverLetterBox_BG_Object.SetActive(true);
         }
         else
@@ -196,26 +207,103 @@ public class Single_RevolverTouch : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
+        ModeState = GameManager.NowGameModeState;
 
-        if(BulletChecker > Bullets.Length)
+        switch(ModeState)
         {
-            
-            GameManager.DeadEyeVersusAction = false;
-            GameManager.DeadEyeRevolverAction = false;
+            case GameModeState.Single:
+                {
+                    if (BulletChecker > Bullets.Length)
+                    {
 
-            Single_RevolverTouch_BG_object.SetActive(false);
-            Single_RevolverAction_Object.SetActive(false);
-            Single_RevolverBullets_Object.SetActive(false);
-            Single_RevolverLetterBox_BG_Object.SetActive(false);
+                        GameManager.DeadEyeVersusAction = false;
+                        GameManager.DeadEyeRevolverAction = false;
+                        GameManager.DeadEyeFailOn = false;
 
-            AnnounceText.text = " ";
+                        Single_RevolverTouch_BG_object.SetActive(false);
+                        Single_RevolverAction_Object.SetActive(false);
+                        Single_RevolverBullets_Object.SetActive(false);
+                        Single_RevolverLetterBox_BG_Object.SetActive(false);
 
-            DeadEyeEndCoroutine = null;
-            DeadEyeEndCoroutine = LetterBoxProtocol(true);
+                        AnnounceText.text = " ";
 
-            StopCoroutine(DeadEyeEndCoroutine);
-            StartCoroutine(DeadEyeEndCoroutine);
+                        DeadEyeEndCoroutine = null;
+                        DeadEyeEndCoroutine = LetterBoxProtocol(true);
+
+                        StopCoroutine(DeadEyeEndCoroutine);
+                        StartCoroutine(DeadEyeEndCoroutine);
+                    }
+                }
+                break;
+
+
+            case GameModeState.MiniGame:
+                {
+
+
+                    if (GameManager.DeadEyeFailOn == false)
+                    {
+                        if (BulletChecker > Bullets.Length)
+                        {
+
+                            GameManager.DeadEyeVersusAction = false;
+                            GameManager.DeadEyeRevolverAction = false;
+                            GameManager.DeadEyeFailOn = false;
+
+                            Single_RevolverTouch_BG_object.SetActive(false);
+                            Single_RevolverAction_Object.SetActive(false);
+                            Single_RevolverBullets_Object.SetActive(false);
+                            Single_RevolverLetterBox_BG_Object.SetActive(false);
+
+                            AnnounceText.text = " ";
+
+                            DeadEyeEndCoroutine = null;
+                            DeadEyeEndCoroutine = LetterBoxProtocol(true);
+
+                            StopCoroutine(DeadEyeEndCoroutine);
+                            StartCoroutine(DeadEyeEndCoroutine);
+                        }
+                        else
+                        {
+                            DeadEyeGage -= (33.0f * Time.deltaTime);
+                        }
+                    }
+                    else
+                    {
+                        GameManager.DeadEyeVersusAction = false;
+                        GameManager.DeadEyeRevolverAction = false;
+
+
+                        Single_RevolverTouch_BG_object.SetActive(false);
+                        Single_RevolverAction_Object.SetActive(false);
+                        Single_RevolverBullets_Object.SetActive(false);
+                        Single_RevolverLetterBox_BG_Object.SetActive(false);
+
+                        GameManager.DeadEyeActiveOn = false;
+                        Single_RevolverLetterBox_Object.SetActive(false);
+                        InGame_UI_Object.SetActive(true);
+                        this.gameObject.SetActive(false);
+
+                        GameManager.DeadEyeFailOn = true;
+                    }
+                }
+                break;
+
+            case GameModeState.Multi:
+                {
+                   
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+
+                }
+                break;
         }
+     
+
 
         //print("BulletChecker : " + BulletChecker);
 	}

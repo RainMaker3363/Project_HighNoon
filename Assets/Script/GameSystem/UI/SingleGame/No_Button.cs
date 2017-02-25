@@ -3,14 +3,20 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class No_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public GameObject Exit_Dialog_Object;
+    private GameState BackUpState;
 
     // Use this for initialization
     void Start()
     {
-        Exit_Dialog_Object.SetActive(false);
+        BackUpState = GameManager.NowGameState;
+    }
+
+    void OnEnable()
+    {
+        BackUpState = GameManager.NowGameState;
     }
 
     // Update is called once per frame
@@ -101,10 +107,10 @@ public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler
     public virtual void OnPointerDown(PointerEventData ped)
     {
 
-        GameManager.NowGameState = GameState.PAUSE;
+        GameManager.NowGameState = BackUpState;
 
-        Exit_Dialog_Object.SetActive(true);
-        
+        Exit_Dialog_Object.SetActive(false);
+
         //AutoFade.LoadLevel("MainMenuScene", 0.3f, 0.3f, Color.black);
     }
 

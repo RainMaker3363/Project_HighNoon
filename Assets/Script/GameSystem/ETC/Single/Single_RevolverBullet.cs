@@ -36,6 +36,10 @@ public class Single_RevolverBullet : MonoBehaviour, IDragHandler, IPointerUpHand
             this.gameObject.SetActive(false);
             Single_RevolverTouch.BulletChecker++;
         }
+        else
+        {
+            GameManager.DeadEyeFailOn = true;
+        }
     }
 
     // 터치가 드래그(Drag) 했을때 호출 되는 함수

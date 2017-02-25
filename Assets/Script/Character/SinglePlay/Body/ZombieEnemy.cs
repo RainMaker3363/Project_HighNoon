@@ -23,6 +23,7 @@ public class ZombieEnemy : MonoBehaviour {
 
     public GameObject Zombie_Object;
     public GameObject Zombie_Navi;
+    public GameObject Player_Ojbect;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,27 @@ public class ZombieEnemy : MonoBehaviour {
         {
             sp_Col.enabled = true;
         }
+
+        if (Player_Ojbect == null)
+        {
+            Player_Ojbect = GameObject.FindWithTag("Player");
+        }
+
+        if (Zombie_Navi != null)
+        {
+            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+        }
+
+        // 애니메이션 방향
+        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+        {
+            ZombieAniState = AnimationState.LEFTSTAND;
+        }
+        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+        {
+            ZombieAniState = AnimationState.RIGHTSTAND;
+        }
+
 
         DeadCoroutine = null;
         DeadCoroutine = DeadProtocol(true);
@@ -72,6 +94,27 @@ public class ZombieEnemy : MonoBehaviour {
         else
         {
             sp_Col.enabled = true;
+        }
+
+        if (Player_Ojbect == null)
+        {
+            Player_Ojbect = GameObject.FindWithTag("Player");
+        }
+
+        if (Zombie_Navi != null)
+        {
+            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+        }
+
+
+        // 애니메이션 방향
+        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+        {
+            ZombieAniState = AnimationState.LEFTSTAND;
+        }
+        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+        {
+            ZombieAniState = AnimationState.RIGHTSTAND;
         }
 
         DeadCoroutine = null;
@@ -115,11 +158,32 @@ public class ZombieEnemy : MonoBehaviour {
 
     IEnumerator DamegeProtocol(bool on = true)
     {
+        sp_Col.enabled = false;
+
+        // 애니메이션 방향
+        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+        {
+            ZombieAniState = AnimationState.LEFTDEAD;
+        }
+        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+        {
+            ZombieAniState = AnimationState.RIGHTDEAD;
+        }
+
+        if (Zombie_Navi != null)
+        {
+            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+        }
+
         Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.red;
         
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.5f);
 
         Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.white;
+        Zombie_Object.SetActive(false);
+
+        GameManager.EnemyKillCount += 1;
     }
 
 	// Update is called once per frame
@@ -197,35 +261,50 @@ public class ZombieEnemy : MonoBehaviour {
                             {
                                 if(GameManager.DeadEyeActiveOn == true)
                                 {
-                                    if ((this.gameObject.transform.eulerAngles.y >= 0.0f) || (this.gameObject.transform.eulerAngles.y < 180.0f))
+                                    // 네비게이션 작동 여부
+                                    if (Zombie_Navi != null)
+                                    {
+                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                        //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                    }
+
+                                    // 애니메이션 방향
+                                    if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
                                     {
                                         ZombieAniState = AnimationState.LEFTSTAND;
                                     }
-                                    else if ((this.gameObject.transform.eulerAngles.y > 180.0f) || (this.gameObject.transform.eulerAngles.y <= 360.0f))
+                                    else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
                                     {
                                         ZombieAniState = AnimationState.RIGHTSTAND;
                                     }
                                 }
                                 else
                                 {
+                                    // 네비게이션 작동 여부
+                                    if (Zombie_Navi != null)
+                                    {
+                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+                                        //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                    }
+
                                     if (NowMoveOn == true)
                                     {
-                                        if ((this.gameObject.transform.eulerAngles.y >= 0.0f) || (this.gameObject.transform.eulerAngles.y < 180.0f))
+                                        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
                                         {
                                             ZombieAniState = AnimationState.LEFTWALK;
                                         }
-                                        else if ((this.gameObject.transform.eulerAngles.y > 180.0f) || (this.gameObject.transform.eulerAngles.y <= 360.0f))
+                                        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
                                         {
                                             ZombieAniState = AnimationState.RIGHTWALK;
                                         }
                                     }
                                     else
                                     {
-                                        if ((this.gameObject.transform.eulerAngles.y >= 0.0f) || (this.gameObject.transform.eulerAngles.y < 180.0f))
+                                        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
                                         {
                                             ZombieAniState = AnimationState.LEFTSTAND;
                                         }
-                                        else if ((this.gameObject.transform.eulerAngles.y > 180.0f) || (this.gameObject.transform.eulerAngles.y <= 360.0f))
+                                        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
                                         {
                                             ZombieAniState = AnimationState.RIGHTSTAND;
                                         }
@@ -237,25 +316,45 @@ public class ZombieEnemy : MonoBehaviour {
 
                         case GameState.PAUSE:
                             {
-
+                                // 네비게이션 작동 여부
+                                if (Zombie_Navi != null)
+                                {
+                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                }
                             }
                             break;
 
                         case GameState.EVENT:
                             {
-
+                                // 네비게이션 작동 여부
+                                if (Zombie_Navi != null)
+                                {
+                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                }
                             }
                             break;
 
                         case GameState.VICTORY:
                             {
-
+                                // 네비게이션 작동 여부
+                                if (Zombie_Navi != null)
+                                {
+                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                }
                             }
                             break;
 
                         case GameState.GAMEOVER:
                             {
-
+                                // 네비게이션 작동 여부
+                                if (Zombie_Navi != null)
+                                {
+                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                }
                             }
                             break;
                     }
@@ -366,8 +465,15 @@ public class ZombieEnemy : MonoBehaviour {
         return ZombieAniState;
     }
 
+    //void OnCollisionEnter(Collision collision)
+    //{
+
+    //}
+
     void OnTriggerEnter(Collider other)
     {
+
+
         if (other.transform.tag.Equals("PlayerBullet") == true)
         {
             // 사망 처리
@@ -377,7 +483,7 @@ public class ZombieEnemy : MonoBehaviour {
             StopCoroutine(DamegeCoroutine);
             StartCoroutine(DamegeCoroutine);
         }
-
+        
         if (other.transform.tag.Equals("Player") == true)
         {
             // 데미지 처리
@@ -387,6 +493,8 @@ public class ZombieEnemy : MonoBehaviour {
 
                 AttackCoroutine = null;
                 AttackCoroutine = AttackProtocol(true);
+
+                Player_Ojbect.GetComponent<Player>().DamegeToPlayer(10);
 
                 StopCoroutine(AttackCoroutine);
                 StartCoroutine(AttackCoroutine);

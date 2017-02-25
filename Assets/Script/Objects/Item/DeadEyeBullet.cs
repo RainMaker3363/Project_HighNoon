@@ -10,6 +10,7 @@ public class DeadEyeBullet : MonoBehaviour {
     private SphereCollider spcol;
     private bool RespawnChecker;
     public GameObject DeadEyeBullet_Object;
+    public Transform[] DeadEyeRespawnTrans;
 
     // Use this for initialization
     void Start()
@@ -29,7 +30,39 @@ public class DeadEyeBullet : MonoBehaviour {
             spcol = GetComponent<SphereCollider>();
         }
 
+        // 게임 모드 별로 랜덤 값을 지정해준다.
+        switch(NowGameModeState)
+        {
+            case GameModeState.Single:
+                {
+
+                }
+                break;
+
+            case GameModeState.MiniGame:
+                {
+                    
+                    int RespawnNumber = Random.Range(0, DeadEyeRespawnTrans.Length);
+                    this.transform.position = DeadEyeRespawnTrans[RespawnNumber].transform.position;
+                }
+                break;
+
+            case GameModeState.Multi:
+                {
+
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+
+                }
+                break;
+        }
+
+
         RespawnChecker = false;
+
 
         //StartCoroutine(ResurectionProtocol(true));
         //StopCoroutine(ResurectionProtocol(true));
@@ -62,6 +95,36 @@ public class DeadEyeBullet : MonoBehaviour {
             spcol = GetComponent<SphereCollider>();
         }
 
+        // 게임 모드 별로 랜덤 값을 지정해준다.
+        switch (NowGameModeState)
+        {
+            case GameModeState.Single:
+                {
+
+                }
+                break;
+
+            case GameModeState.MiniGame:
+                {
+
+                    int RespawnNumber = Random.Range(0, DeadEyeRespawnTrans.Length);
+                    this.transform.position = DeadEyeRespawnTrans[RespawnNumber].transform.position;
+                }
+                break;
+
+            case GameModeState.Multi:
+                {
+
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+
+                }
+                break;
+        }
+
         RespawnChecker = false;
 
         //StartCoroutine(ResurectionProtocol(true));
@@ -84,6 +147,30 @@ public class DeadEyeBullet : MonoBehaviour {
 
         //RespawnChecker = true;
         RespawnChecker = false;
+
+        spcol.enabled = true;
+        DeadEyeBullet_Object.gameObject.SetActive(true);
+
+    }
+
+    IEnumerator RandomResurectionProtocol()
+    {
+        Debug.Log("Protocol Start!");
+
+        RespawnChecker = true;
+
+        spcol.enabled = false;
+        DeadEyeBullet_Object.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(20.0f);
+
+        Debug.Log("Protocol End!");
+
+        //RespawnChecker = true;
+        RespawnChecker = false;
+
+        int RespawnNumber = Random.Range(0, DeadEyeRespawnTrans.Length);
+        this.transform.position = DeadEyeRespawnTrans[RespawnNumber].transform.position;
 
         spcol.enabled = true;
         DeadEyeBullet_Object.gameObject.SetActive(true);
@@ -209,6 +296,23 @@ public class DeadEyeBullet : MonoBehaviour {
                         case GameState.PLAY:
                             {
                                 //NormalBullet_Object.transform.Rotate(new Vector3(0.0f, 65.0f, 0.0f) * Time.deltaTime);
+
+                                if (GameManager.DeadEyeActiveOn == false)
+                                {
+                                    if (DeadEyeBullet_Object.activeSelf == false)
+                                    {
+                                        if (RespawnChecker == false)
+                                        {
+                                            ActiveCoroutine = null;
+                                            ActiveCoroutine = RandomResurectionProtocol();
+
+                                            StopCoroutine(ActiveCoroutine);
+                                            StartCoroutine(ActiveCoroutine);
+                                        }
+
+
+                                    }
+                                }
                             }
                             break;
 

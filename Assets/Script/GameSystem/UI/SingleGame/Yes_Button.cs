@@ -3,14 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class Yes_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    public GameObject Exit_Dialog_Object;
 
     // Use this for initialization
     void Start()
     {
-        Exit_Dialog_Object.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -101,11 +100,7 @@ public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler
     public virtual void OnPointerDown(PointerEventData ped)
     {
 
-        GameManager.NowGameState = GameState.PAUSE;
-
-        Exit_Dialog_Object.SetActive(true);
-        
-        //AutoFade.LoadLevel("MainMenuScene", 0.3f, 0.3f, Color.black);
+        AutoFade.LoadLevel("MainMenuScene", 0.3f, 0.3f, Color.black);
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

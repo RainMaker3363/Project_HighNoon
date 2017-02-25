@@ -264,6 +264,7 @@ public class Player : MonoBehaviour {
     {
 
         ModeState = GameManager.NowGameModeState;
+        State = GameManager.NowGameState;
 
         //print("PlayerState : " + playerState);
         //print("transform.rotation.y : " + transform.rotation.eulerAngles);
@@ -1008,7 +1009,7 @@ public class Player : MonoBehaviour {
                                             // 조준선 표시 여부
                                             Player_Tranjectory.enabled = true;
                                             // 현재 총알에 대한 UI 표시
-                                            BulletInfoText.text = (BulletQuantity.ToString() + "/6").ToString();
+                                            BulletInfoText.text = (BulletQuantity.ToString() + "/" + GameManager.NowPlayerMaxBulletQuantity.ToString()).ToString();
 
                                             // 플레이어의 움직임
                                             if (NowMovePlayer)
@@ -1245,7 +1246,7 @@ public class Player : MonoBehaviour {
                                             // 조준선 표시 여부
                                             Player_Tranjectory.enabled = true;
                                             // 현재 총알에 대한 UI 표시
-                                            BulletInfoText.text = (BulletQuantity.ToString() + "/6").ToString();
+                                            BulletInfoText.text = (BulletQuantity.ToString() + "/" + GameManager.NowPlayerMaxBulletQuantity.ToString()).ToString();
 
                                             // 플레이어의 움직임
                                             if (NowMovePlayer)
@@ -1464,42 +1465,54 @@ public class Player : MonoBehaviour {
                                         {
                                             if (GameManager.DeadEyeActiveOn == true)
                                             {
-                                                Player_Tranjectory.enabled = false;
-                                                //PlayerAniState = AnimationState.DEADEYING;
+                                                if (GameManager.DeadEyeFailOn == false)
+                                                {
+                                                    Player_Tranjectory.enabled = false;
+                                                    //PlayerAniState = AnimationState.DEADEYING;
 
-                                                if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-                                                    || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
-                                                {
-                                                    PlayerAniState = AnimationState.UPSTAND;
+                                                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                                                        || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                                                    {
+                                                        PlayerAniState = AnimationState.UPSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.RIGHTSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.RIGHTDOWNSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.DOWNSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.LEFTDOWNSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.LEFTSTAND;
+                                                    }
+                                                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                                                    {
+                                                        PlayerAniState = AnimationState.LEFTUPSTAND;
+                                                    }
                                                 }
-                                                else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                                                else
                                                 {
-                                                    PlayerAniState = AnimationState.RIGHTUPSTAND;
+                                                    // 회전 값 백업 다시 채우기
+                                                    MoveVector = PrevPlayerRot;
+                                                    JoyStickControl.InitInputVector();
+
+                                                    playerState = PlayerState.REALBATTLE;
                                                 }
-                                                else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.RIGHTSTAND;
-                                                }
-                                                else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.RIGHTDOWNSTAND;
-                                                }
-                                                else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.DOWNSTAND;
-                                                }
-                                                else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.LEFTDOWNSTAND;
-                                                }
-                                                else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.LEFTSTAND;
-                                                }
-                                                else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
-                                                {
-                                                    PlayerAniState = AnimationState.LEFTUPSTAND;
-                                                }
+
                                             }
                                             else
                                             {
@@ -1644,86 +1657,189 @@ public class Player : MonoBehaviour {
     public void Shoot()
     {
         //ShootAniOn = m_PlayerAni.GetShootAniOn();
-
-        switch (playerState)
+        switch(ModeState)
         {
-            case PlayerState.NORMAL:
+            case GameModeState.Single:
                 {
-                    // 총알의 개수 파악하기
-                    if (BulletQuantity > 0)
+                    switch (playerState)
                     {
-                        if (BulletStack > 0)
-                        {
-
-                            // 재장전이 다 되어있다면 발사한다.
-                            if (ReloadSuccessOn == true)
+                        case PlayerState.NORMAL:
                             {
-                                if ((ShootOn == true))
+                                // 총알의 개수 파악하기
+                                if (BulletQuantity > 0)
                                 {
-                                    StopCoroutine(ShootProtocol(true));
-                                    StartCoroutine(ShootProtocol(true));
+                                    if (BulletStack > 0)
+                                    {
+
+                                        // 재장전이 다 되어있다면 발사한다.
+                                        if (ReloadSuccessOn == true)
+                                        {
+                                            if ((ShootOn == true))
+                                            {
+                                                StopCoroutine(ShootProtocol(true));
+                                                StartCoroutine(ShootProtocol(true));
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        StopCoroutine(ReloadProtocol(true));
+                                        StartCoroutine(ReloadProtocol(true));
+                                    }
                                 }
+
                             }
-                        }
-                        else
-                        {
-                            StopCoroutine(ReloadProtocol(true));
-                            StartCoroutine(ReloadProtocol(true));
-                        }
+                            break;
+
+                        case PlayerState.REALBATTLE:
+                            {
+                                // 총알의 개수 파악하기
+                                if (BulletQuantity > 0)
+                                {
+                                    if (BulletStack > 0)
+                                    {
+
+                                        // 재장전이 다 되어있다면 발사한다.
+                                        if (ReloadSuccessOn == true)
+                                        {
+                                            if ((ShootOn == true))
+                                            {
+                                                StopCoroutine(ShootProtocol(true));
+                                                StartCoroutine(ShootProtocol(true));
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        StopCoroutine(ReloadProtocol(true));
+                                        StartCoroutine(ReloadProtocol(true));
+                                    }
+                                }
+
+                            }
+                            break;
+
+                        case PlayerState.DEADEYE:
+                            {
+                                //if (DeadEyeActive == false)
+                                //{
+                                //    StopCoroutine(DeadEyeProtocol);
+
+                                //    DeadEyeProtocol = null;
+                                //    DeadEyeProtocol = DeadEyeShootProtocol(true);
+
+                                //    StartCoroutine(DeadEyeProtocol);
+                                //}
+
+                            }
+                            break;
+
+                        case PlayerState.DEAD:
+                            {
+                                this.gameObject.SetActive(false);
+                            }
+                            break;
                     }
-          
                 }
                 break;
 
-            case PlayerState.REALBATTLE:
+            case GameModeState.Multi:
                 {
-                    // 총알의 개수 파악하기
-                    if (BulletQuantity > 0)
+
+                }
+                break;
+
+            case GameModeState.MiniGame:
+                {
+                    switch (playerState)
                     {
-                        if (BulletStack > 0)
-                        {
-
-                            // 재장전이 다 되어있다면 발사한다.
-                            if (ReloadSuccessOn == true)
+                        case PlayerState.NORMAL:
                             {
-                                if ((ShootOn == true))
+                                // 총알의 개수 파악하기
+                                if (BulletQuantity > 0)
                                 {
-                                    StopCoroutine(ShootProtocol(true));
-                                    StartCoroutine(ShootProtocol(true));
+                                    if (BulletStack > 0)
+                                    {
+
+                                        // 재장전이 다 되어있다면 발사한다.
+                                        if (ReloadSuccessOn == true)
+                                        {
+                                            if ((ShootOn == true))
+                                            {
+                                                StopCoroutine(ShootProtocol(true));
+                                                StartCoroutine(ShootProtocol(true));
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        StopCoroutine(ReloadProtocol(true));
+                                        StartCoroutine(ReloadProtocol(true));
+                                    }
                                 }
+
                             }
-                        }
-                        else
-                        {
-                            StopCoroutine(ReloadProtocol(true));
-                            StartCoroutine(ReloadProtocol(true));
-                        }
+                            break;
+
+                        case PlayerState.REALBATTLE:
+                            {
+                                // 총알의 개수 파악하기
+                                if (BulletQuantity > 0)
+                                {
+                                    if (BulletStack > 0)
+                                    {
+
+                                        // 재장전이 다 되어있다면 발사한다.
+                                        if (ReloadSuccessOn == true)
+                                        {
+                                            if ((ShootOn == true))
+                                            {
+                                                StopCoroutine(ShootProtocol(true));
+                                                StartCoroutine(ShootProtocol(true));
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        StopCoroutine(ReloadProtocol(true));
+                                        StartCoroutine(ReloadProtocol(true));
+                                    }
+                                }
+
+                            }
+                            break;
+
+                        case PlayerState.DEADEYE:
+                            {
+                                //if (DeadEyeActive == false)
+                                //{
+                                //    StopCoroutine(DeadEyeProtocol);
+
+                                //    DeadEyeProtocol = null;
+                                //    DeadEyeProtocol = DeadEyeShootProtocol(true);
+
+                                //    StartCoroutine(DeadEyeProtocol);
+                                //}
+
+                            }
+                            break;
+
+                        case PlayerState.DEAD:
+                            {
+                                this.gameObject.SetActive(false);
+                            }
+                            break;
                     }
-                    
                 }
                 break;
 
-            case PlayerState.DEADEYE:
+            case GameModeState.NotSelect:
                 {
-                    //if (DeadEyeActive == false)
-                    //{
-                    //    StopCoroutine(DeadEyeProtocol);
-                        
-                    //    DeadEyeProtocol = null;
-                    //    DeadEyeProtocol = DeadEyeShootProtocol(true);
 
-                    //    StartCoroutine(DeadEyeProtocol);
-                    //}
-
-                }
-                break;
-
-            case PlayerState.DEAD:
-                {
-                    this.gameObject.SetActive(false);
                 }
                 break;
         }
+
 
 
 
@@ -2013,6 +2129,18 @@ public class Player : MonoBehaviour {
     //    Debug.Log("Shoot Cool End!");
     //}
 
+    public void DamegeToPlayer(int Damege)
+    {
+        if(HP > 0)
+        {
+            HP -= Damege;
+        }
+        else
+        {
+            HP = 0;
+        }
+
+    }
     public PlayerState GetPlayerState()
     {
         return playerState;
@@ -2190,44 +2318,171 @@ public class Player : MonoBehaviour {
         {
             Debug.Log("Bullet Get !");
 
-            if (BulletQuantity >= 6)
+            switch(ModeState)
             {
-                BulletQuantity = 6;
-            }
-            else
-            {
-                BulletQuantity++;
-            }
-            
+                case GameModeState.Single:
+                    {
+                        if (BulletQuantity >= 6)
+                        {
+                            BulletQuantity = 6;
+                        }
+                        else
+                        {
+                            BulletQuantity++;
+                        }
 
-            ItemInfoText.text = ("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
-            ItemInfoText.gameObject.SetActive(true);
 
-            Debug.Log("BulletQuantity : " + BulletQuantity);
+                        ItemInfoText.text = ("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                        ItemInfoText.gameObject.SetActive(true);
+
+                        Debug.Log("BulletQuantity : " + BulletQuantity);
+                    }
+                    break;
+
+                case GameModeState.MiniGame:
+                    {
+                        if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                        {
+                            BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                        }
+                        else
+                        {
+                            BulletQuantity += GameManager.NowPlayerBulletPlusQuantity;
+
+                            if(BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                            {
+                                BulletQuantity = GameManager.NowPlayerBulletPlusQuantity;
+                            }
+
+                        }
+
+
+                        ItemInfoText.text = ("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                        ItemInfoText.gameObject.SetActive(true);
+
+                        Debug.Log("BulletQuantity : " + BulletQuantity);
+                    }
+                    break;
+
+                case GameModeState.Multi:
+                    {
+
+                    }
+                    break;
+
+                case GameModeState.NotSelect:
+                    {
+
+                    }
+                    break;
+            }
+          
         }
         
         if (other.transform.tag.Equals("DeadEyeBox") == true)
         {
             // 데드아이를 준비한다.
-
-            DeadEyeReady = true;
-            DeadEyeActive = true;
-
-            playerState = PlayerState.DEADEYE;
-            
-            if(Single_VersusActionObject.activeSelf == false)
+            switch(ModeState)
             {
-                Single_VersusActionObject.SetActive(true);
+                case GameModeState.Single:
+                    {
+                        DeadEyeReady = true;
+                        DeadEyeActive = true;
 
-                GameObject Enemy = GameObject.FindWithTag("Enemy");
-                this.gameObject.transform.LookAt(Enemy.transform.position);
+                        playerState = PlayerState.DEADEYE;
 
-                // 플레이어의 회전 값 백업
-                PrevPlayerRot = this.gameObject.transform.rotation.eulerAngles;
+                        if (Single_VersusActionObject.activeSelf == false)
+                        {
+                            Single_VersusActionObject.SetActive(true);
+
+                            GameObject Enemy = GameObject.FindWithTag("Enemy");
+                            this.gameObject.transform.LookAt(Enemy.transform.position);
+
+                            // 플레이어의 회전 값 백업
+                            PrevPlayerRot = this.gameObject.transform.rotation.eulerAngles;
+                        }
+
+                        GameManager.DeadEyeActiveOn = true;
+                        GameManager.DeadEyeVersusAction = true;
+                    }
+                    break;
+
+                case GameModeState.MiniGame:
+                    {
+                        DeadEyeReady = true;
+                        DeadEyeActive = true;
+
+                        playerState = PlayerState.DEADEYE;
+
+                        if (Single_VersusActionObject.activeSelf == false)
+                        {
+                            Single_VersusActionObject.SetActive(true);
+
+                            //GameObject Enemy = GameObject.FindWithTag("Enemy");
+                            //this.gameObject.transform.LookAt(Enemy.transform.position);
+
+
+                            // 플레이어의 회전 값 백업
+                            PrevPlayerRot = this.gameObject.transform.rotation.eulerAngles;
+                        }
+
+                        GameManager.DeadEyeActiveOn = true;
+                        GameManager.DeadEyeVersusAction = true;
+                    }
+                    break;
+
+                case GameModeState.Multi:
+                    {
+
+                    }
+                    break;
+
+                case GameModeState.NotSelect:
+                    {
+
+                    }
+                    break;
             }
-            
-            GameManager.DeadEyeActiveOn = true;
-            GameManager.DeadEyeVersusAction = true;
+
+        }
+
+        if(other.transform.tag.Equals("ZombieEnemy") == true)
+        {
+            switch (ModeState)
+            {
+                case GameModeState.Single:
+                    {
+
+                    }
+                    break;
+
+                case GameModeState.MiniGame:
+                    {
+
+                    }
+                    break;
+
+                case GameModeState.Multi:
+                    {
+                        if(HP > 0)
+                        {
+                            HP = 0;
+                        }
+                        else
+                        {
+                            HP -= 10;
+                        }
+                        
+                    }
+                    break;
+
+                case GameModeState.NotSelect:
+                    {
+
+                    }
+                    break;
+            }
         }
     }
+
 }

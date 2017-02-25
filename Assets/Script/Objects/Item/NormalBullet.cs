@@ -13,6 +13,8 @@ public class NormalBullet : MonoBehaviour {
     private AudioSource Audio;
     public AudioClip Get_Sound;
 
+    private float ResurectTime;
+
     // Use this for initialization
     void Start()
     {
@@ -85,7 +87,7 @@ public class NormalBullet : MonoBehaviour {
         spcol.enabled = false;
         NormalBullet_Object.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(ResurectTime);
 
         Debug.Log("Protocol End!");
 
@@ -148,6 +150,9 @@ public class NormalBullet : MonoBehaviour {
 
             case GameModeState.Single:
                 {
+                    // 쿨타임 정하기
+                    ResurectTime = 2.5f;
+
                     switch (NowGameState)
                     {
                         case GameState.PLAY:
@@ -191,6 +196,9 @@ public class NormalBullet : MonoBehaviour {
 
             case GameModeState.MiniGame:
                 {
+                    // 쿨타임 정하기
+                    ResurectTime = 6.0f;
+
                     switch (NowGameState)
                     {
                         case GameState.PLAY:

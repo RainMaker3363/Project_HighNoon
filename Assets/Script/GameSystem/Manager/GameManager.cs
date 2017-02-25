@@ -104,6 +104,19 @@ public class GameManager : MonoBehaviour {
     // 데드 아이 리볼버 모션의 끝난 여부
     public static bool DeadEyeRevolverAction;
 
+    // 데드 아이 성공 여부
+    public static bool DeadEyeFailOn;
+
+    // 미니게임에 쓰일 주인공 총알 정보들...
+    public static int NowPlayerBulletPlusQuantity;
+    public static int NowPlayerMaxBulletQuantity;
+
+    // 미니 게임에 쓰일 정보들...
+    private float Minigame_StartTimer;
+    private float Minigame_RoundTimer;
+    public static int MiniGame_Round;
+    public static int EnemyKillCount;
+
 	// Use this for initialization
 	void Awake () 
     {
@@ -119,6 +132,8 @@ public class GameManager : MonoBehaviour {
 
         print("NowGameModeState : " + NowGameModeState.ToString());
 
+        NowPlayerBulletPlusQuantity = 1;
+        NowPlayerMaxBulletQuantity = 6;
 
         switch(NowGameModeState)
         {
@@ -127,6 +142,9 @@ public class GameManager : MonoBehaviour {
                     DeadEyeActiveOn = false;
                     DeadEyeVersusAction = false;
                     DeadEyeRevolverAction = false;
+                    DeadEyeFailOn = false;
+
+                    NowGameState = GameState.PLAY;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
@@ -137,6 +155,7 @@ public class GameManager : MonoBehaviour {
                     DeadEyeActiveOn = false;
                     DeadEyeVersusAction = false;
                     DeadEyeRevolverAction = false;
+                    DeadEyeFailOn = false;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
@@ -147,6 +166,14 @@ public class GameManager : MonoBehaviour {
                     DeadEyeActiveOn = false;
                     DeadEyeVersusAction = false;
                     DeadEyeRevolverAction = false;
+                    DeadEyeFailOn = false;
+
+                    MiniGame_Round = 1;
+                    Minigame_StartTimer = 30.0f;
+                    Minigame_RoundTimer = 10.0f;
+                    EnemyKillCount = 0;
+
+                    //NowGameState = GameState.START;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
@@ -157,6 +184,7 @@ public class GameManager : MonoBehaviour {
                     DeadEyeActiveOn = false;
                     DeadEyeVersusAction = false;
                     DeadEyeRevolverAction = false;
+                    DeadEyeFailOn = false;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
@@ -198,6 +226,70 @@ public class GameManager : MonoBehaviour {
         //{
         //    NowGameState = GameState.VICTORY;
         //}
+        switch (NowGameModeState)
+        {
+            case GameModeState.Single:
+                {
+
+                }
+                break;
+
+            case GameModeState.Multi:
+                {
+                    switch(NowGameState)
+                    {
+                        case GameState.START:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.PLAY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.PAUSE:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.EVENT:
+                            {
+
+                            }
+                            break;
+
+
+                        case GameState.VICTORY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+
+                            }
+                            break;
+                    }
+                }
+                break;
+
+            case GameModeState.MiniGame:
+                {
+
+                }
+                break;
+
+            case GameModeState.NotSelect:
+                {
+
+                }
+                break;
+        }
 
         switch(Application.platform)
         {
