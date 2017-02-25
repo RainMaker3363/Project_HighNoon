@@ -3,64 +3,22 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class MiniGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public SoundManager SDManager;
     public AudioClip Button_Touch_Sound;
 
     private bool buttonDown;
-    private bool MultiButtonDownCheck;
-    
-    public Text NetText;
-    public Text NetWarningText;
-    public Text NetReadyText;
 
     // Use this for initialization
     void Start()
     {
         buttonDown = false;
-        MultiButtonDownCheck = false;
-        
     }
-
-    IEnumerator StartMultiGame()
+	
+	// Update is called once per frame
+	void Update () 
     {
-        yield return new WaitForSeconds(1.0f);
-
-        AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        NetText.text = GPGSManager.GetInstance.GetNetMessage();
-
-        if(GPGSManager.GetInstance.IsAuthenticated())
-        {
-            NetWarningText.text = "구글 계정이 연결 되었습니다.";
-        }
-        else
-        {
-            NetWarningText.text = "구글 계정이 아직 연결되지 않았습니다.";
-        }
-
-        if (GPGSManager.GetInstance.IsConnected() == true)
-        {
-            MultiButtonDownCheck = true;
-            MainMenuManager.StartMultiGameOn = true;
-
-            NetReadyText.text = "잠시후 멀티 게임을 시작합니다.";
-
-            StartCoroutine(StartMultiGame());
-        }
-        else
-        {
-            MainMenuManager.StartMultiGameOn = false;
-            MultiButtonDownCheck = false;
-
-            NetReadyText.text = "아직 멀티 게임을 준비 중입니다...";
-        }
-
         //switch (Application.platform)
         //{
         //    case RuntimePlatform.Android:
@@ -84,6 +42,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         //                    case TouchPhase.Began:
         //                        {
         //                            Debug.Log("TouchPhase Began!");
+
         //                        }
         //                        break;
 
@@ -132,7 +91,7 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         //        }
         //        break;
         //}
-    }
+	}
 
     // 터치가 드래그(Drag) 했을때 호출 되는 함수
     public virtual void OnDrag(PointerEventData ped)
@@ -144,52 +103,20 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        if(GPGSManager.GetInstance.IsAuthenticated() == true)
+
+        if (MainMenuManager.MainModeBtnDownOn == true)
         {
-            if (MainMenuManager.MainModeBtnDownOn == true)
+            if (buttonDown == false)
             {
-                MainMenuManager.StartMultiGameOn = true;
+                buttonDown = true;
 
-                if (buttonDown == false)
-                {
-                    buttonDown = true;
+                SDManager.PlaySfx(Button_Touch_Sound);
 
-                    SDManager.PlaySfx(Button_Touch_Sound);
+                MainMenuManager.gameMode = GameModeState.MiniGame;
 
-                    MainMenuManager.gameMode = GameModeState.Multi;
-
-
-
-                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-
-                    //GPGSManager.GetInstance.SignInAndStartMPGame();
-                }
-
-                if (MultiButtonDownCheck == false)
-                {
-                    MultiButtonDownCheck = true;
-
-                    if (GPGSManager.GetInstance.IsConnected() == false)
-                    {
-
-                        GPGSManager.GetInstance.SignInAndStartMPGame();
-
-                        //GPGSManager.GetInstance.ShowRoomUI();
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                    }
-                    else
-                    {
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                    }
-                }
-
-
-                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+                //AutoFade.LoadLevel("TestScene", 0.2f, 0.2f, Color.black);
             }
         }
-  
-
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

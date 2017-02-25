@@ -72,6 +72,12 @@ public class MainMenuManager : MonoBehaviour {
                 }
                 break;
 
+            case GameModeState.MiniGame:
+                {
+                    GameManager.NowGameModeState = GameModeState.MiniGame;
+                }
+                break;
+
             case GameModeState.NotSelect:
                 {
                     //_showLobbyDialog = false;

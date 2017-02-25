@@ -7,7 +7,7 @@ public class FlyingCamera : MonoBehaviour {
     private GameControlState ControlState;
 
     private PlayerState playerState;
-    private Vector3 BackPos;
+    //private Vector3 BackPos;
 
     public GameObject PlayerObject;
     private Player m_Player;
@@ -48,7 +48,7 @@ public class FlyingCamera : MonoBehaviour {
 
         DeadEyeSoundCheck = false;
 
-        BackPos = this.transform.position;
+        //BackPos = this.transform.position;
 	}
 	
 	// Update is called once per frame

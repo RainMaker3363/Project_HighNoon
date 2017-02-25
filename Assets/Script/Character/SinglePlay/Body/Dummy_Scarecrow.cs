@@ -65,6 +65,15 @@ public class Dummy_Scarecrow : MonoBehaviour {
                 }
                 break;
 
+            case GameModeState.MiniGame:
+                {
+                    if (m_Player == null)
+                    {
+                        m_Player = GameObject.FindWithTag("Player");
+                    }
+                }
+                break;
+
             case GameModeState.NotSelect:
                 {
                     if (m_Player == null)

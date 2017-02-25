@@ -7,8 +7,8 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 {
 
     
-    private GameState State;
-    private PlayerState playerState;
+    //private GameState State;
+    //private PlayerState playerState;
     
     private Image img;
     // 주인공 오브젝트
@@ -35,26 +35,26 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            playerState = m_Player.playerState;
+            //playerState = m_Player.playerState;
             //DeadEyeReady = m_Player.GetDeadEyeReady();
         }
         else
         {
-            playerState = m_Player.playerState;
+            //playerState = m_Player.playerState;
             //DeadEyeReady = m_Player.GetDeadEyeReady();
         }
 
         
 
-        State = GameManager.NowGameState;
+        //State = GameManager.NowGameState;
         
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        State = GameManager.NowGameState;
-        playerState = m_Player.playerState;
+        //State = GameManager.NowGameState;
+        //playerState = m_Player.playerState;
 
         //DeadEyeReady = m_Player.GetDeadEyeReady();
         //DeadEyeActive = m_Player.GetDeadEyeActive();

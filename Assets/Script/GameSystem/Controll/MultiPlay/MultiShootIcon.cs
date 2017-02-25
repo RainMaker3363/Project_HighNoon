@@ -5,8 +5,8 @@ using System.Collections;
 
 public class MultiShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    private GameState State;
-    private MultiPlayerState playerState;
+    //private GameState State;
+    //private MultiPlayerState playerState;
 
     private Image img;
     // 주인공 오브젝트
@@ -34,26 +34,26 @@ public class MultiShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         if (m_Player == null)
         {
             m_Player = GameObject.FindWithTag("Player").GetComponent<MulPlayer>();
-            playerState = m_Player.playerState;
+            //playerState = m_Player.playerState;
             DeadEyeReady = m_Player.GetDeadEyeReady();
         }
         else
         {
-            playerState = m_Player.playerState;
+            //playerState = m_Player.playerState;
             DeadEyeReady = m_Player.GetDeadEyeReady();
         }
 
 
 
-        State = MultiGameManager.NowGameState;
+        //State = MultiGameManager.NowGameState;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        State = MultiGameManager.NowGameState;
-        playerState = m_Player.playerState;
+        //State = MultiGameManager.NowGameState;
+        //playerState = m_Player.playerState;
 
         DeadEyeReady = m_Player.GetDeadEyeReady();
         DeadEyeActive = m_Player.GetDeadEyeActive();

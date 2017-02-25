@@ -27,11 +27,7 @@ public class PietaEnemyBullet : MonoBehaviour {
         }
 
         //this.transform.Rotate(new Vector3(-90.0f, 0.0f, 0.0f));
-        
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Enemy"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Item"), true);
+
 
         StopCoroutine(DeadProtocol(true));
         StartCoroutine(DeadProtocol(true));

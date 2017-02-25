@@ -67,12 +67,6 @@ public class PlayerBullet : MonoBehaviour {
         StopCoroutine(DeadOrAliveCoroutine);
         StartCoroutine(DeadOrAliveCoroutine);
 
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Player"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerBullet"), LayerMask.NameToLayer("Item"), true);
-
-
     }
 
     IEnumerator DeadProtocol(bool On = true)

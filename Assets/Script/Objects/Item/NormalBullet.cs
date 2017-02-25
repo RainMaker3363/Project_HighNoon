@@ -189,6 +189,49 @@ public class NormalBullet : MonoBehaviour {
                 }
                 break;
 
+            case GameModeState.MiniGame:
+                {
+                    switch (NowGameState)
+                    {
+                        case GameState.PLAY:
+                            {
+                                //NormalBullet_Object.transform.Rotate(new Vector3(0.0f, 65.0f, 0.0f) * Time.deltaTime);
+                            }
+                            break;
+
+                        case GameState.START:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.PAUSE:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.EVENT:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.VICTORY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+
+                            }
+                            break;
+                    }
+                }
+                break;
+
             case GameModeState.NotSelect:
                 {
 
