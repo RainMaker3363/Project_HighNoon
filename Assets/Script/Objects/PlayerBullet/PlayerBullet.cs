@@ -93,7 +93,7 @@ public class PlayerBullet : MonoBehaviour {
                 {
                     //print("Distance : " + (this.transform.position - MyPos).magnitude);
 
-                    if ((this.transform.position - MyPos).magnitude >= 6.0f)
+                    if ((this.transform.position - MyPos).magnitude >= 10.0f)
                     {
                         DeadOrAliveCoroutine = null;
                         DeadOrAliveCoroutine = DeadProtocol(true);
@@ -155,6 +155,11 @@ public class PlayerBullet : MonoBehaviour {
         if(other.transform.tag.Equals("Enemy"))
         {
 
+            this.gameObject.SetActive(false);
+        }
+
+        if(other.transform.tag.Equals("ZombieEnemy") == true)
+        {
             this.gameObject.SetActive(false);
         }
     }

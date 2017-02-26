@@ -402,17 +402,162 @@ public class DeadEyeBullet : MonoBehaviour {
     {
         if (other.transform.tag.Equals("Player") == true)
         {
+            switch (NowGameModeState)
+            {
+                case GameModeState.Multi:
+                    {
+                        switch (NowGameState)
+                        {
+                            case GameState.PLAY:
+                                {
 
-            print("DeadEye Trigger Start!");
+                                }
+                                break;
 
-            spcol.enabled = false;
-            DeadEyeBullet_Object.gameObject.SetActive(false);
+                            case GameState.START:
+                                {
 
-            ActiveCoroutine = null;
-            ActiveCoroutine = ResurectionProtocol();
+                                }
+                                break;
 
-            StopCoroutine(ActiveCoroutine);
-            //StartCoroutine(ActiveCoroutine);
+                            case GameState.PAUSE:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.EVENT:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.VICTORY:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.GAMEOVER:
+                                {
+
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case GameModeState.Single:
+                    {
+                        switch (NowGameState)
+                        {
+                            case GameState.PLAY:
+                                {
+                                    print("DeadEye Trigger Start!");
+
+                                    spcol.enabled = false;
+                                    DeadEyeBullet_Object.gameObject.SetActive(false);
+
+                                    ActiveCoroutine = null;
+                                    ActiveCoroutine = ResurectionProtocol();
+
+                                    StopCoroutine(ActiveCoroutine);
+                                    //StartCoroutine(ActiveCoroutine);
+                                }
+                                break;
+
+                            case GameState.START:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.PAUSE:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.EVENT:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.VICTORY:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.GAMEOVER:
+                                {
+
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case GameModeState.MiniGame:
+                    {
+                        switch (NowGameState)
+                        {
+                            case GameState.PLAY:
+                                {
+                                    print("DeadEye Trigger Start!");
+
+                                    spcol.enabled = false;
+                                    DeadEyeBullet_Object.gameObject.SetActive(false);
+
+                                    ActiveCoroutine = null;
+                                    ActiveCoroutine = ResurectionProtocol();
+
+                                    StopCoroutine(ActiveCoroutine);
+                                    //StartCoroutine(ActiveCoroutine);
+                                }
+                                break;
+
+                            case GameState.START:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.PAUSE:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.EVENT:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.VICTORY:
+                                {
+
+                                }
+                                break;
+
+                            case GameState.GAMEOVER:
+                                {
+
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case GameModeState.NotSelect:
+                    {
+
+                    }
+                    break;
+            }
+
         }
 
     }

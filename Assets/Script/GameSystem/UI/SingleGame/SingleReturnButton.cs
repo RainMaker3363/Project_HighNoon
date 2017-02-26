@@ -6,16 +6,19 @@ using System.Collections;
 public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public GameObject Exit_Dialog_Object;
+    private GameState state;
 
     // Use this for initialization
     void Start()
     {
+        state = GameManager.NowGameState;
         Exit_Dialog_Object.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        state = GameManager.NowGameState;
         //switch (Application.platform)
         //{
         //    case RuntimePlatform.Android:
@@ -100,11 +103,53 @@ public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        switch(state)
+        {
+            case GameState.START:
+                {
+                    //GameManager.NowGameState = GameState.PAUSE;
 
-        GameManager.NowGameState = GameState.PAUSE;
-
-        Exit_Dialog_Object.SetActive(true);
+                    //Exit_Dialog_Object.SetActive(true);
         
+                }
+                break;
+
+            case GameState.PLAY:
+                {
+                    GameManager.NowGameState = GameState.PAUSE;
+
+                    Exit_Dialog_Object.SetActive(true);
+        
+                }
+                break;
+
+            case GameState.PAUSE:
+                {
+
+                }
+                break;
+
+            case GameState.EVENT:
+                {
+                    //GameManager.NowGameState = GameState.EVENT;
+
+                    //Exit_Dialog_Object.SetActive(true);
+                }
+                break;
+
+            case GameState.VICTORY:
+                {
+
+                }
+                break;
+
+            case GameState.GAMEOVER:
+                {
+
+                }
+                break;
+        }
+
         //AutoFade.LoadLevel("MainMenuScene", 0.3f, 0.3f, Color.black);
     }
 

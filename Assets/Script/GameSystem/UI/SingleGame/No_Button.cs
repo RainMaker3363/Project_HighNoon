@@ -6,17 +6,19 @@ using System.Collections;
 public class No_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public GameObject Exit_Dialog_Object;
-    private GameState BackUpState;
+    //private GameState BackUpState;
 
     // Use this for initialization
     void Start()
     {
-        BackUpState = GameManager.NowGameState;
+        //BackUpState = GameManager.NowGameState;
     }
 
     void OnEnable()
     {
-        BackUpState = GameManager.NowGameState;
+        //BackUpState = GameManager.NowGameState;
+
+       // print(BackUpState);
     }
 
     // Update is called once per frame
@@ -107,7 +109,7 @@ public class No_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
     public virtual void OnPointerDown(PointerEventData ped)
     {
 
-        GameManager.NowGameState = BackUpState;
+        GameManager.NowGameState = GameState.PLAY;
 
         Exit_Dialog_Object.SetActive(false);
 

@@ -18,6 +18,7 @@ public class Single_RevolverTouch : MonoBehaviour {
 
     public static int BulletChecker;
     public static float DeadEyeGage;
+    private float DeadEyeTimer;
 
     private IEnumerator DeadEyeEndCoroutine;
     private List<int> BulletIndex = new List<int>();
@@ -32,6 +33,7 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletChecker = 1;
         GameManager.DeadEyeFailOn = false;
         DeadEyeGage = 100.0f;
+        DeadEyeTimer = 5.0f;
 
         ModeState = GameManager.NowGameModeState;
 
@@ -123,6 +125,7 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletChecker = 1;
         GameManager.DeadEyeFailOn = false;
         DeadEyeGage = 100.0f;
+        DeadEyeTimer = 5.0f;
 
         ModeState = GameManager.NowGameModeState;
 
@@ -241,36 +244,62 @@ public class Single_RevolverTouch : MonoBehaviour {
             case GameModeState.MiniGame:
                 {
 
-
-                    if (GameManager.DeadEyeFailOn == false)
+                    if (DeadEyeTimer > 0)
                     {
-                        if (BulletChecker > Bullets.Length)
+                        DeadEyeTimer -= Time.deltaTime;
+
+
+                        if (GameManager.DeadEyeFailOn == false)
                         {
 
+                            if (BulletChecker > Bullets.Length)
+                            {
+
+                                GameManager.DeadEyeVersusAction = false;
+                                GameManager.DeadEyeRevolverAction = false;
+                                GameManager.DeadEyeFailOn = false;
+
+                                Single_RevolverTouch_BG_object.SetActive(false);
+                                Single_RevolverAction_Object.SetActive(false);
+                                Single_RevolverBullets_Object.SetActive(false);
+                                Single_RevolverLetterBox_BG_Object.SetActive(false);
+
+                                AnnounceText.text = " ";
+
+                                DeadEyeEndCoroutine = null;
+                                DeadEyeEndCoroutine = LetterBoxProtocol(true);
+
+                                StopCoroutine(DeadEyeEndCoroutine);
+                                StartCoroutine(DeadEyeEndCoroutine);
+                            }
+                            else
+                            {
+                                DeadEyeGage -= (33.0f * Time.deltaTime);
+                            }
+                        }
+                        else
+                        {
                             GameManager.DeadEyeVersusAction = false;
                             GameManager.DeadEyeRevolverAction = false;
-                            GameManager.DeadEyeFailOn = false;
+
 
                             Single_RevolverTouch_BG_object.SetActive(false);
                             Single_RevolverAction_Object.SetActive(false);
                             Single_RevolverBullets_Object.SetActive(false);
                             Single_RevolverLetterBox_BG_Object.SetActive(false);
 
-                            AnnounceText.text = " ";
+                            GameManager.DeadEyeActiveOn = false;
+                            Single_RevolverLetterBox_Object.SetActive(false);
+                            InGame_UI_Object.SetActive(true);
+                            this.gameObject.SetActive(false);
 
-                            DeadEyeEndCoroutine = null;
-                            DeadEyeEndCoroutine = LetterBoxProtocol(true);
-
-                            StopCoroutine(DeadEyeEndCoroutine);
-                            StartCoroutine(DeadEyeEndCoroutine);
-                        }
-                        else
-                        {
-                            DeadEyeGage -= (33.0f * Time.deltaTime);
+                            GameManager.DeadEyeFailOn = true;
                         }
                     }
                     else
                     {
+                        DeadEyeTimer = 0.0f;
+
                         GameManager.DeadEyeVersusAction = false;
                         GameManager.DeadEyeRevolverAction = false;
 
@@ -287,6 +316,7 @@ public class Single_RevolverTouch : MonoBehaviour {
 
                         GameManager.DeadEyeFailOn = true;
                     }
+
                 }
                 break;
 

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public enum GameControlState
@@ -114,8 +116,24 @@ public class GameManager : MonoBehaviour {
     // 미니 게임에 쓰일 정보들...
     private float Minigame_StartTimer;
     private float Minigame_RoundTimer;
+    private float MiniGame_EventTimer;
     public static int MiniGame_Round;
     public static int EnemyKillCount;
+    public static bool MiniGame_Upgrade_End;
+    public static int MiniGame_KillCount;
+
+    private IEnumerator MiniGameCoroutine;
+
+    public Text RoundTimer_Text;
+    public Text RoundStart_Text;
+    public GameObject Upgrade_Dialog;
+    public GameObject GameOver_Dialog;
+    //public Transform[] Respawn_Point;
+
+    public GameObject[] Zombie_Swarms_01;
+    public GameObject[] Zombie_Swarms_02;
+    public GameObject[] Zombie_Swarms_03;
+    public GameObject[] Zombie_Swarms_04;
 
 	// Use this for initialization
 	void Awake () 
@@ -127,7 +145,7 @@ public class GameManager : MonoBehaviour {
         //NowGameModeState = GameModeState.Single;
 
         // 임시로 하는거니 나중에 지우세요
-        NowGameModeState = GameModeState.MiniGame;
+        NowGameModeState = GameModeState.Single;
 
 
         print("NowGameModeState : " + NowGameModeState.ToString());
@@ -158,6 +176,7 @@ public class GameManager : MonoBehaviour {
                     DeadEyeFailOn = false;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
+
                 }
                 break;
 
@@ -168,14 +187,33 @@ public class GameManager : MonoBehaviour {
                     DeadEyeRevolverAction = false;
                     DeadEyeFailOn = false;
 
-                    MiniGame_Round = 1;
-                    Minigame_StartTimer = 30.0f;
-                    Minigame_RoundTimer = 10.0f;
-                    EnemyKillCount = 0;
-
                     //NowGameState = GameState.START;
 
+                    MiniGame_Round = 1;
+                    Minigame_StartTimer = 10.0f;
+                    Minigame_RoundTimer = 10.0f;
+                    MiniGame_EventTimer = 10.0f;
+                    EnemyKillCount = 0;
+
+                    MiniGame_Upgrade_End = false;
+
+                    RoundTimer_Text.text = Minigame_StartTimer.ToString();
+                    RoundStart_Text.text = " ";
+                    Upgrade_Dialog.SetActive(false);
+                    GameOver_Dialog.SetActive(false);
+
+                    print("Zombies_01 : " + Zombie_Swarms_01.Length);
+                    print("Zombies_02 : " + Zombie_Swarms_02.Length);
+                    print("Zombies_03 : " + Zombie_Swarms_03.Length);
+                    print("Zombies_04 : " + Zombie_Swarms_04.Length);
+
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
+
+                    MiniGameCoroutine = null;
+                    MiniGameCoroutine = MiniGameStartProtocol(true);
+
+                    StopCoroutine(MiniGameCoroutine);
+                    StartCoroutine(MiniGameCoroutine);
                 }
                 break;
 
@@ -187,6 +225,7 @@ public class GameManager : MonoBehaviour {
                     DeadEyeFailOn = false;
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
+
                 }
                 break;
         }
@@ -202,6 +241,8 @@ public class GameManager : MonoBehaviour {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("PlayerBullet"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("EnemyBullet"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("EnemyBullet"), LayerMask.NameToLayer("Item"), true);
+
+        //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
 
         /* 
          * 유니티 엔진 사용 시 입력을 하지 않으면 모바일 장치의 화면이 어두워지다가 잠기게 되는데,
@@ -230,7 +271,45 @@ public class GameManager : MonoBehaviour {
         {
             case GameModeState.Single:
                 {
+                    switch (NowGameState)
+                    {
+                        case GameState.START:
+                            {
 
+                            }
+                            break;
+
+                        case GameState.PLAY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.PAUSE:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.EVENT:
+                            {
+
+                            }
+                            break;
+
+
+                        case GameState.VICTORY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+
+                            }
+                            break;
+                    }
                 }
                 break;
 
@@ -280,7 +359,173 @@ public class GameManager : MonoBehaviour {
 
             case GameModeState.MiniGame:
                 {
+                    switch (NowGameState)
+                    {
+                        case GameState.START:
+                            {
+                                if(Minigame_StartTimer > 0)
+                                {
+                                    Minigame_StartTimer -= Time.deltaTime;
+                                    RoundTimer_Text.text = Minigame_StartTimer.ToString("0.0") + " 초";
+                                }
+                                else
+                                {
+                                    RoundTimer_Text.text = "0 초";
+                                    //RoundStart_Text.text = "라운드가 시작되었습니다.";
+                                    Minigame_RoundTimer = (100.0f);
 
+                                    for (int i = 0; i < (MiniGame_Round); i++)
+                                    {
+                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                    }
+
+                                    for (int i = 0; i < (MiniGame_Round); i++)
+                                    {
+                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                    }
+
+                                    for (int i = 0; i < (MiniGame_Round); i++)
+                                    {
+                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                    }
+
+                                    for (int i = 0; i < (MiniGame_Round); i++)
+                                    {
+                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                    }
+
+
+                                    NowGameState = GameState.PLAY;
+                                }
+                            }
+                            break;
+
+                        case GameState.PLAY:
+                            {
+                                if (Minigame_RoundTimer > 0.0f)
+                                {
+                                    if(GameManager.DeadEyeActiveOn == false)
+                                    {
+                                        Minigame_RoundTimer -= Time.deltaTime;
+                                        RoundTimer_Text.text = Minigame_RoundTimer.ToString("0.0") + " 초";
+
+                                    }
+                                    else
+                                    {
+                                        Minigame_RoundTimer -= 0.0f;
+                                        RoundTimer_Text.text = Minigame_RoundTimer.ToString("0.0") + " 초";
+                                    }
+
+                                    RoundStart_Text.text = MiniGame_Round.ToString() + "라운드";
+
+                                    print("MiniGame_KillCount : " + MiniGame_KillCount);
+                                    print("4 * MiniGame_Round : " + (4 * MiniGame_Round));
+
+                                    if ((4 * MiniGame_Round) >= 16)
+                                    {
+                                        if (MiniGame_KillCount >= 16)
+                                        {
+                                            MiniGame_Round += 1;
+
+                                            MiniGame_EventTimer = 15.0f;
+                                            MiniGame_KillCount = 0;
+                                            MiniGame_Upgrade_End = false;
+                                            NowGameState = GameState.EVENT;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (MiniGame_KillCount >= (4 * MiniGame_Round))
+                                        {
+                                            MiniGame_Round += 1;
+
+                                            MiniGame_EventTimer = 15.0f;
+                                            MiniGame_KillCount = 0;
+                                            MiniGame_Upgrade_End = false;
+                                            NowGameState = GameState.EVENT;
+                                        }
+                                    }
+
+                                    //MiniGame_KillCount = (EnemyKillCount / 4);
+                                }
+                                else
+                                {
+                                    Minigame_RoundTimer = 0.0f;
+                                    RoundTimer_Text.text = "0 초";
+                                    NowGameState = GameState.GAMEOVER;
+                                }
+                            }
+                            break;
+
+                        case GameState.PAUSE:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.EVENT:
+                            {
+                                if (MiniGame_Upgrade_End == false)
+                                {
+                                    Upgrade_Dialog.SetActive(true);
+                                }
+                                else
+                                {
+                                    Upgrade_Dialog.SetActive(false);
+
+                                    if(MiniGame_EventTimer > 0.0f)
+                                    {
+                                        MiniGame_EventTimer -= Time.deltaTime;
+                                        RoundTimer_Text.text = MiniGame_EventTimer.ToString("0.0") + " 초";
+                                    }
+                                    else
+                                    {
+                                        MiniGame_EventTimer = 0.0f;
+                                        Minigame_RoundTimer = (100.0f + (MiniGame_Round * 10.0f));
+                                        //RoundStart_Text.text = MiniGame_Round.ToString() + "라운드가 시작되었습니다.";
+
+                                        if (MiniGame_Round >= Zombie_Swarms_01.Length)
+                                        {
+                                            for (int i = 0; i < Zombie_Swarms_01.Length; i++)
+                                            {
+                                                Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < MiniGame_Round; i++)
+                                            {
+                                                Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                            }
+                                        }
+
+                                        NowGameState = GameState.PLAY;
+                                        MiniGame_KillCount = 0;
+                                    }
+                                }
+
+                            }
+                            break;
+
+
+                        case GameState.VICTORY:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+                                GameOver_Dialog.SetActive(true);
+                            }
+                            break;
+                    }
                 }
                 break;
 
@@ -322,4 +567,29 @@ public class GameManager : MonoBehaviour {
         }
 
     }
+
+    IEnumerator MiniGameStartProtocol(bool on = true)
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        NowGameState = GameState.START;
+    }
+
+    //IEnumerator WaveStartProtocol(bool On = true)
+    //{
+    //    NowGameState = GameState.START;
+
+    //    yield return new WaitForSeconds(10.0f);
+
+    //    NowGameState = GameState.PLAY;
+    //    Minigame_RoundTimer = (Minigame_StartTimer + (MiniGame_Round * 10.0f));
+    //}
+
+    //IEnumerator WaveReadyProtocol(bool On = true)
+    //{
+
+    //    yield return new WaitForSeconds(10.0f);
+
+    //    NowGameState = GameState.PLAY;
+    //}
 }

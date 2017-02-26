@@ -7,8 +7,8 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 {
 
     
-    //private GameState State;
-    //private PlayerState playerState;
+    private GameState State;
+    private PlayerState playerState;
     
     private Image img;
     // 주인공 오브젝트
@@ -53,8 +53,8 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 	// Update is called once per frame
 	void Update ()
     {
-        //State = GameManager.NowGameState;
-        //playerState = m_Player.playerState;
+        State = GameManager.NowGameState;
+        playerState = m_Player.playerState;
 
         //DeadEyeReady = m_Player.GetDeadEyeReady();
         //DeadEyeActive = m_Player.GetDeadEyeActive();
@@ -101,10 +101,10 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 
         //}
 
-        Debug.Log("Shoot Button");
+        //Debug.Log("Shoot Button");
 
 
-        m_Player.Shoot();
+        //m_Player.Shoot();
 
         //if(DeadEyeActive == true)
         //{
@@ -112,81 +112,83 @@ public class ShootIcon : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointe
 
         //    m_Player.DeadEyeCancel();
         //}
+        
+        switch (State)
+        {
+            case GameState.START:
+                {
+                    img.sprite = ShootIcons[0];
 
-        //switch (State)
-        //{
-        //    case GameState.START:
-        //        {
+                    m_Player.Shoot();
+                }
+                break;
 
-        //        }
-        //        break;
+            case GameState.PLAY:
+                {
+                    switch (playerState)
+                    {
+                        case PlayerState.NORMAL:
+                            {
+                                Debug.Log("Shoot Button");
 
-        //    case GameState.PLAY:
-        //        {
-        //            switch (playerState)
-        //            {
-        //                case PlayerState.NORMAL:
-        //                    {
-        //                        Debug.Log("Shoot Button");
+                                img.sprite = ShootIcons[0];
 
-        //                        img.sprite = ShootIcons[0];
+                                m_Player.Shoot();
+                            }
+                            break;
 
-        //                        m_Player.Shoot();
-        //                    }
-        //                    break;
+                        case PlayerState.DEADEYE:
+                            {
 
-        //                case PlayerState.DEADEYE:
-        //                    {
-        //                        img.sprite = ShootIcons[1];
+                            }
+                            break;
 
-        //                        m_Player.Shoot();
-        //                    }
-        //                    break;
+                        case PlayerState.REALBATTLE:
+                            {
+                                Debug.Log("Shoot Button");
 
-        //                case PlayerState.REALBATTLE:
-        //                    {
-        //                        Debug.Log("Shoot Button");
+                                img.sprite = ShootIcons[0];
 
-        //                        img.sprite = ShootIcons[0];
+                                m_Player.Shoot();
+                            }
+                            break;
 
-        //                        m_Player.Shoot();
-        //                    }
-        //                    break;
+                        case PlayerState.DEAD:
+                            {
 
-        //                case PlayerState.DEAD:
-        //                    {
+                            }
+                            break;
+                    }
 
-        //                    }
-        //                    break;
-        //            }
+                }
+                break;
 
-        //        }
-        //        break;
+            case GameState.PAUSE:
+                {
 
-        //    case GameState.PAUSE:
-        //        {
+                }
+                break;
 
-        //        }
-        //        break;
+            case GameState.EVENT:
+                {
+                    img.sprite = ShootIcons[0];
 
-        //    case GameState.EVENT:
-        //        {
+                    m_Player.Shoot();
+                }
+                break;
 
-        //        }
-        //        break;
+            case GameState.GAMEOVER:
+                {
 
-        //    case GameState.GAMEOVER:
-        //        {
+                }
+                break;
 
-        //        }
-        //        break;
+            case GameState.VICTORY:
+                {
 
-        //    case GameState.VICTORY:
-        //        {
-
-        //        }
-        //        break;
-        //}
+                }
+                break;
+        }
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

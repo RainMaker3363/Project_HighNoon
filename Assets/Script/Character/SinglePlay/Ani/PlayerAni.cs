@@ -114,6 +114,306 @@ public class PlayerAni : MonoBehaviour {
             case GameState.START:
                 {
                     this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
+
+                    switch (PlayerAniState)
+                    {
+                        case AnimationState.DOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.UPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(2);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(4);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(3);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(6);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(8);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(7);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(5);
+                            }
+                            break;
+
+                        case AnimationState.LEFTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(12);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(11);
+                            }
+                            break;
+
+                        case AnimationState.UPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(10);
+                            }
+                            break;
+
+                        case AnimationState.DOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(9);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(16);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(14);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(15);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(13);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(20);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(19);
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(17);
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(18);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(24);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(22);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(23);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(21);
+                            }
+                            break;
+
+                        case AnimationState.SHOOTING:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DEADEYING:
+                            {
+                                _animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+
+                            }
+                            break;
+                    }
                 }
                 break;
 
@@ -425,25 +725,1225 @@ public class PlayerAni : MonoBehaviour {
 
             case GameState.PAUSE:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
+
+                    switch (PlayerAniState)
+                    {
+                        case AnimationState.DOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.UPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(2);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(4);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(3);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(6);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(8);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(7);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(5);
+                            }
+                            break;
+
+                        case AnimationState.LEFTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(12);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(11);
+                            }
+                            break;
+
+                        case AnimationState.UPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(10);
+                            }
+                            break;
+
+                        case AnimationState.DOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(9);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(16);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(14);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(15);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(13);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(20);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(19);
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(17);
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(18);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(24);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(22);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(23);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(21);
+                            }
+                            break;
+
+                        case AnimationState.SHOOTING:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DEADEYING:
+                            {
+                                _animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+
+                            }
+                            break;
+                    }
                 }
                 break;
 
             case GameState.EVENT:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
+
+                    switch (PlayerAniState)
+                    {
+                        case AnimationState.DOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.UPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(2);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(4);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(3);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(6);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(8);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(7);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(5);
+                            }
+                            break;
+
+                        case AnimationState.LEFTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(12);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(11);
+                            }
+                            break;
+
+                        case AnimationState.UPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(10);
+                            }
+                            break;
+
+                        case AnimationState.DOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(9);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(16);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(14);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(15);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(13);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(20);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(19);
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(17);
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(18);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(24);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(22);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(23);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(21);
+                            }
+                            break;
+
+                        case AnimationState.SHOOTING:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DEADEYING:
+                            {
+                                _animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+
+                            }
+                            break;
+                    }
                 }
                 break;
 
             case GameState.GAMEOVER:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
+
+                    switch (PlayerAniState)
+                    {
+                        case AnimationState.DOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.UPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(2);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(4);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(3);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(6);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(8);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(7);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(5);
+                            }
+                            break;
+
+                        case AnimationState.LEFTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(12);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(11);
+                            }
+                            break;
+
+                        case AnimationState.UPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(10);
+                            }
+                            break;
+
+                        case AnimationState.DOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(9);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(16);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(14);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(15);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(13);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(20);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(19);
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(17);
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(18);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(24);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(22);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(23);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(21);
+                            }
+                            break;
+
+                        case AnimationState.SHOOTING:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DEADEYING:
+                            {
+                                _animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+
+                            }
+                            break;
+                    }
                 }
                 break;
 
             case GameState.VICTORY:
                 {
-                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y + 0.2f, m_Player.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Player.gameObject.transform.position.x, m_Player.gameObject.transform.position.y, m_Player.gameObject.transform.position.z);
+
+                    switch (PlayerAniState)
+                    {
+                        case AnimationState.DOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(1);
+                                //_animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.UPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(2);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(4);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(3);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(6);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(8);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(7);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSTAND:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(5);
+                            }
+                            break;
+
+                        case AnimationState.LEFTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(12);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(11);
+                            }
+                            break;
+
+                        case AnimationState.UPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(10);
+                            }
+                            break;
+
+                        case AnimationState.DOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(9);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(16);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(14);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(15);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNWALK:
+                            {
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckRow(13);
+                            }
+                            break;
+
+                        case AnimationState.LEFTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(20);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(19);
+                            }
+                            break;
+
+                        case AnimationState.DOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(17);
+
+                            }
+                            break;
+
+                        case AnimationState.UPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(18);
+                            }
+                            break;
+
+                        case AnimationState.LEFTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(24);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(22);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTUPSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    //_animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+                                _animatedTileTexture.ChangeCheckRow(23);
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDOWNSHOOT:
+                            {
+                                if (AniCheckOn == false)
+                                {
+                                    AniCheckOn = true;
+                                    // _animatedTileTexture._playOnce = true;
+                                    _animatedTileTexture.SetIndex(0);
+
+
+
+                                    _animatedTileTexture._enableEvents = true;
+                                }
+
+                                _animatedTileTexture.ChangeCheckRow(21);
+                            }
+                            break;
+
+                        case AnimationState.SHOOTING:
+                            {
+
+                            }
+                            break;
+
+                        case AnimationState.DEADEYING:
+                            {
+                                _animatedTileTexture.ChangeCheckRow(1);
+                            }
+                            break;
+
+                        case AnimationState.LEFTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(28);
+
+
+                            }
+                            break;
+
+                        case AnimationState.UPDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(26);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.DOWNDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                _animatedTileTexture.ChangeCheckRow(25);
+                                //_animatedTileTexture.ChangeCheckColumn(12);
+
+                            }
+                            break;
+
+                        case AnimationState.RIGHTDEAD:
+                            {
+                                _animatedTileTexture._playOnce = true;
+                                _animatedTileTexture._enableEvents = false;
+                                _animatedTileTexture.ChangeCheckColumn(12);
+                                //_animatedTileTexture.ChangeCheckRow(27);
+
+                            }
+                            break;
+                    }
                 }
                 break;
         }

@@ -105,7 +105,7 @@ public class ExitButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
         {
             SDManager.PlaySfx(Button_Touch_Sound);
 
-            GPGSManager.GetInstance.LogoutGPGS();
+            //GPGSManager.GetInstance.LogoutGPGS();
 
             Application.Quit();
         }

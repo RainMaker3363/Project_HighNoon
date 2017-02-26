@@ -15,6 +15,8 @@ public class ZombieEnemy : MonoBehaviour {
     private bool NowMoveOn;
     // 데미지 틱(Tick)
     private bool AttackChecker;
+    // 데드 아이 체크
+    private bool DeadEyeChecker;
 
     // 코루틴 정보들
     private IEnumerator DamegeCoroutine;
@@ -24,6 +26,8 @@ public class ZombieEnemy : MonoBehaviour {
     public GameObject Zombie_Object;
     public GameObject Zombie_Navi;
     public GameObject Player_Ojbect;
+
+    private Vector3 BackPos;
 
 	// Use this for initialization
 	void Start () {
@@ -48,8 +52,11 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+            //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
         }
+
+        //NaviChecker = false;
 
         // 애니메이션 방향
         if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
@@ -61,6 +68,8 @@ public class ZombieEnemy : MonoBehaviour {
             ZombieAniState = AnimationState.RIGHTSTAND;
         }
 
+        Zombie_Object.SetActive(false);
+        Zombie_Navi.SetActive(false);
 
         DeadCoroutine = null;
         DeadCoroutine = DeadProtocol(true);
@@ -77,14 +86,21 @@ public class ZombieEnemy : MonoBehaviour {
 
         StopCoroutine(AttackCoroutine);
 
+        DeadEyeChecker = false;
         AttackChecker = false;
-        NowMoveOn = false;
+        NowMoveOn = true;
+
+        BackPos = Vector3.zero;
+        BackPos = Zombie_Navi.transform.position;
+
+        this.gameObject.SetActive(false);
 	}
     
     void OnEnable()
     {
         State = GameManager.NowGameState;
         ModeState = GameManager.NowGameModeState;
+
 
         if (sp_Col == null)
         {
@@ -103,7 +119,8 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+            //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
         }
 
 
@@ -116,6 +133,9 @@ public class ZombieEnemy : MonoBehaviour {
         {
             ZombieAniState = AnimationState.RIGHTSTAND;
         }
+
+        Zombie_Object.SetActive(true);
+        Zombie_Navi.SetActive(true);
 
         DeadCoroutine = null;
         DeadCoroutine = DeadProtocol(true);
@@ -132,19 +152,44 @@ public class ZombieEnemy : MonoBehaviour {
 
         StopCoroutine(AttackCoroutine);
 
+        DeadEyeChecker = false;
         AttackChecker = false;
-        NowMoveOn = false;
+        NowMoveOn = true;
+
+
+        Zombie_Navi.transform.position = BackPos;
     }
 
     IEnumerator DeadProtocol(bool on = true)
     {
 
         sp_Col.enabled = false;
-        ZombieAniState = AnimationState.DOWNDEAD;
 
-        yield return new WaitForSeconds(1.0f);
+        if (Zombie_Navi != null)
+        {
+            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+        }
 
+
+        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+        {
+            ZombieAniState = AnimationState.LEFTDEAD;
+        }
+        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+        {
+            ZombieAniState = AnimationState.RIGHTDEAD;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameManager.EnemyKillCount += 1;
+        GameManager.MiniGame_KillCount += 1;
+
+
+        Zombie_Navi.SetActive(false);
         Zombie_Object.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     IEnumerator AttackProtocol(bool on = true)
@@ -152,12 +197,14 @@ public class ZombieEnemy : MonoBehaviour {
         AttackChecker = true;
         
         yield return new WaitForSeconds(0.5f);
-
+        
         AttackChecker = false;
     }
 
     IEnumerator DamegeProtocol(bool on = true)
     {
+
+
         sp_Col.enabled = false;
 
         // 애니메이션 방향
@@ -180,10 +227,15 @@ public class ZombieEnemy : MonoBehaviour {
         
         yield return new WaitForSeconds(0.5f);
 
+        GameManager.EnemyKillCount += 1;
+        GameManager.MiniGame_KillCount += 1;
+
+
         Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.white;
         Zombie_Object.SetActive(false);
+        Zombie_Navi.SetActive(false);
+        this.gameObject.SetActive(false);
 
-        GameManager.EnemyKillCount += 1;
     }
 
 	// Update is called once per frame
@@ -248,12 +300,18 @@ public class ZombieEnemy : MonoBehaviour {
 
                     // 위치 갱신
                     this.gameObject.transform.position = Zombie_Navi.transform.position;
+                    //Zombie_Object.transform.position = this.gameObject.transform.position;
 
                     switch (State)
                     {
                         case GameState.START:
                             {
-
+                                // 네비게이션 작동 여부
+                                if (Zombie_Navi != null)
+                                {
+                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                }
                             }
                             break;
 
@@ -277,29 +335,28 @@ public class ZombieEnemy : MonoBehaviour {
                                     {
                                         ZombieAniState = AnimationState.RIGHTSTAND;
                                     }
+
+                                    if(GameManager.DeadEyeFailOn == false)
+                                    {
+                                        // 데드 아이 일시 플레이어와의 거리를 체크해 없애줄지 없애지 않을지 체크한다.
+                                        if ((Player_Ojbect.transform.position - this.transform.position).magnitude < 10.0f)
+                                        {
+
+                                            NowMoveOn = false;
+                                            DeadEyeChecker = true;
+
+                                        }
+                                    }
+
+
                                 }
                                 else
                                 {
-                                    // 네비게이션 작동 여부
-                                    if (Zombie_Navi != null)
+                                    if (DeadEyeChecker == true)
                                     {
-                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
-                                        //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
-                                    }
+                                        DeadEyeChecker = false;
 
-                                    if (NowMoveOn == true)
-                                    {
-                                        if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
-                                        {
-                                            ZombieAniState = AnimationState.LEFTWALK;
-                                        }
-                                        else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
-                                        {
-                                            ZombieAniState = AnimationState.RIGHTWALK;
-                                        }
-                                    }
-                                    else
-                                    {
+                                        // 애니메이션 방향
                                         if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
                                         {
                                             ZombieAniState = AnimationState.LEFTSTAND;
@@ -308,7 +365,67 @@ public class ZombieEnemy : MonoBehaviour {
                                         {
                                             ZombieAniState = AnimationState.RIGHTSTAND;
                                         }
+
+                                        print("zombie HighNoon..............................");
+
+                                        DeadCoroutine = null;
+                                        DeadCoroutine = DeadProtocol(true);
+
+                                        StopCoroutine(DeadCoroutine);
+                                        StartCoroutine(DeadCoroutine);
                                     }
+                                    else
+                                    {
+
+
+                                        if (NowMoveOn == true)
+                                        {
+                                            // 네비게이션 작동 여부
+                                            if (Zombie_Navi != null)
+                                            {
+                                                if (this.gameObject.activeSelf == true)
+                                                {
+                                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+                                                    Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                                }
+
+                                                //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                            }
+
+                                            if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+                                            {
+                                                ZombieAniState = AnimationState.LEFTWALK;
+                                            }
+                                            else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+                                            {
+                                                ZombieAniState = AnimationState.RIGHTWALK;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // 네비게이션 작동 여부
+                                            if (Zombie_Navi != null)
+                                            {
+                                                if (this.gameObject.activeSelf == true)
+                                                {
+                                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                                    //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                                }
+
+                                                //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                            }
+
+                                            if ((Zombie_Navi.transform.eulerAngles.y >= 0.0f) || (Zombie_Navi.transform.eulerAngles.y < 180.0f))
+                                            {
+                                                ZombieAniState = AnimationState.LEFTSTAND;
+                                            }
+                                            else if ((Zombie_Navi.transform.eulerAngles.y > 180.0f) || (Zombie_Navi.transform.eulerAngles.y <= 360.0f))
+                                            {
+                                                ZombieAniState = AnimationState.RIGHTSTAND;
+                                            }
+                                        }
+                                    }
+                                 
                                 }
 
                             }
@@ -476,6 +593,10 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (other.transform.tag.Equals("PlayerBullet") == true)
         {
+            print("Zombie Dead");
+
+            NowMoveOn = false;
+
             // 사망 처리
             DamegeCoroutine = null;
             DamegeCoroutine = DamegeProtocol(true);
@@ -484,21 +605,87 @@ public class ZombieEnemy : MonoBehaviour {
             StartCoroutine(DamegeCoroutine);
         }
         
+        //if (other.transform.tag.Equals("Player") == true)
+        //{
+        //    // 데미지 처리
+        //    if(AttackChecker == false)
+        //    {
+        //        AttackChecker = true;
+
+        //        AttackCoroutine = null;
+        //        AttackCoroutine = AttackProtocol(true);
+
+                
+
+        //        StopCoroutine(AttackCoroutine);
+        //        StartCoroutine(AttackCoroutine);
+        //    }
+        //}
+    }
+
+    void OnTriggerStay(Collider other)
+    {
         if (other.transform.tag.Equals("Player") == true)
         {
             // 데미지 처리
-            if(AttackChecker == false)
+            switch(State)
             {
-                AttackChecker = true;
+                case GameState.START:
+                    {
 
-                AttackCoroutine = null;
-                AttackCoroutine = AttackProtocol(true);
+                    }
+                    break;
 
-                Player_Ojbect.GetComponent<Player>().DamegeToPlayer(10);
+                case GameState.PLAY:
+                    {
+                        if (AttackChecker == false)
+                        {
+                            AttackChecker = true;
 
-                StopCoroutine(AttackCoroutine);
-                StartCoroutine(AttackCoroutine);
+
+                            AttackCoroutine = null;
+                            AttackCoroutine = AttackProtocol(true);
+
+                            Player_Ojbect.GetComponent<Player>().DamegeToPlayer(2);
+
+                            StopCoroutine(AttackCoroutine);
+                            StartCoroutine(AttackCoroutine);
+
+
+                        }
+                    }
+                    break;
+
+                case GameState.PAUSE:
+                    {
+
+                    }
+                    break;
+
+                case GameState.EVENT:
+                    {
+
+                    }
+                    break;
+
+                case GameState.VICTORY:
+                    {
+
+                    }
+                    break;
+
+                case GameState.GAMEOVER:
+                    {
+
+                    }
+                    break;
             }
+
+
+            
+
+
         }
+        
     }
 }

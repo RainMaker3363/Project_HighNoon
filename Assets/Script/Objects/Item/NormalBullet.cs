@@ -204,6 +204,7 @@ public class NormalBullet : MonoBehaviour {
                         case GameState.PLAY:
                             {
                                 //NormalBullet_Object.transform.Rotate(new Vector3(0.0f, 65.0f, 0.0f) * Time.deltaTime);
+
                             }
                             break;
 

@@ -144,50 +144,50 @@ public class MultiGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-        if(GPGSManager.GetInstance.IsAuthenticated() == true)
-        {
-            if (MainMenuManager.MainModeBtnDownOn == true)
-            {
-                MainMenuManager.StartMultiGameOn = true;
+        //if(GPGSManager.GetInstance.IsAuthenticated() == true)
+        //{
+        //    if (MainMenuManager.MainModeBtnDownOn == true)
+        //    {
+        //        MainMenuManager.StartMultiGameOn = true;
 
-                if (buttonDown == false)
-                {
-                    buttonDown = true;
+        //        if (buttonDown == false)
+        //        {
+        //            buttonDown = true;
 
-                    SDManager.PlaySfx(Button_Touch_Sound);
+        //            SDManager.PlaySfx(Button_Touch_Sound);
 
-                    MainMenuManager.gameMode = GameModeState.Multi;
-
-
-
-                    //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-
-                    //GPGSManager.GetInstance.SignInAndStartMPGame();
-                }
-
-                if (MultiButtonDownCheck == false)
-                {
-                    MultiButtonDownCheck = true;
-
-                    if (GPGSManager.GetInstance.IsConnected() == false)
-                    {
-
-                        GPGSManager.GetInstance.SignInAndStartMPGame();
-
-                        //GPGSManager.GetInstance.ShowRoomUI();
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                    }
-                    else
-                    {
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-                    }
-                }
+        //            MainMenuManager.gameMode = GameModeState.Multi;
 
 
-                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
-            }
-        }
+
+        //            //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+
+        //            //GPGSManager.GetInstance.SignInAndStartMPGame();
+        //        }
+
+        //        if (MultiButtonDownCheck == false)
+        //        {
+        //            MultiButtonDownCheck = true;
+
+        //            if (GPGSManager.GetInstance.IsConnected() == false)
+        //            {
+
+        //                GPGSManager.GetInstance.SignInAndStartMPGame();
+
+        //                //GPGSManager.GetInstance.ShowRoomUI();
+        //                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+        //            }
+        //            else
+        //            {
+        //                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+        //                //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+        //            }
+        //        }
+
+
+        //        //AutoFade.LoadLevel("MultiPlayScene", 0.2f, 0.2f, Color.black);
+        //    }
+        //}
   
 
     }
