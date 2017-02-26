@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Yes_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip UI_Touch_Sound;
 
     // Use this for initialization
     void Start()
@@ -99,6 +101,7 @@ public class Yes_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        SDManager.PlaySfx(UI_Touch_Sound);
 
         AutoFade.LoadLevel("MainMenuScene", 0.3f, 0.3f, Color.black);
     }

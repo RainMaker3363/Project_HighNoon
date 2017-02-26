@@ -373,12 +373,14 @@ public class GameManager : MonoBehaviour {
                                     {
                                         Minigame_StartTimer -= Time.deltaTime;
                                         RoundTimer_Text.text = Minigame_StartTimer.ToString("0.0") + " 초";
+                                        RoundStart_Text.text = " ";
                                     }
                                     else
                                     {
                                         RoundTimer_Text.text = "0 초";
                                         //RoundStart_Text.text = "라운드가 시작되었습니다.";
-                                        Minigame_RoundTimer = (100.0f);
+                                        RoundStart_Text.text = " ";
+                                        Minigame_RoundTimer = (60.0f);
 
                                         for (int i = 0; i < (MiniGame_Round); i++)
                                         {
@@ -489,11 +491,13 @@ public class GameManager : MonoBehaviour {
                                     {
                                         MiniGame_EventTimer -= Time.deltaTime;
                                         RoundTimer_Text.text = MiniGame_EventTimer.ToString("0.0") + " 초";
+                                        RoundStart_Text.text = " ";
                                     }
                                     else
                                     {
                                         MiniGame_EventTimer = 0.0f;
-                                        Minigame_RoundTimer = (100.0f + (MiniGame_Round * 10.0f));
+                                        Minigame_RoundTimer = (60.0f + (MiniGame_Round * 5.0f));
+                                        RoundStart_Text.text = " ";
                                         //RoundStart_Text.text = MiniGame_Round.ToString() + "라운드가 시작되었습니다.";
 
 
@@ -709,6 +713,8 @@ public class GameManager : MonoBehaviour {
                             {
                                 KillCount_Text.text = EnemyKillCount.ToString();
                                 RoundCount_Text.text = MiniGame_Round.ToString();
+
+                                RoundStart_Text.text = " ";
 
                                 GameOver_Dialog.SetActive(true);
                             }

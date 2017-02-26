@@ -5,6 +5,7 @@ public class FlyingCamera : MonoBehaviour {
 
     private GameState State;
     private GameControlState ControlState;
+    private GameModeState ModeState;
 
     private PlayerState playerState;
     //private Vector3 BackPos;
@@ -23,6 +24,7 @@ public class FlyingCamera : MonoBehaviour {
 
         State = GameManager.NowGameState;
         ControlState = GameManager.NowGameControlState;
+        ModeState = GameManager.NowGameModeState;
 
         if (PlayerObject == null)
         {
@@ -48,6 +50,7 @@ public class FlyingCamera : MonoBehaviour {
 
         DeadEyeSoundCheck = false;
 
+
         //BackPos = this.transform.position;
 	}
 	
@@ -55,103 +58,225 @@ public class FlyingCamera : MonoBehaviour {
 	void LateUpdate () {
 
         State = GameManager.NowGameState;
+        ModeState = GameManager.NowGameModeState;
         playerState = m_Player.GetPlayerState();
 
-        switch (State)
+        switch(ModeState)
         {
-            case GameState.START:
+            case GameModeState.Single:
                 {
-
-                }
-                break;
-
-            case GameState.PLAY:
-                {
-                    switch (playerState)
+                    switch (State)
                     {
-                        case PlayerState.NORMAL:
+                        case GameState.START:
                             {
-                                //this.transform.position = new Vector3(this.transform.position.x, BackPos.y, this.transform.position.z);
-                                //this.transform.LookAt(PlayerObject.transform.position);
-                                
-                                DeadEyeSoundCheck = false;
 
-                                //if (Audio.isPlaying == false)
-                                //{
-                                //    Audio.loop = true;
-                                //    Audio.clip = InGame_BG_Sound;
-                                //    Audio.Play();
-                                //}
                             }
                             break;
 
-                        case PlayerState.DEADEYE:
+                        case GameState.PLAY:
                             {
-                                if (DeadEyeSoundCheck == false)
+                                switch (playerState)
                                 {
-                                    DeadEyeSoundCheck = true;
+                                    case PlayerState.NORMAL:
+                                        {
+                                            //this.transform.position = new Vector3(this.transform.position.x, BackPos.y, this.transform.position.z);
+                                            //this.transform.LookAt(PlayerObject.transform.position);
 
-                                    if (Audio.isPlaying == false)
-                                    {
-                                        Audio.loop = false;
-                                        Audio.clip = DeadEyeSound;
-                                        Audio.Play();
-                                    }
+                                            DeadEyeSoundCheck = false;
+
+                                            //if (Audio.isPlaying == false)
+                                            //{
+                                            //    Audio.loop = true;
+                                            //    Audio.clip = InGame_BG_Sound;
+                                            //    Audio.Play();
+                                            //}
+                                        }
+                                        break;
+
+                                    case PlayerState.DEADEYE:
+                                        {
+                                            if (DeadEyeSoundCheck == false)
+                                            {
+                                                DeadEyeSoundCheck = true;
+
+                                                if (Audio.isPlaying == false)
+                                                {
+                                                    Audio.loop = false;
+                                                    Audio.clip = DeadEyeSound;
+                                                    Audio.Play();
+                                                }
+                                            }
+
+
+                                        }
+                                        break;
+
+                                    case PlayerState.REALBATTLE:
+                                        {
+                                            DeadEyeSoundCheck = false;
+
+                                            //this.transform.LookAt(PlayerObject.transform.position);
+                                            //if (Audio.isPlaying == false)
+                                            //{
+                                            //    Audio.loop = true;
+                                            //    Audio.clip = InGame_BG_Sound;
+                                            //    Audio.Play();
+                                            //}
+
+                                        }
+                                        break;
+
+                                    case PlayerState.DEAD:
+                                        {
+
+                                        }
+                                        break;
                                 }
 
-                                
                             }
                             break;
 
-                        case PlayerState.REALBATTLE:
+                        case GameState.PAUSE:
                             {
-                                DeadEyeSoundCheck = false;
 
-                                //this.transform.LookAt(PlayerObject.transform.position);
-                                //if (Audio.isPlaying == false)
-                                //{
-                                //    Audio.loop = true;
-                                //    Audio.clip = InGame_BG_Sound;
-                                //    Audio.Play();
-                                //}
-                                
                             }
                             break;
 
-                        case PlayerState.DEAD:
+                        case GameState.EVENT:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.VICTORY:
                             {
 
                             }
                             break;
                     }
-                    
                 }
                 break;
 
-            case GameState.PAUSE:
+            case GameModeState.Multi:
                 {
 
                 }
                 break;
 
-            case GameState.EVENT:
+            case GameModeState.MiniGame:
+                {
+                    switch (State)
+                    {
+                        case GameState.START:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.PLAY:
+                            {
+                                switch (playerState)
+                                {
+                                    case PlayerState.NORMAL:
+                                        {
+                                            //this.transform.position = new Vector3(this.transform.position.x, BackPos.y, this.transform.position.z);
+                                            //this.transform.LookAt(PlayerObject.transform.position);
+
+                                            DeadEyeSoundCheck = false;
+
+                                            if (Audio.isPlaying == false)
+                                            {
+                                                Audio.loop = true;
+                                                Audio.clip = InGame_BG_Sound;
+                                                Audio.Play();
+                                            }
+                                        }
+                                        break;
+
+                                    case PlayerState.DEADEYE:
+                                        {
+                                            if (DeadEyeSoundCheck == false)
+                                            {
+                                                DeadEyeSoundCheck = true;
+
+                                                if (Audio.isPlaying == false)
+                                                {
+                                                    Audio.loop = false;
+                                                    Audio.clip = DeadEyeSound;
+                                                    Audio.Play();
+                                                }
+                                            }
+
+
+                                        }
+                                        break;
+
+                                    case PlayerState.REALBATTLE:
+                                        {
+                                            DeadEyeSoundCheck = false;
+
+                                            if (Audio.isPlaying == false)
+                                            {
+                                                Audio.loop = true;
+                                                Audio.clip = InGame_BG_Sound;
+                                                Audio.Play();
+                                            }
+
+                                        }
+                                        break;
+
+                                    case PlayerState.DEAD:
+                                        {
+
+                                        }
+                                        break;
+                                }
+
+                            }
+                            break;
+
+                        case GameState.PAUSE:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.EVENT:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.GAMEOVER:
+                            {
+
+                            }
+                            break;
+
+                        case GameState.VICTORY:
+                            {
+
+                            }
+                            break;
+                    }
+                }
+                break;
+
+            case GameModeState.NotSelect:
                 {
 
                 }
                 break;
 
-            case GameState.GAMEOVER:
-                {
 
-                }
-                break;
-
-            case GameState.VICTORY:
-                {
-
-                }
-                break;
         }
+   
         
 	}
 }

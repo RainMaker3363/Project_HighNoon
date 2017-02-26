@@ -5,6 +5,9 @@ using System.Collections;
 
 public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip UI_Touch_Sound;
+
     public GameObject Exit_Dialog_Object;
     private GameState state;
 
@@ -116,6 +119,8 @@ public class SingleReturnButton : MonoBehaviour, IDragHandler, IPointerUpHandler
 
             case GameState.PLAY:
                 {
+                    SDManager.PlaySfx(UI_Touch_Sound);
+
                     GameManager.NowGameState = GameState.PAUSE;
 
                     Exit_Dialog_Object.SetActive(true);

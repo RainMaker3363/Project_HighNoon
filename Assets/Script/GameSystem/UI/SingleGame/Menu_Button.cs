@@ -5,6 +5,9 @@ using System.Collections;
 
 public class Menu_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public SoundManager SDManager;
+    public AudioClip UI_Touch_Sound;
+
     public GameObject GameOver_Dialog_Object;
 
     // Use this for initialization
@@ -100,6 +103,8 @@ public class Menu_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoin
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
+        SDManager.PlaySfx(UI_Touch_Sound);
+
         GameOver_Dialog_Object.SetActive(false);
         AutoFade.LoadLevel("MainMenuScene", 0.2f, 0.2f, Color.black);
     }

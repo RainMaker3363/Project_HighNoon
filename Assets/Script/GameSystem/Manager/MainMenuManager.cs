@@ -31,7 +31,7 @@ public class MainMenuManager : MonoBehaviour {
          */
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        GPGSManager.GetInstance.mainMenuManager = this;
+        //GPGSManager.GetInstance.mainMenuManager = this;
         
         //_showLobbyDialog = false;
 
