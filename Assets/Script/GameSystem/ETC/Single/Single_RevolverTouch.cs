@@ -15,6 +15,7 @@ public class Single_RevolverTouch : MonoBehaviour {
     public GameObject InGame_UI_Object;
 
     public Text AnnounceText;
+    public Text TimerText;
 
     public static int BulletChecker;
     public static float DeadEyeGage;
@@ -247,7 +248,7 @@ public class Single_RevolverTouch : MonoBehaviour {
                     if (DeadEyeTimer > 0)
                     {
                         DeadEyeTimer -= Time.deltaTime;
-
+                        TimerText.text = DeadEyeTimer.ToString("0.0");
 
                         if (GameManager.DeadEyeFailOn == false)
                         {

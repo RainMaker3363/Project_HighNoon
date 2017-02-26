@@ -121,13 +121,16 @@ public class GameManager : MonoBehaviour {
     public static int EnemyKillCount;
     public static bool MiniGame_Upgrade_End;
     public static int MiniGame_KillCount;
-
-    private IEnumerator MiniGameCoroutine;
+    public static bool MiniGame_StartOn;
 
     public Text RoundTimer_Text;
     public Text RoundStart_Text;
+    public Text KillCount_Text;
+    public Text RoundCount_Text;
+
     public GameObject Upgrade_Dialog;
     public GameObject GameOver_Dialog;
+    public GameObject Notice_Dialog;
     //public Transform[] Respawn_Point;
 
     public GameObject[] Zombie_Swarms_01;
@@ -145,7 +148,7 @@ public class GameManager : MonoBehaviour {
         //NowGameModeState = GameModeState.Single;
 
         // 임시로 하는거니 나중에 지우세요
-        NowGameModeState = GameModeState.Single;
+        //NowGameModeState = GameModeState.MiniGame;
 
 
         print("NowGameModeState : " + NowGameModeState.ToString());
@@ -187,7 +190,7 @@ public class GameManager : MonoBehaviour {
                     DeadEyeRevolverAction = false;
                     DeadEyeFailOn = false;
 
-                    //NowGameState = GameState.START;
+                    NowGameState = GameState.START;
 
                     MiniGame_Round = 1;
                     Minigame_StartTimer = 10.0f;
@@ -195,10 +198,15 @@ public class GameManager : MonoBehaviour {
                     MiniGame_EventTimer = 10.0f;
                     EnemyKillCount = 0;
 
+                    MiniGame_StartOn = false;
                     MiniGame_Upgrade_End = false;
 
                     RoundTimer_Text.text = Minigame_StartTimer.ToString();
                     RoundStart_Text.text = " ";
+                    KillCount_Text.text = " ";
+                    RoundCount_Text.text = " ";
+
+                    Notice_Dialog.SetActive(true);
                     Upgrade_Dialog.SetActive(false);
                     GameOver_Dialog.SetActive(false);
 
@@ -208,12 +216,6 @@ public class GameManager : MonoBehaviour {
                     print("Zombies_04 : " + Zombie_Swarms_04.Length);
 
                     NowStageEnemies = (GameObject.FindGameObjectsWithTag("Enemy").Length);
-
-                    MiniGameCoroutine = null;
-                    MiniGameCoroutine = MiniGameStartProtocol(true);
-
-                    StopCoroutine(MiniGameCoroutine);
-                    StartCoroutine(MiniGameCoroutine);
                 }
                 break;
 
@@ -363,40 +365,50 @@ public class GameManager : MonoBehaviour {
                     {
                         case GameState.START:
                             {
-                                if(Minigame_StartTimer > 0)
+                                if (MiniGame_StartOn == true)
                                 {
-                                    Minigame_StartTimer -= Time.deltaTime;
-                                    RoundTimer_Text.text = Minigame_StartTimer.ToString("0.0") + " 초";
+                                    Notice_Dialog.SetActive(false);
+
+                                    if (Minigame_StartTimer > 0)
+                                    {
+                                        Minigame_StartTimer -= Time.deltaTime;
+                                        RoundTimer_Text.text = Minigame_StartTimer.ToString("0.0") + " 초";
+                                    }
+                                    else
+                                    {
+                                        RoundTimer_Text.text = "0 초";
+                                        //RoundStart_Text.text = "라운드가 시작되었습니다.";
+                                        Minigame_RoundTimer = (100.0f);
+
+                                        for (int i = 0; i < (MiniGame_Round); i++)
+                                        {
+                                            Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                        }
+
+                                        for (int i = 0; i < (MiniGame_Round); i++)
+                                        {
+                                            Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                        }
+
+                                        for (int i = 0; i < (MiniGame_Round); i++)
+                                        {
+                                            Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                        }
+
+                                        for (int i = 0; i < (MiniGame_Round); i++)
+                                        {
+                                            Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                        }
+
+
+                                        NowGameState = GameState.PLAY;
+                                    }
                                 }
                                 else
                                 {
-                                    RoundTimer_Text.text = "0 초";
-                                    //RoundStart_Text.text = "라운드가 시작되었습니다.";
-                                    Minigame_RoundTimer = (100.0f);
-
-                                    for (int i = 0; i < (MiniGame_Round); i++)
-                                    {
-                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
-                                    }
-
-                                    for (int i = 0; i < (MiniGame_Round); i++)
-                                    {
-                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
-                                    }
-
-                                    for (int i = 0; i < (MiniGame_Round); i++)
-                                    {
-                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
-                                    }
-
-                                    for (int i = 0; i < (MiniGame_Round); i++)
-                                    {
-                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
-                                    }
-
-
-                                    NowGameState = GameState.PLAY;
+                                    Notice_Dialog.SetActive(true);
                                 }
+                                
                             }
                             break;
 
@@ -427,7 +439,7 @@ public class GameManager : MonoBehaviour {
                                         {
                                             MiniGame_Round += 1;
 
-                                            MiniGame_EventTimer = 15.0f;
+                                            MiniGame_EventTimer = 10.0f;
                                             MiniGame_KillCount = 0;
                                             MiniGame_Upgrade_End = false;
                                             NowGameState = GameState.EVENT;
@@ -439,7 +451,7 @@ public class GameManager : MonoBehaviour {
                                         {
                                             MiniGame_Round += 1;
 
-                                            MiniGame_EventTimer = 15.0f;
+                                            MiniGame_EventTimer = 10.0f;
                                             MiniGame_KillCount = 0;
                                             MiniGame_Upgrade_End = false;
                                             NowGameState = GameState.EVENT;
@@ -484,25 +496,198 @@ public class GameManager : MonoBehaviour {
                                         Minigame_RoundTimer = (100.0f + (MiniGame_Round * 10.0f));
                                         //RoundStart_Text.text = MiniGame_Round.ToString() + "라운드가 시작되었습니다.";
 
-                                        if (MiniGame_Round >= Zombie_Swarms_01.Length)
+
+                                        switch (MiniGame_Round)
                                         {
-                                            for (int i = 0; i < Zombie_Swarms_01.Length; i++)
-                                            {
-                                                Zombie_Swarms_01[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_02[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_03[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_04[i].gameObject.SetActive(true);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            for (int i = 0; i < MiniGame_Round; i++)
-                                            {
-                                                Zombie_Swarms_01[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_02[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_03[i].gameObject.SetActive(true);
-                                                Zombie_Swarms_04[i].gameObject.SetActive(true);
-                                            }
+                                            case 1:
+                                                {
+                                                    for (int i = 0; i < 1; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(100);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(100);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(100);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(100);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 2:
+                                                {
+                                                    for (int i = 0; i < 1; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 3:
+                                                {
+                                                    for (int i = 0; i < 2; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(200);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 4:
+                                                {
+                                                    for (int i = 0; i < 2; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 5:
+                                                {
+                                                    for (int i = 0; i < 3; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(300);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 6:
+                                                {
+                                                    for (int i = 0; i < 3; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 7:
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(400);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 8:
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(500);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(500);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(500);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(500);
+                                                    }
+                                                }
+                                                break;
+
+                                            case 9:
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(600);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(600);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(600);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(600);
+                                                    }
+                                                }
+                                                break;
+
+                                            default:
+                                                {
+                                                    for (int i = 0; i < 4; i++)
+                                                    {
+                                                        Zombie_Swarms_01[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_01[i].GetComponent<ZombieEnemy>().SetZombieHP(MiniGame_Round * 100);
+
+                                                        Zombie_Swarms_02[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_02[i].GetComponent<ZombieEnemy>().SetZombieHP(MiniGame_Round * 100);
+
+                                                        Zombie_Swarms_03[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_03[i].GetComponent<ZombieEnemy>().SetZombieHP(MiniGame_Round * 100);
+
+                                                        Zombie_Swarms_04[i].gameObject.SetActive(true);
+                                                        Zombie_Swarms_04[i].GetComponent<ZombieEnemy>().SetZombieHP(MiniGame_Round * 100);
+                                                    }
+                                                }
+                                                break;
                                         }
 
                                         NowGameState = GameState.PLAY;
@@ -522,6 +707,9 @@ public class GameManager : MonoBehaviour {
 
                         case GameState.GAMEOVER:
                             {
+                                KillCount_Text.text = EnemyKillCount.ToString();
+                                RoundCount_Text.text = MiniGame_Round.ToString();
+
                                 GameOver_Dialog.SetActive(true);
                             }
                             break;
@@ -566,13 +754,6 @@ public class GameManager : MonoBehaviour {
                 break;
         }
 
-    }
-
-    IEnumerator MiniGameStartProtocol(bool on = true)
-    {
-        yield return new WaitForSeconds(2.0f);
-
-        NowGameState = GameState.START;
     }
 
     //IEnumerator WaveStartProtocol(bool On = true)

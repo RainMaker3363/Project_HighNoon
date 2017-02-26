@@ -3,21 +3,17 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class MiniGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class Notice_Ok_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    public SoundManager SDManager;
-    public AudioClip Button_Touch_Sound;
-
-    private bool buttonDown;
 
     // Use this for initialization
     void Start()
     {
-        buttonDown = false;
+        
     }
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Update is called once per frame
+    void Update()
     {
         //switch (Application.platform)
         //{
@@ -91,7 +87,7 @@ public class MiniGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         //        }
         //        break;
         //}
-	}
+    }
 
     // 터치가 드래그(Drag) 했을때 호출 되는 함수
     public virtual void OnDrag(PointerEventData ped)
@@ -103,20 +99,8 @@ public class MiniGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
     // 터치를 하고 있을 대 발생하는 함수
     public virtual void OnPointerDown(PointerEventData ped)
     {
-
-        if (MainMenuManager.MainModeBtnDownOn == true)
-        {
-            if (buttonDown == false)
-            {
-                buttonDown = true;
-
-                SDManager.PlaySfx(Button_Touch_Sound);
-
-                MainMenuManager.gameMode = GameModeState.MiniGame;
-
-                AutoFade.LoadLevel("NightMareScene", 0.2f, 0.2f, Color.black);
-            }
-        }
+        
+        GameManager.MiniGame_StartOn = true;
     }
 
     // 터치에서 손을 땠을때 발생하는 함수
@@ -125,3 +109,6 @@ public class MiniGameButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
 
     }
 }
+
+
+

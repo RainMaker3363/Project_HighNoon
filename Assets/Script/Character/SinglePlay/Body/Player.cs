@@ -3523,9 +3523,6 @@ public class Player : MonoBehaviour {
                 Debug.Log("The Game End...ㅠ");
 
                 playerState = PlayerState.DEAD;
-
-
-
             }
             else
             {
@@ -3608,7 +3605,7 @@ public class Player : MonoBehaviour {
                         }
 
 
-                        ItemInfoText.text = ("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                        ItemInfoText.text = " ";//("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
                         ItemInfoText.gameObject.SetActive(true);
 
                         Debug.Log("BulletQuantity : " + BulletQuantity);
@@ -3780,21 +3777,51 @@ public class Player : MonoBehaviour {
 
                             case GameState.PLAY:
                                 {
-                                    if (HP > 0)
+                                    switch(playerState)
                                     {
-                                        if (Audio.isPlaying == false)
-                                        {
-                                            Audio.clip = Player_HitSound;
-                                            Audio.Play();
-                                        }
+                                        case PlayerState.NORMAL:
+                                            {
+                                                if (HP > 0)
+                                                {
+                                                    if (Audio.isPlaying == false)
+                                                    {
+                                                        Audio.clip = Player_HitSound;
+                                                        Audio.Play();
+                                                    }
 
-                                        HP -= 5;
-                                        HP_Bar.fillAmount = (HP / 100.0f);
-                                    }
-                                    else
-                                    {
-                                        HP = 0;
-                                        HP_Bar.fillAmount = 0.0f;
+                                                    HP -= 5;
+                                                    HP_Bar.fillAmount = (HP / 100.0f);
+                                                }
+                                                else
+                                                {
+                                                    HP = 0;
+                                                    HP_Bar.fillAmount = 0.0f;
+                                                }
+
+                                            }
+                                            break;
+
+                                        case PlayerState.REALBATTLE:
+                                            {
+                                                if (HP > 0)
+                                                {
+                                                    if (Audio.isPlaying == false)
+                                                    {
+                                                        Audio.clip = Player_HitSound;
+                                                        Audio.Play();
+                                                    }
+
+                                                    HP -= 5;
+                                                    HP_Bar.fillAmount = (HP / 100.0f);
+                                                }
+                                                else
+                                                {
+                                                    HP = 0;
+                                                    HP_Bar.fillAmount = 0.0f;
+                                                }
+
+                                            }
+                                            break;
                                     }
 
                                 }
