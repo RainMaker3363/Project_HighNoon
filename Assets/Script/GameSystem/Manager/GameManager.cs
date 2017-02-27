@@ -460,6 +460,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 4;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -474,6 +475,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 8;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -488,6 +490,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 8;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -502,6 +505,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 12;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -516,6 +520,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 12;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -530,6 +535,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 16;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -544,6 +550,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 16;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -558,6 +565,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 16;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -572,6 +580,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 16;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
@@ -586,6 +595,7 @@ public class GameManager : MonoBehaviour {
                                                 {
                                                     MiniGame_Round += 1;
 
+                                                    MiniGame_Remain_Enemy_Count = 16;
                                                     MiniGame_EventTimer = 10.0f;
                                                     MiniGame_KillCount = 0;
                                                     MiniGame_Upgrade_End = false;
