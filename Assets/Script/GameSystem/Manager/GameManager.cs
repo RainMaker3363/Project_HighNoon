@@ -384,12 +384,15 @@ public class GameManager : MonoBehaviour {
                                         Minigame_StartTimer -= Time.deltaTime;
                                         RoundTimer_Text.text = Minigame_StartTimer.ToString("0.0") + " 초";
                                         RoundStart_Text.text = " ";
+                                        RemainCount_Text.text = " ";
                                     }
                                     else
                                     {
                                         RoundTimer_Text.text = "0 초";
                                         //RoundStart_Text.text = "라운드가 시작되었습니다.";
                                         RoundStart_Text.text = " ";
+                                        RemainCount_Text.text = " ";
+
                                         Minigame_RoundTimer = (60.0f);
 
                                         for (int i = 0; i < (MiniGame_Round); i++)
@@ -648,6 +651,7 @@ public class GameManager : MonoBehaviour {
                                         MiniGame_EventTimer -= Time.deltaTime;
                                         RoundTimer_Text.text = MiniGame_EventTimer.ToString("0.0") + " 초";
                                         RoundStart_Text.text = " ";
+                                        RemainCount_Text.text = " ";
                                     }
                                     else
                                     {
@@ -663,6 +667,7 @@ public class GameManager : MonoBehaviour {
                                         }
                                         
                                         RoundStart_Text.text = " ";
+                                        RemainCount_Text.text = " ";
                                         //RoundStart_Text.text = MiniGame_Round.ToString() + "라운드가 시작되었습니다.";
 
 
@@ -891,6 +896,7 @@ public class GameManager : MonoBehaviour {
                                 }
 
                                 RoundStart_Text.text = " ";
+                                RemainCount_Text.text = " ";
 
                                 GameOver_Dialog.SetActive(true);
                             }
