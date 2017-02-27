@@ -274,6 +274,7 @@ public class Single_RevolverTouch : MonoBehaviour {
                                 GameManager.DeadEyeVersusAction = false;
                                 GameManager.DeadEyeRevolverAction = false;
                                 GameManager.DeadEyeFailOn = false;
+                                GameManager.MiniGame_DeadEye_Sight_Number = 0;
 
                                 Single_RevolverTouch_BG_object.SetActive(false);
                                 Single_RevolverAction_Object.SetActive(false);
@@ -311,6 +312,7 @@ public class Single_RevolverTouch : MonoBehaviour {
                             StartCoroutine(DeadEyeFailCoroutine);
 
                             GameManager.DeadEyeFailOn = true;
+                            GameManager.MiniGame_DeadEye_Sight_Number = 0;
                         }
                     }
                     else
@@ -333,6 +335,7 @@ public class Single_RevolverTouch : MonoBehaviour {
                         StartCoroutine(DeadEyeFailCoroutine);
 
                         GameManager.DeadEyeFailOn = true;
+                        GameManager.MiniGame_DeadEye_Sight_Number = 0;
                     }
 
                 }

@@ -117,16 +117,22 @@ public class GameManager : MonoBehaviour {
     private float Minigame_StartTimer;
     private float Minigame_RoundTimer;
     private float MiniGame_EventTimer;
+
+    // 데드 아이에 잡힐 적군 수
+    public static int MiniGame_DeadEye_Sight_Number;
     public static int MiniGame_Round;
     public static int EnemyKillCount;
     public static bool MiniGame_Upgrade_End;
     public static int MiniGame_KillCount;
     public static bool MiniGame_StartOn;
 
+    private int MiniGame_Remain_Enemy_Count;
+
     public Text RoundTimer_Text;
     public Text RoundStart_Text;
     public Text KillCount_Text;
     public Text RoundCount_Text;
+    public Text RemainCount_Text;
 
     public GameObject Upgrade_Dialog;
     public GameObject GameOver_Dialog;
@@ -198,6 +204,8 @@ public class GameManager : MonoBehaviour {
                     MiniGame_EventTimer = 10.0f;
                     EnemyKillCount = 0;
                     MiniGame_KillCount = 0;
+                    MiniGame_DeadEye_Sight_Number = 0;
+                    MiniGame_Remain_Enemy_Count = 0;
 
                     MiniGame_StartOn = false;
                     MiniGame_Upgrade_End = false;
@@ -206,6 +214,7 @@ public class GameManager : MonoBehaviour {
                     RoundStart_Text.text = " ";
                     KillCount_Text.text = " ";
                     RoundCount_Text.text = " ";
+                    RemainCount_Text.text = " ";
 
                     Notice_Dialog.SetActive(true);
                     Upgrade_Dialog.SetActive(false);
@@ -403,6 +412,7 @@ public class GameManager : MonoBehaviour {
                                             Zombie_Swarms_04[i].gameObject.SetActive(true);
                                         }
 
+                                        MiniGame_Remain_Enemy_Count = 4;
 
                                         NowGameState = GameState.PLAY;
                                     }
@@ -432,6 +442,7 @@ public class GameManager : MonoBehaviour {
                                     }
 
                                     RoundStart_Text.text = "WAVE " + MiniGame_Round.ToString();
+                                    RemainCount_Text.text = "좀비 남은 수 : " + (MiniGame_Remain_Enemy_Count - MiniGame_KillCount).ToString();
 
                                     print("MiniGame_KillCount : " + MiniGame_KillCount);
                                     print("4 * MiniGame_Round : " + (4 * MiniGame_Round));
@@ -440,6 +451,8 @@ public class GameManager : MonoBehaviour {
                                     {
                                         case 1:
                                             {
+                                                
+
                                                 if (MiniGame_KillCount >= (4))
                                                 {
                                                     MiniGame_Round += 1;
@@ -642,11 +655,11 @@ public class GameManager : MonoBehaviour {
 
                                         if(MiniGame_Round <= 2)
                                         {
-                                            Minigame_RoundTimer = (60.0f + (5.0f));
+                                            Minigame_RoundTimer = (60.0f + (10.0f));
                                         }
                                         else
                                         {
-                                            Minigame_RoundTimer = (60.0f + ((MiniGame_Round-1) * 5.0f));
+                                            Minigame_RoundTimer = (60.0f + ((MiniGame_Round-1) * 10.0f));
                                         }
                                         
                                         RoundStart_Text.text = " ";
@@ -865,6 +878,17 @@ public class GameManager : MonoBehaviour {
                             {
                                 KillCount_Text.text = EnemyKillCount.ToString();
                                 RoundCount_Text.text = MiniGame_Round.ToString();
+
+                                // 최고 기록 갱신
+                                if (EnemyKillCount >= PlayerPrefs.GetInt("HighScore"))
+                                {
+                                    PlayerPrefs.SetInt("HighScore", EnemyKillCount);
+                                }
+
+                                if (MiniGame_Round >= PlayerPrefs.GetInt("HighRound"))
+                                {
+                                    PlayerPrefs.SetInt("HighRound", MiniGame_Round);
+                                }
 
                                 RoundStart_Text.text = " ";
 

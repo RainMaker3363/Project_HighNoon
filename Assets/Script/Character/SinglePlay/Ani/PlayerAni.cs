@@ -104,7 +104,7 @@ public class PlayerAni : MonoBehaviour {
         {
             ShootAniOn = false;
         }
-
+        
         //print("Index : " + _animatedTileTexture.GetIndex());
         //print("PlayerAniState : " + PlayerAniState);
         //print("_animatedTileTexture.GetIndex() : " + _animatedTileTexture.GetIndex());

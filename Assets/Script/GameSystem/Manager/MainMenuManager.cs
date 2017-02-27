@@ -11,7 +11,8 @@ public class MainMenuManager : MonoBehaviour {
     public static bool StartMultiGameOn;
     //private string _lobbyMessage;
 
-    
+    public Text HighScoreText;
+    public Text HighRoundText;
 
     public GameObject MainMenuObject;
     public GameObject ModeSelectObject;
@@ -20,6 +21,9 @@ public class MainMenuManager : MonoBehaviour {
     public Button MultiModeButton;
 
     public static GameModeState gameMode;
+
+    private int HighScore;
+    private int HighRound;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +45,39 @@ public class MainMenuManager : MonoBehaviour {
         MainMenuBtnDownOn = false;
         MainModeBtnDownOn = false;
         StartMultiGameOn = false;
+
+        if(HighRoundText == null)
+        {
+            HighRoundText = GameObject.Find("HighRoundText").GetComponent<Text>();
+        }
+
+        if(HighScoreText == null)
+        {
+            HighScoreText = GameObject.Find("HighScroeText").GetComponent<Text>();
+        }
+
+        // 최고 기록 갱신
+        if (PlayerPrefs.HasKey("HighScore") == false)
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+        }
+        else
+        {
+            HighScore = PlayerPrefs.GetInt("HighScore");
+            HighScoreText.text = HighScore.ToString();
+        }
+
+        if (PlayerPrefs.HasKey("HighRound") == false)
+        {
+            PlayerPrefs.SetInt("HighRound", 0);
+        }
+        else
+        {
+            HighRound = PlayerPrefs.GetInt("HighRound");
+            HighRoundText.text = HighRound.ToString();
+        }
+        
+        
 
 
         gameMode = GameModeState.NotSelect;

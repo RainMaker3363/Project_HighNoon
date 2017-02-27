@@ -3,17 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class OptionButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class LeaderBoard_Ok_Button : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    public SoundManager SDManager;
-    public AudioClip Button_Touch_Sound;
     public GameObject LeaderBoard_Dialog;
 
-    // Use this for initialization
-    void Start()
-    {
-        LeaderBoard_Dialog.SetActive(false);
-    }
+	// Use this for initialization
+	void Start () {
+
+
+	}
 
     // Update is called once per frame
     void Update()
@@ -104,9 +102,9 @@ public class OptionButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     {
         if (MainMenuManager.MainMenuBtnDownOn == true)
         {
-            SDManager.PlaySfx(Button_Touch_Sound);
-            LeaderBoard_Dialog.SetActive(true);
+            LeaderBoard_Dialog.SetActive(false);
         }
+
     }
 
     // 터치에서 손을 땠을때 발생하는 함수

@@ -255,7 +255,8 @@ public class FlyingCamera : MonoBehaviour {
 
                         case GameState.GAMEOVER:
                             {
-
+                                Audio.loop = false;
+                                Audio.Stop();
                             }
                             break;
 
