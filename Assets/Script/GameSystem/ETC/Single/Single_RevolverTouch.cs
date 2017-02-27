@@ -22,6 +22,7 @@ public class Single_RevolverTouch : MonoBehaviour {
     private float DeadEyeTimer;
 
     private IEnumerator DeadEyeEndCoroutine;
+    private IEnumerator DeadEyeFailCoroutine;
     private List<int> BulletIndex = new List<int>();
     public Single_RevolverBullet[] Bullets;
 
@@ -34,7 +35,7 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletChecker = 1;
         GameManager.DeadEyeFailOn = false;
         DeadEyeGage = 100.0f;
-        DeadEyeTimer = 5.0f;
+        DeadEyeTimer = 3.0f;
 
         ModeState = GameManager.NowGameModeState;
 
@@ -115,6 +116,13 @@ public class Single_RevolverTouch : MonoBehaviour {
         DeadEyeEndCoroutine = null;
         DeadEyeEndCoroutine = LetterBoxProtocol(true);
 
+        StopCoroutine(DeadEyeEndCoroutine);
+
+        DeadEyeFailCoroutine = null;
+        DeadEyeFailCoroutine = LetterBoxFailProtocol(true);
+
+        StopCoroutine(DeadEyeFailCoroutine);
+
         AnnounceText.text = "순서대로 터치 하세요";
 
 	}
@@ -126,7 +134,7 @@ public class Single_RevolverTouch : MonoBehaviour {
         BulletChecker = 1;
         GameManager.DeadEyeFailOn = false;
         DeadEyeGage = 100.0f;
-        DeadEyeTimer = 5.0f;
+        DeadEyeTimer = 3.0f;
 
         ModeState = GameManager.NowGameModeState;
 
@@ -206,6 +214,13 @@ public class Single_RevolverTouch : MonoBehaviour {
         DeadEyeEndCoroutine = null;
         DeadEyeEndCoroutine = LetterBoxProtocol(true);
 
+        StopCoroutine(DeadEyeEndCoroutine);
+
+        DeadEyeFailCoroutine = null;
+        DeadEyeFailCoroutine = LetterBoxFailProtocol(true);
+
+        StopCoroutine(DeadEyeFailCoroutine);
+
         AnnounceText.text = "순서대로 터치 하세요";
     }
 	
@@ -265,7 +280,7 @@ public class Single_RevolverTouch : MonoBehaviour {
                                 Single_RevolverBullets_Object.SetActive(false);
                                 Single_RevolverLetterBox_BG_Object.SetActive(false);
 
-                                AnnounceText.text = " ";
+                                //AnnounceText.text = " ";
 
                                 DeadEyeEndCoroutine = null;
                                 DeadEyeEndCoroutine = LetterBoxProtocol(true);
@@ -289,10 +304,11 @@ public class Single_RevolverTouch : MonoBehaviour {
                             Single_RevolverBullets_Object.SetActive(false);
                             Single_RevolverLetterBox_BG_Object.SetActive(false);
 
-                            GameManager.DeadEyeActiveOn = false;
-                            Single_RevolverLetterBox_Object.SetActive(false);
-                            InGame_UI_Object.SetActive(true);
-                            this.gameObject.SetActive(false);
+                            DeadEyeFailCoroutine = null;
+                            DeadEyeFailCoroutine = LetterBoxFailProtocol(true);
+
+                            StopCoroutine(DeadEyeFailCoroutine);
+                            StartCoroutine(DeadEyeFailCoroutine);
 
                             GameManager.DeadEyeFailOn = true;
                         }
@@ -310,10 +326,11 @@ public class Single_RevolverTouch : MonoBehaviour {
                         Single_RevolverBullets_Object.SetActive(false);
                         Single_RevolverLetterBox_BG_Object.SetActive(false);
 
-                        GameManager.DeadEyeActiveOn = false;
-                        Single_RevolverLetterBox_Object.SetActive(false);
-                        InGame_UI_Object.SetActive(true);
-                        this.gameObject.SetActive(false);
+                        DeadEyeFailCoroutine = null;
+                        DeadEyeFailCoroutine = LetterBoxFailProtocol(true);
+
+                        StopCoroutine(DeadEyeFailCoroutine);
+                        StartCoroutine(DeadEyeFailCoroutine);
 
                         GameManager.DeadEyeFailOn = true;
                     }
@@ -340,6 +357,18 @@ public class Single_RevolverTouch : MonoBehaviour {
 	}
 
     IEnumerator LetterBoxProtocol(bool IsOn = true)
+    {
+        GameManager.DeadEyeActiveOn = false;
+        Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = true;
+
+        yield return new WaitForSeconds(1.0f);
+
+        Single_RevolverLetterBox_Object.SetActive(false);
+        InGame_UI_Object.SetActive(true);
+        this.gameObject.SetActive(false);
+    }
+
+    IEnumerator LetterBoxFailProtocol(bool IsOn = true)
     {
         GameManager.DeadEyeActiveOn = false;
         Single_RevolverLetterBox_Object.GetComponent<Animator>().enabled = true;

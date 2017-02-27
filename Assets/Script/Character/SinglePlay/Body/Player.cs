@@ -975,10 +975,15 @@ public class Player : MonoBehaviour {
                                             {
                                                 playerState = PlayerState.DEAD;
                                             }
+
+ 
+                                            if (GameManager.MiniGame_StartOn == true)
+                                            {
+                                                State = GameManager.NowGameState;
+                                                ShootAniOn = m_PlayerAni.GetShootAniOn();
+                                                MoveVector = PoolInput();
+                                            }
                                             
-                                            State = GameManager.NowGameState;
-                                            ShootAniOn = m_PlayerAni.GetShootAniOn();
-                                            MoveVector = PoolInput();
 
 
                                             // 가상 조이스틱의 상태 여부
@@ -1223,10 +1228,12 @@ public class Player : MonoBehaviour {
                                                 playerState = PlayerState.DEAD;
                                             }
 
-                                            State = GameManager.NowGameState;
-                                            ShootAniOn = m_PlayerAni.GetShootAniOn();
-                                            MoveVector = PoolInput();
-
+                                            if (GameManager.MiniGame_StartOn == true)
+                                            {
+                                                State = GameManager.NowGameState;
+                                                ShootAniOn = m_PlayerAni.GetShootAniOn();
+                                                MoveVector = PoolInput();
+                                            }
 
                                             // 가상 조이스틱의 상태 여부
                                             if (MoveVector == Vector3.zero)
@@ -2145,7 +2152,7 @@ public class Player : MonoBehaviour {
                                             {
                                                 playerState = PlayerState.DEAD;
                                             }
-                                            
+
                                             State = GameManager.NowGameState;
                                             ShootAniOn = m_PlayerAni.GetShootAniOn();
                                             MoveVector = PoolInput();
@@ -2690,6 +2697,8 @@ public class Player : MonoBehaviour {
                                             }
                                             else
                                             {
+
+
                                                 if (DeadEyeActive == true)
                                                 {
                                                     DeadEyeActive = false;
@@ -2700,7 +2709,6 @@ public class Player : MonoBehaviour {
                                                     StopCoroutine(DeadEyeProtocol);
                                                     StartCoroutine(DeadEyeProtocol);
                                                 }
-
                                             }
 
                                         }
@@ -3085,53 +3093,55 @@ public class Player : MonoBehaviour {
 
                     DeadEyeActive = false;
 
-                    Audio.clip = Player_FireSound;
-                    Audio.Play();
-
-
                     // 사격 애니메이션 출력
-
-                    if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
-                       || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                    if (GameManager.DeadEyeFailOn == false)
                     {
-                        PlayerAniState = AnimationState.UPSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
-                    {
+                        Audio.clip = Player_FireSound;
+                        Audio.Play();
 
-                        PlayerAniState = AnimationState.RIGHTUPSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
-                    {
+                        if ((transform.rotation.eulerAngles.y > 340.0f && transform.rotation.eulerAngles.y <= 0.0f)
+                    || (transform.rotation.eulerAngles.y > 0.0f && transform.rotation.eulerAngles.y <= 25.0f))
+                        {
+                            PlayerAniState = AnimationState.UPSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 25.0f && transform.rotation.eulerAngles.y <= 70.0f)
+                        {
 
-                        PlayerAniState = AnimationState.RIGHTSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
-                    {
+                            PlayerAniState = AnimationState.RIGHTUPSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 70.0f && transform.rotation.eulerAngles.y <= 110.0f)
+                        {
 
-                        PlayerAniState = AnimationState.RIGHTDOWNSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
-                    {
+                            PlayerAniState = AnimationState.RIGHTSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 110.0f && transform.rotation.eulerAngles.y <= 155.0f)
+                        {
 
-                        PlayerAniState = AnimationState.DOWNSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
-                    {
+                            PlayerAniState = AnimationState.RIGHTDOWNSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 155.0f && transform.rotation.eulerAngles.y <= 200.0f)
+                        {
 
-                        PlayerAniState = AnimationState.LEFTDOWNSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
-                    {
+                            PlayerAniState = AnimationState.DOWNSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 200.0f && transform.rotation.eulerAngles.y <= 245.0f)
+                        {
+
+                            PlayerAniState = AnimationState.LEFTDOWNSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 245.0f && transform.rotation.eulerAngles.y <= 290.0f)
+                        {
 
 
-                        PlayerAniState = AnimationState.LEFTSHOOT;
-                    }
-                    else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
-                    {
+                            PlayerAniState = AnimationState.LEFTSHOOT;
+                        }
+                        else if (transform.rotation.eulerAngles.y > 290.0f && transform.rotation.eulerAngles.y <= 340.0f)
+                        {
 
-                        PlayerAniState = AnimationState.LEFTUPSHOOT;
+                            PlayerAniState = AnimationState.LEFTUPSHOOT;
+                        }
                     }
+                 
 
 
 
@@ -3564,7 +3574,7 @@ public class Player : MonoBehaviour {
 
         if (other.transform.tag.Equals("Item") == true)
         {
-            Debug.Log("Bullet Get !");
+            //Debug.Log("Bullet Get !");
 
             switch(ModeState)
             {
@@ -3589,26 +3599,84 @@ public class Player : MonoBehaviour {
 
                 case GameModeState.MiniGame:
                     {
-                        if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                        switch (State)
                         {
-                            BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                            case GameState.PLAY:
+                                {
+                                    if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                    {
+                                        BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                    }
+                                    else
+                                    {
+                                        BulletQuantity += GameManager.NowPlayerBulletPlusQuantity;
+
+                                        if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                        {
+                                            BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                        }
+
+                                    }
+
+
+                                    ItemInfoText.text = " ";//("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                                    ItemInfoText.gameObject.SetActive(true);
+                                }
+                                break;
+
+                            case GameState.EVENT:
+                                {
+                                    if(GameManager.MiniGame_Upgrade_End == true)
+                                    {
+                                        if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                        {
+                                            BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                        }
+                                        else
+                                        {
+                                            BulletQuantity += GameManager.NowPlayerBulletPlusQuantity;
+
+                                            if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                            {
+                                                BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                            }
+
+                                        }
+
+                                        ItemInfoText.text = " ";//("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                                        ItemInfoText.gameObject.SetActive(true);
+                                    }
+
+                                }
+                                break;
+
+
+                            case GameState.START:
+                                {
+                                    if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                    {
+                                        BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                    }
+                                    else
+                                    {
+                                        BulletQuantity += GameManager.NowPlayerBulletPlusQuantity;
+
+                                        if (BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
+                                        {
+                                            BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
+                                        }
+
+                                    }
+
+
+                                    ItemInfoText.text = " ";//("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
+                                    ItemInfoText.gameObject.SetActive(true);
+                                }
+                                break;
                         }
-                        else
-                        {
-                            BulletQuantity += GameManager.NowPlayerBulletPlusQuantity;
+                    
 
-                            if(BulletQuantity >= GameManager.NowPlayerMaxBulletQuantity)
-                            {
-                                BulletQuantity = GameManager.NowPlayerMaxBulletQuantity;
-                            }
-
-                        }
-
-
-                        ItemInfoText.text = " ";//("이것은 총알 입니다.\n 하단의 사격 버튼으로 발사 할 수 있습니다.");
-                        ItemInfoText.gameObject.SetActive(true);
-
-                        Debug.Log("BulletQuantity : " + BulletQuantity);
+                        //Debug.Log("BulletQuantity : " + BulletQuantity);
                     }
                     break;
 
@@ -3783,11 +3851,8 @@ public class Player : MonoBehaviour {
                                             {
                                                 if (HP > 0)
                                                 {
-                                                    if (Audio.isPlaying == false)
-                                                    {
-                                                        Audio.clip = Player_HitSound;
-                                                        Audio.Play();
-                                                    }
+                                                    Audio.clip = Player_HitSound;
+                                                    Audio.Play();
 
                                                     HP -= 5;
                                                     HP_Bar.fillAmount = (HP / 100.0f);
@@ -3805,11 +3870,8 @@ public class Player : MonoBehaviour {
                                             {
                                                 if (HP > 0)
                                                 {
-                                                    if (Audio.isPlaying == false)
-                                                    {
-                                                        Audio.clip = Player_HitSound;
-                                                        Audio.Play();
-                                                    }
+                                                    Audio.clip = Player_HitSound;
+                                                    Audio.Play();
 
                                                     HP -= 5;
                                                     HP_Bar.fillAmount = (HP / 100.0f);

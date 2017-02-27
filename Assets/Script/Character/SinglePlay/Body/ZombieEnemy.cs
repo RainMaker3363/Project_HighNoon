@@ -208,6 +208,7 @@ public class ZombieEnemy : MonoBehaviour {
     IEnumerator DeadProtocol(bool on = true)
     {
 
+
         sp_Col.enabled = false;
         NowMoveOn = false;
 
@@ -264,7 +265,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         NowMoveOn = false;
 
-        Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.red;
+        //Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.red;
         
         yield return new WaitForSeconds(0.5f);
 
@@ -275,7 +276,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         NowMoveOn = true;
         
-        Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.white;
+        //Zombie_Object.GetComponent<MeshRenderer>().material.color = Color.white;
 
 
     }
@@ -364,7 +365,7 @@ public class ZombieEnemy : MonoBehaviour {
 
                         case GameState.PLAY:
                             {
-                                print("HP : " + HP);
+                                //print("HP : " + HP);
 
                                 if (HP <= 0)
                                 {
@@ -408,16 +409,11 @@ public class ZombieEnemy : MonoBehaviour {
                                             if ((Player_Ojbect.transform.position - this.transform.position).magnitude < 10.0f)
                                             {
 
-                                                NowMoveOn = false;
+                                                //NowMoveOn = false;
                                                 DeadEyeChecker = true;
 
                                             }
                                         }
-                                        else
-                                        {
-                                            NowMoveOn = true;
-                                        }
-                                        
 
                                     }
                                     else
@@ -437,8 +433,6 @@ public class ZombieEnemy : MonoBehaviour {
                                                 ZombieAniState = AnimationState.RIGHTDEAD;
                                             }
 
-                                            print("zombie HighNoon..............................");
-
                                             DeadCoroutine = null;
                                             DeadCoroutine = DeadProtocol(true);
 
@@ -454,25 +448,25 @@ public class ZombieEnemy : MonoBehaviour {
                                                 // 네비게이션 작동 여부
                                                 if (Zombie_Navi != null)
                                                 {
-                                                    if (this.gameObject.activeSelf == true)
+                                                    print("DeadManWalk");
+                                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+
+                                                    if (WalkPathChecker == false)
                                                     {
-                                                        print("DeadManWalk");
-                                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+                                                        WalkPathChecker = true;
 
-                                                        if (WalkPathChecker == false)
+                                                        if (this.gameObject.activeSelf == true)
                                                         {
-                                                            WalkPathChecker = true;
-
-                                                            WalkPathCoroutine = null;
-                                                            WalkPathCoroutine = WalkPathProtocol(true);
-
-                                                            StopCoroutine(WalkPathCoroutine);
-                                                            StartCoroutine(WalkPathCoroutine);
+                                                            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                                         }
-                                                        
-                                                        
-                                                    }
 
+
+                                                        WalkPathCoroutine = null;
+                                                        WalkPathCoroutine = WalkPathProtocol(true);
+
+                                                        StopCoroutine(WalkPathCoroutine);
+                                                        StartCoroutine(WalkPathCoroutine);
+                                                    }
                                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                                 }
 
@@ -677,11 +671,9 @@ public class ZombieEnemy : MonoBehaviour {
     {
         WalkPathChecker = true;
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
 
         WalkPathChecker = false;
-
-        Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
     }
 
     void OnTriggerEnter(Collider other)
@@ -745,7 +737,7 @@ public class ZombieEnemy : MonoBehaviour {
                                         AttackCoroutine = null;
                                         AttackCoroutine = AttackProtocol(true);
 
-                                        Player_Ojbect.GetComponent<Player>().DamegeToPlayer(3);
+                                        //Player_Ojbect.GetComponent<Player>().DamegeToPlayer(3);
 
                                         StopCoroutine(AttackCoroutine);
                                         StartCoroutine(AttackCoroutine);
@@ -765,7 +757,7 @@ public class ZombieEnemy : MonoBehaviour {
                                         AttackCoroutine = null;
                                         AttackCoroutine = AttackProtocol(true);
 
-                                        Player_Ojbect.GetComponent<Player>().DamegeToPlayer(3);
+                                        //Player_Ojbect.GetComponent<Player>().DamegeToPlayer(3);
 
                                         StopCoroutine(AttackCoroutine);
                                         StartCoroutine(AttackCoroutine);

@@ -82,14 +82,14 @@ public class NormalBullet : MonoBehaviour {
 
     IEnumerator ResurectionProtocol()
     {
-        Debug.Log("Protocol Start!");
+        //Debug.Log("Protocol Start!");
 
         spcol.enabled = false;
         NormalBullet_Object.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(ResurectTime);
 
-        Debug.Log("Protocol End!");
+        //Debug.Log("Protocol End!");
 
         spcol.enabled = true;
         NormalBullet_Object.gameObject.SetActive(true);
@@ -295,7 +295,7 @@ public class NormalBullet : MonoBehaviour {
         if (other.transform.tag.Equals("Player") == true)
         {
 
-            print("Bullet + 1");
+            //print("Bullet + 1");
 
 
             Audio.Play();

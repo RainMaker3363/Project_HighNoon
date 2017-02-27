@@ -197,6 +197,7 @@ public class GameManager : MonoBehaviour {
                     Minigame_RoundTimer = 10.0f;
                     MiniGame_EventTimer = 10.0f;
                     EnemyKillCount = 0;
+                    MiniGame_KillCount = 0;
 
                     MiniGame_StartOn = false;
                     MiniGame_Upgrade_End = false;
@@ -430,35 +431,177 @@ public class GameManager : MonoBehaviour {
                                         RoundTimer_Text.text = Minigame_RoundTimer.ToString("0.0") + " 초";
                                     }
 
-                                    RoundStart_Text.text = MiniGame_Round.ToString() + "라운드";
+                                    RoundStart_Text.text = "WAVE " + MiniGame_Round.ToString();
 
                                     print("MiniGame_KillCount : " + MiniGame_KillCount);
                                     print("4 * MiniGame_Round : " + (4 * MiniGame_Round));
 
-                                    if ((4 * MiniGame_Round) >= 16)
+                                    switch (MiniGame_Round)
                                     {
-                                        if (MiniGame_KillCount >= 16)
-                                        {
-                                            MiniGame_Round += 1;
+                                        case 1:
+                                            {
+                                                if (MiniGame_KillCount >= (4))
+                                                {
+                                                    MiniGame_Round += 1;
 
-                                            MiniGame_EventTimer = 10.0f;
-                                            MiniGame_KillCount = 0;
-                                            MiniGame_Upgrade_End = false;
-                                            NowGameState = GameState.EVENT;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (MiniGame_KillCount >= (4 * MiniGame_Round))
-                                        {
-                                            MiniGame_Round += 1;
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
 
-                                            MiniGame_EventTimer = 10.0f;
-                                            MiniGame_KillCount = 0;
-                                            MiniGame_Upgrade_End = false;
-                                            NowGameState = GameState.EVENT;
-                                        }
+                                        case 2:
+                                            {
+                                                if (MiniGame_KillCount >= (4))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 3:
+                                            {
+                                                if (MiniGame_KillCount >= (8))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 4:
+                                            {
+                                                if (MiniGame_KillCount >= (8))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 5:
+                                            {
+                                                if (MiniGame_KillCount >= (12))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 6:
+                                            {
+                                                if (MiniGame_KillCount >= (12))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 7:
+                                            {
+                                                if (MiniGame_KillCount >= (16))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 8:
+                                            {
+                                                if (MiniGame_KillCount >= (16))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        case 9:
+                                            {
+                                                if (MiniGame_KillCount >= (16))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
+
+                                        default:
+                                            {
+                                                if (MiniGame_KillCount >= (16))
+                                                {
+                                                    MiniGame_Round += 1;
+
+                                                    MiniGame_EventTimer = 10.0f;
+                                                    MiniGame_KillCount = 0;
+                                                    MiniGame_Upgrade_End = false;
+                                                    NowGameState = GameState.EVENT;
+                                                }
+                                            }
+                                            break;
                                     }
+                                    //if ((4 * MiniGame_Round) >= 16)
+                                    //{
+                                    //    if (MiniGame_KillCount >= 16)
+                                    //    {
+                                    //        MiniGame_Round += 1;
+
+                                    //        MiniGame_EventTimer = 10.0f;
+                                    //        MiniGame_KillCount = 0;
+                                    //        MiniGame_Upgrade_End = false;
+                                    //        NowGameState = GameState.EVENT;
+                                    //    }
+                                    //}
+                                    //else
+                                    //{
+                                    //    if (MiniGame_KillCount >= (4 * MiniGame_Round))
+                                    //    {
+                                    //        MiniGame_Round += 1;
+
+                                    //        MiniGame_EventTimer = 10.0f;
+                                    //        MiniGame_KillCount = 0;
+                                    //        MiniGame_Upgrade_End = false;
+                                    //        NowGameState = GameState.EVENT;
+                                    //    }
+                                    //}
 
                                     //MiniGame_KillCount = (EnemyKillCount / 4);
                                 }
@@ -496,7 +639,16 @@ public class GameManager : MonoBehaviour {
                                     else
                                     {
                                         MiniGame_EventTimer = 0.0f;
-                                        Minigame_RoundTimer = (60.0f + (MiniGame_Round * 5.0f));
+
+                                        if(MiniGame_Round <= 2)
+                                        {
+                                            Minigame_RoundTimer = (60.0f + (5.0f));
+                                        }
+                                        else
+                                        {
+                                            Minigame_RoundTimer = (60.0f + ((MiniGame_Round-1) * 5.0f));
+                                        }
+                                        
                                         RoundStart_Text.text = " ";
                                         //RoundStart_Text.text = MiniGame_Round.ToString() + "라운드가 시작되었습니다.";
 

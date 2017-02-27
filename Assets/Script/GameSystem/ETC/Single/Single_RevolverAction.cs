@@ -103,9 +103,9 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverTouch.SetActive(true);
             Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;
-            ani.Stop();
+            //ani.Stop();
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
-            Single_RevolverLetterBox.GetComponent<Animator>().Stop();
+            //Single_RevolverLetterBox.GetComponent<Animator>().Stop();
 
             //Single_RevolverAction_Object.gameObject.SetActive(false);
         }
@@ -115,9 +115,9 @@ public class Single_RevolverAction : MonoBehaviour {
             Single_RevolverTouch.SetActive(true);
             Single_RevolverAction_BG.SetActive(false);
             ani.enabled = false;
-            ani.Stop();
+            //ani.Stop();
             Single_RevolverLetterBox.GetComponent<Animator>().enabled = false;
-            Single_RevolverLetterBox.GetComponent<Animator>().Stop();
+            //Single_RevolverLetterBox.GetComponent<Animator>().Stop();
             //Single_RevolverAction_Object.gameObject.SetActive(false);
         }
     }
