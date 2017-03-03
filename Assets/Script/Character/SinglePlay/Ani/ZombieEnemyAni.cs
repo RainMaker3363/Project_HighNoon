@@ -116,7 +116,7 @@ public class ZombieEnemyAni : MonoBehaviour {
         {
             case GameState.START:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch (AniState)
                     {
@@ -187,7 +187,7 @@ public class ZombieEnemyAni : MonoBehaviour {
 
             case GameState.PLAY:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch(AniState)
                     {
@@ -258,7 +258,7 @@ public class ZombieEnemyAni : MonoBehaviour {
 
             case GameState.PAUSE:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch (AniState)
                     {
@@ -329,7 +329,7 @@ public class ZombieEnemyAni : MonoBehaviour {
 
             case GameState.EVENT:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch (AniState)
                     {
@@ -400,7 +400,7 @@ public class ZombieEnemyAni : MonoBehaviour {
 
             case GameState.GAMEOVER:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch (AniState)
                     {
@@ -471,7 +471,7 @@ public class ZombieEnemyAni : MonoBehaviour {
 
             case GameState.VICTORY:
                 {
-                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.3f, m_Zombie.gameObject.transform.position.z);
+                    this.transform.position = new Vector3(m_Zombie.gameObject.transform.position.x, m_Zombie.gameObject.transform.position.y + 0.2f, m_Zombie.gameObject.transform.position.z);
 
                     switch (AniState)
                     {
