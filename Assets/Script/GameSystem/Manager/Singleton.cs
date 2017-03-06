@@ -23,4 +23,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return instance;
         }
     }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        instance = FindObjectOfType(typeof(T)) as T;
+    }
+
+    private void OnApplicationQuit()
+    {
+        instance = null;
+    }
 }

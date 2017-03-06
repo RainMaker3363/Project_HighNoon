@@ -19,9 +19,9 @@ public class TitleManager : MonoBehaviour {
         NextTitleOn = false;
         TitleScreenText.SetActive(false);
 
-        //GPGSManager.GetInstance.InitializeGPGS(); // 초기화
+        GPGSManager.GetInstance.InitializeGPGS(); // 초기화
 
-        //GPGSManager.GetInstance.LoginGPGS();
+        GPGSManager.GetInstance.LoginGPGS();
 
         StopCoroutine(TitleSceneProtocol(true));
         StartCoroutine(TitleSceneProtocol(true));
