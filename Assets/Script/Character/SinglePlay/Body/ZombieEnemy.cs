@@ -74,7 +74,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 
            //Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
             //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
@@ -171,7 +171,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             Zombie_Navi.transform.position = ObjectBackPos.transform.position;
             //Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
             //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
@@ -240,7 +240,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
         }
 
@@ -286,7 +286,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         if (Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         }
 
         NowMoveOn = false;
@@ -307,7 +307,7 @@ public class ZombieEnemy : MonoBehaviour {
 
         if(Zombie_Navi != null)
         {
-            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
         }
 
         NowMoveOn = true;
@@ -395,7 +395,7 @@ public class ZombieEnemy : MonoBehaviour {
                                 // 네비게이션 작동 여부
                                 if (Zombie_Navi != null)
                                 {
-                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                 }
                             }
@@ -420,7 +420,7 @@ public class ZombieEnemy : MonoBehaviour {
                                     // 네비게이션 작동 여부
                                     if (Zombie_Navi != null)
                                     {
-                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                        Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                         //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
 
                                         DeadCoroutine = null;
@@ -437,7 +437,7 @@ public class ZombieEnemy : MonoBehaviour {
                                         // 네비게이션 작동 여부
                                         if (Zombie_Navi != null)
                                         {
-                                            Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                             //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                         }
 
@@ -508,7 +508,7 @@ public class ZombieEnemy : MonoBehaviour {
                                                 if (Zombie_Navi != null)
                                                 {
                                                     print("DeadManWalk");
-                                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = true;
+                                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
 
                                                     if (WalkPathChecker == false)
                                                     {
@@ -516,7 +516,7 @@ public class ZombieEnemy : MonoBehaviour {
 
                                                         if (this.gameObject.activeSelf == true)
                                                         {
-                                                            Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
+                                                            Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                                         }
 
 
@@ -545,7 +545,7 @@ public class ZombieEnemy : MonoBehaviour {
                                                 {
                                                     if (this.gameObject.activeSelf == true)
                                                     {
-                                                        Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                                        Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                                         //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                                     }
 
@@ -575,7 +575,7 @@ public class ZombieEnemy : MonoBehaviour {
                                 // 네비게이션 작동 여부
                                 if (Zombie_Navi != null)
                                 {
-                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                 }
                             }
@@ -586,7 +586,7 @@ public class ZombieEnemy : MonoBehaviour {
                                 // 네비게이션 작동 여부
                                 if (Zombie_Navi != null)
                                 {
-                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                 }
                             }
@@ -597,7 +597,7 @@ public class ZombieEnemy : MonoBehaviour {
                                 // 네비게이션 작동 여부
                                 if (Zombie_Navi != null)
                                 {
-                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                 }
                             }
@@ -608,7 +608,7 @@ public class ZombieEnemy : MonoBehaviour {
                                 // 네비게이션 작동 여부
                                 if (Zombie_Navi != null)
                                 {
-                                    Zombie_Navi.GetComponent<NavMeshAgent>().enabled = false;
+                                    Zombie_Navi.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                                     //Zombie_Navi.GetComponent<NavMeshAgent>().SetDestination(Player_Ojbect.transform.position);
                                 }
                             }
